@@ -10,29 +10,30 @@ Setup
 -----
 
 ```ruby
-$ git clone https://github.com/sger/Tinylog-iOS
-$ cd Tinylog-iOS
+$ git clone https://github.com/sger/Tinylog
+$ cd Tinylog
 $ pod install
+$ make bootstrap
 ```
 
 Testing
 -----
 
 ```ruby
-$ xctool test -workspace Tinylog.xcworkspace -scheme TinylogTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+$ make test
 ```
 
 Requirements
 -----
 
-Tinylog requires Swift 2.1 and Xcode 7.2.
+Tinylog requires Swift 3.0 and Xcode 8.0.
 
 Author
 -----
 
-__Spiros Gerokostas__ 
+__Spiros Gerokostas__
 
-- [![](https://img.shields.io/badge/twitter-sger-brightgreen.svg)](https://twitter.com/sger) 
+- [![](https://img.shields.io/badge/twitter-sger-brightgreen.svg)](https://twitter.com/sger)
 - :email: spiros.gerokostas@gmail.com
 
 License
