@@ -1,0 +1,1 @@
+list,tasks,todo,tags,tinylog,shopping,shop,checklist,manager,reminder,organizer,grocery,compra

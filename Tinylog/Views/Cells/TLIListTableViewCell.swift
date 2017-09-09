@@ -1,0 +1,169 @@
+//
+//  TLIListTableViewCell.swift
+//  Tinylog
+//
+//  Created by Spiros Gerokostas on 18/10/15.
+//  Copyright © 2015 Spiros Gerokostas. All rights reserved.
+//
+
+import UIKit
+import TTTAttributedLabel
+import SGBackgroundView
+
+class TLIListTableViewCell: TLITableViewCell {
+
+    let kRadius: CGFloat = 30.0
+    var didSetupConstraints = false
+    var bgView: SGBackgroundView?
+    let listLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
+    let totalTasksLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
+    var checkBoxButton: TLICheckBoxButton?
+
+    var currentList: TLIList? {
+        didSet {
+            updateFonts()
+            if let currentList = currentList,
+                let total = currentList.total as? Int,
+                let color = currentList.color {
+                self.listLabel.text = currentList.title
+                self.totalTasksLabel.text = String(total)
+                totalTasksLabel.layer.borderColor = UIColor(rgba: color).cgColor
+                self.totalTasksLabel.textColor = UIColor(rgba: color)
+            }
+            self.setNeedsUpdateConstraints()
+            self.updateConstraintsIfNeeded()
+        }
+        willSet {
+            if let list = newValue, let color = list.color {
+              self.totalTasksLabel.textColor = UIColor(rgba: color)
+            }
+        }
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        self.currentList = nil
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        // swiftlint:disable force_unwrapping
+        bgView = SGBackgroundView(frame: CGRect.zero)
+        bgView?.bgColor = UIColor.tinylogLightGray
+        bgView?.lineColor = UIColor(red: 213.0 / 255.0, green: 213.0 / 255.0, blue: 213.0 / 255.0, alpha: 1.0)
+        bgView?.xPosLine = 16.0
+        self.backgroundView = bgView!
+
+        listLabel.lineBreakMode = .byTruncatingTail
+        listLabel.numberOfLines = 0
+        listLabel.textAlignment = .left
+        listLabel.textColor = UIColor.tinylogTextColor
+        self.contentView.addSubview(listLabel)
+
+        totalTasksLabel.layer.cornerRadius = kRadius / 2.0
+        totalTasksLabel.layer.borderColor = UIColor.lightGray.cgColor
+        totalTasksLabel.layer.borderWidth = 1.0
+        totalTasksLabel.textAlignment = NSTextAlignment.center
+        totalTasksLabel.autoresizingMask = [
+            UIViewAutoresizing.flexibleWidth,
+            UIViewAutoresizing.flexibleHeight]
+        totalTasksLabel.clipsToBounds = true
+        self.contentView.addSubview(totalTasksLabel)
+
+        let selectedBackgroundView = UIView(frame: frame)
+        selectedBackgroundView.backgroundColor = UIColor(
+            red: 244.0 / 255.0,
+            green: 244.0 / 255.0,
+            blue: 244.0 / 255.0,
+            alpha: 1.0)
+        selectedBackgroundView.contentMode = UIViewContentMode.redraw
+        self.selectedBackgroundView = selectedBackgroundView
+
+        updateFonts()
+    }
+
+    override func updateConstraints() {
+        if !didSetupConstraints {
+
+            listLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
+            listLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 16.0)
+            listLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 50.0)
+            listLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
+
+            totalTasksLabel.autoSetDimensions(to: CGSize(width: kRadius, height: kRadius))
+            totalTasksLabel.autoAlignAxis(.horizontal, toSameAxisOf: self.contentView, withOffset: 0.0)
+            totalTasksLabel.autoPinEdge(.left, to: .right, of: listLabel, withOffset: 10.0)
+
+            didSetupConstraints = true
+        }
+        super.updateConstraints()
+    }
+    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable line_length
+    override func updateFonts() {
+        super.updateFonts()
+
+        let userDefaults: UserDefaults = UserDefaults.standard
+        if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
+
+        if useSystemFontSize == "on" {
+
+            if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
+                listLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
+                listLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Courier" {
+                listLabel.font = UIFont.preferredCourierFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredCourierFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Georgia" {
+                listLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Menlo" {
+                listLabel.font = UIFont.preferredMenloFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredMenloFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
+                listLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Palatino" {
+                listLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
+                listLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
+                listLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+            }
+
+        } else {
+            let fontSize: Float = userDefaults.float(forKey: "kFontSize")
+            listLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize))
+            totalTasksLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize - 2))
+        }
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let size: CGSize = self.contentView.bounds.size
+
+        self.contentView.setNeedsLayout()
+        self.contentView.layoutIfNeeded()
+
+        listLabel.preferredMaxLayoutWidth = listLabel.frame.width
+
+        if self.isEditing {
+            bgView?.width = size.width + 78.0
+            bgView?.height = size.height
+        } else {
+            bgView?.width = size.width
+            bgView?.height = size.height
+        }
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

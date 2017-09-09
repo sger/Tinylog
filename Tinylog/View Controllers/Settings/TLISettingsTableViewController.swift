@@ -1,0 +1,321 @@
+//
+//  TLISettingsTableViewController.swift
+//  Tinylog
+//
+//  Created by Spiros Gerokostas on 18/10/15.
+//  Copyright © 2015 Spiros Gerokostas. All rights reserved.
+//
+// swiftlint:disable force_unwrapping
+import UIKit
+import MessageUI
+import SVProgressHUD
+
+class TLISettingsTableViewController: UITableViewController,
+    MFMailComposeViewControllerDelegate,
+    UIGestureRecognizerDelegate {
+
+    let settingsCellIdentifier = "SettingsCellIdentifier"
+
+    // MARK: Initializers
+
+    override init(style: UITableViewStyle) {
+        super.init(style: UITableViewStyle.grouped)
+    }
+
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Done",
+            style: UIBarButtonItemStyle.plain,
+            target: self,
+            action: #selector(TLISettingsTableViewController.close(_:)))
+        self.view.backgroundColor = UIColor.tinylogLightGray
+        self.tableView?.backgroundColor = UIColor.tinylogLightGray
+        self.title = "Settings"
+
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(TLISettingsTableViewController.updateFonts),
+            name: NSNotification.Name(
+                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
+                object: nil)
+    }
+
+    func updateFonts() {
+        self.navigationController?.navigationBar.setNeedsDisplay()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    // swiftlint:disable cyclomatic_complexity
+    func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.textLabel?.font = UIFont.tinylogFontOfSize(17.0)
+        cell.textLabel?.textColor = UIColor.tinylogTextColor
+
+        let selectedBackgroundView = UIView(frame: cell.frame)
+        selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
+        selectedBackgroundView.contentMode = UIViewContentMode.redraw
+        cell.selectedBackgroundView = selectedBackgroundView
+
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "iCloud"
+                cell.imageView?.image = UIImage(named: "706-cloud")
+                let switchMode: UISwitch = UISwitch(
+                    frame: CGRect(
+                        x: 0,
+                        y: 0,
+                        width: self.view.frame.size.width,
+                        height: 20.0))
+                switchMode.addTarget(
+                    self,
+                    action: #selector(TLISettingsTableViewController.toggleSyncSettings(_:)),
+                    for: UIControlEvents.valueChanged)
+                switchMode.onTintColor = UIColor.tinylogMainColor
+                cell.accessoryView = switchMode
+                cell.accessoryType = UITableViewCellAccessoryType.none
+
+                let userDefaults: UserDefaults = UserDefaults.standard
+                if let syncModeValue: String = userDefaults.object(
+                    forKey: TLIUserDefaults.kTLISyncMode as String) as? String {
+                    if syncModeValue == "on" {
+                        switchMode.setOn(true, animated: false)
+                    } else if syncModeValue == "off" {
+                        switchMode.setOn(false, animated: false)
+                    }
+                }
+            }
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "Font"
+                // swiftlint:disable line_length
+                cell.detailTextLabel?.text = TLISettingsFontPickerViewController.textForSelectedKey() as String?
+                cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0, key: TLISettingsFontPickerViewController.selectedKey()!)
+            } else if indexPath.row == 1 {
+                cell.textLabel?.text = "Text Size"
+                cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0)
+                let userDefaults: UserDefaults = UserDefaults.standard
+                if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
+                    if useSystemFontSize == "on" {
+                        cell.detailTextLabel?.text = "System Size"
+                    } else {
+                        let fontSize: Float = userDefaults.float(forKey: "kFontSize")
+                        let strFontSize = NSString(format: "%.f", fontSize)
+                        cell.detailTextLabel?.text = strFontSize as String
+                    }
+                }
+            }
+        } else if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "Send Feedback"
+            } else if indexPath.row == 1 {
+                cell.textLabel?.text = "Rate Tinylog"
+            } else if indexPath.row == 2 {
+                cell.textLabel?.text = "Help"
+            }
+        } else if indexPath.section == 3 {
+            cell.textLabel?.text = "About"
+        }
+    }
+
+    // MARK: Actions
+
+    func toggleSyncSettings(_ sender: UISwitch) {
+        let mode: UISwitch = sender as UISwitch
+        let value: NSString = mode.isOn == true ? "on" : "off"
+
+        let userDefaults: UserDefaults = UserDefaults.standard
+        userDefaults.set(value, forKey: TLIUserDefaults.kTLISyncMode as String)
+        userDefaults.synchronize()
+
+        Utils.delay(0.2, closure: { () -> Void in
+            let syncManager = TLISyncManager.shared()
+
+            if value == "on" {
+                syncManager?.connect(toSyncService: IDMICloudService, withCompletion: { (error) -> Void in
+                    if error != nil {
+                        if error?._code == 1003 {
+                            SVProgressHUD.show()
+                            SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.dark)
+                            SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor)
+                            SVProgressHUD.setForegroundColor(UIColor.white)
+                            SVProgressHUD.setFont(UIFont.tinylogFontOfSize(14.0))
+                            SVProgressHUD.showError(withStatus: "You are not logged in to iCloud.Tap Settings > iCloud to login.")
+                        }
+                    }
+                })
+            } else if value == "off" {
+                if (syncManager?.canSynchronize())! {
+                    syncManager?.disconnectFromSyncService(completion: { () -> Void in
+                    })
+                }
+            }
+        })
+    }
+
+    func close(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel!.font = UIFont.regularFontWithSize(16.0)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "SYNC"
+        } else if section == 1 {
+            return "DISPLAY"
+        } else if section == 2 {
+            return "FEEDBACK"
+        } else if section == 3 {
+            return ""
+        }
+        return nil
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return 2
+        } else if section == 2 {
+            return 3
+        } else if section == 3 {
+            return 1
+        }
+        return 0
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell(
+            style: UITableViewCellStyle.value1,
+            reuseIdentifier: settingsCellIdentifier)
+        configureCell(cell, indexPath: indexPath)
+        return cell
+    }
+    // swiftlint:disable cyclomatic_complexity
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var viewController: UIViewController? = nil
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+
+            }
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                viewController = TLISettingsFontPickerViewController()
+            } else if indexPath.row == 1 {
+                viewController = TLITextSizeViewController()
+            }
+        } else if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                if MFMailComposeViewController.canSendMail() {
+                    let infoDictionary: NSDictionary = Bundle.main.infoDictionary! as NSDictionary
+                    if let version: NSString = infoDictionary.object(forKey:"CFBundleShortVersionString") as? NSString,
+                        let build: NSString = infoDictionary.object(forKey: "CFBundleVersion") as? NSString {
+                    let deviceModel = TLIDeviceInfo.model()
+
+                    let mailer: MFMailComposeViewController = MFMailComposeViewController()
+                    mailer.mailComposeDelegate = self
+                    mailer.setSubject("Tinylog \(version)")
+                    mailer.setToRecipients(["feedback@tinylogapp.com"])
+
+                    let systemVersion = UIDevice.current.systemVersion
+                    let stringBody = "---\nApp: Tinylog \(version) (\(build))\nDevice: \(String(describing: deviceModel)) (\(systemVersion))"
+
+                    mailer.setMessageBody(stringBody, isHTML: false)
+                    let titleTextDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.mediumFontWithSize(16.0)]
+
+                    mailer.navigationBar.titleTextAttributes = titleTextDict as? [String : AnyObject]
+
+                    mailer.navigationBar.tintColor = UIColor.tinylogMainColor
+                    self.present(mailer, animated: true, completion: nil)
+                    mailer.viewControllers.last?.navigationItem.title = "Tinylog"
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Tinylog",
+                                                  message: "Your device doesn't support this feature",
+                                                  preferredStyle: UIAlertControllerStyle.alert)
+
+                    let cancelAction = UIAlertAction(title: "OK",
+                                                     style: .cancel, handler: nil)
+
+                    alert.addAction(cancelAction)
+                    present(alert, animated: true)
+                }
+            } else if indexPath.row == 1 {
+                if let path: URL = URL(string: "https://itunes.apple.com/gr/app/tinylog/id799267191?mt=8") {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(path, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(path)
+                    }
+                }
+            } else if indexPath.row == 2 {
+                viewController = TLIHelpTableViewController()
+            }
+        } else if indexPath.section == 3 {
+            if indexPath.row == 0 {
+                viewController = TLIAboutViewController()
+            }
+        }
+        if viewController != nil {
+            if let vc = viewController {
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+
+    // MARK: MFMailComposeViewControllerDelegate
+
+    func mailComposeController(
+        _ controller: MFMailComposeViewController,
+        didFinishWith result: MFMailComposeResult,
+        error: Error?) {
+        switch result.rawValue {
+        case MFMailComposeResult.cancelled.rawValue:
+            break
+        case MFMailComposeResult.saved.rawValue:
+            break
+        case MFMailComposeResult.sent.rawValue:
+            break
+        case MFMailComposeResult.failed.rawValue:
+            break
+        default:
+            break
+        }
+        self.dismiss(animated: true, completion: { () -> Void in
+
+        })
+    }
+}

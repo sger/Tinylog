@@ -1,0 +1,21 @@
+Tinylog is a minimal todo app for iPhone and iPad.
+
+Quick summary:
+
+- Create a new list by tapping Plus icon at bottom left
+- Search all your lists with the search field at the top
+- Search all your lists with by typing 'purple', 'blue', 'red', 'orange', 'green', 'yellow' tags
+- Create a new task by tapping text field at the top"
+- View tasks by tapping a list"
+- View archives by tapping Archive icon at bottom right"
+- Reorder lists and tasks by tapping 'Edit'"
+- Archive a list by swiping to the left and tapping 'Archive'
+- Edit a list by swiping to the left and tapping 'Edit'
+- Delete a list by swiping to the left and tapping 'Delete'
+- Restore a list by swiping to the left and tapping 'Restore'
+- Tap checkbox to complete tasks
+- Create web links by typing http:// for example http://www.tinylogapp.com
+- Enable iCloud by tapping Settings icon
+- Change font or size by tapping Settings icon
+
+Thanks for choosing Tinylog.
