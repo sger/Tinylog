@@ -130,7 +130,7 @@ class TLISetupViewController: UIViewController {
                     SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.dark)
                     SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor)
                     SVProgressHUD.setForegroundColor(UIColor.white)
-                    SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0))
+                    SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0)!)
                     SVProgressHUD.showError(
                         withStatus: "You are not logged in to iCloud.Tap Settings > iCloud to login.")
                 }
