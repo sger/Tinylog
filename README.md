@@ -1,4 +1,4 @@
-Tinylog-iOS
+Tinylog
 ===
 [![Build Status](https://travis-ci.org/binarylevel/Tinylog-iOS.svg?branch=master)](https://travis-ci.org/binarylevel/Tinylog-iOS)
 
