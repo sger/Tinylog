@@ -102,22 +102,23 @@ class TLIListsViewController: TLICoreDataTableViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //configureFetch()
-        
-        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
         let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
         fetchRequest.predicate = NSPredicate(format: "archivedAt = nil")
-        self.frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        self.frc = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: self.managedObjectContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
         self.frc?.delegate = self
-        
+
         do {
             try self.frc?.performFetch()
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
-
 
         self.title = "My Lists"
 

@@ -17,3 +17,4 @@ script:
   - set -o pipefail
   - make build
   - make test
+  - make lint

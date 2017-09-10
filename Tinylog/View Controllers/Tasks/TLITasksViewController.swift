@@ -313,9 +313,9 @@ class TLITasksViewController: TLICoreDataTableViewController,
                 self.noTasksLabel?.isHidden = true
             }
             self.tableView?.reloadData()
-            
+
             let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-            
+
             if IS_IPAD {
                 if let list = self.managedObject {
                     updateFooterInfoText(list)

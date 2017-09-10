@@ -27,11 +27,11 @@ class SnapshotsUITests: XCTestCase {
         let app = XCUIApplication()
 
         snapshot("01")
-        
+
         if app.buttons["Later"].exists {
             app.buttons["Later"].tap()
         }
-        
+
         snapshot("02")
         app.buttons["add list"].tap()
         snapshot("03")
