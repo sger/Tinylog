@@ -33,6 +33,11 @@ bootstrap: dependencies
 	brew install swiftlint
 	brew link --overwrite swiftlint
 
+dependencies: cocoapods
+
+cocoapods:
+	pod install
+
 lint:
 		swiftlint lint --reporter json --strict
 
@@ -66,4 +71,4 @@ deploy:
 
 	@echo "Deploy completed!"
 
-.PHONY: test clean dependencies lint deploy
+.PHONY: test clean dependencies lint deploy cocoapods
