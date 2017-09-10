@@ -79,29 +79,6 @@ class TLIListsViewController: TLICoreDataTableViewController,
     }()
 
     func configureFetch() {
-
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
-        let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
-        let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
-        fetchRequest.predicate = NSPredicate(format: "archivedAt = nil")
-        self.frc = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: managedObjectContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil)
-        self.frc?.delegate = self
-
-        do {
-            try self.frc?.performFetch()
-        } catch let error as NSError {
-            fatalError(error.localizedDescription)
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
         let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
@@ -119,6 +96,12 @@ class TLIListsViewController: TLICoreDataTableViewController,
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        configureFetch()
 
         self.title = "My Lists"
 
