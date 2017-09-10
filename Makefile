@@ -36,6 +36,7 @@ bootstrap: dependencies
 dependencies: cocoapods
 
 cocoapods:
+	pod repo update
 	pod install
 
 lint:
