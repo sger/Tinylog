@@ -1,6 +1,6 @@
 Tinylog
 ===
-[![Build Status](https://travis-ci.org/binarylevel/Tinylog-iOS.svg?branch=master)](https://travis-ci.org/binarylevel/Tinylog-iOS)
+[![Build Status](https://travis-ci.org/sger/Tinylog.svg?branch=master)](https://travis-ci.org/sger/Tinylog)
 
 Tinylog is a minimal TODO App for iOS (iPhone/iPad).
 
