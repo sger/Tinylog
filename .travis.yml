@@ -13,6 +13,8 @@ before_install:
   - gem install xcpretty -N
   - brew update
   - brew install swiftlint || true
+install:
+  - pod install
 script:
   - set -o pipefail
   - xcodebuild -workspace Tinylog.xcworkspace -scheme Tinylog -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
