@@ -257,7 +257,7 @@ class TLISettingsTableViewController: UITableViewController,
                     let titleTextDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.mediumFontWithSize(16.0)]
 
                     mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedStringKey : Any]
-   
+
                     mailer.navigationBar.tintColor = UIColor.tinylogMainColor
                     self.present(mailer, animated: true, completion: nil)
                     mailer.viewControllers.last?.navigationItem.title = "Tinylog"
