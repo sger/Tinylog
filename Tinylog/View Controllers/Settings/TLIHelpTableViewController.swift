@@ -95,7 +95,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
             object: nil)
     }
 
-    func updateFonts() {
+    @objc func updateFonts() {
         self.navigationController?.navigationBar.setNeedsDisplay()
     }
 
@@ -145,8 +145,8 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
         if success != nil {
             let cellSize: CGSize = cell.systemLayoutSizeFitting(
                 CGSize(width: self.view.frame.size.width, height: 0),
-                withHorizontalFittingPriority: 1000,
-                verticalFittingPriority: 61)
+                withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
+                verticalFittingPriority: UILayoutPriority(rawValue: 61))
             putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
         }
 

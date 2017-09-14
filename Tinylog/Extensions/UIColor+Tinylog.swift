@@ -18,7 +18,7 @@ extension UIColor {
 
         if rgba.hasPrefix("#") {
             let index = rgba.characters.index(rgba.startIndex, offsetBy: 1)
-            let hex = rgba.substring(from: index)
+            let hex = String(rgba[index...])
             let scanner = Scanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
             if scanner.scanHexInt64(&hexValue) {

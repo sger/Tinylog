@@ -90,7 +90,7 @@ class TLIMenuColorsView: UIView {
         }
     }
 
-    func buttonPressed(_ button: UIButton) {
+    @objc func buttonPressed(_ button: UIButton) {
         currentColor = colors[button.tag - tagOffset]
         setSelectedIndex(button.tag - tagOffset)
     }

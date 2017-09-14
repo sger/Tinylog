@@ -183,11 +183,11 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
 
     }
 
-    func onChangeSize(_ notification: Notification) {
+    @objc func onChangeSize(_ notification: Notification) {
         self.tableView?.reloadData()
     }
 
-    func appBecomeActive() {
+    @objc func appBecomeActive() {
         startSync()
     }
 
@@ -199,11 +199,11 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         }
     }
 
-    func updateFonts() {
+    @objc func updateFonts() {
         self.tableView?.reloadData()
     }
 
-    func syncActivityDidEndNotification(_ notification: Notification) {
+    @objc func syncActivityDidEndNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
@@ -211,14 +211,14 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         self.tableView?.reloadData()
     }
 
-    func syncActivityDidBeginNotification(_ notification: Notification) {
+    @objc func syncActivityDidBeginNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
     }
 
     // MARK: Close
-    func close(_ button: UIButton) {
+    @objc func close(_ button: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -392,8 +392,8 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         if success != nil {
             let cellSize: CGSize = cell.systemLayoutSizeFitting(
                 CGSize(width: self.view.frame.size.width, height: 0),
-                withHorizontalFittingPriority: 1000,
-                verticalFittingPriority: 61)
+                withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
+                verticalFittingPriority: UILayoutPriority(rawValue: 61))
             putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
         }
         return cell

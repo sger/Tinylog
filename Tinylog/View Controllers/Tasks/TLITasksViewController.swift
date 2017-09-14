@@ -251,11 +251,11 @@ class TLITasksViewController: TLICoreDataTableViewController,
             object: nil)
     }
 
-    func updateFonts() {
+    @objc func updateFonts() {
         self.tableView?.reloadData()
     }
 
-    func appBecomeActive() {
+    @objc func appBecomeActive() {
         startSync()
     }
 
@@ -304,7 +304,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func syncActivityDidEndNotification(_ notification: Notification) {
+    @objc func syncActivityDidEndNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.checkForEmptyResults() {
@@ -328,7 +328,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func syncActivityDidBeginNotification(_ notification: Notification) {
+    @objc func syncActivityDidBeginNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             if self.checkForEmptyResults() {
@@ -418,7 +418,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         setEditing(false, animated: false)
     }
 
-    func displayArchive(_ button: TLIArchiveButton) {
+    @objc func displayArchive(_ button: TLIArchiveButton) {
         let viewController: TLIArchiveTasksViewController = TLIArchiveTasksViewController()
         viewController.managedObjectContext = managedObjectContext
 
@@ -491,7 +491,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func toggleEditMode(_ sender: UIBarButtonItem) {
+    @objc func toggleEditMode(_ sender: UIBarButtonItem) {
         setEditing(!isEditing, animated: true)
     }
 
@@ -600,7 +600,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         try! managedObjectContext.save()
     }
 
-    func onChangeSize(_ notification: Notification) {
+    @objc func onChangeSize(_ notification: Notification) {
         self.tableView?.reloadData()
     }
 
@@ -650,8 +650,8 @@ class TLITasksViewController: TLICoreDataTableViewController,
             if height != nil {
                 let cellSize: CGSize = cell.systemLayoutSizeFitting(
                     CGSize(width: self.view.frame.size.width, height: 0),
-                    withHorizontalFittingPriority: 1000,
-                    verticalFittingPriority: 52)
+                    withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
+                    verticalFittingPriority: UILayoutPriority(rawValue: 52))
                 putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
             }
             return cell
@@ -670,7 +670,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func toggleComplete(_ button: TLICheckBoxButton) {
+    @objc func toggleComplete(_ button: TLICheckBoxButton) {
         if enableDidSelectRowAtIndexPath {
 
             let button: TLICheckBoxButton = button as TLICheckBoxButton
@@ -813,7 +813,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
+    @objc func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
         self.addTaskView?.textField?.resignFirstResponder()
     }
 
@@ -872,7 +872,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         self.tableView?.reloadData()
     }
 
-    func exportTasks(_ sender: UIButton) {
+    @objc func exportTasks(_ sender: UIButton) {
         if self.managedObject != nil || self.list != nil {
 
             do {

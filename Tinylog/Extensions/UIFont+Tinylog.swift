@@ -16,19 +16,19 @@ let kTLIItalicFontName: NSString = "HelveticaNeue-Italic"
 @available(iOS 8.2, *)
 let kTLIRegularSFFontName: NSString = UIFont.systemFont(
     ofSize: 10.0,
-    weight: UIFontWeightRegular).fontName as NSString //".SFUIText-Regular"
+    weight: UIFont.Weight.regular).fontName as NSString //".SFUIText-Regular"
 @available(iOS 8.2, *)
 let kTLIBoldSFFontName: NSString = UIFont.systemFont(
     ofSize: 10.0,
-    weight: UIFontWeightBold).fontName as NSString //".SFUIText-Bold"
+    weight: UIFont.Weight.bold).fontName as NSString //".SFUIText-Bold"
 @available(iOS 8.2, *)
 let kTLIBoldItalicSFFontName: NSString = UIFont.systemFont(
     ofSize: 10.0,
-    weight: UIFontWeightMedium).fontName as NSString //".SFUIText-Medium"
+    weight: UIFont.Weight.medium).fontName as NSString //".SFUIText-Medium"
 @available(iOS 8.2, *)
 let kTLIItalicSFFontName: NSString = UIFont.systemFont(
     ofSize: 10.0,
-    weight: UIFontWeightLight).fontName as NSString //".SFUIText-Light"
+    weight: UIFont.Weight.light).fontName as NSString //".SFUIText-Light"
 
 let kTLIFontRegularKey: NSString = "Regular"
 let kTLIFontItalicKey: NSString = "Italic"
@@ -53,7 +53,7 @@ extension UIFont {
 
     class func mediumFontWithSize(_ size: CGFloat) -> UIFont {
         if #available(iOS 9, *) {
-          return UIFont.systemFont(ofSize: size, weight: UIFontWeightMedium)
+          return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.medium)
         } else {
           return UIFont(name: "HelveticaNeue-Medium", size: size)!
         }
@@ -61,7 +61,7 @@ extension UIFont {
 
     class func regularFontWithSize(_ size: CGFloat) -> UIFont {
         if #available(iOS 9, *) {
-          return UIFont.systemFont(ofSize: size, weight: UIFontWeightRegular)
+          return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.regular)
         } else {
           return UIFont(name: "HelveticaNeue", size: size)!
         }
@@ -955,12 +955,12 @@ extension UIFont {
             textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
 
             if #available(iOS 8.2, *) {
-                return UIFont.systemFont(ofSize: CGFloat(fontSize), weight: UIFontWeightMedium)
+                return UIFont.systemFont(ofSize: CGFloat(fontSize), weight: UIFont.Weight.medium)
             }
         } else {
 
             if #available(iOS 8.2, *) {
-                return UIFont.systemFont(ofSize: CGFloat(fontSize), weight: UIFontWeightRegular)
+                return UIFont.systemFont(ofSize: CGFloat(fontSize), weight: UIFont.Weight.regular)
             }
         }
         return  UIFont.systemFont(ofSize: CGFloat(fontSize))

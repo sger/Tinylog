@@ -123,7 +123,7 @@ class TLITableViewCell: UITableViewCell {
         }
     }
 
-    func updateFonts() {
+    @objc func updateFonts() {
         textField?.font = self.textLabel!.font
         self.textLabel!.font = UIFont.tinylogFontOfSize(18.0)
     }

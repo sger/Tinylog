@@ -115,7 +115,7 @@ class TLISetupViewController: UIViewController {
         super.updateViewConstraints()
     }
 
-    func enableiCloudAndDismiss(_ button: TLIRoundedButton) {
+    @objc func enableiCloudAndDismiss(_ button: TLIRoundedButton) {
 
         let userDefaults = UserDefaults.standard
         userDefaults.set("off", forKey: "kSetupScreen")
@@ -141,7 +141,7 @@ class TLISetupViewController: UIViewController {
         TLIAnalyticsTracker.trackMixpanelEvent("Enable iCloud", properties: nil)
     }
 
-    func disableiCloudAndDismiss(_ button: TLIRoundedButton) {
+    @objc func disableiCloudAndDismiss(_ button: TLIRoundedButton) {
 
         let userDefaults = UserDefaults.standard
         userDefaults.set("off", forKey: "kSetupScreen")

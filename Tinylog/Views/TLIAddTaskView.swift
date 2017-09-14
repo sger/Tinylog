@@ -64,7 +64,7 @@ class TLIAddTaskView: UIView, UITextFieldDelegate {
         return 44.0
     }
 
-    func updateFonts() {
+    @objc func updateFonts() {
         textField?.font = UIFont.tinylogFontOfSize(17.0)
     }
 

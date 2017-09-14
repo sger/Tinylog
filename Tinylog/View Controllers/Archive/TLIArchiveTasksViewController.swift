@@ -189,11 +189,11 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
                 rawValue: TLINotifications.kTLIFontDidChangeNotification as String), object: nil)
     }
 
-    func updateFonts() {
+    @objc func updateFonts() {
         self.tableView?.reloadData()
     }
 
-    func appBecomeActive() {
+    @objc func appBecomeActive() {
         startSync()
     }
 
@@ -205,7 +205,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func syncActivityDidEndNotification(_ notification: Notification) {
+    @objc func syncActivityDidEndNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
@@ -213,13 +213,13 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         self.tableView?.reloadData()
     }
 
-    func syncActivityDidBeginNotification(_ notification: Notification) {
+    @objc func syncActivityDidBeginNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
     }
 
-    func deviceOrientationChanged() {
+    @objc func deviceOrientationChanged() {
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             self.orientation = "landscape"
         }
@@ -267,7 +267,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
 
     // MARK: Close
 
-    func close(_ button: UIButton) {
+    @objc func close(_ button: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -318,7 +318,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func toggleEditMode(_ sender: UIBarButtonItem) {
+    @objc func toggleEditMode(_ sender: UIBarButtonItem) {
         setEditing(!isEditing, animated: true)
     }
 
@@ -421,7 +421,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         try! managedObjectContext.save()
     }
 
-    func onChangeSize(_ notification: Notification) {
+    @objc func onChangeSize(_ notification: Notification) {
         self.tableView?.reloadData()
     }
 
@@ -451,8 +451,8 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
             if height != nil {
                 let cellSize: CGSize = cell.systemLayoutSizeFitting(
                     CGSize(width: self.view.frame.size.width, height: 0),
-                    withHorizontalFittingPriority: 1000,
-                    verticalFittingPriority: 52)
+                    withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
+                    verticalFittingPriority: UILayoutPriority(rawValue: 52))
                 putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
             }
             return cell

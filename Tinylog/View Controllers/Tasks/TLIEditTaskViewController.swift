@@ -58,7 +58,7 @@ class TLIEditTaskViewController: UIViewController {
             object: nil)
     }
 
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         keyboardRect = self.view.convert((
             userInfo.object(
@@ -68,7 +68,7 @@ class TLIEditTaskViewController: UIViewController {
         layoutTextView(duration)
     }
 
-    func keyboardWillHide(_ notification: Notification) {
+    @objc func keyboardWillHide(_ notification: Notification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         keyboardRect = CGRect.zero
         let size: CGSize = self.view.bounds.size
@@ -98,12 +98,12 @@ class TLIEditTaskViewController: UIViewController {
         })
     }
 
-    func close(_ sender: UIButton) {
+    @objc func close(_ sender: UIButton) {
         saveOnClose = false
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
 
-    func save(_ sender: UIButton) {
+    @objc func save(_ sender: UIButton) {
         saveOnClose = true
         self.navigationController?.dismiss(animated: true, completion: nil)
     }

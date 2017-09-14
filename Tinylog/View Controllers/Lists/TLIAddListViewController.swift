@@ -66,12 +66,12 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
         self.name?.becomeFirstResponder()
     }
 
-    func cancel(_ button: UIButton) {
+    @objc func cancel(_ button: UIButton) {
         self.name?.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
     }
 
-    func save(_ button: UIButton) {
+    @objc func save(_ button: UIButton) {
         if mode == "create" {
             createList()
         } else if mode == "edit" {

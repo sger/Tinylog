@@ -152,8 +152,8 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         navigationBar.tintColor = UIColor.tinylogMainColor
 
         UINavigationBar.appearance().titleTextAttributes = [
-            NSFontAttributeName: UIFont.mediumFontWithSize(18.0),
-            NSForegroundColorAttributeName: UIColor.tinylogTextColor]
+            NSAttributedStringKey.font: UIFont.mediumFontWithSize(18.0),
+            NSAttributedStringKey.foregroundColor: UIColor.tinylogTextColor]
 
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 
@@ -176,7 +176,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         unregisterNotifications()
     }
 
-    func reachabilityDidChange(_ notification: Notification) {
+    @objc func reachabilityDidChange(_ notification: Notification) {
         if let reachability: Reachability = notification.object as? Reachability {
             if reachability.isReachable() {
                 if reachability.isReachableViaWiFi() {

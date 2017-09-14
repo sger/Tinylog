@@ -181,7 +181,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         view.setNeedsUpdateConstraints()
     }
 
-    func onChangeSize(_ notification: Notification) {
+    @objc func onChangeSize(_ notification: Notification) {
         self.tableView?.reloadData()
     }
 
@@ -222,7 +222,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         super.updateViewConstraints()
     }
 
-    func appBecomeActive() {
+    @objc func appBecomeActive() {
         startSync()
     }
 
@@ -234,11 +234,11 @@ class TLIListsViewController: TLICoreDataTableViewController,
         }
     }
 
-    func updateFonts() {
+    @objc func updateFonts() {
         self.tableView?.reloadData()
     }
 
-    func syncActivityDidEndNotification(_ notification: Notification) {
+    @objc func syncActivityDidEndNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
 
@@ -262,7 +262,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         }
     }
 
-    func syncActivityDidBeginNotification(_ notification: Notification) {
+    @objc func syncActivityDidBeginNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
@@ -293,7 +293,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
             })
     }
 
-    func addNewList(_ sender: UIButton?) {
+    @objc func addNewList(_ sender: UIButton?) {
         let addListViewController: TLIAddListViewController = TLIAddListViewController()
         addListViewController.managedObjectContext = managedObjectContext
         addListViewController.delegate = self
@@ -313,7 +313,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         TLIAnalyticsTracker.trackMixpanelEvent("Setup", properties: nil)
     }
 
-    func displayArchive(_ button: TLIArchiveButton) {
+    @objc func displayArchive(_ button: TLIArchiveButton) {
         let archiveViewController: TLIArchiveViewController = TLIArchiveViewController()
         archiveViewController.managedObjectContext = managedObjectContext
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
@@ -324,7 +324,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
 
     // MARK: Display Settings
 
-    func displaySettings(_ sender: UIButton) {
+    @objc func displaySettings(_ sender: UIButton) {
         let settingsViewController: TLISettingsTableViewController = TLISettingsTableViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: settingsViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
@@ -390,7 +390,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         }
     }
 
-    func toggleEditMode(_ sender: UIBarButtonItem) {
+    @objc func toggleEditMode(_ sender: UIBarButtonItem) {
         setEditing(!isEditing, animated: true)
     }
 
@@ -430,7 +430,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         return [archiveRowAction, editRowAction]
     }
 
-    func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    @objc func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
 
@@ -487,7 +487,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         try! managedObjectContext.save()
     }
 
-    func tableView(
+    @objc func tableView(
         _ tableView: UITableView,
         estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
@@ -502,8 +502,8 @@ class TLIListsViewController: TLICoreDataTableViewController,
         if success != nil {
             let cellSize: CGSize = cell.systemLayoutSizeFitting(
                 CGSize(width: self.view.frame.size.width, height: 0),
-                withHorizontalFittingPriority: 1000,
-                verticalFittingPriority: 61)
+                withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
+                verticalFittingPriority: UILayoutPriority(rawValue: 61))
             putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
         }
         return cell

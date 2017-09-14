@@ -43,7 +43,7 @@ class TLIKeyboardBar: UIView, UIInputViewAudioFeedback {
         buttonMention.frame = CGRect(x: 60.0, y: 1.0, width: 20.0, height: self.bounds.size.height - 1.0)
     }
 
-    func buttonHashTagPressed(_ button: UIButton) {
+    @objc func buttonHashTagPressed(_ button: UIButton) {
         UIDevice.current.playInputClick()
         keyInputView?.insertText("#")
     }

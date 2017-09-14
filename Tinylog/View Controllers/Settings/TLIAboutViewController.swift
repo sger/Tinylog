@@ -176,9 +176,9 @@ class TLIAboutViewController: TLIGroupedTableViewController,
                         let stringBody = "---\nApp: Tinylog \(versionInfo)\nDevice: \(String(describing: deviceModel)) (\(systemVersion))"
                         mailer.setMessageBody(stringBody, isHTML: false)
                         let titleTextDict: NSDictionary = [
-                            NSForegroundColorAttributeName: UIColor.black,
-                            NSFontAttributeName: UIFont.mediumFontWithSize(16.0)]
-                        mailer.navigationBar.titleTextAttributes = titleTextDict as? [String : AnyObject]
+                            NSAttributedStringKey.foregroundColor: UIColor.black,
+                            NSAttributedStringKey.font: UIFont.mediumFontWithSize(16.0)]
+                        mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedStringKey : Any]
                         mailer.navigationBar.tintColor = UIColor.tinylogMainColor
                         self.present(mailer, animated: true, completion: nil)
                         mailer.viewControllers.last?.navigationItem.title = "Tinylog"
@@ -206,7 +206,7 @@ class TLIAboutViewController: TLIGroupedTableViewController,
         }
     }
 
-    func viewWebsite() {
+    @objc func viewWebsite() {
         if let path: URL = URL(string: "https://www.behance.net/tzoAnagnostou") {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(path, options: [:], completionHandler: nil)

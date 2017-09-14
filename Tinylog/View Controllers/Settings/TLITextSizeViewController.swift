@@ -128,7 +128,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
         }
     }
 
-    func sliderValue(_ sender: UISlider!) {
+    @objc func sliderValue(_ sender: UISlider!) {
         let slider: UISlider = sender as UISlider
         let number = numbers[Int(slider.value)]
         let userDefaults: UserDefaults = UserDefaults.standard
@@ -138,7 +138,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
 
     // MARK: Actions
 
-    func toggleSystemFontSize(_ sender: UISwitch) {
+    @objc func toggleSystemFontSize(_ sender: UISwitch) {
         let mode: UISwitch = sender as UISwitch
         let value: NSString = mode.isOn == true ? "on" : "off"
 

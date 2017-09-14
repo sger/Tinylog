@@ -52,7 +52,7 @@ class TLISettingsTableViewController: UITableViewController,
                 object: nil)
     }
 
-    func updateFonts() {
+    @objc func updateFonts() {
         self.navigationController?.navigationBar.setNeedsDisplay()
     }
 
@@ -138,7 +138,7 @@ class TLISettingsTableViewController: UITableViewController,
 
     // MARK: Actions
 
-    func toggleSyncSettings(_ sender: UISwitch) {
+    @objc func toggleSyncSettings(_ sender: UISwitch) {
         let mode: UISwitch = sender as UISwitch
         let value: NSString = mode.isOn == true ? "on" : "off"
 
@@ -171,7 +171,7 @@ class TLISettingsTableViewController: UITableViewController,
         })
     }
 
-    func close(_ sender: UIButton) {
+    @objc func close(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -254,10 +254,10 @@ class TLISettingsTableViewController: UITableViewController,
                     let stringBody = "---\nApp: Tinylog \(version) (\(build))\nDevice: \(String(describing: deviceModel)) (\(systemVersion))"
 
                     mailer.setMessageBody(stringBody, isHTML: false)
-                    let titleTextDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.mediumFontWithSize(16.0)]
+                    let titleTextDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.mediumFontWithSize(16.0)]
 
-                    mailer.navigationBar.titleTextAttributes = titleTextDict as? [String : AnyObject]
-
+                    mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedStringKey : Any]
+   
                     mailer.navigationBar.tintColor = UIColor.tinylogMainColor
                     self.present(mailer, animated: true, completion: nil)
                     mailer.viewControllers.last?.navigationItem.title = "Tinylog"
