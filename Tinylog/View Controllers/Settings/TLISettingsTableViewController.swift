@@ -241,7 +241,7 @@ class TLISettingsTableViewController: UITableViewController,
             if indexPath.row == 0 {
                 if MFMailComposeViewController.canSendMail() {
                     let infoDictionary: NSDictionary = Bundle.main.infoDictionary! as NSDictionary
-                    if let version: NSString = infoDictionary.object(forKey:"CFBundleShortVersionString") as? NSString,
+                    if let version: NSString = infoDictionary.object(forKey: "CFBundleShortVersionString") as? NSString,
                         let build: NSString = infoDictionary.object(forKey: "CFBundleVersion") as? NSString {
                     let deviceModel = TLIDeviceInfo.model()
 
@@ -256,7 +256,7 @@ class TLISettingsTableViewController: UITableViewController,
                     mailer.setMessageBody(stringBody, isHTML: false)
                     let titleTextDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.mediumFontWithSize(16.0)]
 
-                    mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedStringKey : Any]
+                    mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedStringKey: Any]
 
                     mailer.navigationBar.tintColor = UIColor.tinylogMainColor
                     self.present(mailer, animated: true, completion: nil)

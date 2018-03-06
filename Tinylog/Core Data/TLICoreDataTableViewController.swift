@@ -159,7 +159,7 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
             case .insert:
                 if let newIndexPath = newIndexPath {
                     tableView?.insertRows(at: [newIndexPath],
-                        with:UITableViewRowAnimation.fade)
+                        with: UITableViewRowAnimation.fade)
                 }
 
             case .delete:

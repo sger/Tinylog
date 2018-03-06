@@ -40,7 +40,7 @@ extension UIColor {
         } else {
             print("invalid rgb string, missing '#' as prefix")
         }
-        self.init(red:red, green:green, blue:blue, alpha:alpha)
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 
     public static var tinylogNavigationBarColor: UIColor {
@@ -60,7 +60,7 @@ extension UIColor {
     }
 
     public static var tinylogNumbersColor: UIColor {
-        return UIColor(red:76.0 / 255.0, green:90.0 / 255.0, blue:100.0 / 255.0, alpha:1.0)
+        return UIColor(red: 76.0 / 255.0, green: 90.0 / 255.0, blue: 100.0 / 255.0, alpha: 1.0)
     }
 
     public static var tinylogNavigationBarLineColor: UIColor {
