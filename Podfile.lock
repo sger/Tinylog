@@ -1,17 +1,17 @@
 PODS:
-  - Crashlytics (3.8.6):
-    - Fabric (~> 1.6.3)
-  - Ensembles (1.7):
-    - Ensembles/Core (= 1.7)
-  - Ensembles/Core (1.7)
-  - Fabric (1.6.13)
-  - Mixpanel (3.2.0)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - Ensembles (1.7.1):
+    - Ensembles/Core (= 1.7.1)
+  - Ensembles/Core (1.7.1)
+  - Fabric (1.7.5)
+  - Mixpanel (3.2.7)
   - PureLayout (3.0.2)
   - Reachability (3.2)
   - SGBackgroundView (1.2)
   - SGReachability (1.0):
     - Reachability
-  - SVProgressHUD (2.2.1)
+  - SVProgressHUD (2.2.5)
   - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
@@ -27,17 +27,17 @@ DEPENDENCIES:
   - TTTAttributedLabel
 
 SPEC CHECKSUMS:
-  Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
-  Ensembles: b82f0747092d11aff476471244e2cfc660861c76
-  Fabric: 2fb5676bc811af011a04513451f463dac6803206
-  Mixpanel: 904f98ac3872340e15c21c138d761c38125ab064
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Ensembles: 11a67648712e8d2fd7d3103b9fe95e967d94ebf4
+  Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
+  Mixpanel: 34568617004230e044428caebc7b515d22e80baa
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SGBackgroundView: adfe9ef0892f8c5c6aa3820e9a4c1e9adbed4de9
   SGReachability: abf9b7c6695750939268fb0e7197ea2d69536f22
-  SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
 PODFILE CHECKSUM: 378919c1eb9aa5d91cc8b60a9079e2ef2522cf3f
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

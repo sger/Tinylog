@@ -11,7 +11,6 @@
 		5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5628E8CD1E85898700AAFD20 /* Assets.xcassets */; };
 		5628E8DC1E85898700AAFD20 /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628E8DB1E85898700AAFD20 /* TinylogTests.swift */; };
 		562FAC3D1F4DE73A0008C7D8 /* PlistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */; };
-		56487F911F644E150080192C /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56487F901F644E150080192C /* Secrets.swift */; };
 		564E552D1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */; };
 		564E55391E8ADE30008D5D85 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */; };
 		564E55451E8ADE48008D5D85 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E553B1E8ADE48008D5D85 /* TLIList.swift */; };
@@ -74,6 +73,7 @@
 		566BAC071F6ADBD4005B0E4F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */; };
 		568F7E061F2BA12E00CFDDDD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */; };
 		568F7E081F2BA14300CFDDDD /* SnapshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */; };
+		56A1F7E220190E2D006DFBBD /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1F7E120190E2D006DFBBD /* Secrets.swift */; };
 		56AC7AA51E8A342F006AD29B /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */; };
 		56AC7AA61E8A342F006AD29B /* TLIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA41E8A342F006AD29B /* TLIConstants.swift */; };
 		56AC7AAA1E8A34E9006AD29B /* TLIAnalyticsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA91E8A34E9006AD29B /* TLIAnalyticsTracker.swift */; };
@@ -112,7 +112,6 @@
 		5628E8DB1E85898700AAFD20 /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
 		5628E8DD1E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlistInfo.swift; path = Utils/PlistInfo.swift; sourceTree = "<group>"; };
-		56487F901F644E150080192C /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLISettingsFontPickerViewController.swift; path = "View Controllers/Settings/TLISettingsFontPickerViewController.swift"; sourceTree = "<group>"; };
 		564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICoreDataTableViewController.swift; path = "Core Data/TLICoreDataTableViewController.swift"; sourceTree = "<group>"; };
 		564E553B1E8ADE48008D5D85 /* TLIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIList.swift; path = "Core Data Model/TLIList.swift"; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		568F7DFF1F2BA0DC00CFDDDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotsUITests.swift; sourceTree = "<group>"; };
+		56A1F7E120190E2D006DFBBD /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAppDelegate.swift; path = Application/TLIAppDelegate.swift; sourceTree = "<group>"; };
 		56AC7AA41E8A342F006AD29B /* TLIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIConstants.swift; path = Application/TLIConstants.swift; sourceTree = "<group>"; };
 		56AC7AA91E8A34E9006AD29B /* TLIAnalyticsTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAnalyticsTracker.swift; path = Network/TLIAnalyticsTracker.swift; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		56487F8F1F644E150080192C /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				56487F901F644E150080192C /* Secrets.swift */,
+				56A1F7E120190E2D006DFBBD /* Secrets.swift */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -906,7 +906,6 @@
 				564E55771E8AE238008D5D85 /* TLIArchiveTasksViewController.swift in Sources */,
 				56AC7AB31E8A3549006AD29B /* UIImage+Tinylog.swift in Sources */,
 				564E552D1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift in Sources */,
-				56487F911F644E150080192C /* Secrets.swift in Sources */,
 				564E55461E8ADE48008D5D85 /* TLIList+CoreDataProperties.swift in Sources */,
 				564E55A81E8AE327008D5D85 /* TLIExportTasksButton.swift in Sources */,
 				564E55961E8AE30C008D5D85 /* TLIListsFooterView.swift in Sources */,
@@ -914,6 +913,7 @@
 				56AC7AB11E8A3549006AD29B /* UIColor+Tinylog.swift in Sources */,
 				564E555D1E8AE0C8008D5D85 /* TLITextField.m in Sources */,
 				564E555A1E8AE05E008D5D85 /* TLIDrawingUtils.m in Sources */,
+				56A1F7E220190E2D006DFBBD /* Secrets.swift in Sources */,
 				56AC7AB21E8A3549006AD29B /* UIFont+Tinylog.swift in Sources */,
 				564E55C61E8AE43E008D5D85 /* Utils.swift in Sources */,
 				564E554A1E8ADE48008D5D85 /* TLINotification+CoreDataProperties.swift in Sources */,
