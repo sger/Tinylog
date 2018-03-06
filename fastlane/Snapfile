@@ -6,7 +6,12 @@
    "iPhone 6 Plus",
    "iPhone 5s",
    "iPad Pro (12.9-inch)",
-   "iPad Pro (9.7-inch)"
+   "iPad Pro (9.7-inch)",
+   "iPhone 7",
+   "iPhone 8",
+   "iPhone 7 Plus",
+   "iPhone 8 Plus",
+   "iPhone X"
  ])
 
 languages([
