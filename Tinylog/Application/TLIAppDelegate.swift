@@ -248,12 +248,12 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
 
     fileprivate func selectTabBarItemForIdentifier(_ identifier: ShortcutIdentifier) -> Bool {
         switch identifier {
-            case .createNewList:
-                if let navigationController = window?.rootViewController as? UINavigationController {
-                    if let vc = navigationController.viewControllers[0] as? TLIListsViewController {
-                        vc.addNewList(nil)
-                    }
+        case .createNewList:
+            if let navigationController = window?.rootViewController as? UINavigationController {
+                if let vc = navigationController.viewControllers[0] as? TLIListsViewController {
+                    vc.addNewList(nil)
                 }
+            }
             return true
         }
     }

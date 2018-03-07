@@ -12,7 +12,7 @@
 //            bottom of the file to notify users about
 //            the new SnapshotHelper.swift
 // -----------------------------------------------------
-
+// swiftlint:disable line_length
 import Foundation
 import XCTest
 

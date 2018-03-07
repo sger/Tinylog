@@ -495,59 +495,59 @@ class TLITasksViewController: TLICoreDataTableViewController,
         setEditing(!isEditing, animated: true)
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]? {
+    func tableView(_ tableView: UITableView,
+                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let archiveRowAction = UITableViewRowAction(
             style: UITableViewRowActionStyle.default,
             title: "Archive",
             handler: {_, indexpath in
-            if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
-                task.archivedAt = Date()
-                // Update counter list
-                // Fetch all objects from list
-                let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
-                    entityName: "Task")
-                let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-                fetchRequestTotal.sortDescriptors = [positionDescriptor]
-                fetchRequestTotal.predicate  = NSPredicate(
-                    format: "archivedAt = nil AND list = %@", task.list!)
-                fetchRequestTotal.fetchBatchSize = 20
-                do {
-                    let results: NSArray = try self.managedObjectContext.fetch(fetchRequestTotal) as NSArray
-                    let fetchRequestCompleted: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
+                if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
+                    task.archivedAt = Date()
+                    // Update counter list
+                    // Fetch all objects from list
+                    let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
                         entityName: "Task")
-                    fetchRequestCompleted.sortDescriptors = [positionDescriptor]
-                    fetchRequestCompleted.predicate  = NSPredicate(
-                        format: "archivedAt = nil AND completed = %@ AND list = %@",
-                        NSNumber(value: true as Bool), task.list!)
-                    fetchRequestCompleted.fetchBatchSize = 20
-                    let resultsCompleted: NSArray = try self.managedObjectContext.fetch(
-                        fetchRequestCompleted) as NSArray
-                    let total: Int = results.count - resultsCompleted.count
-                    task.list!.total = total as NSNumber?
-                    try self.managedObjectContext.save()
-                    self.setEditing(false, animated: true)
-                    if self.checkForEmptyResults() {
-                        self.noTasksLabel?.isHidden = false
-                    } else {
-                        self.noTasksLabel?.isHidden = true
+                    let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
+                    fetchRequestTotal.sortDescriptors = [positionDescriptor]
+                    fetchRequestTotal.predicate  = NSPredicate(
+                        format: "archivedAt = nil AND list = %@", task.list!)
+                    fetchRequestTotal.fetchBatchSize = 20
+                    do {
+                        let results: NSArray = try self.managedObjectContext.fetch(fetchRequestTotal)
+                            as NSArray
+                        let fetchRequestCompleted: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
+                            entityName: "Task")
+                        fetchRequestCompleted.sortDescriptors = [positionDescriptor]
+                        fetchRequestCompleted.predicate  = NSPredicate(
+                            format: "archivedAt = nil AND completed = %@ AND list = %@",
+                            NSNumber(value: true as Bool), task.list!)
+                        fetchRequestCompleted.fetchBatchSize = 20
+                        let resultsCompleted: NSArray = try self.managedObjectContext.fetch(
+                            fetchRequestCompleted) as NSArray
+                        let total: Int = results.count - resultsCompleted.count
+                        task.list!.total = total as NSNumber?
+                        try self.managedObjectContext.save()
+                        self.setEditing(false, animated: true)
+                        if self.checkForEmptyResults() {
+                            self.noTasksLabel?.isHidden = false
+                        } else {
+                            self.noTasksLabel?.isHidden = true
+                        }
+                        self.tableView?.reloadData()
+                    } catch let error as NSError {
+                        fatalError(error.localizedDescription)
                     }
-                    self.tableView?.reloadData()
-                } catch let error as NSError {
-                    fatalError(error.localizedDescription)
                 }
-            }
         })
         archiveRowAction.backgroundColor = UIColor.tinylogMainColor
         return [archiveRowAction]
     }
 
-    func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
@@ -583,10 +583,9 @@ class TLITasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        moveRowAtIndexPath sourceIndexPath: IndexPath,
-        toIndexPath destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   moveRowAt sourceIndexPath: IndexPath,
+                   to destinationIndexPath: IndexPath) {
         if sourceIndexPath.row == destinationIndexPath.row {
             return
         }
@@ -627,10 +626,8 @@ class TLITasksViewController: TLICoreDataTableViewController,
         return 0
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        estimatedHeightForRowAtIndexPath
-        indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 52)!)
     }
 
@@ -658,15 +655,14 @@ class TLITasksViewController: TLICoreDataTableViewController,
 
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if enableDidSelectRowAtIndexPath {
 
-                let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
+            let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
 
-                DispatchQueue.main.async {
-                    self.editTask(task, indexPath: indexPath)
-                }
-
+            DispatchQueue.main.async {
+                self.editTask(task, indexPath: indexPath)
+            }
         }
     }
 

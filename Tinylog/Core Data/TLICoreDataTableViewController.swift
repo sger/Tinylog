@@ -124,7 +124,7 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
 
         self.tableView?.beginUpdates()
     }
-
+    // swiftlint:disable unneeded_break_in_switch
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
 
         if ignoreNextUpdates {

@@ -396,24 +396,23 @@ class TLIListsViewController: TLICoreDataTableViewController,
 
     // MARK: UITableViewDataSource
 
-    func tableView(
-        _ tableView: UITableView,
-        editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]? {
-
+    func tableView(_ tableView: UITableView,
+                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let editRowAction = UITableViewRowAction(
             style: UITableViewRowActionStyle.default,
             title: "Edit", handler: {_, indexpath in
 
-            let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
+                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
 
-            let addListViewController: TLIAddListViewController = TLIAddListViewController()
-            addListViewController.managedObjectContext = self.managedObjectContext
-            addListViewController.delegate = self
-            addListViewController.list = list
-            addListViewController.mode = "edit"
-            let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
-            nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
-            self.navigationController?.present(nc, animated: true, completion: nil)
+                let addListViewController: TLIAddListViewController = TLIAddListViewController()
+                addListViewController.managedObjectContext = self.managedObjectContext
+                addListViewController.delegate = self
+                addListViewController.list = list
+                addListViewController.mode = "edit"
+                let nc: UINavigationController = UINavigationController(
+                    rootViewController: addListViewController)
+                nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+                self.navigationController?.present(nc, animated: true, completion: nil)
         })
         editRowAction.backgroundColor = UIColor.tinylogEditRowAction
         let archiveRowAction = UITableViewRowAction(
@@ -430,11 +429,11 @@ class TLIListsViewController: TLICoreDataTableViewController,
         return [archiveRowAction, editRowAction]
     }
 
-    @objc func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
@@ -467,10 +466,9 @@ class TLIListsViewController: TLICoreDataTableViewController,
         }
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        moveRowAtIndexPath sourceIndexPath: IndexPath,
-        toIndexPath destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   moveRowAt sourceIndexPath: IndexPath,
+                   to destinationIndexPath: IndexPath) {
         if sourceIndexPath.row == destinationIndexPath.row {
             return
         }
@@ -487,9 +485,8 @@ class TLIListsViewController: TLICoreDataTableViewController,
         try! managedObjectContext.save()
     }
 
-    @objc func tableView(
-        _ tableView: UITableView,
-        estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
     }
 
@@ -515,7 +512,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         listTableViewCell.currentList = list
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var list: TLIList
 
         if tableView == self.tableView {
