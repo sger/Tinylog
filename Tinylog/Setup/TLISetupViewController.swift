@@ -138,18 +138,13 @@ class TLISetupViewController: UIViewController {
         })
 
         self.dismiss(animated: true, completion: nil)
-        TLIAnalyticsTracker.trackMixpanelEvent("Enable iCloud", properties: nil)
     }
 
     @objc func disableiCloudAndDismiss(_ button: TLIRoundedButton) {
-
         let userDefaults = UserDefaults.standard
         userDefaults.set("off", forKey: "kSetupScreen")
         userDefaults.set("off", forKey: TLIUserDefaults.kTLISyncMode as String)
         userDefaults.synchronize()
-
         self.dismiss(animated: true, completion: nil)
-
-        TLIAnalyticsTracker.trackMixpanelEvent("Disable iCloud", properties: nil)
     }
 }

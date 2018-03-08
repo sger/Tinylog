@@ -433,7 +433,6 @@ class TLITasksViewController: TLICoreDataTableViewController,
         let nc: UINavigationController = UINavigationController(rootViewController: viewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
-        TLIAnalyticsTracker.trackMixpanelEvent("Display Archive Tasks", properties: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -706,8 +705,6 @@ class TLITasksViewController: TLICoreDataTableViewController,
             } else {
                 updateFooterInfoText(self.list!)
             }
-
-            TLIAnalyticsTracker.trackMixpanelEvent("Toggle Task", properties: nil)
         }
     }
 
@@ -764,8 +761,6 @@ class TLITasksViewController: TLICoreDataTableViewController,
                     updateFooterInfoText(self.list!)
                 }
             }
-
-            TLIAnalyticsTracker.trackMixpanelEvent("Add New Task", properties: nil)
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
@@ -805,7 +800,6 @@ class TLITasksViewController: TLICoreDataTableViewController,
             } else {
                 UIApplication.shared.openURL(path)
             }
-            TLIAnalyticsTracker.trackMixpanelEvent("Display Link", properties: nil)
         }
     }
 
@@ -823,7 +817,6 @@ class TLITasksViewController: TLICoreDataTableViewController,
         let nc: UINavigationController = UINavigationController(rootViewController: editTaskViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
-        TLIAnalyticsTracker.trackMixpanelEvent("Edit Task", properties: nil)
     }
 
     func putEstimatedCellHeightToCache(_ indexPath: IndexPath, height: CGFloat) {
@@ -929,8 +922,6 @@ class TLITasksViewController: TLICoreDataTableViewController,
 
                 self.navigationController?.present(
                     activityViewController, animated: true, completion: nil)
-
-                TLIAnalyticsTracker.trackMixpanelEvent("Export Tasks", properties: nil)
             } catch let error as NSError {
                 fatalError(error.localizedDescription)
             }

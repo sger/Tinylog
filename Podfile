@@ -10,7 +10,6 @@ target 'Tinylog' do
 	pod 'Reachability'
 	pod 'SVProgressHUD'
 	pod 'PureLayout'
-	pod 'Mixpanel'
 	pod 'SGReachability'
 	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"

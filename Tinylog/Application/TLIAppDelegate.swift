@@ -9,7 +9,6 @@
 import UIKit
 import Reachability
 import SGReachability
-import Mixpanel
 import Fabric
 import Crashlytics
 import Ensembles
@@ -122,7 +121,6 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
             }
 
         Crashlytics.start(withAPIKey: Secrets.crashlyticsKey)
-        Mixpanel.sharedInstance(withToken: Secrets.mixpanelToken)
         SGReachabilityController.shared()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -132,13 +130,11 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         if  IS_IPAD {
             let splitViewController = TLISplitViewController()
             self.window?.rootViewController = splitViewController
-            TLIAnalyticsTracker.trackMixpanelEvent("Open App", properties: ["device": "ipad"])
         } else {
             let listsViewController: TLIListsViewController = TLIListsViewController()
             listsViewController.managedObjectContext = managedObjectContext
             let nc: UINavigationController = UINavigationController(rootViewController: listsViewController)
             self.window?.rootViewController = nc
-            TLIAnalyticsTracker.trackMixpanelEvent("Open App", properties: ["device": "iphone"])
         }
 
         self.window?.backgroundColor = UIColor.white
@@ -159,10 +155,6 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
 
         if let displaySetupScreen = UserDefaults.standard.object(forKey: "kSetupScreen") as? String {
             if displaySetupScreen == "on" {
-                //Setup Mixpanel
-                if let mixpanel = Mixpanel.sharedInstance() {
-                    TLIAnalyticsTracker.createAlias(mixpanel.distinctId)
-                }
             }
         }
 
@@ -205,7 +197,6 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         }
 
         UIApplication.shared.applicationIconBadgeNumber =  0
-        Mixpanel.sharedInstance()?.flush()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {}

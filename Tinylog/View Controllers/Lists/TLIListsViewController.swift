@@ -301,7 +301,6 @@ class TLIListsViewController: TLICoreDataTableViewController,
         let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
-        TLIAnalyticsTracker.trackMixpanelEvent("Add New List", properties: nil)
     }
 
     // MARK: Display Setup
@@ -310,7 +309,6 @@ class TLIListsViewController: TLICoreDataTableViewController,
         let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
-        TLIAnalyticsTracker.trackMixpanelEvent("Setup", properties: nil)
     }
 
     @objc func displayArchive(_ button: TLIArchiveButton) {
@@ -319,7 +317,6 @@ class TLIListsViewController: TLICoreDataTableViewController,
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
-        TLIAnalyticsTracker.trackMixpanelEvent("Display Archive", properties: nil)
     }
 
     // MARK: Display Settings
@@ -329,7 +326,6 @@ class TLIListsViewController: TLICoreDataTableViewController,
         let nc: UINavigationController = UINavigationController(rootViewController: settingsViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
-        TLIAnalyticsTracker.trackMixpanelEvent("Display Settings", properties: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {

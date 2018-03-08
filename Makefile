@@ -47,29 +47,4 @@ secrets:
 		&& cp -n Configs/Secrets.swift.example Tinylog/Configs/Secrets.swift \
 		|| true; \
 
-deploy:
-	@echo "Deploying $(BRANCH) to $(RELEASE)"
-
-	@if test -n "`git rev-list $(BRANCH)..$(RELEASE)`"; \
-	then \
-		echo "There are commits in $(BRANCH) that are not in $(RELEASE). Please sync the remotes before deploying."; \
-		exit 1; \
-	fi
-	@if test "$(RELEASE)" != "release" && test "$(RELEASE)" != "itunes"; \
-	then \
-		echo "RELEASE must be 'release' or 'itunes'."; \
-		exit 1; \
-	fi
-	@if test "$(RELEASE)" = "itunes" && test "$(BRANCH)" != "master"; \
-	then \
-		echo "BRANCH must be 'master' for iTunes releases."; \
-		exit 1; \
-	fi
-
-	@git branch -f $(DIST_BRANCH) $(BRANCH)
-	@git push -f $(DIST_BRANCH)
-	@git branch -d $(DIST_BRANCH)
-
-	@echo "Deploy completed!"
-
 .PHONY: test clean dependencies lint deploy cocoapods

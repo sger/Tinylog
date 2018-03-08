@@ -76,7 +76,6 @@
 		56A1F7E220190E2D006DFBBD /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1F7E120190E2D006DFBBD /* Secrets.swift */; };
 		56AC7AA51E8A342F006AD29B /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */; };
 		56AC7AA61E8A342F006AD29B /* TLIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA41E8A342F006AD29B /* TLIConstants.swift */; };
-		56AC7AAA1E8A34E9006AD29B /* TLIAnalyticsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA91E8A34E9006AD29B /* TLIAnalyticsTracker.swift */; };
 		56AC7AB01E8A3549006AD29B /* String+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AAC1E8A3549006AD29B /* String+Tinylog.swift */; };
 		56AC7AB11E8A3549006AD29B /* UIColor+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AAD1E8A3549006AD29B /* UIColor+Tinylog.swift */; };
 		56AC7AB21E8A3549006AD29B /* UIFont+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AAE1E8A3549006AD29B /* UIFont+Tinylog.swift */; };
@@ -191,7 +190,6 @@
 		56A1F7E120190E2D006DFBBD /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAppDelegate.swift; path = Application/TLIAppDelegate.swift; sourceTree = "<group>"; };
 		56AC7AA41E8A342F006AD29B /* TLIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIConstants.swift; path = Application/TLIConstants.swift; sourceTree = "<group>"; };
-		56AC7AA91E8A34E9006AD29B /* TLIAnalyticsTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAnalyticsTracker.swift; path = Network/TLIAnalyticsTracker.swift; sourceTree = "<group>"; };
 		56AC7AAC1E8A3549006AD29B /* String+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Tinylog.swift"; path = "Extensions/String+Tinylog.swift"; sourceTree = "<group>"; };
 		56AC7AAD1E8A3549006AD29B /* UIColor+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Tinylog.swift"; path = "Extensions/UIColor+Tinylog.swift"; sourceTree = "<group>"; };
 		56AC7AAE1E8A3549006AD29B /* UIFont+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Tinylog.swift"; path = "Extensions/UIFont+Tinylog.swift"; sourceTree = "<group>"; };
@@ -495,7 +493,6 @@
 		565DA7941E8699A900C6E60C /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				56AC7AA91E8A34E9006AD29B /* TLIAnalyticsTracker.swift */,
 				565DA7991E8699CB00C6E60C /* TLISyncManager.h */,
 				565DA79A1E8699CB00C6E60C /* TLISyncManager.m */,
 			);
@@ -832,7 +829,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Ensembles/Ensembles.framework",
-				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SGBackgroundView/SGBackgroundView.framework",
@@ -843,7 +839,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Ensembles.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGBackgroundView.framework",
@@ -920,7 +915,6 @@
 				564E556B1E8AE1EF008D5D85 /* TLIEditTaskViewControllerDelegate.swift in Sources */,
 				564E55B71E8AE338008D5D85 /* TLITaskTableViewCell.swift in Sources */,
 				564E55951E8AE30C008D5D85 /* TLIAddTaskView.swift in Sources */,
-				56AC7AAA1E8A34E9006AD29B /* TLIAnalyticsTracker.swift in Sources */,
 				564E55481E8ADE48008D5D85 /* TLIMention+CoreDataProperties.swift in Sources */,
 				565454DD1F4581C40076BD08 /* UIViewController+Tinylog.swift in Sources */,
 				564E55471E8ADE48008D5D85 /* TLIMention.swift in Sources */,
