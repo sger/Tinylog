@@ -24,6 +24,18 @@ DEPENDENCIES:
   - SVProgressHUD
   - TTTAttributedLabel
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Crashlytics
+    - Ensembles
+    - Fabric
+    - PureLayout
+    - Reachability
+    - SGBackgroundView
+    - SGReachability
+    - SVProgressHUD
+    - TTTAttributedLabel
+
 SPEC CHECKSUMS:
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   Ensembles: 11a67648712e8d2fd7d3103b9fe95e967d94ebf4
@@ -37,4 +49,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: eaf11e406280b83a41dc47ba7b2ea6ee48deefe5
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

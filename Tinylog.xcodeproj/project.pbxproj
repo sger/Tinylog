@@ -11,6 +11,7 @@
 		5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5628E8CD1E85898700AAFD20 /* Assets.xcassets */; };
 		5628E8DC1E85898700AAFD20 /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628E8DB1E85898700AAFD20 /* TinylogTests.swift */; };
 		562FAC3D1F4DE73A0008C7D8 /* PlistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */; };
+		5633F44020C1A19D000C0E1A /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5633F43F20C1A19D000C0E1A /* Secrets.swift */; };
 		564E552D1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */; };
 		564E55391E8ADE30008D5D85 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */; };
 		564E55451E8ADE48008D5D85 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E553B1E8ADE48008D5D85 /* TLIList.swift */; };
@@ -73,7 +74,6 @@
 		566BAC071F6ADBD4005B0E4F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */; };
 		568F7E061F2BA12E00CFDDDD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */; };
 		568F7E081F2BA14300CFDDDD /* SnapshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */; };
-		56A1F7E220190E2D006DFBBD /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1F7E120190E2D006DFBBD /* Secrets.swift */; };
 		56AC7AA51E8A342F006AD29B /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */; };
 		56AC7AA61E8A342F006AD29B /* TLIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA41E8A342F006AD29B /* TLIConstants.swift */; };
 		56AC7AB01E8A3549006AD29B /* String+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AAC1E8A3549006AD29B /* String+Tinylog.swift */; };
@@ -111,6 +111,7 @@
 		5628E8DB1E85898700AAFD20 /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
 		5628E8DD1E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlistInfo.swift; path = Utils/PlistInfo.swift; sourceTree = "<group>"; };
+		5633F43F20C1A19D000C0E1A /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLISettingsFontPickerViewController.swift; path = "View Controllers/Settings/TLISettingsFontPickerViewController.swift"; sourceTree = "<group>"; };
 		564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICoreDataTableViewController.swift; path = "Core Data/TLICoreDataTableViewController.swift"; sourceTree = "<group>"; };
 		564E553B1E8ADE48008D5D85 /* TLIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIList.swift; path = "Core Data Model/TLIList.swift"; sourceTree = "<group>"; };
@@ -187,7 +188,6 @@
 		568F7DFF1F2BA0DC00CFDDDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotsUITests.swift; sourceTree = "<group>"; };
-		56A1F7E120190E2D006DFBBD /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAppDelegate.swift; path = Application/TLIAppDelegate.swift; sourceTree = "<group>"; };
 		56AC7AA41E8A342F006AD29B /* TLIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIConstants.swift; path = Application/TLIConstants.swift; sourceTree = "<group>"; };
 		56AC7AAC1E8A3549006AD29B /* String+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Tinylog.swift"; path = "Extensions/String+Tinylog.swift"; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 		56487F8F1F644E150080192C /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				56A1F7E120190E2D006DFBBD /* Secrets.swift */,
+				5633F43F20C1A19D000C0E1A /* Secrets.swift */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -573,7 +573,6 @@
 				5628E8C01E85898700AAFD20 /* Frameworks */,
 				5628E8C11E85898700AAFD20 /* Resources */,
 				DDFA14B61268A7B4EA5B443B /* [CP] Embed Pods Frameworks */,
-				CBCAF806F7962861437427BB /* [CP] Copy Pods Resources */,
 				56C7749F1F4D7823008571E1 /* Build Number */,
 				56C774A01F4D78CA008571E1 /* Version Number */,
 			);
@@ -594,8 +593,6 @@
 				5628E8D31E85898700AAFD20 /* Sources */,
 				5628E8D41E85898700AAFD20 /* Frameworks */,
 				5628E8D51E85898700AAFD20 /* Resources */,
-				52B8858EAF3679240FA67DB0 /* [CP] Embed Pods Frameworks */,
-				0487A89BE28E9638168C3048 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -632,7 +629,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Spiros Gerokostas";
 				TargetAttributes = {
 					5628E8C21E85898700AAFD20 = {
@@ -712,21 +709,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0487A89BE28E9638168C3048 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		066E2B78B671887052C70238 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -763,21 +745,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		52B8858EAF3679240FA67DB0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		56C7749F1F4D7823008571E1 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -805,21 +772,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
-		};
-		CBCAF806F7962861437427BB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		DDFA14B61268A7B4EA5B443B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -863,6 +815,7 @@
 				565DA79E1E8699CB00C6E60C /* TLISyncManager.m in Sources */,
 				564E55A31E8AE327008D5D85 /* TLIAddListButton.swift in Sources */,
 				564E55C11E8AE411008D5D85 /* TLIHelpTableViewController.swift in Sources */,
+				5633F44020C1A19D000C0E1A /* Secrets.swift in Sources */,
 				564E55A41E8AE327008D5D85 /* TLIArchiveButton.swift in Sources */,
 				564E55A91E8AE327008D5D85 /* TLIRoundedButton.swift in Sources */,
 				564E55B21E8AE338008D5D85 /* TLIGroupedTableViewCell.swift in Sources */,
@@ -908,7 +861,6 @@
 				56AC7AB11E8A3549006AD29B /* UIColor+Tinylog.swift in Sources */,
 				564E555D1E8AE0C8008D5D85 /* TLITextField.m in Sources */,
 				564E555A1E8AE05E008D5D85 /* TLIDrawingUtils.m in Sources */,
-				56A1F7E220190E2D006DFBBD /* Secrets.swift in Sources */,
 				56AC7AB21E8A3549006AD29B /* UIFont+Tinylog.swift in Sources */,
 				564E55C61E8AE43E008D5D85 /* Utils.swift in Sources */,
 				564E554A1E8ADE48008D5D85 /* TLINotification+CoreDataProperties.swift in Sources */,
@@ -975,6 +927,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -982,6 +935,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1031,6 +985,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1038,6 +993,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
