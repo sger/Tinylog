@@ -434,12 +434,12 @@ class TLIListsViewController: TLICoreDataTableViewController,
     }
 
     func listAtIndexPath(_ indexPath: IndexPath) -> TLIList? {
-        let list = self.frc?.object(at: indexPath) as! TLIList!
+        let list = self.frc?.object(at: indexPath) as! TLIList?
         return list
     }
 
     func updateList(_ list: TLIList, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedLists: [AnyObject] = self.frc?.fetchedObjects as [AnyObject]!
+        var fetchedLists: [AnyObject] = (self.frc?.fetchedObjects as [AnyObject]?)!
 
         // Remove current list item
         fetchedLists = fetchedLists.filter { $0 as! TLIList != list }
