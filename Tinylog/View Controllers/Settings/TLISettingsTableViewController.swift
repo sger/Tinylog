@@ -226,7 +226,7 @@ class TLISettingsTableViewController: UITableViewController,
     }
     // swiftlint:disable cyclomatic_complexity
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var viewController: UIViewController? = nil
+        var viewController: UIViewController?
         if indexPath.section == 0 {
             if indexPath.row == 0 {
 

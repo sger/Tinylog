@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		185C99393E0FFB186A3B1DE4 /* Pods_Tinylog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCB1EEBF9EAC162DF797006 /* Pods_Tinylog.framework */; };
+		561A25BE2116EBE500B28644 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561A25BD2116EBE400B28644 /* Secrets.swift */; };
 		5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5628E8CD1E85898700AAFD20 /* Assets.xcassets */; };
 		5628E8DC1E85898700AAFD20 /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628E8DB1E85898700AAFD20 /* TinylogTests.swift */; };
 		562FAC3D1F4DE73A0008C7D8 /* PlistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */; };
-		5633F44020C1A19D000C0E1A /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5633F43F20C1A19D000C0E1A /* Secrets.swift */; };
 		564E552D1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */; };
 		564E55391E8ADE30008D5D85 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */; };
 		564E55451E8ADE48008D5D85 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E553B1E8ADE48008D5D85 /* TLIList.swift */; };
@@ -104,6 +104,7 @@
 /* Begin PBXFileReference section */
 		034E13532B5D4A3280918EFF /* Pods-Tinylog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinylog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog.debug.xcconfig"; sourceTree = "<group>"; };
 		29E91D341FDF61B134BED598 /* Pods-TinylogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.debug.xcconfig"; sourceTree = "<group>"; };
+		561A25BD2116EBE400B28644 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		5628E8C31E85898700AAFD20 /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5628E8CD1E85898700AAFD20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5628E8D21E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		5628E8DB1E85898700AAFD20 /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
 		5628E8DD1E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlistInfo.swift; path = Utils/PlistInfo.swift; sourceTree = "<group>"; };
-		5633F43F20C1A19D000C0E1A /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLISettingsFontPickerViewController.swift; path = "View Controllers/Settings/TLISettingsFontPickerViewController.swift"; sourceTree = "<group>"; };
 		564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICoreDataTableViewController.swift; path = "Core Data/TLICoreDataTableViewController.swift"; sourceTree = "<group>"; };
 		564E553B1E8ADE48008D5D85 /* TLIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIList.swift; path = "Core Data Model/TLIList.swift"; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 		56487F8F1F644E150080192C /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				5633F43F20C1A19D000C0E1A /* Secrets.swift */,
+				561A25BD2116EBE400B28644 /* Secrets.swift */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -815,7 +815,6 @@
 				565DA79E1E8699CB00C6E60C /* TLISyncManager.m in Sources */,
 				564E55A31E8AE327008D5D85 /* TLIAddListButton.swift in Sources */,
 				564E55C11E8AE411008D5D85 /* TLIHelpTableViewController.swift in Sources */,
-				5633F44020C1A19D000C0E1A /* Secrets.swift in Sources */,
 				564E55A41E8AE327008D5D85 /* TLIArchiveButton.swift in Sources */,
 				564E55A91E8AE327008D5D85 /* TLIRoundedButton.swift in Sources */,
 				564E55B21E8AE338008D5D85 /* TLIGroupedTableViewCell.swift in Sources */,
@@ -853,6 +852,7 @@
 				564E55991E8AE30C008D5D85 /* TLITasksFooterView.swift in Sources */,
 				564E55771E8AE238008D5D85 /* TLIArchiveTasksViewController.swift in Sources */,
 				56AC7AB31E8A3549006AD29B /* UIImage+Tinylog.swift in Sources */,
+				561A25BE2116EBE500B28644 /* Secrets.swift in Sources */,
 				564E552D1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift in Sources */,
 				564E55461E8ADE48008D5D85 /* TLIList+CoreDataProperties.swift in Sources */,
 				564E55A81E8AE327008D5D85 /* TLIExportTasksButton.swift in Sources */,

@@ -22,9 +22,7 @@ extension String {
     }
 
     subscript(index: Int) -> String! {
-        get {
-            return self.substring(index, length: 1)
-        }
+        return self.substring(index, length: 1)
     }
 
     func location(_ other: String) -> Int {

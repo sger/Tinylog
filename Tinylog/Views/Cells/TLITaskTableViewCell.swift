@@ -185,7 +185,7 @@ class TLITaskTableViewCell: TLITableViewCell {
 
     func updateAttributedText() {
 
-        taskLabel.setText(currentTask?.displayLongText, afterInheritingLabelAttributesAndConfiguringWith: { (mutableAttributedString) -> NSMutableAttributedString! in
+        taskLabel.setText(currentTask?.displayLongText, afterInheritingLabelAttributesAndConfiguringWith: { (mutableAttributedString) -> NSMutableAttributedString? in
             return mutableAttributedString
         })
 

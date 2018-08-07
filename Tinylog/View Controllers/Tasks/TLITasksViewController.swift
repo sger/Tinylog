@@ -558,7 +558,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
     }
     // swiftlint:disable force_cast
     func updateTask(_ task: TLITask, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedTasks: [AnyObject] = self.frc?.fetchedObjects as [AnyObject]!
+        var fetchedTasks: [AnyObject] = (self.frc?.fetchedObjects as [AnyObject]?)!
 
         // Remove current list item
 
@@ -632,8 +632,8 @@ class TLITasksViewController: TLICoreDataTableViewController,
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-            let cell: TLITaskTableViewCell = tableView.dequeueReusableCell(
-                withIdentifier: kCellIdentifier) as! TLITaskTableViewCell!
+        let cell: TLITaskTableViewCell = (tableView.dequeueReusableCell(
+            withIdentifier: kCellIdentifier) as! TLITaskTableViewCell?)!
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.checkBoxButton.addTarget(
                 self,

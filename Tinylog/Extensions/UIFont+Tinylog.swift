@@ -68,7 +68,7 @@ extension UIFont {
     }
 
     class func tinylogFontMapForFontKey(_ key: NSString) -> NSDictionary? {
-        var fontDictionary: NSDictionary? = nil
+        var fontDictionary: NSDictionary?
 
         let _onceToken = NSUUID().uuidString
 
@@ -333,7 +333,7 @@ extension UIFont {
         let fontNameRegular: NSString = "HelveticaNeue"
         let fontNameMedium: NSString = "HelveticaNeue-Medium"
         // swiftlint:disable syntactic_sugar
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 
@@ -402,7 +402,7 @@ extension UIFont {
         let contentSize: String = UIApplication.shared.preferredContentSizeCategory.rawValue
         let fontNameRegular: NSString = "Avenir-Book"
         let fontNameMedium: NSString = "Avenir-Medium"
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 
@@ -469,7 +469,7 @@ extension UIFont {
         let contentSize: String = UIApplication.shared.preferredContentSizeCategory.rawValue
         let fontNameRegular: NSString = "Courier"
         let fontNameMedium: NSString = "Courier-Bold"
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 
@@ -540,7 +540,7 @@ extension UIFont {
         let contentSize: String = UIApplication.shared.preferredContentSizeCategory.rawValue
         let fontNameRegular: NSString = "Georgia"
         let fontNameMedium: NSString = "Georgia-Bold"
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 
@@ -611,7 +611,7 @@ extension UIFont {
         let contentSize: String = UIApplication.shared.preferredContentSizeCategory.rawValue
         let fontNameRegular: NSString = "Menlo-Regular"
         let fontNameMedium: NSString = "Menlo-Bold"
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 
@@ -682,7 +682,7 @@ extension UIFont {
         let contentSize: String = UIApplication.shared.preferredContentSizeCategory.rawValue
         let fontNameRegular: NSString = "TimesNewRomanPSMT"
         let fontNameMedium: NSString = "TimesNewRomanPS-BoldMT"
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 
@@ -753,7 +753,7 @@ extension UIFont {
         let contentSize: String = UIApplication.shared.preferredContentSizeCategory.rawValue
         let fontNameRegular: NSString = "Palatino-Roman"
         let fontNameMedium: NSString = "Palatino-Bold"
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 
@@ -824,7 +824,7 @@ extension UIFont {
         let contentSize: String = UIApplication.shared.preferredContentSizeCategory.rawValue
         let fontNameRegular: NSString = "IowanOldStyle-Roman"
         let fontNameMedium: NSString = "IowanOldStyle-Bold"
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 
@@ -893,7 +893,7 @@ extension UIFont {
     class func preferredSFFontForTextStyle(_ textStyle: NSString) -> UIFont? {
         var fontSize = 16.0
         let contentSize = UIApplication.shared.preferredContentSizeCategory.rawValue
-        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        var fontSizeOffsetDictionary: Dictionary<String, Dictionary<String, AnyObject>>?
 
         let _onceToken = NSUUID().uuidString
 

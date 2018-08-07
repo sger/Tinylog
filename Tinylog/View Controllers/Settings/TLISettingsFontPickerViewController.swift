@@ -56,7 +56,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
     }
 
     class func valueMap() -> NSDictionary? {
-        var map: NSDictionary? = nil
+        var map: NSDictionary?
 
         let _onceToken = NSUUID().uuidString
 

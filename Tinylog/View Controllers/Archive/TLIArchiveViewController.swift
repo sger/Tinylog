@@ -336,7 +336,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
     // swiftlint:disable force_unwrapping
     // swiftlint:disable force_cast
     func updateList(_ list: TLIList, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedLists: [AnyObject] = self.frc?.fetchedObjects as [AnyObject]!
+        var fetchedLists: [AnyObject] = (self.frc?.fetchedObjects as [AnyObject]?)!
 
         // Remove current list item
         fetchedLists = fetchedLists.filter { $0 as! TLIList != list }
