@@ -575,7 +575,6 @@
 				DDFA14B61268A7B4EA5B443B /* [CP] Embed Pods Frameworks */,
 				56C7749F1F4D7823008571E1 /* Build Number */,
 				56C774A01F4D78CA008571E1 /* Version Number */,
-				56E4AA28217B25F000223119 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -773,23 +772,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"\n";
-		};
-		56E4AA28217B25F000223119 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		DDFA14B61268A7B4EA5B443B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
