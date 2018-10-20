@@ -8,6 +8,20 @@
 
 import UIKit
 
+extension UIViewController {
+    // swiftlint:disable force_unwrapping
+    public var topDistance: CGFloat {
+        if self.navigationController != nil && !self.navigationController!.navigationBar.isTranslucent {
+            return 0
+        } else {
+            let barHeight = self.navigationController?.navigationBar.frame.height ?? 0
+            let statusBarHeight = UIApplication.shared.isStatusBarHidden ? CGFloat(0) :
+                UIApplication.shared.statusBarFrame.height
+            return barHeight + statusBarHeight
+        }
+    }
+}
+
 extension TLICoreDataTableViewController {
     func checkForEmptyResults() -> Bool {
         if let fetchedObjects = self.frc?.fetchedObjects {

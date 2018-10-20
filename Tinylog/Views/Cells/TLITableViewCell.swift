@@ -21,7 +21,7 @@ class TLITableViewCell: UITableViewCell {
                 textField?.textColor = self.textLabel!.textColor
                 textField?.placeholderTextColor = UIColor.tinylogNavigationBarColor
                 textField?.backgroundColor = UIColor.white
-                textField?.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+                textField?.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
                 textField?.returnKeyType = UIReturnKeyType.done
                 textField?.alpha = 0.0
                 self.updateFonts()
@@ -42,7 +42,7 @@ class TLITableViewCell: UITableViewCell {
             UIView.animate(
                 withDuration: TimeInterval(0.4),
                 delay: TimeInterval(0.0),
-                options: UIViewAnimationOptions(),
+                options: UIView.AnimationOptions(),
                 animations: { () -> Void in
                     self.textField?.alpha = 1
                     return
@@ -54,7 +54,7 @@ class TLITableViewCell: UITableViewCell {
             UIView.animate(
                 withDuration: TimeInterval(0.4),
                 delay: TimeInterval(0.0),
-                options: UIViewAnimationOptions(),
+                options: UIView.AnimationOptions(),
                 animations: { () -> Void in
                     self.textField?.alpha = 0.0
                     return
@@ -65,7 +65,7 @@ class TLITableViewCell: UITableViewCell {
         }
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.textLabel!.textColor = UIColor.tinylogTextColor
         self.updateFonts()

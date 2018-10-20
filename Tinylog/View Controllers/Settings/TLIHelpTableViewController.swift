@@ -53,8 +53,8 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
 
     // MARK: Initializers
 
-    override init(style: UITableViewStyle) {
-        super.init(style: UITableViewStyle.plain)
+    override init(style: UITableView.Style) {
+        super.init(style: UITableView.Style.plain)
     }
 
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
@@ -71,7 +71,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundView = UIView()
         self.tableView?.backgroundView?.backgroundColor = UIColor.clear
-        self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView?.frame = CGRect(
             x: 0.0,
             y: 0.0,
@@ -79,7 +79,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
             height: self.view.frame.size.height - 50.0)
 
         self.tableView?.register(TLIHelpTableViewCell.self, forCellReuseIdentifier: helpCellIdentifier)
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = 61
 
         self.title = "Help"

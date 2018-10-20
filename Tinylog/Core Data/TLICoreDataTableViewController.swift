@@ -19,7 +19,7 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
 
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        tableView = UITableView(frame: CGRect.zero, style: UITableViewStyle.plain)
+        tableView = UITableView(frame: CGRect.zero, style: UITableView.Style.plain)
         tableView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView?.dataSource = self
         tableView?.delegate = self
@@ -84,7 +84,7 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "MyTestCell")
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "MyTestCell")
         return cell
     }
 
@@ -100,7 +100,7 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
     }
 
     /*func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return self.frc?.sections![section].name
+     return self.frc?.sections![section].name
     }*/
 
     func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
@@ -159,13 +159,13 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
             case .insert:
                 if let newIndexPath = newIndexPath {
                     tableView?.insertRows(at: [newIndexPath],
-                        with: UITableViewRowAnimation.fade)
+                        with: UITableView.RowAnimation.fade)
                 }
 
             case .delete:
                 if let indexPath = indexPath {
                     tableView?.deleteRows(at: [indexPath],
-                        with: UITableViewRowAnimation.fade)
+                        with: UITableView.RowAnimation.fade)
                 }
 
             case .update:
@@ -179,9 +179,9 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
                 if let indexPath = indexPath {
                     if let newIndexPath = newIndexPath {
                         tableView?.deleteRows(at: [indexPath],
-                            with: UITableViewRowAnimation.fade)
+                            with: UITableView.RowAnimation.fade)
                         tableView?.insertRows(at: [newIndexPath],
-                            with: UITableViewRowAnimation.fade)
+                            with: UITableView.RowAnimation.fade)
                     }
                 }
             }

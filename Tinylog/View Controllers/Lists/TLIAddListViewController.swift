@@ -18,7 +18,7 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
     var list: TLIList?
 
     init() {
-        super.init(style: UITableViewStyle.grouped)
+        super.init(style: UITableView.Style.grouped)
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -36,12 +36,12 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Cancel",
-            style: UIBarButtonItemStyle.plain,
+            style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(TLIAddListViewController.cancel(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Save",
-            style: UIBarButtonItemStyle.plain,
+            style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(TLIAddListViewController.save(_:)))
 
@@ -104,7 +104,7 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TLITextFieldCell = TLITextFieldCell(
-            style: UITableViewCellStyle.default,
+            style: UITableViewCell.CellStyle.default,
             reuseIdentifier: "CellIdentifier")
         configureCell(cell, indexPath: indexPath)
         return cell

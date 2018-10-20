@@ -635,7 +635,7 @@
 					5628E8C21E85898700AAFD20 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = A22EW7MN8G;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -649,14 +649,14 @@
 					5628E8D61E85898700AAFD20 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = A22EW7MN8G;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 5628E8C21E85898700AAFD20;
 					};
 					568F7DFA1F2BA0DC00CFDDDD = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = A22EW7MN8G;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 5628E8C21E85898700AAFD20;
 					};
@@ -757,7 +757,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"";
+			shellScript = "\"${SRCROOT}/scripts/update_build_number.sh\"\n";
 		};
 		56C774A01F4D78CA008571E1 /* Version Number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -771,7 +771,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"";
+			shellScript = "\"${SRCROOT}/scripts/update_version_number.sh\"\n";
 		};
 		DDFA14B61268A7B4EA5B443B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1038,8 +1038,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Tinylog-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1059,8 +1058,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.Tinylog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Tinylog-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1075,8 +1073,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tinylog.app/Tinylog";
 			};
 			name = Debug;
@@ -1092,8 +1089,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tinylog.app/Tinylog";
 			};
 			name = Release;
@@ -1108,8 +1104,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Tinylog;
 			};
 			name = Debug;
@@ -1124,8 +1119,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = Tinylog;
 			};
 			name = Release;

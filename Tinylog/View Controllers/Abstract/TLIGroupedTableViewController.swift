@@ -13,10 +13,10 @@ class TLIGroupedTableViewController: UITableViewController {
     // MARK: Initializers
 
     init() {
-        super.init(style: UITableViewStyle.grouped)
+        super.init(style: UITableView.Style.grouped)
     }
 
-    override init(style: UITableViewStyle) {
+    override init(style: UITableView.Style) {
         super.init(style: style)
 
     }

@@ -57,8 +57,8 @@ class TLITasksViewController: TLICoreDataTableViewController,
     lazy var addTransparentLayer: UIView? = {
         let addTransparentLayer: UIView = UIView.newAutoLayout()
         addTransparentLayer.autoresizingMask = [
-            UIViewAutoresizing.flexibleWidth,
-            UIViewAutoresizing.flexibleBottomMargin]
+            UIView.AutoresizingMask.flexibleWidth,
+            UIView.AutoresizingMask.flexibleBottomMargin]
         addTransparentLayer.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
         addTransparentLayer.alpha = 0.0
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(
@@ -98,7 +98,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         header.closeButton?.addTarget(
             self,
             action: #selector(TLITasksViewController.transparentLayerTapped(_:)),
-            for: UIControlEvents.touchDown)
+            for: UIControl.Event.touchDown)
         header.delegate = self
         return header
     }()
@@ -192,9 +192,9 @@ class TLITasksViewController: TLICoreDataTableViewController,
 
         self.view.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView?.register(TLITaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
         self.tableView?.frame = CGRect(
             x: 0.0,
@@ -205,11 +205,11 @@ class TLITasksViewController: TLICoreDataTableViewController,
         tasksFooterView?.exportTasksButton?.addTarget(
             self,
             action: #selector(TLITasksViewController.exportTasks(_:)),
-            for: UIControlEvents.touchDown)
+            for: UIControl.Event.touchDown)
         tasksFooterView?.archiveButton?.addTarget(
             self,
             action: #selector(TLITasksViewController.displayArchive(_:)),
-            for: UIControlEvents.touchDown)
+            for: UIControl.Event.touchDown)
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
@@ -226,7 +226,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLITasksViewController.onChangeSize(_:)),
-            name: NSNotification.Name.UIContentSizeCategoryDidChange,
+            name: UIContentSizeCategory.didChangeNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
@@ -241,7 +241,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLITasksViewController.appBecomeActive),
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
@@ -371,21 +371,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         topConstraint?.autoRemove()
         heightConstraint?.autoRemove()
 
-        var posY: CGFloat = 0.0
-
-        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
-            if self.orientation == "portrait" {
-                posY = 64.0 + TLIAddTaskView.height()
-            } else {
-                posY = 64.0 + TLIAddTaskView.height()
-            }
-        } else {
-            if self.orientation == "portrait" {
-                posY = 64.0 + TLIAddTaskView.height()
-            } else {
-                posY = 32.0 + TLIAddTaskView.height()
-            }
-        }
+        let posY: CGFloat = TLIAddTaskView.height() + topDistance
 
         topConstraint = addTransparentLayer?.autoPinEdge(toSuperviewEdge: .top, withInset: posY)
         heightConstraint = addTransparentLayer?.autoMatch(
@@ -450,10 +436,10 @@ class TLITasksViewController: TLICoreDataTableViewController,
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+        if UIDevice.current.orientation.isLandscape {
             self.orientation = "landscape"
         }
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+        if UIDevice.current.orientation.isPortrait {
             self.orientation = "portrait"
         }
     }
@@ -478,13 +464,13 @@ class TLITasksViewController: TLICoreDataTableViewController,
         if editing {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Done",
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(TLITasksViewController.toggleEditMode(_:)))
         } else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Edit",
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(TLITasksViewController.toggleEditMode(_:)))
         }
@@ -497,7 +483,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
     func tableView(_ tableView: UITableView,
                    editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let archiveRowAction = UITableViewRowAction(
-            style: UITableViewRowActionStyle.default,
+            style: UITableViewRowAction.Style.default,
             title: "Archive",
             handler: {_, indexpath in
                 if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
@@ -558,7 +544,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
     }
     // swiftlint:disable force_cast
     func updateTask(_ task: TLITask, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedTasks: [AnyObject] = (self.frc?.fetchedObjects as [AnyObject]?)!
+        var fetchedTasks: [AnyObject] = (self.frc?.fetchedObjects)!
 
         // Remove current list item
 
@@ -631,14 +617,13 @@ class TLITasksViewController: TLICoreDataTableViewController,
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell: TLITaskTableViewCell = (tableView.dequeueReusableCell(
-            withIdentifier: kCellIdentifier) as! TLITaskTableViewCell?)!
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            let cell: TLITaskTableViewCell = tableView.dequeueReusableCell(
+                withIdentifier: kCellIdentifier) as! TLITaskTableViewCell
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.checkBoxButton.addTarget(
                 self,
                 action: #selector(TLITasksViewController.toggleComplete(_:)),
-                for: UIControlEvents.touchUpInside)
+                for: UIControl.Event.touchUpInside)
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
 
@@ -780,7 +765,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
         UIView.animate(
             withDuration: 0.3,
             delay: 0,
-            options: UIViewAnimationOptions.allowUserInteraction,
+            options: UIView.AnimationOptions.allowUserInteraction,
             animations: {
                 self.addTransparentLayer!.alpha = 0.0
             }, completion: { finished in
@@ -796,7 +781,9 @@ class TLITasksViewController: TLICoreDataTableViewController,
         if url.scheme == "http" {
             let path: URL = URL(string: NSString(format: "http://%@", url.host!) as String)!
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(path, options: [:], completionHandler: nil)
+                UIApplication.shared.open(path,
+                                          options: [:],
+                                          completionHandler: nil)
             } else {
                 UIApplication.shared.openURL(path)
             }
@@ -902,16 +889,16 @@ class TLITasksViewController: TLICoreDataTableViewController,
                 let activityViewController: UIActivityViewController = UIActivityViewController(
                     activityItems: [output], applicationActivities: nil)
                 activityViewController.excludedActivityTypes = [
-                    UIActivityType.postToTwitter,
-                    UIActivityType.postToFacebook,
-                    UIActivityType.postToWeibo,
-                    UIActivityType.copyToPasteboard,
-                    UIActivityType.assignToContact,
-                    UIActivityType.saveToCameraRoll,
-                    UIActivityType.addToReadingList,
-                    UIActivityType.postToFlickr,
-                    UIActivityType.postToVimeo,
-                    UIActivityType.postToTencentWeibo
+                    UIActivity.ActivityType.postToTwitter,
+                    UIActivity.ActivityType.postToFacebook,
+                    UIActivity.ActivityType.postToWeibo,
+                    UIActivity.ActivityType.copyToPasteboard,
+                    UIActivity.ActivityType.assignToContact,
+                    UIActivity.ActivityType.saveToCameraRoll,
+                    UIActivity.ActivityType.addToReadingList,
+                    UIActivity.ActivityType.postToFlickr,
+                    UIActivity.ActivityType.postToVimeo,
+                    UIActivity.ActivityType.postToTencentWeibo
                 ]
 
                 activityViewController.modalPresentationStyle = UIModalPresentationStyle.popover

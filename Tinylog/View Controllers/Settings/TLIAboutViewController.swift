@@ -17,10 +17,10 @@ class TLIAboutViewController: TLIGroupedTableViewController,
     // MARK: Initializers
 
     override init() {
-        super.init(style: UITableViewStyle.grouped)
+        super.init(style: UITableView.Style.grouped)
     }
 
-    override init(style: UITableViewStyle) {
+    override init(style: UITableView.Style) {
         super.init(style: style)
 
     }
@@ -66,7 +66,7 @@ class TLIAboutViewController: TLIGroupedTableViewController,
 
         let selectedBackgroundView = UIView(frame: cell.frame)
         selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
-        selectedBackgroundView.contentMode = UIViewContentMode.redraw
+        selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         cell.selectedBackgroundView = selectedBackgroundView
 
         if indexPath.section == 0 {
@@ -145,7 +145,7 @@ class TLIAboutViewController: TLIGroupedTableViewController,
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(
-            style: UITableViewCellStyle.value1, reuseIdentifier: aboutCellIdentifier)
+            style: UITableViewCell.CellStyle.value1, reuseIdentifier: aboutCellIdentifier)
         configureCell(cell, indexPath: indexPath)
         return cell
     }
@@ -158,7 +158,9 @@ class TLIAboutViewController: TLIGroupedTableViewController,
             if indexPath.row == 0 {
                 if let path: URL = URL(string: "http://binarylevel.github.io/tinylog/") {
                     if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(path, options: [:], completionHandler: nil)
+                        UIApplication.shared.open(path,
+                                                  options: [:],
+                                                  completionHandler: nil)
                     } else {
                         UIApplication.shared.openURL(path)
                     }
@@ -176,9 +178,9 @@ class TLIAboutViewController: TLIGroupedTableViewController,
                         let stringBody = "---\nApp: Tinylog \(versionInfo)\nDevice: \(String(describing: deviceModel)) (\(systemVersion))"
                         mailer.setMessageBody(stringBody, isHTML: false)
                         let titleTextDict: NSDictionary = [
-                            NSAttributedStringKey.foregroundColor: UIColor.black,
-                            NSAttributedStringKey.font: UIFont.mediumFontWithSize(16.0)]
-                        mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedStringKey: Any]
+                            NSAttributedString.Key.foregroundColor: UIColor.black,
+                            NSAttributedString.Key.font: UIFont.mediumFontWithSize(16.0)]
+                        mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedString.Key: Any]
                         mailer.navigationBar.tintColor = UIColor.tinylogMainColor
                         self.present(mailer, animated: true, completion: nil)
                         mailer.viewControllers.last?.navigationItem.title = "Tinylog"
@@ -186,7 +188,7 @@ class TLIAboutViewController: TLIGroupedTableViewController,
                 } else {
                     let alert = UIAlertController(title: "Tinylog",
                                                   message: "Your device doesn't support this feature",
-                                                  preferredStyle: UIAlertControllerStyle.alert)
+                                                  preferredStyle: UIAlertController.Style.alert)
 
                     let cancelAction = UIAlertAction(title: "OK",
                                                      style: .cancel, handler: nil)

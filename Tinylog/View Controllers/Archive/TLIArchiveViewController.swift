@@ -105,7 +105,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundView = UIView()
         self.tableView?.backgroundView?.backgroundColor = UIColor.clear
-        self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView?.frame = CGRect(
             x: 0.0,
             y: 0.0,
@@ -113,7 +113,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
             height: self.view.frame.size.height)
 
         self.tableView?.register(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = 61
 
         resultsTableViewController = TLIResultsTableViewController()
@@ -122,9 +122,9 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         searchController?.searchResultsUpdater = self
         searchController?.searchBar.sizeToFit()
         searchController?.searchBar.backgroundColor = UIColor.tinylogLightGray
-        searchController?.searchBar.searchBarStyle = UISearchBarStyle.minimal
+        searchController?.searchBar.searchBarStyle = UISearchBar.Style.minimal
         searchController?.searchBar.setSearchFieldBackgroundImage(
-            UIImage(named: "search-bar-bg-gray"), for: UIControlState())
+            UIImage(named: "search-bar-bg-gray"), for: UIControl.State())
 
         searchController?.searchBar.tintColor = UIColor.tinylogMainColor
 
@@ -142,7 +142,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Close",
-            style: UIBarButtonItemStyle.plain,
+            style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(TLIArchiveViewController.close(_:)))
 
@@ -170,13 +170,13 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIArchiveViewController.appBecomeActive),
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIArchiveViewController.onChangeSize(_:)),
-            name: NSNotification.Name.UIContentSizeCategoryDidChange,
+            name: UIContentSizeCategory.didChangeNotification,
             object: nil)
 
         definesPresentationContext = true
@@ -289,7 +289,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]? {
 
         let deleteRowAction = UITableViewRowAction(
-            style: UITableViewRowActionStyle.default,
+            style: UITableViewRowAction.Style.default,
             title: "Delete", handler: {_, indexpath in
             if let list: TLIList = self.frc?.object(at: indexpath) as? TLIList {
                 self.managedObjectContext.delete(list)
@@ -305,7 +305,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
             alpha: 1.0)
 
         let restoreRowAction = UITableViewRowAction(
-            style: UITableViewRowActionStyle.default,
+            style: UITableViewRowAction.Style.default,
             title: "Restore",
             handler: {_, indexpath in
                 if let list: TLIList = self.frc?.object(at: indexpath) as? TLIList {
@@ -336,7 +336,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
     // swiftlint:disable force_unwrapping
     // swiftlint:disable force_cast
     func updateList(_ list: TLIList, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedLists: [AnyObject] = (self.frc?.fetchedObjects as [AnyObject]?)!
+        var fetchedLists: [AnyObject] = (self.frc?.fetchedObjects)!
 
         // Remove current list item
         fetchedLists = fetchedLists.filter { $0 as! TLIList != list }
@@ -433,8 +433,8 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         return "Delete"
     }
 
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath) {
-        if editingStyle != UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+        if editingStyle != UITableViewCell.EditingStyle.delete {
             return
         }
 
@@ -450,7 +450,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
 
     func onClose(_ addListViewController: TLIAddListViewController, list: TLIList) {
         let indexPath = self.frc?.indexPath(forObject: list)
-        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.none)
+        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
         let tasksViewController: TLITasksViewController = TLITasksViewController()
         tasksViewController.managedObjectContext = managedObjectContext
         tasksViewController.list = list

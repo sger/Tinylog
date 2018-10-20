@@ -31,7 +31,7 @@ class SGTextField: UITextField {
     // MARK: UITextField
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(super.textRect(forBounds: bounds), textEdgeInsets!)
+        return super.textRect(forBounds: bounds).inset(by: textEdgeInsets!)
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {

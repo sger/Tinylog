@@ -88,7 +88,7 @@ class TLITaskTableViewCell: TLITableViewCell {
         }
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         bgView = SGBackgroundView(frame: CGRect.zero)
@@ -138,23 +138,23 @@ class TLITaskTableViewCell: TLITableViewCell {
 
         if useSystemFontSize == "on" {
             if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
-                taskLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
-                taskLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Courier" {
-                taskLabel.font = UIFont.preferredCourierFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredCourierFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Georgia" {
-                taskLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Menlo" {
-                taskLabel.font = UIFont.preferredMenloFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredMenloFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
-                taskLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Palatino" {
-                taskLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
-                taskLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredIowanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
-                taskLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                taskLabel.font = UIFont.preferredSFFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             }
 
         } else {
@@ -184,15 +184,11 @@ class TLITaskTableViewCell: TLITableViewCell {
     }
 
     func updateAttributedText() {
-
-        taskLabel.setText(currentTask?.displayLongText, afterInheritingLabelAttributesAndConfiguringWith: { (mutableAttributedString) -> NSMutableAttributedString? in
+        taskLabel.setText(currentTask?.displayLongText) { (mutableAttributedString) -> NSMutableAttributedString? in
             return mutableAttributedString
-        })
-
-        if let text = taskLabel.text {
-            let total: NSString = text as NSString
+        }
+        if let textTaskLabel = taskLabel.text, let total = textTaskLabel as? NSString {
             let words: [String] = total.components(separatedBy: " ")
-
             for word in words {
                 let character = word as NSString
                 if character.hasPrefix("http://") || character.hasPrefix("https://") {

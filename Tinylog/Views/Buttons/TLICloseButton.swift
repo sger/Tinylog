@@ -17,8 +17,8 @@ class TLICloseButton: UIButton {
 
     func setup() {
         self.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        self.setBackgroundImage(UIImage(named: "close"), for: UIControlState())
-        self.setBackgroundImage(UIImage(named: "close"), for: UIControlState.highlighted)
+        self.setBackgroundImage(UIImage(named: "close"), for: UIControl.State())
+        self.setBackgroundImage(UIImage(named: "close"), for: UIControl.State.highlighted)
     }
 
     required init(coder aDecoder: NSCoder) {

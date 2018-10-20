@@ -20,16 +20,16 @@ class TLIKeyboardBar: UIView, UIInputViewAudioFeedback {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.autoresizingMask = UIViewAutoresizing.flexibleWidth
+        self.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
         self.backgroundColor = UIColor.tinylogNavigationBarDayColor
         // swiftlint:disable force_unwrapping
         buttonHashTag.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 20.0)
-        buttonHashTag.setTitleColor(UIColor.tinylogMainColor, for: UIControlState())
-        buttonHashTag.setTitle("#", for: UIControlState())
+        buttonHashTag.setTitleColor(UIColor.tinylogMainColor, for: UIControl.State())
+        buttonHashTag.setTitle("#", for: UIControl.State())
         buttonHashTag.addTarget(
             self,
             action: #selector(TLIKeyboardBar.buttonHashTagPressed(_:)),
-            for: UIControlEvents.touchUpInside)
+            for: UIControl.Event.touchUpInside)
         self.addSubview(buttonHashTag)
     }
 

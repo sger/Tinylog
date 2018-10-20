@@ -14,15 +14,15 @@ class TLITextFieldCell: UITableViewCell, UITextFieldDelegate, TLITextFieldCellDe
     var indexPath: IndexPath?
     var delegate: TLITextFieldCellDelegate?
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.clear
 
         textField = TLITextField(frame: CGRect.zero)
         textField?.clearsOnBeginEditing = false
-        textField?.clearButtonMode = UITextFieldViewMode.whileEditing
+        textField?.clearButtonMode = UITextField.ViewMode.whileEditing
         textField?.textAlignment = NSTextAlignment.left
-        textField?.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+        textField?.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField?.keyboardAppearance = UIKeyboardAppearance.light
         textField?.adjustsFontSizeToFitWidth = true
         textField?.delegate = self

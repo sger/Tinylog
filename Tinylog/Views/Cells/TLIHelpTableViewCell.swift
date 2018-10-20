@@ -20,7 +20,7 @@ class TLIHelpTableViewCell: TLITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // swiftlint:disable force_unwrapping
         bgView = SGBackgroundView(frame: CGRect.zero)
@@ -41,7 +41,7 @@ class TLIHelpTableViewCell: TLITableViewCell {
             green: 237.0 / 255.0,
             blue: 237.0 / 255.0,
             alpha: 1.0)
-        selectedBackgroundView.contentMode = UIViewContentMode.redraw
+        selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         self.selectedBackgroundView = selectedBackgroundView
 
         updateFonts()
@@ -72,31 +72,31 @@ class TLIHelpTableViewCell: TLITableViewCell {
             if useSystemFontSize == "on" {
                 if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
                     helpLabel.font = UIFont.preferredAvenirFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
                     helpLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 } else if TLISettingsFontPickerViewController.selectedKey() == "Courier" {
                     helpLabel.font = UIFont.preferredCourierFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 } else if TLISettingsFontPickerViewController.selectedKey() == "Georgia" {
                     helpLabel.font = UIFont.preferredGeorgiaFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 } else if TLISettingsFontPickerViewController.selectedKey() == "Menlo" {
                     helpLabel.font = UIFont.preferredMenloFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 } else if TLISettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
                     helpLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 } else if TLISettingsFontPickerViewController.selectedKey() == "Palatino" {
                     helpLabel.font = UIFont.preferredPalatinoFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
                     helpLabel.font = UIFont.preferredIowanFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
                     helpLabel.font = UIFont.preferredSFFontForTextStyle(
-                        UIFontTextStyle.body.rawValue as NSString)
+                        UIFont.TextStyle.body.rawValue as NSString)
                 }
             } else {
                 let fontSize: Float = userDefaults.float(forKey: "kFontSize")
