@@ -4,13 +4,13 @@ BUILD_FLAGS = -workspace $(WORKSPACE) -scheme $(SCHEME) -destination $(DESTINATI
 SCHEME ?= $(TARGET)
 TARGET ?= Tinylog
 PLATFORM ?= iOS
-OS ?= 10.3
+OS ?= 12.0
 RELEASE ?= release
 BRANCH ?= master
 DIST_BRANCH = $(RELEASE)-dist
 
 ifeq ($(PLATFORM), iOS)
-	DESTINATION ?= 'platform=iOS Simulator,name=iPhone 7,OS=10.3.1'
+	DESTINATION ?= 'platform=iOS Simulator,name=iPhone 7,OS=12.0'
 endif
 
 XCPRETTY :=
