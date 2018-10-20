@@ -339,56 +339,56 @@ extension UIFont {
 
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
-                UIContentSizeCategory.large.rawValue: [UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                                                      UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                                                      UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                                                      UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                                                      UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                                                      UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                UIContentSizeCategory.large.rawValue: [UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                                                      UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                                                      UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                                                      UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                                                      UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                                                      UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
-                UIContentSizeCategory.extraSmall.rawValue: [UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                                                  UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                                                  UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                                                  UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                                                  UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                                                  UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                UIContentSizeCategory.extraSmall.rawValue: [UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                                                  UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                                                  UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                                                  UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                                                  UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                                                  UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
-                UIContentSizeCategory.small.rawValue: [UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                                             UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                                             UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                                             UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                                             UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                                             UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                UIContentSizeCategory.small.rawValue: [UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                                             UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                                             UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                                             UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                                             UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                                             UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
-                UIContentSizeCategory.medium.rawValue: [UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                                              UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                                              UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                                              UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                                              UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                                              UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                UIContentSizeCategory.medium.rawValue: [UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                                              UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                                              UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                                              UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                                              UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                                              UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                                                       UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                                                       UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                                                       UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                                                       UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                                                       UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                                                       UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                                                       UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                                                       UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                                                       UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                                                       UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
             return UIFont(name: fontNameMedium as String, size: CGFloat(fontSize))
         } else {
             return UIFont(name: fontNameRegular as String, size: CGFloat(fontSize))
@@ -408,56 +408,56 @@ extension UIFont {
 
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
-                UIContentSizeCategory.large.rawValue: [UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                UIContentSizeCategory.large.rawValue: [UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
-                UIContentSizeCategory.extraSmall.rawValue: [UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                UIContentSizeCategory.extraSmall.rawValue: [UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
-                UIContentSizeCategory.small.rawValue: [UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                UIContentSizeCategory.small.rawValue: [UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
-                UIContentSizeCategory.medium.rawValue: [UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                UIContentSizeCategory.medium.rawValue: [UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
             return UIFont(name: fontNameMedium as String, size: CGFloat(fontSize))
         } else {
             return UIFont(name: fontNameRegular as String, size: CGFloat(fontSize))
@@ -476,59 +476,59 @@ extension UIFont {
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
                 UIContentSizeCategory.large.rawValue: [
-                    UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
                 UIContentSizeCategory.extraSmall.rawValue: [
-                    UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.small.rawValue: [
-                    UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.medium.rawValue: [
-                    UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
             return UIFont(name: fontNameMedium as String, size: CGFloat(fontSize))
         } else {
             return UIFont(name: fontNameRegular as String, size: CGFloat(fontSize))
@@ -547,59 +547,59 @@ extension UIFont {
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
                 UIContentSizeCategory.large.rawValue: [
-                    UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
                 UIContentSizeCategory.extraSmall.rawValue: [
-                    UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.small.rawValue: [
-                    UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.medium.rawValue: [
-                    UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
             return UIFont(name: fontNameMedium as String, size: CGFloat(fontSize))
         } else {
             return UIFont(name: fontNameRegular as String, size: CGFloat(fontSize))
@@ -618,59 +618,59 @@ extension UIFont {
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
                 UIContentSizeCategory.large.rawValue: [
-                    UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
                 UIContentSizeCategory.extraSmall.rawValue: [
-                    UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.small.rawValue: [
-                    UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.medium.rawValue: [
-                    UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
             return UIFont(name: fontNameMedium as String, size: CGFloat(fontSize))
         } else {
             return UIFont(name: fontNameRegular as String, size: CGFloat(fontSize))
@@ -689,59 +689,59 @@ extension UIFont {
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
                 UIContentSizeCategory.large.rawValue: [
-                    UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
                 UIContentSizeCategory.extraSmall.rawValue: [
-                    UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.small.rawValue: [
-                    UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.medium.rawValue: [
-                    UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
             return UIFont(name: fontNameMedium as String, size: CGFloat(fontSize))
         } else {
             return UIFont(name: fontNameRegular as String, size: CGFloat(fontSize))
@@ -760,59 +760,59 @@ extension UIFont {
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
                 UIContentSizeCategory.large.rawValue: [
-                    UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
                 UIContentSizeCategory.extraSmall.rawValue: [
-                    UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.small.rawValue: [
-                    UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.medium.rawValue: [
-                    UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
             return UIFont(name: fontNameMedium as String, size: CGFloat(fontSize))
         } else {
             return UIFont(name: fontNameRegular as String, size: CGFloat(fontSize))
@@ -831,59 +831,59 @@ extension UIFont {
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
                 UIContentSizeCategory.large.rawValue: [
-                    UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
                 UIContentSizeCategory.extraSmall.rawValue: [
-                    UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.small.rawValue: [
-                    UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.medium.rawValue: [
-                    UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
             return UIFont(name: fontNameMedium as String, size: CGFloat(fontSize))
         } else {
             return UIFont(name: fontNameRegular as String, size: CGFloat(fontSize))
@@ -900,59 +900,59 @@ extension UIFont {
         DispatchQueue.once(token: _onceToken) {
             fontSizeOffsetDictionary = [
                 UIContentSizeCategory.large.rawValue: [
-                    UIFontTextStyle.body.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -3 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -3 as AnyObject],
 
                 UIContentSizeCategory.extraSmall.rawValue: [
-                    UIFontTextStyle.body.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -4 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -4 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.small.rawValue: [
-                    UIFontTextStyle.body.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.medium.rawValue: [
-                    UIFontTextStyle.body.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 0 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -5 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -4 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 0 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -5 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -4 as AnyObject],
 
                 UIContentSizeCategory.extraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 3 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 1 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -3 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: -1 as AnyObject],
+                    UIFont.TextStyle.body.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 3 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 1 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -3 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: -1 as AnyObject],
 
                 UIContentSizeCategory.extraExtraExtraLarge.rawValue: [
-                    UIFontTextStyle.body.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.headline.rawValue: 4 as AnyObject,
-                    UIFontTextStyle.subheadline.rawValue: 2 as AnyObject,
-                    UIFontTextStyle.caption1.rawValue: -1 as AnyObject,
-                    UIFontTextStyle.caption2.rawValue: -2 as AnyObject,
-                    UIFontTextStyle.footnote.rawValue: 0 as AnyObject]]
+                    UIFont.TextStyle.body.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.headline.rawValue: 4 as AnyObject,
+                    UIFont.TextStyle.subheadline.rawValue: 2 as AnyObject,
+                    UIFont.TextStyle.caption1.rawValue: -1 as AnyObject,
+                    UIFont.TextStyle.caption2.rawValue: -2 as AnyObject,
+                    UIFont.TextStyle.footnote.rawValue: 0 as AnyObject]]
         }
 
         let fontSizeOffset = fontSizeOffsetDictionary![contentSize]?[textStyle as String]?.doubleValue
         fontSize += fontSizeOffset!
 
-        if textStyle as UIFontTextStyle == UIFontTextStyle.headline ||
-            textStyle as UIFontTextStyle ==  UIFontTextStyle.subheadline {
+        if textStyle as UIFont.TextStyle == UIFont.TextStyle.headline ||
+            textStyle as UIFont.TextStyle ==  UIFont.TextStyle.subheadline {
 
             if #available(iOS 8.2, *) {
                 return UIFont.systemFont(ofSize: CGFloat(fontSize), weight: UIFont.Weight.medium)

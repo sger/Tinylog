@@ -63,13 +63,13 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
 
     func application(
         _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
         -> Bool {
 
         // Use verbose logging for sync
         // CDESetCurrentLoggingLevel(CDELoggingLevel.verbose.rawValue)
 
-        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem]
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem]
             as? UIApplicationShortcutItem {
 
             handleShortcut(shortcutItem)
@@ -148,10 +148,10 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         navigationBar.tintColor = UIColor.tinylogMainColor
 
         UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont.mediumFontWithSize(18.0),
-            NSAttributedStringKey.foregroundColor: UIColor.tinylogTextColor]
+            NSAttributedString.Key.font: UIFont.mediumFontWithSize(18.0),
+            NSAttributedString.Key.foregroundColor: UIColor.tinylogTextColor]
 
-        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
 
         if let displaySetupScreen = UserDefaults.standard.object(forKey: "kSetupScreen") as? String {
             if displaySetupScreen == "on" {
@@ -185,14 +185,15 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
     func applicationWillResignActive(_ application: UIApplication) {}
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        var identifier: UIBackgroundTaskIdentifier = 0
+        var identifier: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
         identifier = UIApplication.shared.beginBackgroundTask(expirationHandler: { () -> Void in
         })
         DispatchQueue.main.async {
             // swiftlint:disable force_try
             try! self.managedObjectContext.save()
             TLISyncManager.shared().synchronize(completion: { (_) -> Void in
-                UIApplication.shared.endBackgroundTask(identifier)
+                UIApplication.shared.endBackgroundTask(
+                    convertToUIBackgroundTaskIdentifier(identifier.rawValue))
             })
         }
 
@@ -308,4 +309,9 @@ extension TLIAppDelegate {
             managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+private func convertToUIBackgroundTaskIdentifier(_ input: Int) -> UIBackgroundTaskIdentifier {
+	return UIBackgroundTaskIdentifier(rawValue: input)
 }

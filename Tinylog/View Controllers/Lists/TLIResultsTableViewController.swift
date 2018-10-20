@@ -32,14 +32,14 @@ class TLIResultsTableViewController: TLICoreDataTableViewController {
 
         self.view.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView?.frame = CGRect(
             x: 0.0,
             y: 0.0,
             width: self.view.frame.size.width,
             height: self.view.frame.size.height)
         self.tableView?.register(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
         // swiftlint:disable force_unwrapping
         self.view.addSubview(self.noResultsLabel!)

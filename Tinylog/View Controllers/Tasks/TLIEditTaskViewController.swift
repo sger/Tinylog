@@ -25,13 +25,13 @@ class TLIEditTaskViewController: UIViewController {
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Close",
-            style: UIBarButtonItemStyle.plain,
+            style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(TLIEditTaskViewController.close(_:)))
 
         let saveBarButtonItem: UIBarButtonItem = UIBarButtonItem(
             title: "Save",
-            style: UIBarButtonItemStyle.plain,
+            style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(TLIEditTaskViewController.save(_:)))
 
@@ -49,12 +49,12 @@ class TLIEditTaskViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIEditTaskViewController.keyboardWillShow(_:)),
-            name: NSNotification.Name.UIKeyboardWillShow,
+            name: UIResponder.keyboardWillShowNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIEditTaskViewController.keyboardWillHide(_:)),
-            name: NSNotification.Name.UIKeyboardWillHide,
+            name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }
 
@@ -62,9 +62,9 @@ class TLIEditTaskViewController: UIViewController {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         keyboardRect = self.view.convert((
             userInfo.object(
-                forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue, from: nil)
+                forKey: UIResponder.keyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue, from: nil)
         let duration: Double = (userInfo.object(
-            forKey: UIKeyboardAnimationDurationUserInfoKey)! as AnyObject).doubleValue
+            forKey: UIResponder.keyboardAnimationDurationUserInfoKey)! as AnyObject).doubleValue
         layoutTextView(duration)
     }
 
@@ -83,9 +83,9 @@ class TLIEditTaskViewController: UIViewController {
         let textViewHeight = size.height - heightAdjust //- 44.0
 
         UIView.animate(withDuration: TimeInterval((userInfo.object(
-            forKey: UIKeyboardAnimationDurationUserInfoKey)! as AnyObject).floatValue),
+            forKey: UIResponder.keyboardAnimationDurationUserInfoKey)! as AnyObject).floatValue),
                        delay: TimeInterval(0.0),
-                       options: UIViewAnimationOptions.allowUserInteraction,
+                       options: UIView.AnimationOptions.allowUserInteraction,
                        animations: { () -> Void in
                         self.textView?.frame = CGRect(
                             x: 0.0,
@@ -150,7 +150,7 @@ class TLIEditTaskViewController: UIViewController {
         UIView.animate(
             withDuration: TimeInterval(duration),
             delay: TimeInterval(0.0),
-            options: UIViewAnimationOptions.allowUserInteraction,
+            options: UIView.AnimationOptions.allowUserInteraction,
             animations: { () -> Void in
                 self.textView?.frame = CGRect(
                     x: 0.0,

@@ -44,7 +44,7 @@ class TLIListTableViewCell: TLITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         self.currentList = nil
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // swiftlint:disable force_unwrapping
@@ -65,8 +65,8 @@ class TLIListTableViewCell: TLITableViewCell {
         totalTasksLabel.layer.borderWidth = 1.0
         totalTasksLabel.textAlignment = NSTextAlignment.center
         totalTasksLabel.autoresizingMask = [
-            UIViewAutoresizing.flexibleWidth,
-            UIViewAutoresizing.flexibleHeight]
+            UIView.AutoresizingMask.flexibleWidth,
+            UIView.AutoresizingMask.flexibleHeight]
         totalTasksLabel.clipsToBounds = true
         self.contentView.addSubview(totalTasksLabel)
 
@@ -76,7 +76,7 @@ class TLIListTableViewCell: TLITableViewCell {
             green: 244.0 / 255.0,
             blue: 244.0 / 255.0,
             alpha: 1.0)
-        selectedBackgroundView.contentMode = UIViewContentMode.redraw
+        selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         self.selectedBackgroundView = selectedBackgroundView
 
         updateFonts()
@@ -109,32 +109,32 @@ class TLIListTableViewCell: TLITableViewCell {
         if useSystemFontSize == "on" {
 
             if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
-                listLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
-                listLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Courier" {
-                listLabel.font = UIFont.preferredCourierFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredCourierFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredCourierFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredCourierFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Georgia" {
-                listLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Menlo" {
-                listLabel.font = UIFont.preferredMenloFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredMenloFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredMenloFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredMenloFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
-                listLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Palatino" {
-                listLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
-                listLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredIowanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredIowanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
-                listLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
-                totalTasksLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyle.body.rawValue as NSString)
+                listLabel.font = UIFont.preferredSFFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
+                totalTasksLabel.font = UIFont.preferredSFFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             }
 
         } else {

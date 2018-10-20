@@ -16,8 +16,8 @@ class TLIAddListButton: UIButton {
     }
 
     func setup() {
-        self.setBackgroundImage(UIImage(named: "add-list"), for: UIControlState())
-        self.setBackgroundImage(UIImage(named: "add-list"), for: UIControlState.highlighted)
+        self.setBackgroundImage(UIImage(named: "add-list"), for: UIControl.State())
+        self.setBackgroundImage(UIImage(named: "add-list"), for: UIControl.State.highlighted)
     }
 
     required init(coder aDecoder: NSCoder) {

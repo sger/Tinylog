@@ -18,8 +18,8 @@ class TLISettingsTableViewController: UITableViewController,
 
     // MARK: Initializers
 
-    override init(style: UITableViewStyle) {
-        super.init(style: UITableViewStyle.grouped)
+    override init(style: UITableView.Style) {
+        super.init(style: UITableView.Style.grouped)
     }
 
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
@@ -34,7 +34,7 @@ class TLISettingsTableViewController: UITableViewController,
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Done",
-            style: UIBarButtonItemStyle.plain,
+            style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(TLISettingsTableViewController.close(_:)))
         self.view.backgroundColor = UIColor.tinylogLightGray
@@ -66,13 +66,13 @@ class TLISettingsTableViewController: UITableViewController,
     }
     // swiftlint:disable cyclomatic_complexity
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         cell.textLabel?.font = UIFont.tinylogFontOfSize(17.0)
         cell.textLabel?.textColor = UIColor.tinylogTextColor
 
         let selectedBackgroundView = UIView(frame: cell.frame)
         selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
-        selectedBackgroundView.contentMode = UIViewContentMode.redraw
+        selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         cell.selectedBackgroundView = selectedBackgroundView
 
         if indexPath.section == 0 {
@@ -88,10 +88,10 @@ class TLISettingsTableViewController: UITableViewController,
                 switchMode.addTarget(
                     self,
                     action: #selector(TLISettingsTableViewController.toggleSyncSettings(_:)),
-                    for: UIControlEvents.valueChanged)
+                    for: UIControl.Event.valueChanged)
                 switchMode.onTintColor = UIColor.tinylogMainColor
                 cell.accessoryView = switchMode
-                cell.accessoryType = UITableViewCellAccessoryType.none
+                cell.accessoryType = UITableViewCell.AccessoryType.none
 
                 let userDefaults: UserDefaults = UserDefaults.standard
                 if let syncModeValue: String = userDefaults.object(
@@ -219,7 +219,7 @@ class TLISettingsTableViewController: UITableViewController,
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(
-            style: UITableViewCellStyle.value1,
+            style: UITableViewCell.CellStyle.value1,
             reuseIdentifier: settingsCellIdentifier)
         configureCell(cell, indexPath: indexPath)
         return cell
@@ -254,9 +254,9 @@ class TLISettingsTableViewController: UITableViewController,
                     let stringBody = "---\nApp: Tinylog \(version) (\(build))\nDevice: \(String(describing: deviceModel)) (\(systemVersion))"
 
                     mailer.setMessageBody(stringBody, isHTML: false)
-                    let titleTextDict: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.mediumFontWithSize(16.0)]
+                    let titleTextDict: NSDictionary = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.mediumFontWithSize(16.0)]
 
-                    mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedStringKey: Any]
+                    mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedString.Key: Any]
 
                     mailer.navigationBar.tintColor = UIColor.tinylogMainColor
                     self.present(mailer, animated: true, completion: nil)
@@ -265,7 +265,7 @@ class TLISettingsTableViewController: UITableViewController,
                 } else {
                     let alert = UIAlertController(title: "Tinylog",
                                                   message: "Your device doesn't support this feature",
-                                                  preferredStyle: UIAlertControllerStyle.alert)
+                                                  preferredStyle: UIAlertController.Style.alert)
 
                     let cancelAction = UIAlertAction(title: "OK",
                                                      style: .cancel, handler: nil)

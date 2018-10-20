@@ -16,8 +16,8 @@ class TLIExportTasksButton: UIButton {
     }
 
     func setup() {
-        self.setBackgroundImage(UIImage(named: "702-share"), for: UIControlState())
-        self.setBackgroundImage(UIImage(named: "702-share"), for: UIControlState.highlighted)
+        self.setBackgroundImage(UIImage(named: "702-share"), for: UIControl.State())
+        self.setBackgroundImage(UIImage(named: "702-share"), for: UIControl.State.highlighted)
     }
 
     required init(coder aDecoder: NSCoder) {

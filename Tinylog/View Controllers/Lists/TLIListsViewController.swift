@@ -109,9 +109,9 @@ class TLIListsViewController: TLICoreDataTableViewController,
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundView = UIView()
         self.tableView?.backgroundView?.backgroundColor = UIColor.clear
-        self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView?.register(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = 61
         self.tableView?.frame = CGRect(
             x: 0.0,
@@ -126,10 +126,10 @@ class TLIListsViewController: TLICoreDataTableViewController,
         searchController?.searchResultsUpdater = self
         searchController?.searchBar.sizeToFit()
         searchController?.searchBar.backgroundColor = UIColor.tinylogLightGray
-        searchController?.searchBar.searchBarStyle = UISearchBarStyle.minimal
+        searchController?.searchBar.searchBarStyle = UISearchBar.Style.minimal
         searchController?.searchBar.setSearchFieldBackgroundImage(
             UIImage(named: "search-bar-bg-gray"),
-            for: UIControlState())
+            for: UIControl.State())
 
         searchController?.searchBar.tintColor = UIColor.tinylogMainColor
         let searchField: UITextField = searchController?.searchBar.value(
@@ -142,14 +142,14 @@ class TLIListsViewController: TLICoreDataTableViewController,
         searchController?.searchBar.delegate = self
 
         let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
-        let settingsButton: UIButton = UIButton(type: UIButtonType.custom)
+        let settingsButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
         settingsButton.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
-        settingsButton.setBackgroundImage(settingsImage, for: UIControlState())
-        settingsButton.setBackgroundImage(settingsImage, for: UIControlState.highlighted)
+        settingsButton.setBackgroundImage(settingsImage, for: UIControl.State())
+        settingsButton.setBackgroundImage(settingsImage, for: UIControl.State.highlighted)
         settingsButton.addTarget(
             self,
             action: #selector(TLIListsViewController.displaySettings(_:)),
-            for: UIControlEvents.touchDown)
+            for: UIControl.Event.touchDown)
 
         let settingsBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
         self.navigationItem.hidesBackButton = true
@@ -158,11 +158,11 @@ class TLIListsViewController: TLICoreDataTableViewController,
         listsFooterView?.addListButton?.addTarget(
             self,
             action: #selector(TLIListsViewController.addNewList(_:)),
-            for: UIControlEvents.touchDown)
+            for: UIControl.Event.touchDown)
         listsFooterView?.archiveButton?.addTarget(
             self,
             action: #selector(TLIListsViewController.displayArchive(_:)),
-            for: UIControlEvents.touchDown)
+            for: UIControl.Event.touchDown)
 
         setEditing(false, animated: false)
 
@@ -374,13 +374,13 @@ class TLIListsViewController: TLICoreDataTableViewController,
         if editing {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Done",
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(TLIListsViewController.toggleEditMode(_:)))
         } else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Edit",
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(TLIListsViewController.toggleEditMode(_:)))
         }
@@ -395,7 +395,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
     func tableView(_ tableView: UITableView,
                    editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let editRowAction = UITableViewRowAction(
-            style: UITableViewRowActionStyle.default,
+            style: UITableViewRowAction.Style.default,
             title: "Edit", handler: {_, indexpath in
 
                 let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
@@ -412,7 +412,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         })
         editRowAction.backgroundColor = UIColor.tinylogEditRowAction
         let archiveRowAction = UITableViewRowAction(
-            style: UITableViewRowActionStyle.default,
+            style: UITableViewRowAction.Style.default,
             title: "Archive",
             handler: {_, indexpath in
                 let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
@@ -535,8 +535,8 @@ class TLIListsViewController: TLICoreDataTableViewController,
         return "Delete"
     }
 
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath) {
-        if editingStyle != UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+        if editingStyle != UITableViewCell.EditingStyle.delete {
             return
         }
 
@@ -554,7 +554,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
     func onClose(_ addListViewController: TLIAddListViewController, list: TLIList) {
 
         let indexPath = self.frc?.indexPath(forObject: list)
-        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableViewScrollPosition.none)
+        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         // swiftlint:disable line_length
@@ -717,12 +717,12 @@ extension TLIListsViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIListsViewController.appBecomeActive),
-            name: NSNotification.Name.UIApplicationDidBecomeActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIListsViewController.onChangeSize(_:)),
-            name: NSNotification.Name.UIContentSizeCategoryDidChange,
+            name: UIContentSizeCategory.didChangeNotification,
             object: nil)
     }
     fileprivate func unregisterNotifications() {

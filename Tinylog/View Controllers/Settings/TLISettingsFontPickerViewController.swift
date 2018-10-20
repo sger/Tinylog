@@ -27,7 +27,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
             self.tableView.reloadData()
             self.tableView.scrollToRow(
                 at: self.currentIndexPath! as IndexPath,
-                at: UITableViewScrollPosition.middle,
+                at: UITableView.ScrollPosition.middle,
                 animated: false)
         }
     }
@@ -179,7 +179,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TLIGroupedTableViewCell = TLIGroupedTableViewCell(
-            style: UITableViewCellStyle.default,
+            style: UITableViewCell.CellStyle.default,
             reuseIdentifier: "CellIdentifier")
         let key: NSString = self.keys()!.object(at: indexPath.row) as! NSString
         let selectedKey = TLISettingsFontPickerViewController.selectedKey()!
@@ -187,9 +187,9 @@ class TLISettingsFontPickerViewController: UITableViewController {
         cell.tintColor = UIColor.tinylogMainColor
 
         if key as NSString == selectedKey {
-            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
-            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         cell.textLabel!.font = UIFont.tinylogFontOfSize(18.0, key: key)!
         return cell
@@ -197,7 +197,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(
-            at: indexPath as IndexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+            at: indexPath as IndexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         currentIndexPath = indexPath as NSIndexPath
 

@@ -15,10 +15,10 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
     // MARK: Initializers
 
     override init() {
-        super.init(style: UITableViewStyle.grouped)
+        super.init(style: UITableView.Style.grouped)
     }
 
-    override init(style: UITableViewStyle) {
+    override init(style: UITableView.Style) {
         super.init(style: style)
 
     }
@@ -57,8 +57,8 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
     }
     // swiftlint:disable cyclomatic_complexity
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
-        cell.accessoryType = UITableViewCellAccessoryType.none
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.accessoryType = UITableViewCell.AccessoryType.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         if indexPath.section == 0 {
             if indexPath.row == 0 {
@@ -71,10 +71,10 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                 switchMode.addTarget(
                     self,
                     action: #selector(TLITextSizeViewController.toggleSystemFontSize(_:)),
-                    for: UIControlEvents.valueChanged)
+                    for: UIControl.Event.valueChanged)
                 switchMode.onTintColor = UIColor.tinylogMainColor
                 cell.accessoryView = switchMode
-                cell.accessoryType = UITableViewCellAccessoryType.none
+                cell.accessoryType = UITableViewCell.AccessoryType.none
 
                 let userDefaults: UserDefaults = UserDefaults.standard
                 if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
@@ -112,7 +112,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                 stepSlider.addTarget(
                     self,
                     action: #selector(TLITextSizeViewController.sliderValue(_:)),
-                    for: UIControlEvents.valueChanged)
+                    for: UIControl.Event.valueChanged)
                 cell.contentView.addSubview(stepSlider)
 
                 if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
@@ -188,7 +188,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(
-            style: UITableViewCellStyle.value1,
+            style: UITableViewCell.CellStyle.value1,
             reuseIdentifier: textSizeCellIdentifier)
         configureCell(cell, indexPath: indexPath)
         return cell

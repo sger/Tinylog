@@ -127,7 +127,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Close",
-            style: UIBarButtonItemStyle.plain,
+            style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(TLIArchiveTasksViewController.close(_:)))
 
@@ -141,11 +141,11 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
             green: 250.0 / 255.0,
             blue: 250.0 / 255.0,
             alpha: 1.0)
-        self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
 
         self.tableView?.register(TLITaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
 
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
         self.tableView?.frame = CGRect(
             x: 0.0,
@@ -160,12 +160,12 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIArchiveTasksViewController.onChangeSize(_:)),
-            name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+            name: UIContentSizeCategory.didChangeNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIArchiveTasksViewController.deviceOrientationChanged),
-            name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+            name: UIDevice.orientationDidChangeNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
@@ -180,7 +180,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIArchiveTasksViewController.appBecomeActive),
-            name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+            name: UIApplication.didBecomeActiveNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
@@ -220,10 +220,10 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
     }
 
     @objc func deviceOrientationChanged() {
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+        if UIDevice.current.orientation.isLandscape {
             self.orientation = "landscape"
         }
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+        if UIDevice.current.orientation.isPortrait {
             self.orientation = "portrait"
         }
 
@@ -240,10 +240,10 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+        if UIDevice.current.orientation.isLandscape {
             self.orientation = "landscape"
         }
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+        if UIDevice.current.orientation.isPortrait {
             self.orientation = "portrait"
         }
     }
@@ -306,13 +306,13 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         if editing {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Done",
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(TLIArchiveTasksViewController.toggleEditMode(_:)))
         } else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Edit",
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(TLIArchiveTasksViewController.toggleEditMode(_:)))
         }
@@ -328,7 +328,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         indexPath: IndexPath) -> [AnyObject]? {
 
         let deleteRowAction = UITableViewRowAction(
-            style: UITableViewRowActionStyle.default,
+            style: UITableViewRowAction.Style.default,
             title: "Delete",
             handler: {_, indexpath in
 
@@ -349,7 +349,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
             alpha: 1.0)
 
         let restoreRowAction = UITableViewRowAction(
-            style: UITableViewRowActionStyle.default,
+            style: UITableViewRowAction.Style.default,
             title: "Restore", handler: {_, indexpath in
             if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
                 task.archivedAt = nil
@@ -378,7 +378,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
     }
 
     func updateTask(_ task: TLITask, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedTasks: [AnyObject] = self.frc?.fetchedObjects as [AnyObject]!
+        var fetchedTasks: [AnyObject] = (self.frc?.fetchedObjects)!
 
         print(fetchedTasks)
         // Remove current list item
@@ -442,8 +442,8 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
             let cell: TLITaskTableViewCell = tableView.dequeueReusableCell(
-                withIdentifier: kCellIdentifier) as! TLITaskTableViewCell!
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+                withIdentifier: kCellIdentifier) as! TLITaskTableViewCell
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
 
@@ -561,16 +561,16 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
                 activityItems: [output],
                 applicationActivities: nil)
             activityViewController.excludedActivityTypes =  [
-                UIActivityType.postToTwitter,
-                UIActivityType.postToFacebook,
-                UIActivityType.postToWeibo,
-                UIActivityType.copyToPasteboard,
-                UIActivityType.assignToContact,
-                UIActivityType.saveToCameraRoll,
-                UIActivityType.addToReadingList,
-                UIActivityType.postToFlickr,
-                UIActivityType.postToVimeo,
-                UIActivityType.postToTencentWeibo
+                UIActivity.ActivityType.postToTwitter,
+                UIActivity.ActivityType.postToFacebook,
+                UIActivity.ActivityType.postToWeibo,
+                UIActivity.ActivityType.copyToPasteboard,
+                UIActivity.ActivityType.assignToContact,
+                UIActivity.ActivityType.saveToCameraRoll,
+                UIActivity.ActivityType.addToReadingList,
+                UIActivity.ActivityType.postToFlickr,
+                UIActivity.ActivityType.postToVimeo,
+                UIActivity.ActivityType.postToTencentWeibo
             ]
             self.navigationController?.present(activityViewController, animated: true, completion: nil)
         } catch let error as NSError {

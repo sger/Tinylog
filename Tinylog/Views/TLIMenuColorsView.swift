@@ -62,7 +62,7 @@ class TLIMenuColorsView: UIView {
             button.addTarget(
                 self,
                 action: #selector(TLIMenuColorsView.buttonPressed(_:)),
-                for: UIControlEvents.touchDown)
+                for: UIControl.Event.touchDown)
             buttonsContainer?.addSubview(button)
             index += 1
         }

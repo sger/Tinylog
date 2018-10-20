@@ -19,7 +19,7 @@ class TLIAddTaskView: UIView, UITextFieldDelegate {
         textField.setValue(UIColor.tinylogLightGray, forKeyPath: "_placeholderLabel.textColor")
         textField.autocapitalizationType = UITextAutocapitalizationType.sentences
         textField.autocorrectionType = UITextAutocorrectionType.yes
-        textField.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         textField.textAlignment = NSTextAlignment.left
         textField.returnKeyType = UIReturnKeyType.done
         textField.tintColor = UIColor.tinylogLightGray
