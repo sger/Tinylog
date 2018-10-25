@@ -328,7 +328,6 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
             style: UITableViewRowAction.Style.default,
             title: "Delete",
             handler: {_, indexpath in
-                print("delete")
                 if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
                     // Delete the core date entity
                     self.managedObjectContext.delete(task)
