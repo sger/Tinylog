@@ -322,25 +322,23 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         setEditing(!isEditing, animated: true)
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        editActionsForRowAtIndexPath
-        indexPath: IndexPath) -> [AnyObject]? {
-
+    func tableView(_ tableView: UITableView,
+                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
             title: "Delete",
             handler: {_, indexpath in
+                print("delete")
+                if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
+                    // Delete the core date entity
+                    self.managedObjectContext.delete(task)
+                    // swiftlint:disable force_try
+                    try! self.managedObjectContext.save()
+                }
 
-            if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
-                // Delete the core date entity
-                self.managedObjectContext.delete(task)
-                // swiftlint:disable force_try
-                try! self.managedObjectContext.save()
-            }
-
-            self.checkForTasks()
-            self.setEditing(false, animated: true)
+                self.checkForTasks()
+                self.setEditing(false, animated: true)
+                self.tableView?.reloadData()
         })
         deleteRowAction.backgroundColor = UIColor(
             red: 254.0 / 255.0,
@@ -351,22 +349,23 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         let restoreRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
             title: "Restore", handler: {_, indexpath in
-            if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
-                task.archivedAt = nil
-                try! self.managedObjectContext.save()
-            }
-            self.checkForTasks()
-            self.setEditing(false, animated: true)
+                if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
+                    task.archivedAt = nil
+                    try! self.managedObjectContext.save()
+                }
+                self.checkForTasks()
+                self.setEditing(false, animated: true)
+                self.tableView?.reloadData()
         })
         restoreRowAction.backgroundColor = UIColor.tinylogMainColor
         return [restoreRowAction, deleteRowAction]
     }
 
-    func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
@@ -400,10 +399,9 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        moveRowAtIndexPath sourceIndexPath: IndexPath,
-        toIndexPath destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   moveRowAt sourceIndexPath: IndexPath,
+                   to destinationIndexPath: IndexPath) {
         if sourceIndexPath.row == destinationIndexPath.row {
             return
         }
@@ -428,9 +426,8 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
         }
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 52)!)
     }
 
