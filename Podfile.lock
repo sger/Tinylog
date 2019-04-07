@@ -1,11 +1,11 @@
 PODS:
-  - Crashlytics (3.10.9):
-    - Fabric (~> 1.7.13)
+  - Crashlytics (3.12.0):
+    - Fabric (~> 1.9.0)
   - Ensembles (1.7.1):
     - Ensembles/Core (= 1.7.1)
   - Ensembles/Core (1.7.1)
-  - Fabric (1.7.13)
-  - PureLayout (3.1.2)
+  - Fabric (1.9.0)
+  - PureLayout (3.1.4)
   - Reachability (3.2)
   - SGBackgroundView (1.3)
   - SGReachability (1.0):
@@ -37,10 +37,10 @@ SPEC REPOS:
     - TTTAttributedLabel
 
 SPEC CHECKSUMS:
-  Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
+  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   Ensembles: 11a67648712e8d2fd7d3103b9fe95e967d94ebf4
-  Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
-  PureLayout: 4634d0b61e3b5021166e8ec7c18e9e0ca0720c8b
+  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
+  PureLayout: f08c01b8dec00bb14a1fefa3de4c7d9c265df85e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SGBackgroundView: 3dbf380b9a54eeedfb6176ad750055d7d47e84eb
   SGReachability: abf9b7c6695750939268fb0e7197ea2d69536f22
@@ -49,4 +49,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: eaf11e406280b83a41dc47ba7b2ea6ee48deefe5
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
