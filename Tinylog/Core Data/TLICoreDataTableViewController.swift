@@ -184,7 +184,8 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
                             with: UITableView.RowAnimation.fade)
                     }
                 }
-            }
+            @unknown default: break
+        }
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
