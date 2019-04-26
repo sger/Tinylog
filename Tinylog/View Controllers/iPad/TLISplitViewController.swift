@@ -15,7 +15,7 @@ class TLISplitViewController: UISplitViewController, UISplitViewControllerDelega
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         listsViewController = TLIListsViewController()
-        listsViewController?.managedObjectContext = TLIAppDelegate.sharedAppDelegate().managedObjectContext
+        listsViewController?.managedObjectContext = TLIAppDelegate.sharedAppDelegate().coreDataManager.managedObjectContext
         listViewController = TLITasksViewController()
 
         // swiftlint:disable force_unwrapping

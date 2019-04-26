@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Tinylog
+
+  Created by Spiros Gerokostas on 20/04/2019.
+  Copyright © 2019 Spiros Gerokostas. All rights reserved.
+*/
+
+"My_Lists" = "My Lists";
+"Update_lists" = "Last Updated %@";

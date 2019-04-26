@@ -1,52 +1,112 @@
 PODS:
-  - Crashlytics (3.12.0):
-    - Fabric (~> 1.9.0)
-  - Ensembles (1.7.1):
-    - Ensembles/Core (= 1.7.1)
-  - Ensembles/Core (1.7.1)
-  - Fabric (1.9.0)
+  - Ensembles (1.8):
+    - Ensembles/Core (= 1.8)
+  - Ensembles/Core (1.8)
+  - Firebase/Core (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.8.1)
+  - Firebase/CoreOnly (5.20.2):
+    - FirebaseCore (= 5.4.1)
+  - FirebaseAnalytics (5.8.1):
+    - FirebaseCore (~> 5.4)
+    - FirebaseInstanceID (~> 3.8)
+    - GoogleAppMeasurement (= 5.8.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (5.4.1):
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseInstanceID (3.8.1):
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/UserDefaults (~> 5.2)
+  - GoogleAppMeasurement (5.8.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (5.7.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.7.0)
+  - GoogleUtilities/Logger (5.7.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.7.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.7.0)"
+  - GoogleUtilities/Reachability (5.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.7.0):
+    - GoogleUtilities/Logger
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
   - PureLayout (3.1.4)
   - Reachability (3.2)
   - SGBackgroundView (1.3)
   - SGReachability (1.0):
     - Reachability
+  - SnapshotTesting (1.5.0)
   - SVProgressHUD (2.2.5)
   - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
-  - Crashlytics
   - Ensembles (~> 1.0)
-  - Fabric
+  - Firebase/Core
   - PureLayout
   - Reachability
   - SGBackgroundView
   - SGReachability
+  - SnapshotTesting (~> 1.5)
   - SVProgressHUD
   - TTTAttributedLabel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Crashlytics
     - Ensembles
-    - Fabric
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - GoogleAppMeasurement
+    - GoogleUtilities
+    - nanopb
     - PureLayout
     - Reachability
     - SGBackgroundView
     - SGReachability
+    - SnapshotTesting
     - SVProgressHUD
     - TTTAttributedLabel
 
 SPEC CHECKSUMS:
-  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
-  Ensembles: 11a67648712e8d2fd7d3103b9fe95e967d94ebf4
-  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
+  Ensembles: 6f04632bf2aa35cc69f8ffbc259396afe2f0501e
+  Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
+  FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
+  FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
+  FirebaseInstanceID: a122b0c258720cf250551bb2bedf48c699f80d90
+  GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
+  GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   PureLayout: f08c01b8dec00bb14a1fefa3de4c7d9c265df85e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SGBackgroundView: 3dbf380b9a54eeedfb6176ad750055d7d47e84eb
   SGReachability: abf9b7c6695750939268fb0e7197ea2d69536f22
+  SnapshotTesting: 9ca1d80f6322509a035856170c11d0571b1f7171
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: eaf11e406280b83a41dc47ba7b2ea6ee48deefe5
+PODFILE CHECKSUM: 4be282c623147975bbece9797ec4588f3cc7e356
 
 COCOAPODS: 1.6.1

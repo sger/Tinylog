@@ -76,3 +76,34 @@ class TLIList: NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
 }
+
+extension TLIList {
+    
+    static func lists(with content: NSManagedObjectContext) -> [Any] {
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
+        let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
+        let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
+        fetchRequest.predicate = NSPredicate(format: "archivedAt = nil")
+        
+        do {
+            return try content.fetch(fetchRequest)
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    static func filter(with title: String, color: String) -> NSFetchRequest<NSFetchRequestResult> {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
+        let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
+        let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
+        let titlePredicate = NSPredicate(
+            format: "title CONTAINS[cd] %@ AND archivedAt = nil", title)
+        let colorPredicate = NSPredicate(format: "color CONTAINS[cd] %@ AND archivedAt = nil", color)
+        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, colorPredicate])
+        fetchRequest.predicate = predicate
+        return fetchRequest
+    }
+}

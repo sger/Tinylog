@@ -34,34 +34,17 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 class TLIListsViewController: TLICoreDataTableViewController,
     UITextFieldDelegate,
     TLIAddListViewControllerDelegate,
-    UISearchBarDelegate,
     UISearchControllerDelegate,
+    UISearchBarDelegate,
     UISearchResultsUpdating {
 
     var managedObjectContext: NSManagedObjectContext!
-
-    struct RestorationKeys {
-        static let viewControllerTitle = "ViewControllerTitleKey"
-        static let searchControllerIsActive = "SearchControllerIsActiveKey"
-        static let searchBarText = "SearchBarTextKey"
-        static let searchBarIsFirstResponder = "SearchBarIsFirstResponderKey"
-    }
-
-    // State restoration values.
-    struct SearchControllerRestorableState {
-        var wasActive = false
-        var wasFirstResponder = false
-    }
-
-    var restoredState = SearchControllerRestorableState()
 
     let kEstimateRowHeight = 61
     let kCellIdentifier = "CellIdentifier"
     var editingIndexPath: IndexPath?
     var estimatedRowHeightCache: NSMutableDictionary?
     var resultsTableViewController: TLIResultsTableViewController?
-    var searchController: UISearchController?
-    var topBarView: UIView?
     var didSetupContraints = false
 
     var listsFooterView: TLIListsFooterView? = {
@@ -69,7 +52,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         return listsFooterView
     }()
 
-    lazy var noListsLabel: UILabel? = {
+    lazy var emptyListsLabel: UILabel? = {
         let noListsLabel: UILabel = UILabel.newAutoLayout()
         noListsLabel.font = UIFont.tinylogFontOfSize(16.0)
         noListsLabel.textColor = UIColor.tinylogTextColor
@@ -103,13 +86,14 @@ class TLIListsViewController: TLICoreDataTableViewController,
 
         configureFetch()
 
-        self.title = "My Lists"
-
+        self.title = localizedString(key: "My_Lists")
+        
         self.view.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundView = UIView()
         self.tableView?.backgroundView?.backgroundColor = UIColor.clear
-        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        self.tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         self.tableView?.register(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = 61
@@ -118,28 +102,11 @@ class TLIListsViewController: TLICoreDataTableViewController,
             y: 0.0,
             width: self.view.frame.size.width,
             height: self.view.frame.size.height - 50.0)
+        self.tableView?.tableFooterView = UIView()
 
         resultsTableViewController = TLIResultsTableViewController()
-        resultsTableViewController?.managedObjectContext = managedObjectContext
-        resultsTableViewController?.tableView?.delegate = self
-        searchController = UISearchController(searchResultsController: resultsTableViewController)
-        searchController?.searchResultsUpdater = self
-        searchController?.searchBar.sizeToFit()
-        searchController?.searchBar.backgroundColor = UIColor.tinylogLightGray
-        searchController?.searchBar.searchBarStyle = UISearchBar.Style.minimal
-        searchController?.searchBar.setSearchFieldBackgroundImage(
-            UIImage(named: "search-bar-bg-gray"),
-            for: UIControl.State())
-
-        searchController?.searchBar.tintColor = UIColor.tinylogMainColor
-        let searchField: UITextField = searchController?.searchBar.value(
-            forKey: "searchField") as! UITextField
-        searchField.textColor = UIColor.tinylogTextColor
-
-        self.tableView?.tableHeaderView = searchController?.searchBar
-        searchController?.delegate = self
-        searchController?.dimsBackgroundDuringPresentation = false
-        searchController?.searchBar.delegate = self
+        
+        addSearchController(with: "Search", searchResultsUpdater: self, searchResultsController: resultsTableViewController!)
 
         let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
         let settingsButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
@@ -167,16 +134,14 @@ class TLIListsViewController: TLICoreDataTableViewController,
         setEditing(false, animated: false)
 
         registerNotifications()
-
-        definesPresentationContext = true
     }
     deinit {
         unregisterNotifications()
     }
-
+    
     override func loadView() {
         super.loadView()
-        view.addSubview(noListsLabel!)
+        view.addSubview(emptyListsLabel!)
         view.addSubview(listsFooterView!)
         view.setNeedsUpdateConstraints()
     }
@@ -185,35 +150,14 @@ class TLIListsViewController: TLICoreDataTableViewController,
         self.tableView?.reloadData()
     }
 
-    func checkForLists() {
-
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
-        let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
-        let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
-        fetchRequest.predicate = NSPredicate(format: "archivedAt = nil")
-
-        do {
-            let results = try managedObjectContext.fetch(fetchRequest)
-
-            if results.isEmpty {
-                self.noListsLabel?.isHidden = false
-            } else {
-                self.noListsLabel?.isHidden = true
-            }
-        } catch let error  as NSError {
-            fatalError(error.localizedDescription)
-        }
-    }
-
     override func updateViewConstraints() {
 
         if !didSetupContraints {
 
-            noListsLabel?.autoCenterInSuperview()
+            emptyListsLabel?.autoCenterInSuperview()
 
             listsFooterView?.autoMatch(.width, to: .width, of: self.view)
-            listsFooterView?.autoSetDimension(.height, toSize: 51.0)
+            listsFooterView?.autoSetDimension(.height, toSize: listsFooterView!.footHeight + self.view.safeAreaInsets.bottom)
             listsFooterView?.autoPinEdge(toSuperviewEdge: .left)
             listsFooterView?.autoPinEdge(toSuperviewEdge: .bottom)
 
@@ -297,7 +241,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         let addListViewController: TLIAddListViewController = TLIAddListViewController()
         addListViewController.managedObjectContext = managedObjectContext
         addListViewController.delegate = self
-        addListViewController.mode = "create"
+        addListViewController.mode = .create
         let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
@@ -330,17 +274,6 @@ class TLIListsViewController: TLICoreDataTableViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        // Restore the searchController's active state.
-        if restoredState.wasActive {
-            searchController!.isActive = restoredState.wasActive
-            restoredState.wasActive = false
-
-            if restoredState.wasFirstResponder {
-                searchController!.searchBar.becomeFirstResponder()
-                restoredState.wasFirstResponder = false
-            }
-        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -352,17 +285,17 @@ class TLIListsViewController: TLICoreDataTableViewController,
         super.viewWillAppear(animated)
 
         checkForLists()
-
-        let userDefaults = UserDefaults.standard
-        let displaySetupScreen: NSString = userDefaults.object(forKey: "kSetupScreen") as! NSString
-
-        if displaySetupScreen == "on" {
+        
+        let userDefaults = Environment.current.userDefaults
+        
+        if userDefaults.bool(forKey: TLIUserDefaults.kSetupScreen) {
             Utils.delay(0.1, closure: { () -> Void in
                 self.displaySetup()
             })
-        } else if displaySetupScreen == "off" {
+        } else {
             startSync()
         }
+
         if tableView!.indexPathForSelectedRow != nil {
             tableView?.deselectRow(at: tableView!.indexPathForSelectedRow!, animated: animated)
         }
@@ -404,7 +337,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
                 addListViewController.managedObjectContext = self.managedObjectContext
                 addListViewController.delegate = self
                 addListViewController.list = list
-                addListViewController.mode = "edit"
+                addListViewController.mode = .edit
                 let nc: UINavigationController = UINavigationController(
                     rootViewController: addListViewController)
                 nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
@@ -619,17 +552,11 @@ class TLIListsViewController: TLICoreDataTableViewController,
 
     func presentSearchController(_ searchController: UISearchController) {}
 
-    func willPresentSearchController(_ searchController: UISearchController) {
-        topBarView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 20.0))
-        topBarView?.backgroundColor = UIColor.tinylogLightGray
-        TLIAppDelegate.sharedAppDelegate().window?.rootViewController?.view.addSubview(topBarView!)
-    }
+    func willPresentSearchController(_ searchController: UISearchController) {}
 
     func didPresentSearchController(_ searchController: UISearchController) {}
 
-    func willDismissSearchController(_ searchController: UISearchController) {
-        topBarView?.removeFromSuperview()
-    }
+    func willDismissSearchController(_ searchController: UISearchController) {}
 
     func didDismissSearchController(_ searchController: UISearchController) {
         let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
@@ -641,63 +568,36 @@ class TLIListsViewController: TLICoreDataTableViewController,
 
     func updateSearchResults(for searchController: UISearchController) {
 
-        if searchController.searchBar.text!.length() > 0 {
-            let color = findColorByName(searchController.searchBar.text!.lowercased())
-            let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
-
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
-            let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
-            let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
-            fetchRequest.sortDescriptors = [
-                positionDescriptor,
-                titleDescriptor]
-            let titlePredicate = NSPredicate(
-                format: "title CONTAINS[cd] %@ AND archivedAt = nil", searchController.searchBar.text!.lowercased())
-            let colorPredicate = NSPredicate(format: "color CONTAINS[cd] %@ AND archivedAt = nil", color)
-
-            let predicate = NSCompoundPredicate(
-                orPredicateWithSubpredicates: [titlePredicate, colorPredicate])
-            fetchRequest.predicate = predicate
-            resultsController.frc = NSFetchedResultsController(
-                fetchRequest: fetchRequest,
-                managedObjectContext: managedObjectContext,
-                sectionNameKeyPath: nil,
-                cacheName: nil)
-            resultsController.frc?.delegate = self
-
-            do {
-                try resultsController.frc?.performFetch()
-                resultsController.tableView?.reloadData()
-                if resultsController.checkForEmptyResults() {
+        if let text = searchController.searchBar.text {
+            if !text.isEmpty {
+                let lowercasedText = text.lowercased()
+                let color = Utils.findColorByName(lowercasedText)
+                let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
+                let fetchRequest = TLIList.filter(with: lowercasedText, color: color)
+                
+                resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                   managedObjectContext: managedObjectContext,
+                                                                   sectionNameKeyPath: nil,
+                                                                   cacheName: nil)
+                resultsController.frc?.delegate = self
+                
+                do {
+                    try resultsController.frc?.performFetch()
+                    resultsController.tableView?.reloadData()
+                    if resultsController.checkForEmptyResults() {
+                        print("no results")
+                    }
+                } catch let error as NSError {
+                    fatalError(error.localizedDescription)
                 }
-            } catch let error as NSError {
-                fatalError(error.localizedDescription)
             }
-        }
-    }
-
-    func findColorByName(_ name: String) -> String {
-        switch name {
-        case "purple":
-            return "#6a6de2"
-        case "blue":
-            return "#008efe"
-        case "red":
-            return "#fe4565"
-        case "orange":
-            return "#ffa600"
-        case "green":
-            return "#50de72"
-        case "yellow":
-            return "#ffd401"
-        default:
-            return ""
         }
     }
 }
 
 extension TLIListsViewController {
-    fileprivate func registerNotifications() {
+    
+    private func registerNotifications() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(TLIListsViewController.syncActivityDidEndNotification(_:)),
@@ -725,10 +625,21 @@ extension TLIListsViewController {
             name: UIContentSizeCategory.didChangeNotification,
             object: nil)
     }
-    fileprivate func unregisterNotifications() {
+    
+    private func unregisterNotifications() {
         NotificationCenter.default.removeObserver(
             self,
             name: NSNotification.Name.IDMSyncActivityDidEnd,
             object: nil)
+    }
+    
+    private func checkForLists() {
+        let results = TLIList.lists(with: managedObjectContext)
+        
+        if results.isEmpty {
+            self.emptyListsLabel?.isHidden = false
+        } else {
+            self.emptyListsLabel?.isHidden = true
+        }
     }
 }

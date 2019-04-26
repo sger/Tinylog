@@ -20,6 +20,21 @@ extension UIViewController {
             return barHeight + statusBarHeight
         }
     }
+    
+    public func addSearchController(with placeHolder: String,
+                                    searchResultsUpdater: UISearchResultsUpdating,
+                                    searchResultsController: UIViewController) {
+        let searchController = UISearchController(searchResultsController: searchResultsController)
+        searchController.searchResultsUpdater = searchResultsUpdater
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = placeHolder
+        searchController.searchBar.autocapitalizationType = .none
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.tinylogTextColor]
+        definesPresentationContext = true
+    }
 }
 
 extension TLICoreDataTableViewController {

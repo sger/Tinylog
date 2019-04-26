@@ -92,15 +92,14 @@ class TLISettingsTableViewController: UITableViewController,
                 switchMode.onTintColor = UIColor.tinylogMainColor
                 cell.accessoryView = switchMode
                 cell.accessoryType = UITableViewCell.AccessoryType.none
-
-                let userDefaults: UserDefaults = UserDefaults.standard
-                if let syncModeValue: String = userDefaults.object(
-                    forKey: TLIUserDefaults.kTLISyncMode as String) as? String {
-                    if syncModeValue == "on" {
-                        switchMode.setOn(true, animated: false)
-                    } else if syncModeValue == "off" {
-                        switchMode.setOn(false, animated: false)
-                    }
+                
+                let userDefaults = Environment.current.userDefaults
+                let syncModeValue = userDefaults.bool(forKey: TLIUserDefaults.kTLISyncMode)
+                
+                if syncModeValue {
+                    switchMode.setOn(true, animated: false)
+                } else {
+                    switchMode.setOn(false, animated: false)
                 }
             }
         } else if indexPath.section == 1 {
@@ -112,15 +111,16 @@ class TLISettingsTableViewController: UITableViewController,
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = "Text Size"
                 cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0)
-                let userDefaults: UserDefaults = UserDefaults.standard
-                if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
-                    if useSystemFontSize == "on" {
-                        cell.detailTextLabel?.text = "System Size"
-                    } else {
-                        let fontSize: Float = userDefaults.float(forKey: "kFontSize")
-                        let strFontSize = NSString(format: "%.f", fontSize)
-                        cell.detailTextLabel?.text = strFontSize as String
-                    }
+                
+                let userDefaults = Environment.current.userDefaults
+                let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
+                
+                if useSystemFontSize {
+                    cell.detailTextLabel?.text = "System Size"
+                } else {
+                    let fontSize = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
+                    let strFontSize = NSString(format: "%.f", fontSize)
+                    cell.detailTextLabel?.text = strFontSize as String
                 }
             }
         } else if indexPath.section == 2 {
@@ -141,10 +141,8 @@ class TLISettingsTableViewController: UITableViewController,
     @objc func toggleSyncSettings(_ sender: UISwitch) {
         let mode: UISwitch = sender as UISwitch
         let value: NSString = mode.isOn == true ? "on" : "off"
-
-        let userDefaults: UserDefaults = UserDefaults.standard
-        userDefaults.set(value, forKey: TLIUserDefaults.kTLISyncMode as String)
-        userDefaults.synchronize()
+        
+        Environment.current.userDefaults.set(mode.isOn, forKey: TLIUserDefaults.kTLISyncMode)
 
         Utils.delay(0.2, closure: { () -> Void in
             let syncManager = TLISyncManager.shared()
