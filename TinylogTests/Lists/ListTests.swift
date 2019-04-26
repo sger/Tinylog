@@ -10,7 +10,7 @@ import XCTest
 @testable import Tinylog
 
 class ListTests: XCTestCase {
-    
+
     var coreDataManager: CoreDataManager!
 
     override func setUp() {
@@ -27,20 +27,20 @@ class ListTests: XCTestCase {
         let list = NSEntityDescription.insertNewObject(forEntityName: "List", into: coreDataManager.managedObjectContext) as! TLIList
         list.title = "test"
         try! coreDataManager.managedObjectContext.save()
-        
+
         XCTAssertEqual(list.title, "test")
     }
-    
+
     func testLists() {
         let firstList = NSEntityDescription.insertNewObject(forEntityName: "List", into: coreDataManager.managedObjectContext) as! TLIList
         firstList.title = "firstList"
         let secondList = NSEntityDescription.insertNewObject(forEntityName: "List", into: coreDataManager.managedObjectContext) as! TLIList
         secondList.title = "secondList"
         try! coreDataManager.managedObjectContext.save()
-        
+
         XCTAssertEqual(TLIList.lists(with: coreDataManager.managedObjectContext).count, 2)
     }
-    
+
     func testFilterLists() {
         let firstList = NSEntityDescription.insertNewObject(forEntityName: "List", into: coreDataManager.managedObjectContext) as! TLIList
         firstList.title = "firstList"
@@ -49,10 +49,10 @@ class ListTests: XCTestCase {
         secondList.title = "secondList"
         secondList.color = "blue"
         try! coreDataManager.managedObjectContext.save()
-        
+
         let fetchRequest = TLIList.filter(with: "firstList", color: "red")
         let lists = try! coreDataManager.managedObjectContext.fetch(fetchRequest) as? [TLIList]
-        
+
         XCTAssertEqual(lists?.first?.title, "firstList")
         XCTAssertEqual(lists?.first?.color, "red")
     }

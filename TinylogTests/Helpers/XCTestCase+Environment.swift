@@ -10,17 +10,17 @@ import XCTest
 @testable import Tinylog
 
 extension XCTestCase {
-    
+
     func testWithEnvironment(with env: Environment, block: () -> Void) {
         Environment.pushEnvironment(env)
         block()
         Environment.popEnvironment()
     }
-    
+
     func testWithEnvironment(language: Language = Environment.current.language,
                              userDefaults: UserDefaultsType = Environment.current.userDefaults,
                              block: () -> Void) {
-        testWithEnvironment(with:Environment(language: language, userDefaults: userDefaults),
+        testWithEnvironment(with: Environment(language: language, userDefaults: userDefaults),
                             block: block)
     }
 }

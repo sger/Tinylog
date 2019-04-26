@@ -9,9 +9,9 @@
 public enum Language: String {
     case en
     case de
-    
+
     public static let languages: [Language] = [.en, .de]
-    
+
     public init?(with language: String) {
         switch language.lowercased() {
         case "en":
@@ -22,7 +22,7 @@ public enum Language: String {
             return nil
         }
     }
-    
+
     public init?(languageStrings languages: [String]) {
         guard let language = languages
             .lazy
@@ -31,7 +31,7 @@ public enum Language: String {
             .first else {
                 return nil
         }
-        
+
         self = language
     }
 }

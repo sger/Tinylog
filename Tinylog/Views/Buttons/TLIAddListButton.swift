@@ -16,12 +16,12 @@ class TLIAddListButton: UIButton {
     }
 
     func setup() {
-        
-        let origImage = UIImage(named: "plus");
+
+        let origImage = UIImage(named: "plus")
         let tintedImage = origImage?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         //btn.setImage(tintedImage, for: .normal)
         tintColor = UIColor.tinylogMainColor
-        
+
         self.setBackgroundImage(tintedImage, for: UIControl.State())
         self.setBackgroundImage(tintedImage, for: UIControl.State.highlighted)
     }

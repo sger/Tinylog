@@ -87,7 +87,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         configureFetch()
 
         self.title = localizedString(key: "My_Lists")
-        
+
         self.view.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundView = UIView()
@@ -105,7 +105,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         self.tableView?.tableFooterView = UIView()
 
         resultsTableViewController = TLIResultsTableViewController()
-        
+
         addSearchController(with: "Search", searchResultsUpdater: self, searchResultsController: resultsTableViewController!)
 
         let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
@@ -138,7 +138,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
     deinit {
         unregisterNotifications()
     }
-    
+
     override func loadView() {
         super.loadView()
         view.addSubview(emptyListsLabel!)
@@ -285,9 +285,9 @@ class TLIListsViewController: TLICoreDataTableViewController,
         super.viewWillAppear(animated)
 
         checkForLists()
-        
+
         let userDefaults = Environment.current.userDefaults
-        
+
         if userDefaults.bool(forKey: TLIUserDefaults.kSetupScreen) {
             Utils.delay(0.1, closure: { () -> Void in
                 self.displaySetup()
@@ -574,13 +574,13 @@ class TLIListsViewController: TLICoreDataTableViewController,
                 let color = Utils.findColorByName(lowercasedText)
                 let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
                 let fetchRequest = TLIList.filter(with: lowercasedText, color: color)
-                
+
                 resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: managedObjectContext,
                                                                    sectionNameKeyPath: nil,
                                                                    cacheName: nil)
                 resultsController.frc?.delegate = self
-                
+
                 do {
                     try resultsController.frc?.performFetch()
                     resultsController.tableView?.reloadData()
@@ -596,7 +596,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
 }
 
 extension TLIListsViewController {
-    
+
     private func registerNotifications() {
         NotificationCenter.default.addObserver(
             self,
@@ -625,17 +625,17 @@ extension TLIListsViewController {
             name: UIContentSizeCategory.didChangeNotification,
             object: nil)
     }
-    
+
     private func unregisterNotifications() {
         NotificationCenter.default.removeObserver(
             self,
             name: NSNotification.Name.IDMSyncActivityDidEnd,
             object: nil)
     }
-    
+
     private func checkForLists() {
         let results = TLIList.lists(with: managedObjectContext)
-        
+
         if results.isEmpty {
             self.emptyListsLabel?.isHidden = false
         } else {

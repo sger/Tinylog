@@ -63,7 +63,7 @@ class TLISetupViewController: UIViewController {
         cloudImageView.translatesAutoresizingMaskIntoConstraints = false
         return cloudImageView
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -140,7 +140,7 @@ class TLISetupViewController: UIViewController {
     @objc func disableiCloudAndDismiss(_ button: TLIRoundedButton) {
         Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kSetupScreen)
         Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kTLISyncMode)
-        
+
         self.dismiss(animated: true, completion: nil)
     }
 }

@@ -76,13 +76,13 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         }
 
         // Register defaults
-            
+
         Environment.current.userDefaults.register(defaults:
             [String(kTLIFontDefaultsKey): kTLIFontHelveticaNeueKey,
             TLIUserDefaults.kTLISyncMode: false,
             TLIUserDefaults.kFontSize: 17.0,
             TLIUserDefaults.kSetupScreen: true])
-        
+
         do {
             try FileManager.default.createDirectory(
                 at: coreDataManager.storeDirectoryURL as URL,

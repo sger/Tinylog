@@ -92,10 +92,10 @@ class TLISettingsTableViewController: UITableViewController,
                 switchMode.onTintColor = UIColor.tinylogMainColor
                 cell.accessoryView = switchMode
                 cell.accessoryType = UITableViewCell.AccessoryType.none
-                
+
                 let userDefaults = Environment.current.userDefaults
                 let syncModeValue = userDefaults.bool(forKey: TLIUserDefaults.kTLISyncMode)
-                
+
                 if syncModeValue {
                     switchMode.setOn(true, animated: false)
                 } else {
@@ -111,10 +111,10 @@ class TLISettingsTableViewController: UITableViewController,
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = "Text Size"
                 cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0)
-                
+
                 let userDefaults = Environment.current.userDefaults
                 let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
-                
+
                 if useSystemFontSize {
                     cell.detailTextLabel?.text = "System Size"
                 } else {
@@ -141,7 +141,7 @@ class TLISettingsTableViewController: UITableViewController,
     @objc func toggleSyncSettings(_ sender: UISwitch) {
         let mode: UISwitch = sender as UISwitch
         let value: NSString = mode.isOn == true ? "on" : "off"
-        
+
         Environment.current.userDefaults.set(mode.isOn, forKey: TLIUserDefaults.kTLISyncMode)
 
         Utils.delay(0.2, closure: { () -> Void in
