@@ -20,7 +20,7 @@ extension UIViewController {
             return barHeight + statusBarHeight
         }
     }
-    
+
     public func addSearchController(with placeHolder: String,
                                     searchResultsUpdater: UISearchResultsUpdating,
                                     searchResultsController: UIViewController) {

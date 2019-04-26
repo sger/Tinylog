@@ -49,7 +49,7 @@ class TLIListsFooterView: UIView {
         super.init(frame: frame)
 
         backgroundColor = UIColor.tinylogLighterGray
-        
+
         footerView.backgroundColor = UIColor.tinylogLighterGray
         self.addSubview(footerView)
 
@@ -79,9 +79,9 @@ class TLIListsFooterView: UIView {
     }
 
     override func updateConstraints() {
-        
+
         let padding: CGFloat = 20.0
-        
+
         if !didSetupContraints {
 
             footerView.autoMatch(.width, to: .width, of: self)
@@ -99,7 +99,7 @@ class TLIListsFooterView: UIView {
             archiveButton?.autoSetDimensions(to: CGSize(width: 28.0, height: 26.0))
             archiveButton?.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
             archiveButton?.autoPinEdge(toSuperviewEdge: .right, withInset: padding)
-            
+
             infoLabel?.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
             infoLabel?.autoAlignAxis(.vertical, toSameAxisOf: footerView)
 

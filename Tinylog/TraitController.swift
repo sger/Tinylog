@@ -28,13 +28,13 @@ internal func traitControllers(device: Device = .phone4_7inch,
                                additionalTraits: UITraitCollection = .init(),
                                handleAppearanceTransition: Bool = true)
     -> (parent: UIViewController, child: UIViewController) {
-        
+
         let parent = UIViewController()
         parent.addChild(child)
         parent.view.addSubview(child.view)
-        
+
         child.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+
         let traits: UITraitCollection
         switch (device, orientation) {
         case (.phone4inch, .portrait):
@@ -108,20 +108,19 @@ internal func traitControllers(device: Device = .phone4_7inch,
                 .init(userInterfaceIdiom: .pad)
                 ])
         }
-        
+
         child.view.frame = parent.view.frame
-        
+
         parent.view.backgroundColor = .white
         child.view.backgroundColor = .white
-        
+
         let allTraits = UITraitCollection.init(traitsFrom: [traits, additionalTraits])
         parent.setOverrideTraitCollection(allTraits, forChild: child)
-        
+
         if handleAppearanceTransition {
             parent.beginAppearanceTransition(true, animated: false)
             parent.endAppearanceTransition()
         }
-        
+
         return (parent, child)
 }
-

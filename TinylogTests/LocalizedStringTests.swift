@@ -20,19 +20,17 @@ class LocalizedStringTests: XCTestCase {
     }
 
     func testGerman() {
-       
+
         testWithEnvironment(language: .de) {
-            
+
             let str = localizedString(key: "My_Lists")
             let str2 = localizedString(key: "Update_lists")
-            
+
             let wantedString = String(format: str2, "10:00")
-            
+
             XCTAssertEqual("Meine Listen", str)
             XCTAssertEqual("Letzte Aktualisierung 10:00", wantedString)
         }
     }
-
-
 
 }

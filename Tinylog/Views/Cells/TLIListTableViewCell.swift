@@ -45,9 +45,9 @@ class TLIListTableViewCell: TLITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         self.currentList = nil
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         backgroundColor = UIColor.tinylogLightGray
-        
+
         listLabel.lineBreakMode = .byTruncatingTail
         listLabel.numberOfLines = 0
         listLabel.textAlignment = .left
@@ -75,7 +75,7 @@ class TLIListTableViewCell: TLITableViewCell {
 
         updateFonts()
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -144,7 +144,7 @@ class TLIListTableViewCell: TLITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-    
+
         self.contentView.setNeedsLayout()
         self.contentView.layoutIfNeeded()
 
