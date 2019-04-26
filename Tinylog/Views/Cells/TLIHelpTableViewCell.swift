@@ -66,8 +66,8 @@ class TLIHelpTableViewCell: TLITableViewCell {
     override func updateFonts() {
         super.updateFonts()
 
-        let userDefaults: UserDefaults = UserDefaults.standard
-        if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
+        let userDefaults = Environment.current.userDefaults
+        if let useSystemFontSize: String = userDefaults.object(forKey: TLIUserDefaults.kSystemFontSize) as? String {
 
             if useSystemFontSize == "on" {
                 if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
@@ -99,7 +99,7 @@ class TLIHelpTableViewCell: TLITableViewCell {
                         UIFont.TextStyle.body.rawValue as NSString)
                 }
             } else {
-                let fontSize: Float = userDefaults.float(forKey: "kFontSize")
+                let fontSize = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
                 helpLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize))
             }
         }

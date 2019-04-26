@@ -192,7 +192,8 @@ class TLITasksViewController: TLICoreDataTableViewController,
 
         self.view.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        self.tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         self.tableView?.register(TLITaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
@@ -201,6 +202,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
             y: 0.0,
             width: self.view.frame.size.width,
             height: self.view.frame.size.height - 50.0)
+        self.tableView?.tableFooterView = UIView()
 
         tasksFooterView?.exportTasksButton?.addTarget(
             self,

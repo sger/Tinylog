@@ -63,7 +63,7 @@ class TLISetupViewController: UIViewController {
         cloudImageView.translatesAutoresizingMaskIntoConstraints = false
         return cloudImageView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -116,11 +116,8 @@ class TLISetupViewController: UIViewController {
     }
 
     @objc func enableiCloudAndDismiss(_ button: TLIRoundedButton) {
-
-        let userDefaults = UserDefaults.standard
-        userDefaults.set("off", forKey: "kSetupScreen")
-        userDefaults.set("on", forKey: TLIUserDefaults.kTLISyncMode as String)
-        userDefaults.synchronize()
+        Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kSetupScreen)
+        Environment.current.userDefaults.set(true, forKey: TLIUserDefaults.kTLISyncMode)
 
         let syncManager = TLISyncManager.shared()
         syncManager?.connect(toSyncService: IDMICloudService, withCompletion: { (error) -> Void in
@@ -141,10 +138,9 @@ class TLISetupViewController: UIViewController {
     }
 
     @objc func disableiCloudAndDismiss(_ button: TLIRoundedButton) {
-        let userDefaults = UserDefaults.standard
-        userDefaults.set("off", forKey: "kSetupScreen")
-        userDefaults.set("off", forKey: TLIUserDefaults.kTLISyncMode as String)
-        userDefaults.synchronize()
+        Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kSetupScreen)
+        Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kTLISyncMode)
+        
         self.dismiss(animated: true, completion: nil)
     }
 }

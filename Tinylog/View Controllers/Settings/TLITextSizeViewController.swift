@@ -75,20 +75,20 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                 switchMode.onTintColor = UIColor.tinylogMainColor
                 cell.accessoryView = switchMode
                 cell.accessoryType = UITableViewCell.AccessoryType.none
-
-                let userDefaults: UserDefaults = UserDefaults.standard
-                if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
-                    if useSystemFontSize == "on" {
-                        switchMode.setOn(true, animated: false)
-                    } else if useSystemFontSize == "off" {
-                        switchMode.setOn(false, animated: false)
-                    }
+                
+                let userDefaults = Environment.current.userDefaults
+                let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
+                
+                if useSystemFontSize {
+                    switchMode.setOn(true, animated: false)
+                } else {
+                    switchMode.setOn(false, animated: false)
                 }
 
             } else if indexPath.row == 1 {
-
-                let userDefaults: UserDefaults = UserDefaults.standard
-                let size: Float = userDefaults.float(forKey: "kFontSize")
+                
+                let userDefaults = Environment.current.userDefaults
+                let size = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
 
                 var defaultValue: Int = 0
                 for (index, number) in numbers.enumerated() {
@@ -114,15 +114,15 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                     action: #selector(TLITextSizeViewController.sliderValue(_:)),
                     for: UIControl.Event.valueChanged)
                 cell.contentView.addSubview(stepSlider)
-
-                if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
-                    if useSystemFontSize == "on" {
-                        stepSlider.alpha = 0.5
-                        stepSlider.isUserInteractionEnabled = false
-                    } else if useSystemFontSize == "off" {
-                        stepSlider.alpha = 1.0
-                        stepSlider.isUserInteractionEnabled = true
-                    }
+                
+                let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
+                
+                if useSystemFontSize {
+                    stepSlider.alpha = 0.5
+                    stepSlider.isUserInteractionEnabled = false
+                } else {
+                    stepSlider.alpha = 1.0
+                    stepSlider.isUserInteractionEnabled = true
                 }
             }
         }
@@ -131,9 +131,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
     @objc func sliderValue(_ sender: UISlider!) {
         let slider: UISlider = sender as UISlider
         let number = numbers[Int(slider.value)]
-        let userDefaults: UserDefaults = UserDefaults.standard
-        userDefaults.set(Float(number), forKey: "kFontSize")
-        userDefaults.synchronize()
+        Environment.current.userDefaults.set(Float(number), forKey: TLIUserDefaults.kFontSize)
     }
 
     // MARK: Actions
@@ -141,10 +139,8 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
     @objc func toggleSystemFontSize(_ sender: UISwitch) {
         let mode: UISwitch = sender as UISwitch
         let value: NSString = mode.isOn == true ? "on" : "off"
-
-        let userDefaults: UserDefaults = UserDefaults.standard
-        userDefaults.set(value, forKey: "kSystemFontSize")
-        userDefaults.synchronize()
+        
+        Environment.current.userDefaults.set(mode.isOn, forKey: TLIUserDefaults.kSystemFontSize)
 
         let indexPath = IndexPath(row: 1, section: 0)
         let cell = self.tableView.cellForRow(at: indexPath)

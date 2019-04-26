@@ -9,12 +9,17 @@
 import UIKit
 
 class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
+    
+    enum Mode: String {
+        case create
+        case edit
+    }
 
     var managedObjectContext: NSManagedObjectContext!
     var name: UITextField?
     var menuColorsView: TLIMenuColorsView?
     var delegate: TLIAddListViewControllerDelegate?
-    var mode: String?
+    var mode: Mode = .create
     var list: TLIList?
 
     init() {
@@ -49,9 +54,9 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
             frame: CGRect(x: 12.0, y: 200.0, width: self.view.frame.width, height: 51.0))
         self.tableView.tableFooterView = menuColorsView
 
-        if mode == "create" {
+        if mode == .create {
             self.title = "Add List"
-        } else if mode == "edit" {
+        } else if mode == .edit {
             self.title = "Edit List"
             if let list = list {
                 // swiftlint:disable force_unwrapping
@@ -72,9 +77,9 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
     }
 
     @objc func save(_ button: UIButton) {
-        if mode == "create" {
+        if mode == .create {
             createList()
-        } else if mode == "edit" {
+        } else if mode == .edit {
             saveList()
         }
     }
@@ -125,9 +130,9 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == self.name {
-            if mode == "create" {
+            if mode == .create {
                 createList()
-            } else if mode == "edit" {
+            } else if mode == .edit {
                 saveList()
             }
         }

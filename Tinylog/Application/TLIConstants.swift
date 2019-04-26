@@ -12,5 +12,8 @@ struct TLINotifications {
 }
 
 struct TLIUserDefaults {
-    static var kTLISyncMode: NSString = "TLISyncMode"
+    static var kTLISyncMode = "TLISyncMode"
+    static var kFontSize = "kFontSize"
+    static var kSystemFontSize = "kSystemFontSize"
+    static var kSetupScreen = "kSetupScreen"
 }

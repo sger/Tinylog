@@ -8,13 +8,11 @@
 
 import UIKit
 import TTTAttributedLabel
-import SGBackgroundView
 
 class TLIListTableViewCell: TLITableViewCell {
 
     let kRadius: CGFloat = 30.0
     var didSetupConstraints = false
-    var bgView: SGBackgroundView?
     let listLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
     let totalTasksLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
     var checkBoxButton: TLICheckBoxButton?
@@ -47,13 +45,9 @@ class TLIListTableViewCell: TLITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         self.currentList = nil
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        // swiftlint:disable force_unwrapping
-        bgView = SGBackgroundView(frame: CGRect.zero)
-        bgView?.bgColor = UIColor.tinylogLightGray
-        bgView?.lineColor = UIColor(red: 213.0 / 255.0, green: 213.0 / 255.0, blue: 213.0 / 255.0, alpha: 1.0)
-        bgView?.xPosLine = 16.0
-        self.backgroundView = bgView!
-
+        
+        backgroundColor = UIColor.tinylogLightGray
+        
         listLabel.lineBreakMode = .byTruncatingTail
         listLabel.numberOfLines = 0
         listLabel.textAlignment = .left
@@ -81,6 +75,10 @@ class TLIListTableViewCell: TLITableViewCell {
 
         updateFonts()
     }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func updateConstraints() {
         if !didSetupConstraints {
@@ -103,10 +101,10 @@ class TLIListTableViewCell: TLITableViewCell {
     override func updateFonts() {
         super.updateFonts()
 
-        let userDefaults: UserDefaults = UserDefaults.standard
-        if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
+        let userDefaults = Environment.current.userDefaults
+        let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
 
-        if useSystemFontSize == "on" {
+        if useSystemFontSize {
 
             if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
                 listLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
@@ -138,32 +136,18 @@ class TLIListTableViewCell: TLITableViewCell {
             }
 
         } else {
-            let fontSize: Float = userDefaults.float(forKey: "kFontSize")
+            let fontSize = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
             listLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize))
             totalTasksLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize - 2))
-        }
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let size: CGSize = self.contentView.bounds.size
-
+    
         self.contentView.setNeedsLayout()
         self.contentView.layoutIfNeeded()
 
         listLabel.preferredMaxLayoutWidth = listLabel.frame.width
-
-        if self.isEditing {
-            bgView?.width = size.width + 78.0
-            bgView?.height = size.height
-        } else {
-            bgView?.width = size.width
-            bgView?.height = size.height
-        }
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

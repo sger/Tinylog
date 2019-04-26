@@ -13,7 +13,7 @@ class TLIListsFooterView: UIView {
 
     var infoLabel: TTTAttributedLabel? = {
         let infoLabel = TTTAttributedLabel.newAutoLayout()
-        infoLabel.font = UIFont.regularFontWithSize(14.0)
+        infoLabel.font = UIFont.regularFontWithSize(16.0)
         infoLabel.textColor = UIColor.tinylogTextColor
         infoLabel.verticalAlignment = TTTAttributedLabelVerticalAlignment.top
         infoLabel.text = ""
@@ -32,6 +32,7 @@ class TLIListsFooterView: UIView {
 
     var currentText: String?
     let footerView: UIView = UIView.newAutoLayout()
+    let footHeight: CGFloat = 51
     var didSetupContraints = false
 
     lazy var addListButton: TLIAddListButton? = {
@@ -47,6 +48,8 @@ class TLIListsFooterView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        backgroundColor = UIColor.tinylogLighterGray
+        
         footerView.backgroundColor = UIColor.tinylogLighterGray
         self.addSubview(footerView)
 
@@ -55,7 +58,7 @@ class TLIListsFooterView: UIView {
         self.addSubview(addListButton!)
         self.addSubview(archiveButton!)
 
-        updateInfoLabel("")
+        updateInfoLabel("Last Updated at 10:00:00")
 
         setNeedsUpdateConstraints()
     }
@@ -76,28 +79,29 @@ class TLIListsFooterView: UIView {
     }
 
     override func updateConstraints() {
-
-        let smallPadding: CGFloat = 16.0
-
+        
+        let padding: CGFloat = 20.0
+        
         if !didSetupContraints {
 
             footerView.autoMatch(.width, to: .width, of: self)
-            footerView.autoSetDimension(.height, toSize: 51.0)
-            footerView.autoPinEdge(toSuperviewEdge: .bottom)
+            footerView.autoSetDimension(.height, toSize: footHeight)
+            footerView.autoPinEdge(toSuperviewEdge: .top)
 
             borderLineView.autoMatch(.width, to: .width, of: self)
             borderLineView.autoSetDimension(.height, toSize: 0.5)
             borderLineView.autoPinEdge(toSuperviewEdge: .top)
 
-            addListButton?.autoSetDimensions(to: CGSize(width: 18.0, height: 18.0))
-            addListButton?.autoAlignAxis(toSuperviewAxis: .horizontal)
-            addListButton?.autoPinEdge(toSuperviewEdge: .left, withInset: smallPadding)
+            addListButton?.autoSetDimensions(to: CGSize(width: 28.0, height: 28.0))
+            addListButton?.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            addListButton?.autoPinEdge(toSuperviewEdge: .left, withInset: padding)
 
             archiveButton?.autoSetDimensions(to: CGSize(width: 28.0, height: 26.0))
-            archiveButton?.autoAlignAxis(toSuperviewAxis: .horizontal)
-            archiveButton?.autoPinEdge(toSuperviewEdge: .right, withInset: smallPadding)
-
-            infoLabel?.autoCenterInSuperview()
+            archiveButton?.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            archiveButton?.autoPinEdge(toSuperviewEdge: .right, withInset: padding)
+            
+            infoLabel?.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            infoLabel?.autoAlignAxis(.vertical, toSameAxisOf: footerView)
 
             didSetupContraints = true
         }

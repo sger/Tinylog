@@ -142,14 +142,12 @@ class TLISettingsFontPickerViewController: UITableViewController {
         }
     }
 
-    class func selectedKey() -> NSString? {
-        return UserDefaults.standard.string(forKey: defaultsKey()! as String) as NSString?
+    static func selectedKey() -> NSString? {
+        return Environment.current.userDefaults.string(forKey: defaultsKey()! as String) as NSString?
     }
 
-    class func setSelectedKey(key: NSString) {
-        let userDefaults: UserDefaults = UserDefaults.standard
-        userDefaults.set(key, forKey: defaultsKey()! as String)
-        userDefaults.synchronize()
+    static func setSelectedKey(key: NSString) {
+        Environment.current.userDefaults.set(key, forKey: defaultsKey()! as String)
     }
 
     func cellTextForKey(key: AnyObject) -> String? {

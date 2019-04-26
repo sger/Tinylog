@@ -8,7 +8,6 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 import TTTAttributedLabel
-import SGBackgroundView
 
 class TLITaskTableViewCell: TLITableViewCell {
 
@@ -16,7 +15,6 @@ class TLITaskTableViewCell: TLITableViewCell {
     let kLabelVerticalInsets: CGFloat = 10.0
     var didSetupConstraints = false
     let taskLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
-    var bgView: SGBackgroundView?
 
     let checkBoxButton: TLICheckBoxButton = TLICheckBoxButton.newAutoLayout()
     var checkMarkIcon: UIImageView?
@@ -91,11 +89,7 @@ class TLITaskTableViewCell: TLITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        bgView = SGBackgroundView(frame: CGRect.zero)
-        bgView?.bgColor = UIColor.tinylogLightGray
-        bgView?.lineColor = UIColor(red: 224.0 / 255.0, green: 224.0 / 255.0, blue: 224.0 / 255.0, alpha: 1.0)
-        bgView?.xPosLine = 16.0
-        self.backgroundView = bgView!
+        backgroundColor = UIColor.tinylogLightGray
 
         taskLabel.lineBreakMode = .byTruncatingTail
         taskLabel.numberOfLines = 0
@@ -133,10 +127,10 @@ class TLITaskTableViewCell: TLITableViewCell {
     // swiftlint:disable cyclomatic_complexity
     // swiftlint:disable line_length
     override func updateFonts() {
-        let userDefaults: UserDefaults = UserDefaults.standard
-        if let useSystemFontSize: String = userDefaults.object(forKey: "kSystemFontSize") as? String {
+        let userDefaults = Environment.current.userDefaults
+        let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
 
-        if useSystemFontSize == "on" {
+        if useSystemFontSize {
             if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
                 taskLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
@@ -158,29 +152,18 @@ class TLITaskTableViewCell: TLITableViewCell {
             }
 
         } else {
-            let fontSize: Float = userDefaults.float(forKey: "kFontSize")
+            let fontSize = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
             taskLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize))
         }
-        }
-
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let size: CGSize = self.contentView.bounds.size
 
         self.contentView.setNeedsLayout()
         self.contentView.layoutIfNeeded()
 
         taskLabel.preferredMaxLayoutWidth = taskLabel.frame.width
-
-        if self.isEditing {
-            bgView?.width = size.width + 78.0
-            bgView?.height = size.height
-        } else {
-            bgView?.width = size.width
-            bgView?.height = size.height
-        }
     }
 
     func updateAttributedText() {

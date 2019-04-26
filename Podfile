@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '11.0'
 
 target 'Tinylog' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -13,12 +13,12 @@ target 'Tinylog' do
 	pod 'SGReachability'
 	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"
-	pod 'Fabric'
-	pod 'Crashlytics'
+  pod 'Firebase/Core'
 
   target 'TinylogTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'SnapshotTesting', '~> 1.5'
   end
 
 end

@@ -9,9 +9,8 @@
 import UIKit
 import Reachability
 import SGReachability
-import Fabric
-import Crashlytics
 import Ensembles
+import Firebase
 
 /// TLIAppDelegate Application Logic.
 @UIApplicationMain
@@ -40,7 +39,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
     var networkMode: String?
 
     /// Access core data managed object context.
-    var managedObjectContext: NSManagedObjectContext!
+    let coreDataManager = CoreDataManager(model: "Tinylog")
 
     /**
         Singleton of TLIAppDelegate
@@ -77,50 +76,37 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         }
 
         // Register defaults
-
-        if #available(iOS 9, *) {
-            let standardDefaults = UserDefaults.standard
-            standardDefaults.register(defaults: [
-                String(kTLIFontDefaultsKey): kTLIFontSanFranciscoKey,
-                String(TLIUserDefaults.kTLISyncMode): "off",
-                "kFontSize": 17.0,
-                "kSystemFontSize": "off",
-                "kSetupScreen": "on"])
-        } else {
-            let standardDefaults = UserDefaults.standard
-            standardDefaults.register(defaults: [
-                String(kTLIFontDefaultsKey): kTLIFontHelveticaNeueKey,
-                String(TLIUserDefaults.kTLISyncMode): "off",
-                "kFontSize": 17.0,
-                "kSystemFontSize": "off",
-                "kSetupScreen": "on"])
-        }
-
+            
+        Environment.current.userDefaults.register(defaults:
+            [String(kTLIFontDefaultsKey): kTLIFontHelveticaNeueKey,
+            TLIUserDefaults.kTLISyncMode: false,
+            TLIUserDefaults.kFontSize: 17.0,
+            TLIUserDefaults.kSetupScreen: true])
+        
         do {
             try FileManager.default.createDirectory(
-                at: storeDirectoryURL as URL,
+                at: coreDataManager.storeDirectoryURL as URL,
                 withIntermediateDirectories: true,
                 attributes: nil)
         } catch {
             fatalError("Cannot create directory \(error)")
         }
 
-        // Setup Core Data Stack
-        setupCoreData()
+        // Setup Core Data Sync Manager
 
         let syncManager: TLISyncManager = TLISyncManager.shared()
-        syncManager.managedObjectContext = managedObjectContext
-        syncManager.storePath = storeURL.path
+        syncManager.managedObjectContext = coreDataManager.managedObjectContext
+        syncManager.storePath = coreDataManager.storeURL.path
         syncManager.setup()
 
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name.NSManagedObjectContextDidSave,
-            object: managedObjectContext,
+            object: coreDataManager.managedObjectContext,
             queue: nil) { (_) -> Void in
                 syncManager.synchronize(completion: nil)
             }
 
-        Crashlytics.start(withAPIKey: Secrets.crashlyticsKey)
+        FirebaseApp.configure()
         SGReachabilityController.shared()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -132,7 +118,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
             self.window?.rootViewController = splitViewController
         } else {
             let listsViewController: TLIListsViewController = TLIListsViewController()
-            listsViewController.managedObjectContext = managedObjectContext
+            listsViewController.managedObjectContext = coreDataManager.managedObjectContext//managedObjectContext
             let nc: UINavigationController = UINavigationController(rootViewController: listsViewController)
             self.window?.rootViewController = nc
         }
@@ -190,7 +176,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         })
         DispatchQueue.main.async {
             // swiftlint:disable force_try
-            try! self.managedObjectContext.save()
+            try! self.coreDataManager.managedObjectContext.save()
             TLISyncManager.shared().synchronize(completion: { (_) -> Void in
                 UIApplication.shared.endBackgroundTask(
                     convertToUIBackgroundTaskIdentifier(identifier.rawValue))
@@ -208,7 +194,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        try! managedObjectContext.save()
+        try! coreDataManager.managedObjectContext.save()
     }
 
     func application(
@@ -266,48 +252,6 @@ extension TLIAppDelegate {
         NotificationCenter.default.removeObserver(
             self, name: NSNotification.Name.reachabilityChanged,
             object: nil)
-    }
-}
-
-// MARK: Core Data Stack
-
-extension TLIAppDelegate {
-
-    var storeDirectoryURL: URL {
-        // swiftlint:disable force_try
-        return try! FileManager.default.url(
-            for: .applicationSupportDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true)
-    }
-
-    var storeURL: URL {
-        return self.storeDirectoryURL.appendingPathComponent("store.sqlite")
-    }
-
-    fileprivate func setupCoreData() {
-        if let modelURL = Bundle.main.url(forResource: "Tinylog", withExtension: "momd"),
-            let model = NSManagedObjectModel(contentsOf: modelURL) {
-            try! FileManager.default.createDirectory(
-                at: self.storeDirectoryURL,
-                withIntermediateDirectories: true,
-                attributes: nil)
-
-            let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-            let options = [
-                NSMigratePersistentStoresAutomaticallyOption: true,
-                NSInferMappingModelAutomaticallyOption: true]
-            try! coordinator.addPersistentStore(
-                ofType: NSSQLiteStoreType,
-                configurationName: nil,
-                at: self.storeURL,
-                options: options)
-
-            managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-            managedObjectContext.persistentStoreCoordinator = coordinator
-            managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        }
     }
 }
 
