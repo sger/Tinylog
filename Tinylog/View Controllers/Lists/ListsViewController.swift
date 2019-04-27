@@ -1,5 +1,5 @@
 //
-//  TLIListsViewController.swift
+//  ListsViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 17/10/15.
@@ -31,7 +31,7 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class TLIListsViewController: TLICoreDataTableViewController,
+class ListsViewController: TLICoreDataTableViewController,
     UITextFieldDelegate,
     TLIAddListViewControllerDelegate,
     UISearchControllerDelegate,
@@ -44,11 +44,11 @@ class TLIListsViewController: TLICoreDataTableViewController,
     let kCellIdentifier = "CellIdentifier"
     var editingIndexPath: IndexPath?
     var estimatedRowHeightCache: NSMutableDictionary?
-    var resultsTableViewController: TLIResultsTableViewController?
+    var resultsTableViewController: ResultsTableViewController?
     var didSetupContraints = false
 
-    var listsFooterView: TLIListsFooterView? = {
-        let listsFooterView = TLIListsFooterView.newAutoLayout()
+    var listsFooterView: ListsFooterView? = {
+        let listsFooterView = ListsFooterView.newAutoLayout()
         return listsFooterView
     }()
 
@@ -104,7 +104,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
             height: self.view.frame.size.height - 50.0)
         self.tableView?.tableFooterView = UIView()
 
-        resultsTableViewController = TLIResultsTableViewController()
+        resultsTableViewController = ResultsTableViewController()
 
         addSearchController(with: "Search", searchResultsUpdater: self, searchResultsController: resultsTableViewController!)
 
@@ -115,20 +115,20 @@ class TLIListsViewController: TLICoreDataTableViewController,
         settingsButton.setBackgroundImage(settingsImage, for: UIControl.State.highlighted)
         settingsButton.addTarget(
             self,
-            action: #selector(TLIListsViewController.displaySettings(_:)),
+            action: #selector(ListsViewController.displaySettings(_:)),
             for: UIControl.Event.touchDown)
 
         let settingsBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem = settingsBarButtonItem
 
-        listsFooterView?.addListButton?.addTarget(
+        listsFooterView?.addListButton.addTarget(
             self,
-            action: #selector(TLIListsViewController.addNewList(_:)),
+            action: #selector(ListsViewController.addNewList(_:)),
             for: UIControl.Event.touchDown)
-        listsFooterView?.archiveButton?.addTarget(
+        listsFooterView?.archiveButton.addTarget(
             self,
-            action: #selector(TLIListsViewController.displayArchive(_:)),
+            action: #selector(ListsViewController.displayArchive(_:)),
             for: UIControl.Event.touchDown)
 
         setEditing(false, animated: false)
@@ -238,7 +238,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
     }
 
     @objc func addNewList(_ sender: UIButton?) {
-        let addListViewController: TLIAddListViewController = TLIAddListViewController()
+        let addListViewController: AddListViewController = AddListViewController()
         addListViewController.managedObjectContext = managedObjectContext
         addListViewController.delegate = self
         addListViewController.mode = .create
@@ -249,7 +249,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
 
     // MARK: Display Setup
     func displaySetup() {
-        let setupViewController: TLISetupViewController = TLISetupViewController()
+        let setupViewController: SetupViewController = SetupViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
@@ -309,13 +309,13 @@ class TLIListsViewController: TLICoreDataTableViewController,
                 title: "Done",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
-                action: #selector(TLIListsViewController.toggleEditMode(_:)))
+                action: #selector(ListsViewController.toggleEditMode(_:)))
         } else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Edit",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
-                action: #selector(TLIListsViewController.toggleEditMode(_:)))
+                action: #selector(ListsViewController.toggleEditMode(_:)))
         }
     }
 
@@ -333,7 +333,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
 
                 let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
 
-                let addListViewController: TLIAddListViewController = TLIAddListViewController()
+                let addListViewController: AddListViewController = AddListViewController()
                 addListViewController.managedObjectContext = self.managedObjectContext
                 addListViewController.delegate = self
                 addListViewController.list = list
@@ -484,7 +484,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
-    func onClose(_ addListViewController: TLIAddListViewController, list: TLIList) {
+    func onClose(_ addListViewController: AddListViewController, list: TLIList) {
 
         let indexPath = self.frc?.indexPath(forObject: list)
         self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
@@ -559,7 +559,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
     func willDismissSearchController(_ searchController: UISearchController) {}
 
     func didDismissSearchController(_ searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
+        let resultsController = searchController.searchResultsController as! ResultsTableViewController
         resultsController.frc?.delegate = nil
         resultsController.frc = nil
     }
@@ -572,7 +572,7 @@ class TLIListsViewController: TLICoreDataTableViewController,
             if !text.isEmpty {
                 let lowercasedText = text.lowercased()
                 let color = Utils.findColorByName(lowercasedText)
-                let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
+                let resultsController = searchController.searchResultsController as! ResultsTableViewController
                 let fetchRequest = TLIList.filter(with: lowercasedText, color: color)
 
                 resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -595,33 +595,33 @@ class TLIListsViewController: TLICoreDataTableViewController,
     }
 }
 
-extension TLIListsViewController {
+extension ListsViewController {
 
     private func registerNotifications() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIListsViewController.syncActivityDidEndNotification(_:)),
+            selector: #selector(ListsViewController.syncActivityDidEndNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidEnd,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIListsViewController.syncActivityDidBeginNotification(_:)),
+            selector: #selector(ListsViewController.syncActivityDidBeginNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidBegin,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIListsViewController.updateFonts),
+            selector: #selector(ListsViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: TLINotifications.kTLIFontDidChangeNotification),
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIListsViewController.appBecomeActive),
+            selector: #selector(ListsViewController.appBecomeActive),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIListsViewController.onChangeSize(_:)),
+            selector: #selector(ListsViewController.onChangeSize(_:)),
             name: UIContentSizeCategory.didChangeNotification,
             object: nil)
     }

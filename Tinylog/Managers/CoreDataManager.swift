@@ -31,10 +31,7 @@ class CoreDataManager {
     }
 
     private lazy var managedObjectModel: NSManagedObjectModel = {
-        print(Bundle.main.bundleIdentifier ?? "")
-        print(self.storeDirectoryURL)
         let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        print(urls[urls.endIndex-1])
         let modelURL = Bundle.main.url(forResource: self.model, withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()

@@ -56,7 +56,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
     var managedObjectContext: NSManagedObjectContext!
     var editingIndexPath: IndexPath?
     var estimatedRowHeightCache: NSMutableDictionary?
-    var resultsTableViewController: TLIResultsTableViewController?
+    var resultsTableViewController: ResultsTableViewController?
     var searchController: UISearchController?
     var topBarView: UIView?
 
@@ -116,7 +116,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = 61
 
-        resultsTableViewController = TLIResultsTableViewController()
+        resultsTableViewController = ResultsTableViewController()
         resultsTableViewController?.tableView?.delegate = self
         searchController = UISearchController(searchResultsController: resultsTableViewController)
         searchController?.searchResultsUpdater = self
@@ -448,7 +448,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
-    func onClose(_ addListViewController: TLIAddListViewController, list: TLIList) {
+    func onClose(_ addListViewController: AddListViewController, list: TLIList) {
         let indexPath = self.frc?.indexPath(forObject: list)
         self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
         let tasksViewController: TLITasksViewController = TLITasksViewController()
@@ -519,7 +519,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
     }
 
     func didDismissSearchController(_ searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
+        let resultsController = searchController.searchResultsController as! ResultsTableViewController
         resultsController.frc?.delegate = nil
         resultsController.frc = nil
     }
@@ -530,7 +530,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
 
         if searchController.searchBar.text!.length() > 0 {
             let color = findColorByName(searchController.searchBar.text!.lowercased())
-            let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
+            let resultsController = searchController.searchResultsController as! ResultsTableViewController
 
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
             let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)

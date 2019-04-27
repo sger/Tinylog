@@ -8,3 +8,10 @@
 
 "My_Lists" = "Meine Listen";
 "Update_lists" = "Letzte Aktualisierung %@";
+
+// TLISetupViewController
+"Sync" = "iCloud für Tinylog";
+"Sync_description" = "iCloud hält Ihre Listen auf Ihrem iPhone und iPad auf dem neuesten Stand.";
+"Later" = "Später";
+"Use_iCloud" = "Benutze iCloud";
+"Not_logged_in" = "Sie sind nicht bei iCloud angemeldet. Tippen Sie auf Einstellungen> iCloud, um sich anzumelden.";

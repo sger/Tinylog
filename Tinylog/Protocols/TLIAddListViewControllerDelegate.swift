@@ -7,5 +7,5 @@
 //
 
 @objc protocol TLIAddListViewControllerDelegate {
-    func onClose(_ addListViewController: TLIAddListViewController, list: TLIList)
+    func onClose(_ addListViewController: AddListViewController, list: TLIList)
 }

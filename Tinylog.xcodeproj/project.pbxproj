@@ -9,91 +9,91 @@
 /* Begin PBXBuildFile section */
 		185C99393E0FFB186A3B1DE4 /* Pods_Tinylog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCB1EEBF9EAC162DF797006 /* Pods_Tinylog.framework */; };
 		5609F649226B4DCB00F6AF0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5609F647226B4DCB00F6AF0E /* Localizable.strings */; };
-		5609F64C226B4E7E00F6AF0E /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F64B226B4E7E00F6AF0E /* LocalizedString.swift */; };
 		5609F64E226B4EC700F6AF0E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F64D226B4EC700F6AF0E /* Environment.swift */; };
-		5609F650226B4EED00F6AF0E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F64F226B4EED00F6AF0E /* Language.swift */; };
 		5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */; };
 		5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */; };
 		56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataManager.swift */; };
-		56119AEF226F916A00F8D798 /* UserDefaultsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEE226F916A00F8D798 /* UserDefaultsType.swift */; };
 		561A25BE2116EBE500B28644 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561A25BD2116EBE400B28644 /* Secrets.swift */; };
 		5621958D226A5D3F00749A31 /* ListsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621958C226A5D3F00749A31 /* ListsViewControllerTests.swift */; };
 		5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5628E8CD1E85898700AAFD20 /* Assets.xcassets */; };
 		5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */; };
-		562FAC3D1F4DE73A0008C7D8 /* PlistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */; };
-		564E552D1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */; };
-		564E55391E8ADE30008D5D85 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */; };
-		564E55451E8ADE48008D5D85 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E553B1E8ADE48008D5D85 /* TLIList.swift */; };
-		564E55461E8ADE48008D5D85 /* TLIList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E553C1E8ADE48008D5D85 /* TLIList+CoreDataProperties.swift */; };
-		564E55471E8ADE48008D5D85 /* TLIMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E553D1E8ADE48008D5D85 /* TLIMention.swift */; };
-		564E55481E8ADE48008D5D85 /* TLIMention+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E553E1E8ADE48008D5D85 /* TLIMention+CoreDataProperties.swift */; };
-		564E55491E8ADE48008D5D85 /* TLINotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E553F1E8ADE48008D5D85 /* TLINotification.swift */; };
-		564E554A1E8ADE48008D5D85 /* TLINotification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55401E8ADE48008D5D85 /* TLINotification+CoreDataProperties.swift */; };
-		564E554B1E8ADE48008D5D85 /* TLITag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55411E8ADE48008D5D85 /* TLITag.swift */; };
-		564E554C1E8ADE48008D5D85 /* TLITag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55421E8ADE48008D5D85 /* TLITag+CoreDataProperties.swift */; };
-		564E554D1E8ADE48008D5D85 /* TLITask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55431E8ADE48008D5D85 /* TLITask.swift */; };
-		564E554E1E8ADE48008D5D85 /* TLITask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55441E8ADE48008D5D85 /* TLITask+CoreDataProperties.swift */; };
-		564E55531E8AE011008D5D85 /* StepSliderControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E55521E8AE011008D5D85 /* StepSliderControl.m */; };
-		564E55591E8AE05E008D5D85 /* TLIDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E55561E8AE05E008D5D85 /* TLIDeviceInfo.m */; };
-		564E555A1E8AE05E008D5D85 /* TLIDrawingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E55581E8AE05E008D5D85 /* TLIDrawingUtils.m */; };
-		564E555D1E8AE0C8008D5D85 /* TLITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E555C1E8AE0C8008D5D85 /* TLITextField.m */; };
-		564E55601E8AE0F7008D5D85 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 564E555F1E8AE0F7008D5D85 /* NSDate+Utilities.m */; };
-		564E55631E8AE152008D5D85 /* TLIGroupedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55621E8AE152008D5D85 /* TLIGroupedTableViewController.swift */; };
-		564E55691E8AE1EF008D5D85 /* TLIAddListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55651E8AE1EF008D5D85 /* TLIAddListViewControllerDelegate.swift */; };
-		564E556A1E8AE1EF008D5D85 /* TLIAddTaskViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55661E8AE1EF008D5D85 /* TLIAddTaskViewDelegate.swift */; };
-		564E556B1E8AE1EF008D5D85 /* TLIEditTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55671E8AE1EF008D5D85 /* TLIEditTaskViewControllerDelegate.swift */; };
-		564E556C1E8AE1EF008D5D85 /* TLITextFieldCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55681E8AE1EF008D5D85 /* TLITextFieldCellDelegate.swift */; };
-		564E55711E8AE217008D5D85 /* TLIAddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E556E1E8AE217008D5D85 /* TLIAddListViewController.swift */; };
-		564E55721E8AE217008D5D85 /* TLIListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E556F1E8AE217008D5D85 /* TLIListsViewController.swift */; };
-		564E55731E8AE217008D5D85 /* TLIResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55701E8AE217008D5D85 /* TLIResultsTableViewController.swift */; };
-		564E55771E8AE238008D5D85 /* TLIArchiveTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55751E8AE238008D5D85 /* TLIArchiveTasksViewController.swift */; };
-		564E55781E8AE238008D5D85 /* TLIArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55761E8AE238008D5D85 /* TLIArchiveViewController.swift */; };
-		564E557B1E8AE24F008D5D85 /* TLISplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E557A1E8AE24F008D5D85 /* TLISplitViewController.swift */; };
-		564E55861E8AE287008D5D85 /* TLIEditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55841E8AE287008D5D85 /* TLIEditTaskViewController.swift */; };
-		564E55871E8AE287008D5D85 /* TLITasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55851E8AE287008D5D85 /* TLITasksViewController.swift */; };
-		564E558C1E8AE2D2008D5D85 /* TLISetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E558B1E8AE2D2008D5D85 /* TLISetupViewController.swift */; };
-		564E55941E8AE30C008D5D85 /* SGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E558D1E8AE30C008D5D85 /* SGTextField.swift */; };
-		564E55951E8AE30C008D5D85 /* TLIAddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E558E1E8AE30C008D5D85 /* TLIAddTaskView.swift */; };
-		564E55961E8AE30C008D5D85 /* TLIListsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E558F1E8AE30C008D5D85 /* TLIListsFooterView.swift */; };
-		564E55971E8AE30C008D5D85 /* TLIMenuColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55901E8AE30C008D5D85 /* TLIMenuColorsView.swift */; };
-		564E55991E8AE30C008D5D85 /* TLITasksFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55921E8AE30C008D5D85 /* TLITasksFooterView.swift */; };
-		564E559A1E8AE30C008D5D85 /* TLITouchableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55931E8AE30C008D5D85 /* TLITouchableView.swift */; };
-		564E55A31E8AE327008D5D85 /* TLIAddListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E559C1E8AE327008D5D85 /* TLIAddListButton.swift */; };
-		564E55A41E8AE327008D5D85 /* TLIArchiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E559D1E8AE327008D5D85 /* TLIArchiveButton.swift */; };
-		564E55A51E8AE327008D5D85 /* TLICheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E559E1E8AE327008D5D85 /* TLICheckBoxButton.swift */; };
-		564E55A61E8AE327008D5D85 /* TLICircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E559F1E8AE327008D5D85 /* TLICircleButton.swift */; };
-		564E55A71E8AE327008D5D85 /* TLICloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55A01E8AE327008D5D85 /* TLICloseButton.swift */; };
-		564E55A81E8AE327008D5D85 /* TLIExportTasksButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55A11E8AE327008D5D85 /* TLIExportTasksButton.swift */; };
-		564E55A91E8AE327008D5D85 /* TLIRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55A21E8AE327008D5D85 /* TLIRoundedButton.swift */; };
-		564E55B21E8AE338008D5D85 /* TLIGroupedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55AB1E8AE338008D5D85 /* TLIGroupedTableViewCell.swift */; };
-		564E55B31E8AE338008D5D85 /* TLIHelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55AC1E8AE338008D5D85 /* TLIHelpTableViewCell.swift */; };
-		564E55B41E8AE338008D5D85 /* TLIListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55AD1E8AE338008D5D85 /* TLIListTableViewCell.swift */; };
-		564E55B61E8AE338008D5D85 /* TLITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55AF1E8AE338008D5D85 /* TLITableViewCell.swift */; };
-		564E55B71E8AE338008D5D85 /* TLITaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55B01E8AE338008D5D85 /* TLITaskTableViewCell.swift */; };
-		564E55B81E8AE338008D5D85 /* TLITextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55B11E8AE338008D5D85 /* TLITextFieldCell.swift */; };
-		564E55BB1E8AE34B008D5D85 /* TLIKeyboardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55BA1E8AE34B008D5D85 /* TLIKeyboardBar.swift */; };
-		564E55C01E8AE411008D5D85 /* TLIAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55BC1E8AE411008D5D85 /* TLIAboutViewController.swift */; };
-		564E55C11E8AE411008D5D85 /* TLIHelpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55BD1E8AE411008D5D85 /* TLIHelpTableViewController.swift */; };
-		564E55C21E8AE411008D5D85 /* TLISettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55BE1E8AE411008D5D85 /* TLISettingsTableViewController.swift */; };
-		564E55C31E8AE411008D5D85 /* TLITextSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55BF1E8AE411008D5D85 /* TLITextSizeViewController.swift */; };
-		564E55C61E8AE43E008D5D85 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564E55C51E8AE43E008D5D85 /* Utils.swift */; };
-		565454DD1F4581C40076BD08 /* UIViewController+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565454DC1F4581C40076BD08 /* UIViewController+Tinylog.swift */; };
+		5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */; };
+		5638FC4C22744CDC00CB4071 /* TLIGroupedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3122744CDC00CB4071 /* TLIGroupedTableViewCell.swift */; };
+		5638FC4D22744CDC00CB4071 /* TLIHelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3222744CDC00CB4071 /* TLIHelpTableViewCell.swift */; };
+		5638FC4E22744CDC00CB4071 /* TLITaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3322744CDC00CB4071 /* TLITaskTableViewCell.swift */; };
+		5638FC4F22744CDC00CB4071 /* TLIListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3422744CDC00CB4071 /* TLIListTableViewCell.swift */; };
+		5638FC5022744CDC00CB4071 /* TLITextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3522744CDC00CB4071 /* TLITextFieldCell.swift */; };
+		5638FC5122744CDC00CB4071 /* TLITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3622744CDC00CB4071 /* TLITableViewCell.swift */; };
+		5638FC5222744CDC00CB4071 /* TLICircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3822744CDC00CB4071 /* TLICircleButton.swift */; };
+		5638FC5322744CDC00CB4071 /* TLIExportTasksButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3922744CDC00CB4071 /* TLIExportTasksButton.swift */; };
+		5638FC5422744CDC00CB4071 /* TLIRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3A22744CDC00CB4071 /* TLIRoundedButton.swift */; };
+		5638FC5522744CDC00CB4071 /* TLIArchiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3B22744CDC00CB4071 /* TLIArchiveButton.swift */; };
+		5638FC5622744CDC00CB4071 /* TLICloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3C22744CDC00CB4071 /* TLICloseButton.swift */; };
+		5638FC5722744CDC00CB4071 /* TLICheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3D22744CDC00CB4071 /* TLICheckBoxButton.swift */; };
+		5638FC5822744CDC00CB4071 /* TLIAddListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3E22744CDC00CB4071 /* TLIAddListButton.swift */; };
+		5638FC5922744CDC00CB4071 /* TLITextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3F22744CDC00CB4071 /* TLITextField.m */; };
+		5638FC5A22744CDC00CB4071 /* ListsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC4022744CDC00CB4071 /* ListsFooterView.swift */; };
+		5638FC5B22744CDC00CB4071 /* StepSliderControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC4322744CDC00CB4071 /* StepSliderControl.m */; };
+		5638FC5C22744CDC00CB4071 /* TLIMenuColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC4522744CDC00CB4071 /* TLIMenuColorsView.swift */; };
+		5638FC5D22744CDC00CB4071 /* TLITouchableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC4622744CDC00CB4071 /* TLITouchableView.swift */; };
+		5638FC5E22744CDC00CB4071 /* SGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC4722744CDC00CB4071 /* SGTextField.swift */; };
+		5638FC5F22744CDC00CB4071 /* TLITasksFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC4822744CDC00CB4071 /* TLITasksFooterView.swift */; };
+		5638FC6022744CDC00CB4071 /* TLIKeyboardBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC4A22744CDC00CB4071 /* TLIKeyboardBar.swift */; };
+		5638FC6122744CDC00CB4071 /* TLIAddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC4B22744CDC00CB4071 /* TLIAddTaskView.swift */; };
+		5638FC7922744D8200CB4071 /* TLIGroupedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6422744D8200CB4071 /* TLIGroupedTableViewController.swift */; };
+		5638FC7A22744D8200CB4071 /* TLISettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6622744D8200CB4071 /* TLISettingsTableViewController.swift */; };
+		5638FC7B22744D8200CB4071 /* TLIHelpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6722744D8200CB4071 /* TLIHelpTableViewController.swift */; };
+		5638FC7C22744D8200CB4071 /* TLIAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6822744D8200CB4071 /* TLIAboutViewController.swift */; };
+		5638FC7D22744D8200CB4071 /* TLISettingsFontPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6922744D8200CB4071 /* TLISettingsFontPickerViewController.swift */; };
+		5638FC7E22744D8200CB4071 /* TLITextSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6A22744D8200CB4071 /* TLITextSizeViewController.swift */; };
+		5638FC7F22744D8200CB4071 /* TLIEditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6C22744D8200CB4071 /* TLIEditTaskViewController.swift */; };
+		5638FC8022744D8200CB4071 /* TLITasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6D22744D8200CB4071 /* TLITasksViewController.swift */; };
+		5638FC8122744D8200CB4071 /* TLIArchiveTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6F22744D8200CB4071 /* TLIArchiveTasksViewController.swift */; };
+		5638FC8222744D8200CB4071 /* TLIArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7022744D8200CB4071 /* TLIArchiveViewController.swift */; };
+		5638FC8322744D8200CB4071 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7222744D8200CB4071 /* ResultsTableViewController.swift */; };
+		5638FC8422744D8200CB4071 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7322744D8200CB4071 /* ListsViewController.swift */; };
+		5638FC8522744D8200CB4071 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7422744D8200CB4071 /* AddListViewController.swift */; };
+		5638FC8622744D8200CB4071 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7622744D8200CB4071 /* SetupViewController.swift */; };
+		5638FC8722744D8200CB4071 /* TLISplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7822744D8200CB4071 /* TLISplitViewController.swift */; };
+		5638FC8A22744ECF00CB4071 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8922744ECF00CB4071 /* Utils.swift */; };
+		5638FC8C22744F2200CB4071 /* PlistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8B22744F2200CB4071 /* PlistInfo.swift */; };
+		5638FC9322744F4000CB4071 /* UserDefaultsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8E22744F4000CB4071 /* UserDefaultsType.swift */; };
+		5638FC9422744F4000CB4071 /* TLIAddListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8F22744F4000CB4071 /* TLIAddListViewControllerDelegate.swift */; };
+		5638FC9522744F4000CB4071 /* TLITextFieldCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9022744F4000CB4071 /* TLITextFieldCellDelegate.swift */; };
+		5638FC9622744F4000CB4071 /* TLIAddTaskViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9122744F4000CB4071 /* TLIAddTaskViewDelegate.swift */; };
+		5638FC9722744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9222744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift */; };
+		5638FC9A22744F7C00CB4071 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9822744F7B00CB4071 /* LocalizedString.swift */; };
+		5638FC9B22744F7C00CB4071 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9922744F7B00CB4071 /* Language.swift */; };
+		5638FCA122744F8800CB4071 /* TLIDrawingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9F22744F8800CB4071 /* TLIDrawingUtils.m */; };
+		5638FCA222744F8800CB4071 /* TLIDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCA022744F8800CB4071 /* TLIDeviceInfo.m */; };
+		5638FCAE22744F9F00CB4071 /* TLIMention+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCA422744F9F00CB4071 /* TLIMention+CoreDataProperties.swift */; };
+		5638FCAF22744F9F00CB4071 /* TLITask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCA522744F9F00CB4071 /* TLITask+CoreDataProperties.swift */; };
+		5638FCB022744F9F00CB4071 /* TLINotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCA622744F9F00CB4071 /* TLINotification.swift */; };
+		5638FCB122744F9F00CB4071 /* TLIList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCA722744F9F00CB4071 /* TLIList+CoreDataProperties.swift */; };
+		5638FCB222744F9F00CB4071 /* TLITag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCA822744F9F00CB4071 /* TLITag+CoreDataProperties.swift */; };
+		5638FCB322744F9F00CB4071 /* TLITask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCA922744F9F00CB4071 /* TLITask.swift */; };
+		5638FCB422744F9F00CB4071 /* TLITag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCAA22744F9F00CB4071 /* TLITag.swift */; };
+		5638FCB522744F9F00CB4071 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCAB22744F9F00CB4071 /* TLIList.swift */; };
+		5638FCB622744F9F00CB4071 /* TLIMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCAC22744F9F00CB4071 /* TLIMention.swift */; };
+		5638FCB722744F9F00CB4071 /* TLINotification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCAD22744F9F00CB4071 /* TLINotification+CoreDataProperties.swift */; };
+		5638FCBA22744FC100CB4071 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCB922744FC100CB4071 /* TLICoreDataTableViewController.swift */; };
+		5638FCC52274500A00CB4071 /* UIImage+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCBD2274500A00CB4071 /* UIImage+Tinylog.swift */; };
+		5638FCC62274500A00CB4071 /* UIColor+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCBE2274500A00CB4071 /* UIColor+Tinylog.swift */; };
+		5638FCC72274500A00CB4071 /* String+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCBF2274500A00CB4071 /* String+Tinylog.swift */; };
+		5638FCC82274500A00CB4071 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC02274500A00CB4071 /* NSDate+Utilities.m */; };
+		5638FCC92274500A00CB4071 /* DispatchQueue+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC12274500A00CB4071 /* DispatchQueue+Tinylog.swift */; };
+		5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */; };
+		5638FCCB2274500A00CB4071 /* UIFont+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */; };
+		5638FCCF2274501700CB4071 /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCD2274501700CB4071 /* TLIAppDelegate.swift */; };
+		5638FCD02274501700CB4071 /* TLIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCE2274501700CB4071 /* TLIConstants.swift */; };
+		5638FCD82274503500CB4071 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCD32274503500CB4071 /* TLISyncManager.m */; };
 		5656E1CD226A39C70065DBEA /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656E1CC226A39C70065DBEA /* ListTests.swift */; };
 		565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */; };
-		565DA79E1E8699CB00C6E60C /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 565DA79A1E8699CB00C6E60C /* TLISyncManager.m */; };
 		566BAC071F6ADBD4005B0E4F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */; };
 		566E6A8F226E4A340093783E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566E6A8E226E4A340093783E /* GoogleService-Info.plist */; };
 		56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56892690226C767A00D952A6 /* FindColorByNameTests.swift */; };
 		568F7E061F2BA12E00CFDDDD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */; };
 		568F7E081F2BA14300CFDDDD /* SnapshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */; };
-		56AC7AA51E8A342F006AD29B /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */; };
-		56AC7AA61E8A342F006AD29B /* TLIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AA41E8A342F006AD29B /* TLIConstants.swift */; };
-		56AC7AB01E8A3549006AD29B /* String+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AAC1E8A3549006AD29B /* String+Tinylog.swift */; };
-		56AC7AB11E8A3549006AD29B /* UIColor+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AAD1E8A3549006AD29B /* UIColor+Tinylog.swift */; };
-		56AC7AB21E8A3549006AD29B /* UIFont+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AAE1E8A3549006AD29B /* UIFont+Tinylog.swift */; };
-		56AC7AB31E8A3549006AD29B /* UIImage+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC7AAF1E8A3549006AD29B /* UIImage+Tinylog.swift */; };
-		56AC8A951E8C0FCD002EBA59 /* DispatchQueue+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AC8A941E8C0FCD002EBA59 /* DispatchQueue+Tinylog.swift */; };
-		56BDF724226CBBFB0031EDBE /* TraitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BDF723226CBBFB0031EDBE /* TraitController.swift */; };
 		5C1884CDA759F78478648025 /* Pods_TinylogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FDB230F560367662A28D96 /* Pods_TinylogTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,13 +119,10 @@
 		29E91D341FDF61B134BED598 /* Pods-TinylogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5609F648226B4DCB00F6AF0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5609F64A226B4E0200F6AF0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		5609F64B226B4E7E00F6AF0E /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		5609F64D226B4EC700F6AF0E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		5609F64F226B4EED00F6AF0E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Environment.swift"; sourceTree = "<group>"; };
 		5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTests.swift; sourceTree = "<group>"; };
 		56119AEC226F90EA00F8D798 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		56119AEE226F916A00F8D798 /* UserDefaultsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsType.swift; path = Protocols/UserDefaultsType.swift; sourceTree = "<group>"; };
 		561A25BD2116EBE400B28644 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		5621958C226A5D3F00749A31 /* ListsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewControllerTests.swift; sourceTree = "<group>"; };
 		5628E8C31E85898700AAFD20 /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,69 +131,82 @@
 		5628E8D71E85898700AAFD20 /* TinylogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
 		5628E8DD1E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlistInfo.swift; path = Utils/PlistInfo.swift; sourceTree = "<group>"; };
-		564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLISettingsFontPickerViewController.swift; path = "View Controllers/Settings/TLISettingsFontPickerViewController.swift"; sourceTree = "<group>"; };
-		564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICoreDataTableViewController.swift; path = "Core Data/TLICoreDataTableViewController.swift"; sourceTree = "<group>"; };
-		564E553B1E8ADE48008D5D85 /* TLIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIList.swift; path = "Core Data Model/TLIList.swift"; sourceTree = "<group>"; };
-		564E553C1E8ADE48008D5D85 /* TLIList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TLIList+CoreDataProperties.swift"; path = "Core Data Model/TLIList+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		564E553D1E8ADE48008D5D85 /* TLIMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIMention.swift; path = "Core Data Model/TLIMention.swift"; sourceTree = "<group>"; };
-		564E553E1E8ADE48008D5D85 /* TLIMention+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TLIMention+CoreDataProperties.swift"; path = "Core Data Model/TLIMention+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		564E553F1E8ADE48008D5D85 /* TLINotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLINotification.swift; path = "Core Data Model/TLINotification.swift"; sourceTree = "<group>"; };
-		564E55401E8ADE48008D5D85 /* TLINotification+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TLINotification+CoreDataProperties.swift"; path = "Core Data Model/TLINotification+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		564E55411E8ADE48008D5D85 /* TLITag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITag.swift; path = "Core Data Model/TLITag.swift"; sourceTree = "<group>"; };
-		564E55421E8ADE48008D5D85 /* TLITag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TLITag+CoreDataProperties.swift"; path = "Core Data Model/TLITag+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		564E55431E8ADE48008D5D85 /* TLITask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITask.swift; path = "Core Data Model/TLITask.swift"; sourceTree = "<group>"; };
-		564E55441E8ADE48008D5D85 /* TLITask+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "TLITask+CoreDataProperties.swift"; path = "Core Data Model/TLITask+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		564E55511E8AE011008D5D85 /* StepSliderControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StepSliderControl.h; path = Views/Controls/StepSliderControl.h; sourceTree = "<group>"; };
-		564E55521E8AE011008D5D85 /* StepSliderControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StepSliderControl.m; path = Views/Controls/StepSliderControl.m; sourceTree = "<group>"; };
-		564E55551E8AE05E008D5D85 /* TLIDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLIDeviceInfo.h; path = Utils/TLIDeviceInfo.h; sourceTree = "<group>"; };
-		564E55561E8AE05E008D5D85 /* TLIDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLIDeviceInfo.m; path = Utils/TLIDeviceInfo.m; sourceTree = "<group>"; };
-		564E55571E8AE05E008D5D85 /* TLIDrawingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLIDrawingUtils.h; path = Utils/TLIDrawingUtils.h; sourceTree = "<group>"; };
-		564E55581E8AE05E008D5D85 /* TLIDrawingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLIDrawingUtils.m; path = Utils/TLIDrawingUtils.m; sourceTree = "<group>"; };
-		564E555B1E8AE0C8008D5D85 /* TLITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLITextField.h; path = Views/TLITextField.h; sourceTree = "<group>"; };
-		564E555C1E8AE0C8008D5D85 /* TLITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLITextField.m; path = Views/TLITextField.m; sourceTree = "<group>"; };
-		564E555E1E8AE0F7008D5D85 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "Extensions/NSDate+Utilities.h"; sourceTree = "<group>"; };
-		564E555F1E8AE0F7008D5D85 /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Utilities.m"; path = "Extensions/NSDate+Utilities.m"; sourceTree = "<group>"; };
-		564E55621E8AE152008D5D85 /* TLIGroupedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIGroupedTableViewController.swift; path = "View Controllers/Abstract/TLIGroupedTableViewController.swift"; sourceTree = "<group>"; };
-		564E55651E8AE1EF008D5D85 /* TLIAddListViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAddListViewControllerDelegate.swift; path = Protocols/TLIAddListViewControllerDelegate.swift; sourceTree = "<group>"; };
-		564E55661E8AE1EF008D5D85 /* TLIAddTaskViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAddTaskViewDelegate.swift; path = Protocols/TLIAddTaskViewDelegate.swift; sourceTree = "<group>"; };
-		564E55671E8AE1EF008D5D85 /* TLIEditTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIEditTaskViewControllerDelegate.swift; path = Protocols/TLIEditTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
-		564E55681E8AE1EF008D5D85 /* TLITextFieldCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITextFieldCellDelegate.swift; path = Protocols/TLITextFieldCellDelegate.swift; sourceTree = "<group>"; };
-		564E556E1E8AE217008D5D85 /* TLIAddListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAddListViewController.swift; path = "View Controllers/Lists/TLIAddListViewController.swift"; sourceTree = "<group>"; };
-		564E556F1E8AE217008D5D85 /* TLIListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIListsViewController.swift; path = "View Controllers/Lists/TLIListsViewController.swift"; sourceTree = "<group>"; };
-		564E55701E8AE217008D5D85 /* TLIResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIResultsTableViewController.swift; path = "View Controllers/Lists/TLIResultsTableViewController.swift"; sourceTree = "<group>"; };
-		564E55751E8AE238008D5D85 /* TLIArchiveTasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIArchiveTasksViewController.swift; path = "View Controllers/Archive/TLIArchiveTasksViewController.swift"; sourceTree = "<group>"; };
-		564E55761E8AE238008D5D85 /* TLIArchiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIArchiveViewController.swift; path = "View Controllers/Archive/TLIArchiveViewController.swift"; sourceTree = "<group>"; };
-		564E557A1E8AE24F008D5D85 /* TLISplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLISplitViewController.swift; path = "View Controllers/iPad/TLISplitViewController.swift"; sourceTree = "<group>"; };
-		564E55841E8AE287008D5D85 /* TLIEditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIEditTaskViewController.swift; path = "View Controllers/Tasks/TLIEditTaskViewController.swift"; sourceTree = "<group>"; };
-		564E55851E8AE287008D5D85 /* TLITasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITasksViewController.swift; path = "View Controllers/Tasks/TLITasksViewController.swift"; sourceTree = "<group>"; };
-		564E558B1E8AE2D2008D5D85 /* TLISetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLISetupViewController.swift; path = Setup/TLISetupViewController.swift; sourceTree = "<group>"; };
-		564E558D1E8AE30C008D5D85 /* SGTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SGTextField.swift; path = Views/SGTextField.swift; sourceTree = "<group>"; };
-		564E558E1E8AE30C008D5D85 /* TLIAddTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAddTaskView.swift; path = Views/TLIAddTaskView.swift; sourceTree = "<group>"; };
-		564E558F1E8AE30C008D5D85 /* TLIListsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIListsFooterView.swift; path = Views/TLIListsFooterView.swift; sourceTree = "<group>"; };
-		564E55901E8AE30C008D5D85 /* TLIMenuColorsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIMenuColorsView.swift; path = Views/TLIMenuColorsView.swift; sourceTree = "<group>"; };
-		564E55921E8AE30C008D5D85 /* TLITasksFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITasksFooterView.swift; path = Views/TLITasksFooterView.swift; sourceTree = "<group>"; };
-		564E55931E8AE30C008D5D85 /* TLITouchableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITouchableView.swift; path = Views/TLITouchableView.swift; sourceTree = "<group>"; };
-		564E559C1E8AE327008D5D85 /* TLIAddListButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAddListButton.swift; path = Views/Buttons/TLIAddListButton.swift; sourceTree = "<group>"; };
-		564E559D1E8AE327008D5D85 /* TLIArchiveButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIArchiveButton.swift; path = Views/Buttons/TLIArchiveButton.swift; sourceTree = "<group>"; };
-		564E559E1E8AE327008D5D85 /* TLICheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICheckBoxButton.swift; path = Views/Buttons/TLICheckBoxButton.swift; sourceTree = "<group>"; };
-		564E559F1E8AE327008D5D85 /* TLICircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICircleButton.swift; path = Views/Buttons/TLICircleButton.swift; sourceTree = "<group>"; };
-		564E55A01E8AE327008D5D85 /* TLICloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICloseButton.swift; path = Views/Buttons/TLICloseButton.swift; sourceTree = "<group>"; };
-		564E55A11E8AE327008D5D85 /* TLIExportTasksButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIExportTasksButton.swift; path = Views/Buttons/TLIExportTasksButton.swift; sourceTree = "<group>"; };
-		564E55A21E8AE327008D5D85 /* TLIRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIRoundedButton.swift; path = Views/Buttons/TLIRoundedButton.swift; sourceTree = "<group>"; };
-		564E55AB1E8AE338008D5D85 /* TLIGroupedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIGroupedTableViewCell.swift; path = Views/Cells/TLIGroupedTableViewCell.swift; sourceTree = "<group>"; };
-		564E55AC1E8AE338008D5D85 /* TLIHelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIHelpTableViewCell.swift; path = Views/Cells/TLIHelpTableViewCell.swift; sourceTree = "<group>"; };
-		564E55AD1E8AE338008D5D85 /* TLIListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIListTableViewCell.swift; path = Views/Cells/TLIListTableViewCell.swift; sourceTree = "<group>"; };
-		564E55AF1E8AE338008D5D85 /* TLITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITableViewCell.swift; path = Views/Cells/TLITableViewCell.swift; sourceTree = "<group>"; };
-		564E55B01E8AE338008D5D85 /* TLITaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITaskTableViewCell.swift; path = Views/Cells/TLITaskTableViewCell.swift; sourceTree = "<group>"; };
-		564E55B11E8AE338008D5D85 /* TLITextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITextFieldCell.swift; path = Views/Cells/TLITextFieldCell.swift; sourceTree = "<group>"; };
-		564E55BA1E8AE34B008D5D85 /* TLIKeyboardBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIKeyboardBar.swift; path = Views/Keyboard/TLIKeyboardBar.swift; sourceTree = "<group>"; };
-		564E55BC1E8AE411008D5D85 /* TLIAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAboutViewController.swift; path = "View Controllers/Settings/TLIAboutViewController.swift"; sourceTree = "<group>"; };
-		564E55BD1E8AE411008D5D85 /* TLIHelpTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIHelpTableViewController.swift; path = "View Controllers/Settings/TLIHelpTableViewController.swift"; sourceTree = "<group>"; };
-		564E55BE1E8AE411008D5D85 /* TLISettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLISettingsTableViewController.swift; path = "View Controllers/Settings/TLISettingsTableViewController.swift"; sourceTree = "<group>"; };
-		564E55BF1E8AE411008D5D85 /* TLITextSizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLITextSizeViewController.swift; path = "View Controllers/Settings/TLITextSizeViewController.swift"; sourceTree = "<group>"; };
-		564E55C51E8AE43E008D5D85 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Helpers/Utils.swift; sourceTree = "<group>"; };
-		565454DC1F4581C40076BD08 /* UIViewController+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Tinylog.swift"; path = "Extensions/UIViewController+Tinylog.swift"; sourceTree = "<group>"; };
+		5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewControllerTests.swift; sourceTree = "<group>"; };
+		5638FC3122744CDC00CB4071 /* TLIGroupedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIGroupedTableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3222744CDC00CB4071 /* TLIHelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIHelpTableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3322744CDC00CB4071 /* TLITaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITaskTableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3422744CDC00CB4071 /* TLIListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIListTableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3522744CDC00CB4071 /* TLITextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITextFieldCell.swift; sourceTree = "<group>"; };
+		5638FC3622744CDC00CB4071 /* TLITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3822744CDC00CB4071 /* TLICircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLICircleButton.swift; sourceTree = "<group>"; };
+		5638FC3922744CDC00CB4071 /* TLIExportTasksButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIExportTasksButton.swift; sourceTree = "<group>"; };
+		5638FC3A22744CDC00CB4071 /* TLIRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIRoundedButton.swift; sourceTree = "<group>"; };
+		5638FC3B22744CDC00CB4071 /* TLIArchiveButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIArchiveButton.swift; sourceTree = "<group>"; };
+		5638FC3C22744CDC00CB4071 /* TLICloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLICloseButton.swift; sourceTree = "<group>"; };
+		5638FC3D22744CDC00CB4071 /* TLICheckBoxButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLICheckBoxButton.swift; sourceTree = "<group>"; };
+		5638FC3E22744CDC00CB4071 /* TLIAddListButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAddListButton.swift; sourceTree = "<group>"; };
+		5638FC3F22744CDC00CB4071 /* TLITextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLITextField.m; sourceTree = "<group>"; };
+		5638FC4022744CDC00CB4071 /* ListsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsFooterView.swift; sourceTree = "<group>"; };
+		5638FC4222744CDC00CB4071 /* StepSliderControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepSliderControl.h; sourceTree = "<group>"; };
+		5638FC4322744CDC00CB4071 /* StepSliderControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepSliderControl.m; sourceTree = "<group>"; };
+		5638FC4422744CDC00CB4071 /* TLITextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLITextField.h; sourceTree = "<group>"; };
+		5638FC4522744CDC00CB4071 /* TLIMenuColorsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIMenuColorsView.swift; sourceTree = "<group>"; };
+		5638FC4622744CDC00CB4071 /* TLITouchableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITouchableView.swift; sourceTree = "<group>"; };
+		5638FC4722744CDC00CB4071 /* SGTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGTextField.swift; sourceTree = "<group>"; };
+		5638FC4822744CDC00CB4071 /* TLITasksFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITasksFooterView.swift; sourceTree = "<group>"; };
+		5638FC4A22744CDC00CB4071 /* TLIKeyboardBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIKeyboardBar.swift; sourceTree = "<group>"; };
+		5638FC4B22744CDC00CB4071 /* TLIAddTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAddTaskView.swift; sourceTree = "<group>"; };
+		5638FC6422744D8200CB4071 /* TLIGroupedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIGroupedTableViewController.swift; sourceTree = "<group>"; };
+		5638FC6622744D8200CB4071 /* TLISettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLISettingsTableViewController.swift; sourceTree = "<group>"; };
+		5638FC6722744D8200CB4071 /* TLIHelpTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIHelpTableViewController.swift; sourceTree = "<group>"; };
+		5638FC6822744D8200CB4071 /* TLIAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAboutViewController.swift; sourceTree = "<group>"; };
+		5638FC6922744D8200CB4071 /* TLISettingsFontPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLISettingsFontPickerViewController.swift; sourceTree = "<group>"; };
+		5638FC6A22744D8200CB4071 /* TLITextSizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITextSizeViewController.swift; sourceTree = "<group>"; };
+		5638FC6C22744D8200CB4071 /* TLIEditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIEditTaskViewController.swift; sourceTree = "<group>"; };
+		5638FC6D22744D8200CB4071 /* TLITasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITasksViewController.swift; sourceTree = "<group>"; };
+		5638FC6F22744D8200CB4071 /* TLIArchiveTasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIArchiveTasksViewController.swift; sourceTree = "<group>"; };
+		5638FC7022744D8200CB4071 /* TLIArchiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIArchiveViewController.swift; sourceTree = "<group>"; };
+		5638FC7222744D8200CB4071 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		5638FC7322744D8200CB4071 /* ListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		5638FC7422744D8200CB4071 /* AddListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
+		5638FC7622744D8200CB4071 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		5638FC7822744D8200CB4071 /* TLISplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLISplitViewController.swift; sourceTree = "<group>"; };
+		5638FC8922744ECF00CB4071 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5638FC8B22744F2200CB4071 /* PlistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistInfo.swift; sourceTree = "<group>"; };
+		5638FC8E22744F4000CB4071 /* UserDefaultsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsType.swift; sourceTree = "<group>"; };
+		5638FC8F22744F4000CB4071 /* TLIAddListViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAddListViewControllerDelegate.swift; sourceTree = "<group>"; };
+		5638FC9022744F4000CB4071 /* TLITextFieldCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITextFieldCellDelegate.swift; sourceTree = "<group>"; };
+		5638FC9122744F4000CB4071 /* TLIAddTaskViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAddTaskViewDelegate.swift; sourceTree = "<group>"; };
+		5638FC9222744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIEditTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
+		5638FC9822744F7B00CB4071 /* LocalizedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		5638FC9922744F7B00CB4071 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		5638FC9D22744F8800CB4071 /* TLIDrawingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLIDrawingUtils.h; sourceTree = "<group>"; };
+		5638FC9E22744F8800CB4071 /* TLIDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLIDeviceInfo.h; sourceTree = "<group>"; };
+		5638FC9F22744F8800CB4071 /* TLIDrawingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLIDrawingUtils.m; sourceTree = "<group>"; };
+		5638FCA022744F8800CB4071 /* TLIDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLIDeviceInfo.m; sourceTree = "<group>"; };
+		5638FCA422744F9F00CB4071 /* TLIMention+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLIMention+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5638FCA522744F9F00CB4071 /* TLITask+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLITask+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5638FCA622744F9F00CB4071 /* TLINotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLINotification.swift; sourceTree = "<group>"; };
+		5638FCA722744F9F00CB4071 /* TLIList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLIList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5638FCA822744F9F00CB4071 /* TLITag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLITag+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5638FCA922744F9F00CB4071 /* TLITask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITask.swift; sourceTree = "<group>"; };
+		5638FCAA22744F9F00CB4071 /* TLITag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITag.swift; sourceTree = "<group>"; };
+		5638FCAB22744F9F00CB4071 /* TLIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIList.swift; sourceTree = "<group>"; };
+		5638FCAC22744F9F00CB4071 /* TLIMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIMention.swift; sourceTree = "<group>"; };
+		5638FCAD22744F9F00CB4071 /* TLINotification+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLINotification+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5638FCB922744FC100CB4071 /* TLICoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLICoreDataTableViewController.swift; sourceTree = "<group>"; };
+		5638FCBD2274500A00CB4071 /* UIImage+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Tinylog.swift"; sourceTree = "<group>"; };
+		5638FCBE2274500A00CB4071 /* UIColor+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Tinylog.swift"; sourceTree = "<group>"; };
+		5638FCBF2274500A00CB4071 /* String+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Tinylog.swift"; sourceTree = "<group>"; };
+		5638FCC02274500A00CB4071 /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
+		5638FCC12274500A00CB4071 /* DispatchQueue+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Tinylog.swift"; sourceTree = "<group>"; };
+		5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Tinylog.swift"; sourceTree = "<group>"; };
+		5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Tinylog.swift"; sourceTree = "<group>"; };
+		5638FCC42274500A00CB4071 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		5638FCCD2274501700CB4071 /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAppDelegate.swift; sourceTree = "<group>"; };
+		5638FCCE2274501700CB4071 /* TLIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIConstants.swift; sourceTree = "<group>"; };
+		5638FCD32274503500CB4071 /* TLISyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLISyncManager.m; sourceTree = "<group>"; };
+		5638FCD52274503500CB4071 /* TLISyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLISyncManager.h; sourceTree = "<group>"; };
 		5656E1CC226A39C70065DBEA /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		565DA78C1E86999A00C6E60C /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
 		565DA78D1E86999A00C6E60C /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -205,8 +215,6 @@
 		565DA7901E86999A00C6E60C /* Tinylog 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 6.xcdatamodel"; sourceTree = "<group>"; };
 		565DA7911E86999A00C6E60C /* Tinylog 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 7.xcdatamodel"; sourceTree = "<group>"; };
 		565DA7921E86999A00C6E60C /* Tinylog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tinylog.xcdatamodel; sourceTree = "<group>"; };
-		565DA7991E8699CB00C6E60C /* TLISyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TLISyncManager.h; path = Network/TLISyncManager.h; sourceTree = "<group>"; };
-		565DA79A1E8699CB00C6E60C /* TLISyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TLISyncManager.m; path = Network/TLISyncManager.m; sourceTree = "<group>"; };
 		566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		566E6A8E226E4A340093783E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56892690226C767A00D952A6 /* FindColorByNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindColorByNameTests.swift; sourceTree = "<group>"; };
@@ -214,16 +222,8 @@
 		568F7DFF1F2BA0DC00CFDDDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotsUITests.swift; sourceTree = "<group>"; };
-		56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAppDelegate.swift; path = Application/TLIAppDelegate.swift; sourceTree = "<group>"; };
-		56AC7AA41E8A342F006AD29B /* TLIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIConstants.swift; path = Application/TLIConstants.swift; sourceTree = "<group>"; };
-		56AC7AAC1E8A3549006AD29B /* String+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Tinylog.swift"; path = "Extensions/String+Tinylog.swift"; sourceTree = "<group>"; };
-		56AC7AAD1E8A3549006AD29B /* UIColor+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Tinylog.swift"; path = "Extensions/UIColor+Tinylog.swift"; sourceTree = "<group>"; };
-		56AC7AAE1E8A3549006AD29B /* UIFont+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Tinylog.swift"; path = "Extensions/UIFont+Tinylog.swift"; sourceTree = "<group>"; };
-		56AC7AAF1E8A3549006AD29B /* UIImage+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Tinylog.swift"; path = "Extensions/UIImage+Tinylog.swift"; sourceTree = "<group>"; };
-		56AC8A941E8C0FCD002EBA59 /* DispatchQueue+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Tinylog.swift"; path = "Extensions/DispatchQueue+Tinylog.swift"; sourceTree = "<group>"; };
 		56B7AD8F1E858B25004BB429 /* Tinylog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tinylog-Bridging-Header.h"; sourceTree = "<group>"; };
 		56B7AD931E858B81004BB429 /* Tinylog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tinylog.entitlements; sourceTree = "<group>"; };
-		56BDF723226CBBFB0031EDBE /* TraitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraitController.swift; sourceTree = "<group>"; };
 		72FDB230F560367662A28D96 /* Pods_TinylogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinylogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D4301E616F787A62B48BBD /* Pods-TinylogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.release.xcconfig"; sourceTree = "<group>"; };
 		CCCB1EEBF9EAC162DF797006 /* Pods_Tinylog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinylog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -306,21 +306,19 @@
 		5628E8C51E85898700AAFD20 /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
+				5638FCD12274503500CB4071 /* Network */,
+				5638FCCC2274501700CB4071 /* Application */,
+				5638FCBC2274500A00CB4071 /* Extensions */,
+				5638FCBB22744FD900CB4071 /* Core Data */,
+				5638FC9C22744F8800CB4071 /* Utils */,
+				5638FC8D22744F4000CB4071 /* Protocols */,
+				5638FC8822744ECF00CB4071 /* Helpers */,
+				5638FC6222744D8200CB4071 /* View Controllers */,
+				5638FC2F22744CDC00CB4071 /* Views */,
 				56119AEB226F90EA00F8D798 /* Managers */,
 				5609F607226B4BA600F6AF0E /* Locales */,
 				566BAC051F6ADBD3005B0E4F /* Storyboards */,
 				56487F8F1F644E150080192C /* Configs */,
-				564E55C41E8AE434008D5D85 /* Helpers */,
-				564E558A1E8AE2C5008D5D85 /* Setup */,
-				564E55641E8AE1E3008D5D85 /* Protocols */,
-				564E55541E8AE053008D5D85 /* Utils */,
-				564E554F1E8ADFD5008D5D85 /* Views */,
-				564E553A1E8ADE3C008D5D85 /* Core Data Model */,
-				564E55351E8ADE02008D5D85 /* Core Data */,
-				564E552B1E8ADCE7008D5D85 /* View Controllers */,
-				56AC7AAB1E8A353B006AD29B /* Extensions */,
-				56AC7AA21E8A33FE006AD29B /* Application */,
-				565DA7941E8699A900C6E60C /* Network */,
 				565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */,
 				56B7AD931E858B81004BB429 /* Tinylog.entitlements */,
 				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
@@ -334,6 +332,7 @@
 		5628E8DA1E85898700AAFD20 /* TinylogTests */ = {
 			isa = PBXGroup;
 			children = (
+				5638FC2C227443C800CB4071 /* View Controllers */,
 				5609F659226B54FC00F6AF0E /* Helpers */,
 				5656E1CB226A39AA0065DBEA /* Lists */,
 				5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */,
@@ -342,6 +341,264 @@
 				56892690226C767A00D952A6 /* FindColorByNameTests.swift */,
 			);
 			path = TinylogTests;
+			sourceTree = "<group>";
+		};
+		5638FC2B227443BD00CB4071 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		5638FC2C227443C800CB4071 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC2B227443BD00CB4071 /* Setup */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		5638FC2F22744CDC00CB4071 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC3022744CDC00CB4071 /* Cells */,
+				5638FC3722744CDC00CB4071 /* Buttons */,
+				5638FC3F22744CDC00CB4071 /* TLITextField.m */,
+				5638FC4022744CDC00CB4071 /* ListsFooterView.swift */,
+				5638FC4122744CDC00CB4071 /* Controls */,
+				5638FC4422744CDC00CB4071 /* TLITextField.h */,
+				5638FC4522744CDC00CB4071 /* TLIMenuColorsView.swift */,
+				5638FC4622744CDC00CB4071 /* TLITouchableView.swift */,
+				5638FC4722744CDC00CB4071 /* SGTextField.swift */,
+				5638FC4822744CDC00CB4071 /* TLITasksFooterView.swift */,
+				5638FC4922744CDC00CB4071 /* Keyboard */,
+				5638FC4B22744CDC00CB4071 /* TLIAddTaskView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5638FC3022744CDC00CB4071 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC3122744CDC00CB4071 /* TLIGroupedTableViewCell.swift */,
+				5638FC3222744CDC00CB4071 /* TLIHelpTableViewCell.swift */,
+				5638FC3322744CDC00CB4071 /* TLITaskTableViewCell.swift */,
+				5638FC3422744CDC00CB4071 /* TLIListTableViewCell.swift */,
+				5638FC3522744CDC00CB4071 /* TLITextFieldCell.swift */,
+				5638FC3622744CDC00CB4071 /* TLITableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		5638FC3722744CDC00CB4071 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC3822744CDC00CB4071 /* TLICircleButton.swift */,
+				5638FC3922744CDC00CB4071 /* TLIExportTasksButton.swift */,
+				5638FC3A22744CDC00CB4071 /* TLIRoundedButton.swift */,
+				5638FC3B22744CDC00CB4071 /* TLIArchiveButton.swift */,
+				5638FC3C22744CDC00CB4071 /* TLICloseButton.swift */,
+				5638FC3D22744CDC00CB4071 /* TLICheckBoxButton.swift */,
+				5638FC3E22744CDC00CB4071 /* TLIAddListButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		5638FC4122744CDC00CB4071 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC4222744CDC00CB4071 /* StepSliderControl.h */,
+				5638FC4322744CDC00CB4071 /* StepSliderControl.m */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		5638FC4922744CDC00CB4071 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC4A22744CDC00CB4071 /* TLIKeyboardBar.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		5638FC6222744D8200CB4071 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC6322744D8200CB4071 /* Abstract */,
+				5638FC6522744D8200CB4071 /* Settings */,
+				5638FC6B22744D8200CB4071 /* Tasks */,
+				5638FC6E22744D8200CB4071 /* Archive */,
+				5638FC7122744D8200CB4071 /* Lists */,
+				5638FC7522744D8200CB4071 /* Setup */,
+				5638FC7722744D8200CB4071 /* iPad */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		5638FC6322744D8200CB4071 /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC6422744D8200CB4071 /* TLIGroupedTableViewController.swift */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
+		5638FC6522744D8200CB4071 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC6622744D8200CB4071 /* TLISettingsTableViewController.swift */,
+				5638FC6722744D8200CB4071 /* TLIHelpTableViewController.swift */,
+				5638FC6822744D8200CB4071 /* TLIAboutViewController.swift */,
+				5638FC6922744D8200CB4071 /* TLISettingsFontPickerViewController.swift */,
+				5638FC6A22744D8200CB4071 /* TLITextSizeViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5638FC6B22744D8200CB4071 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC6C22744D8200CB4071 /* TLIEditTaskViewController.swift */,
+				5638FC6D22744D8200CB4071 /* TLITasksViewController.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		5638FC6E22744D8200CB4071 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC6F22744D8200CB4071 /* TLIArchiveTasksViewController.swift */,
+				5638FC7022744D8200CB4071 /* TLIArchiveViewController.swift */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
+		5638FC7122744D8200CB4071 /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC7222744D8200CB4071 /* ResultsTableViewController.swift */,
+				5638FC7322744D8200CB4071 /* ListsViewController.swift */,
+				5638FC7422744D8200CB4071 /* AddListViewController.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
+		5638FC7522744D8200CB4071 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC7622744D8200CB4071 /* SetupViewController.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		5638FC7722744D8200CB4071 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC7822744D8200CB4071 /* TLISplitViewController.swift */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
+		5638FC8822744ECF00CB4071 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC9922744F7B00CB4071 /* Language.swift */,
+				5638FC9822744F7B00CB4071 /* LocalizedString.swift */,
+				5638FC8B22744F2200CB4071 /* PlistInfo.swift */,
+				5638FC8922744ECF00CB4071 /* Utils.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5638FC8D22744F4000CB4071 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC8E22744F4000CB4071 /* UserDefaultsType.swift */,
+				5638FC8F22744F4000CB4071 /* TLIAddListViewControllerDelegate.swift */,
+				5638FC9022744F4000CB4071 /* TLITextFieldCellDelegate.swift */,
+				5638FC9122744F4000CB4071 /* TLIAddTaskViewDelegate.swift */,
+				5638FC9222744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5638FC9C22744F8800CB4071 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5638FC9D22744F8800CB4071 /* TLIDrawingUtils.h */,
+				5638FC9E22744F8800CB4071 /* TLIDeviceInfo.h */,
+				5638FC9F22744F8800CB4071 /* TLIDrawingUtils.m */,
+				5638FCA022744F8800CB4071 /* TLIDeviceInfo.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		5638FCA322744F9F00CB4071 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5638FCA422744F9F00CB4071 /* TLIMention+CoreDataProperties.swift */,
+				5638FCA522744F9F00CB4071 /* TLITask+CoreDataProperties.swift */,
+				5638FCA622744F9F00CB4071 /* TLINotification.swift */,
+				5638FCA722744F9F00CB4071 /* TLIList+CoreDataProperties.swift */,
+				5638FCA822744F9F00CB4071 /* TLITag+CoreDataProperties.swift */,
+				5638FCA922744F9F00CB4071 /* TLITask.swift */,
+				5638FCAA22744F9F00CB4071 /* TLITag.swift */,
+				5638FCAB22744F9F00CB4071 /* TLIList.swift */,
+				5638FCAC22744F9F00CB4071 /* TLIMention.swift */,
+				5638FCAD22744F9F00CB4071 /* TLINotification+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5638FCB822744FC100CB4071 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5638FCB922744FC100CB4071 /* TLICoreDataTableViewController.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5638FCBB22744FD900CB4071 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				5638FCA322744F9F00CB4071 /* Models */,
+				5638FCB822744FC100CB4071 /* Helpers */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		5638FCBC2274500A00CB4071 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5638FCBD2274500A00CB4071 /* UIImage+Tinylog.swift */,
+				5638FCBE2274500A00CB4071 /* UIColor+Tinylog.swift */,
+				5638FCBF2274500A00CB4071 /* String+Tinylog.swift */,
+				5638FCC02274500A00CB4071 /* NSDate+Utilities.m */,
+				5638FCC12274500A00CB4071 /* DispatchQueue+Tinylog.swift */,
+				5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */,
+				5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */,
+				5638FCC42274500A00CB4071 /* NSDate+Utilities.h */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5638FCCC2274501700CB4071 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5638FCCD2274501700CB4071 /* TLIAppDelegate.swift */,
+				5638FCCE2274501700CB4071 /* TLIConstants.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5638FCD12274503500CB4071 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5638FCD32274503500CB4071 /* TLISyncManager.m */,
+				5638FCD52274503500CB4071 /* TLISyncManager.h */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		56487F8F1F644E150080192C /* Configs */ = {
@@ -353,206 +610,6 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
-		564E552A1E8ADCB8008D5D85 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				564E55BC1E8AE411008D5D85 /* TLIAboutViewController.swift */,
-				564E55BD1E8AE411008D5D85 /* TLIHelpTableViewController.swift */,
-				564E55BE1E8AE411008D5D85 /* TLISettingsTableViewController.swift */,
-				564E55BF1E8AE411008D5D85 /* TLITextSizeViewController.swift */,
-				564E552C1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift */,
-			);
-			name = Settings;
-			sourceTree = "<group>";
-		};
-		564E552B1E8ADCE7008D5D85 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				564E55831E8AE27D008D5D85 /* Tasks */,
-				564E55791E8AE240008D5D85 /* iPad */,
-				564E55741E8AE22D008D5D85 /* Archive */,
-				564E556D1E8AE204008D5D85 /* Lists */,
-				564E55611E8AE143008D5D85 /* Abstract */,
-				564E552A1E8ADCB8008D5D85 /* Settings */,
-			);
-			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		564E55351E8ADE02008D5D85 /* Core Data */ = {
-			isa = PBXGroup;
-			children = (
-				564E55381E8ADE30008D5D85 /* TLICoreDataTableViewController.swift */,
-			);
-			name = "Core Data";
-			sourceTree = "<group>";
-		};
-		564E553A1E8ADE3C008D5D85 /* Core Data Model */ = {
-			isa = PBXGroup;
-			children = (
-				564E553B1E8ADE48008D5D85 /* TLIList.swift */,
-				564E553C1E8ADE48008D5D85 /* TLIList+CoreDataProperties.swift */,
-				564E553D1E8ADE48008D5D85 /* TLIMention.swift */,
-				564E553E1E8ADE48008D5D85 /* TLIMention+CoreDataProperties.swift */,
-				564E553F1E8ADE48008D5D85 /* TLINotification.swift */,
-				564E55401E8ADE48008D5D85 /* TLINotification+CoreDataProperties.swift */,
-				564E55411E8ADE48008D5D85 /* TLITag.swift */,
-				564E55421E8ADE48008D5D85 /* TLITag+CoreDataProperties.swift */,
-				564E55431E8ADE48008D5D85 /* TLITask.swift */,
-				564E55441E8ADE48008D5D85 /* TLITask+CoreDataProperties.swift */,
-			);
-			name = "Core Data Model";
-			sourceTree = "<group>";
-		};
-		564E554F1E8ADFD5008D5D85 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				564E55B91E8AE33E008D5D85 /* Keyboard */,
-				564E55AA1E8AE32D008D5D85 /* Cells */,
-				564E559B1E8AE319008D5D85 /* Buttons */,
-				564E558D1E8AE30C008D5D85 /* SGTextField.swift */,
-				564E558E1E8AE30C008D5D85 /* TLIAddTaskView.swift */,
-				564E558F1E8AE30C008D5D85 /* TLIListsFooterView.swift */,
-				564E55901E8AE30C008D5D85 /* TLIMenuColorsView.swift */,
-				564E55921E8AE30C008D5D85 /* TLITasksFooterView.swift */,
-				564E55931E8AE30C008D5D85 /* TLITouchableView.swift */,
-				564E555B1E8AE0C8008D5D85 /* TLITextField.h */,
-				564E555C1E8AE0C8008D5D85 /* TLITextField.m */,
-				564E55501E8ADFE1008D5D85 /* Controls */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		564E55501E8ADFE1008D5D85 /* Controls */ = {
-			isa = PBXGroup;
-			children = (
-				564E55511E8AE011008D5D85 /* StepSliderControl.h */,
-				564E55521E8AE011008D5D85 /* StepSliderControl.m */,
-			);
-			name = Controls;
-			sourceTree = "<group>";
-		};
-		564E55541E8AE053008D5D85 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				564E55551E8AE05E008D5D85 /* TLIDeviceInfo.h */,
-				564E55561E8AE05E008D5D85 /* TLIDeviceInfo.m */,
-				564E55571E8AE05E008D5D85 /* TLIDrawingUtils.h */,
-				564E55581E8AE05E008D5D85 /* TLIDrawingUtils.m */,
-				5609F64B226B4E7E00F6AF0E /* LocalizedString.swift */,
-				5609F64F226B4EED00F6AF0E /* Language.swift */,
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
-		564E55611E8AE143008D5D85 /* Abstract */ = {
-			isa = PBXGroup;
-			children = (
-				564E55621E8AE152008D5D85 /* TLIGroupedTableViewController.swift */,
-			);
-			name = Abstract;
-			sourceTree = "<group>";
-		};
-		564E55641E8AE1E3008D5D85 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				564E55651E8AE1EF008D5D85 /* TLIAddListViewControllerDelegate.swift */,
-				564E55661E8AE1EF008D5D85 /* TLIAddTaskViewDelegate.swift */,
-				564E55671E8AE1EF008D5D85 /* TLIEditTaskViewControllerDelegate.swift */,
-				564E55681E8AE1EF008D5D85 /* TLITextFieldCellDelegate.swift */,
-				56119AEE226F916A00F8D798 /* UserDefaultsType.swift */,
-			);
-			name = Protocols;
-			sourceTree = "<group>";
-		};
-		564E556D1E8AE204008D5D85 /* Lists */ = {
-			isa = PBXGroup;
-			children = (
-				564E556E1E8AE217008D5D85 /* TLIAddListViewController.swift */,
-				564E556F1E8AE217008D5D85 /* TLIListsViewController.swift */,
-				564E55701E8AE217008D5D85 /* TLIResultsTableViewController.swift */,
-			);
-			name = Lists;
-			sourceTree = "<group>";
-		};
-		564E55741E8AE22D008D5D85 /* Archive */ = {
-			isa = PBXGroup;
-			children = (
-				564E55751E8AE238008D5D85 /* TLIArchiveTasksViewController.swift */,
-				564E55761E8AE238008D5D85 /* TLIArchiveViewController.swift */,
-			);
-			name = Archive;
-			sourceTree = "<group>";
-		};
-		564E55791E8AE240008D5D85 /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-				564E557A1E8AE24F008D5D85 /* TLISplitViewController.swift */,
-			);
-			name = iPad;
-			sourceTree = "<group>";
-		};
-		564E55831E8AE27D008D5D85 /* Tasks */ = {
-			isa = PBXGroup;
-			children = (
-				564E55841E8AE287008D5D85 /* TLIEditTaskViewController.swift */,
-				564E55851E8AE287008D5D85 /* TLITasksViewController.swift */,
-			);
-			name = Tasks;
-			sourceTree = "<group>";
-		};
-		564E558A1E8AE2C5008D5D85 /* Setup */ = {
-			isa = PBXGroup;
-			children = (
-				564E558B1E8AE2D2008D5D85 /* TLISetupViewController.swift */,
-			);
-			name = Setup;
-			sourceTree = "<group>";
-		};
-		564E559B1E8AE319008D5D85 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				564E559C1E8AE327008D5D85 /* TLIAddListButton.swift */,
-				564E559D1E8AE327008D5D85 /* TLIArchiveButton.swift */,
-				564E559E1E8AE327008D5D85 /* TLICheckBoxButton.swift */,
-				564E559F1E8AE327008D5D85 /* TLICircleButton.swift */,
-				564E55A01E8AE327008D5D85 /* TLICloseButton.swift */,
-				564E55A11E8AE327008D5D85 /* TLIExportTasksButton.swift */,
-				564E55A21E8AE327008D5D85 /* TLIRoundedButton.swift */,
-			);
-			name = Buttons;
-			sourceTree = "<group>";
-		};
-		564E55AA1E8AE32D008D5D85 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				564E55AB1E8AE338008D5D85 /* TLIGroupedTableViewCell.swift */,
-				564E55AC1E8AE338008D5D85 /* TLIHelpTableViewCell.swift */,
-				564E55AD1E8AE338008D5D85 /* TLIListTableViewCell.swift */,
-				564E55AF1E8AE338008D5D85 /* TLITableViewCell.swift */,
-				564E55B01E8AE338008D5D85 /* TLITaskTableViewCell.swift */,
-				564E55B11E8AE338008D5D85 /* TLITextFieldCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		564E55B91E8AE33E008D5D85 /* Keyboard */ = {
-			isa = PBXGroup;
-			children = (
-				564E55BA1E8AE34B008D5D85 /* TLIKeyboardBar.swift */,
-			);
-			name = Keyboard;
-			sourceTree = "<group>";
-		};
-		564E55C41E8AE434008D5D85 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				564E55C51E8AE43E008D5D85 /* Utils.swift */,
-				562FAC3C1F4DE73A0008C7D8 /* PlistInfo.swift */,
-				56BDF723226CBBFB0031EDBE /* TraitController.swift */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
 		5656E1CB226A39AA0065DBEA /* Lists */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,15 +617,6 @@
 				5621958C226A5D3F00749A31 /* ListsViewControllerTests.swift */,
 			);
 			path = Lists;
-			sourceTree = "<group>";
-		};
-		565DA7941E8699A900C6E60C /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				565DA7991E8699CB00C6E60C /* TLISyncManager.h */,
-				565DA79A1E8699CB00C6E60C /* TLISyncManager.m */,
-			);
-			name = Network;
 			sourceTree = "<group>";
 		};
 		566BAC051F6ADBD3005B0E4F /* Storyboards */ = {
@@ -587,30 +635,6 @@
 				568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */,
 			);
 			path = TinylogUITests;
-			sourceTree = "<group>";
-		};
-		56AC7AA21E8A33FE006AD29B /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				56AC7AA31E8A342F006AD29B /* TLIAppDelegate.swift */,
-				56AC7AA41E8A342F006AD29B /* TLIConstants.swift */,
-			);
-			name = Application;
-			sourceTree = "<group>";
-		};
-		56AC7AAB1E8A353B006AD29B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				564E555E1E8AE0F7008D5D85 /* NSDate+Utilities.h */,
-				564E555F1E8AE0F7008D5D85 /* NSDate+Utilities.m */,
-				56AC7AAC1E8A3549006AD29B /* String+Tinylog.swift */,
-				56AC7AAD1E8A3549006AD29B /* UIColor+Tinylog.swift */,
-				56AC7AAE1E8A3549006AD29B /* UIFont+Tinylog.swift */,
-				56AC7AAF1E8A3549006AD29B /* UIImage+Tinylog.swift */,
-				56AC8A941E8C0FCD002EBA59 /* DispatchQueue+Tinylog.swift */,
-				565454DC1F4581C40076BD08 /* UIViewController+Tinylog.swift */,
-			);
-			name = Extensions;
 			sourceTree = "<group>";
 		};
 		D0366F6B48768776F8771D80 /* Pods */ = {
@@ -912,80 +936,79 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				564E55C31E8AE411008D5D85 /* TLITextSizeViewController.swift in Sources */,
-				564E554B1E8ADE48008D5D85 /* TLITag.swift in Sources */,
-				565DA79E1E8699CB00C6E60C /* TLISyncManager.m in Sources */,
-				564E55A31E8AE327008D5D85 /* TLIAddListButton.swift in Sources */,
-				564E55C11E8AE411008D5D85 /* TLIHelpTableViewController.swift in Sources */,
-				56BDF724226CBBFB0031EDBE /* TraitController.swift in Sources */,
-				564E55A41E8AE327008D5D85 /* TLIArchiveButton.swift in Sources */,
-				564E55A91E8AE327008D5D85 /* TLIRoundedButton.swift in Sources */,
-				564E55B21E8AE338008D5D85 /* TLIGroupedTableViewCell.swift in Sources */,
-				564E55B61E8AE338008D5D85 /* TLITableViewCell.swift in Sources */,
-				564E55721E8AE217008D5D85 /* TLIListsViewController.swift in Sources */,
-				5609F64C226B4E7E00F6AF0E /* LocalizedString.swift in Sources */,
-				564E554C1E8ADE48008D5D85 /* TLITag+CoreDataProperties.swift in Sources */,
-				564E55491E8ADE48008D5D85 /* TLINotification.swift in Sources */,
-				564E55B41E8AE338008D5D85 /* TLIListTableViewCell.swift in Sources */,
-				564E55711E8AE217008D5D85 /* TLIAddListViewController.swift in Sources */,
-				564E55601E8AE0F7008D5D85 /* NSDate+Utilities.m in Sources */,
-				564E554E1E8ADE48008D5D85 /* TLITask+CoreDataProperties.swift in Sources */,
-				564E556C1E8AE1EF008D5D85 /* TLITextFieldCellDelegate.swift in Sources */,
-				564E55691E8AE1EF008D5D85 /* TLIAddListViewControllerDelegate.swift in Sources */,
+				5638FC8422744D8200CB4071 /* ListsViewController.swift in Sources */,
+				5638FC5B22744CDC00CB4071 /* StepSliderControl.m in Sources */,
+				5638FCA222744F8800CB4071 /* TLIDeviceInfo.m in Sources */,
+				5638FC8122744D8200CB4071 /* TLIArchiveTasksViewController.swift in Sources */,
+				5638FCD02274501700CB4071 /* TLIConstants.swift in Sources */,
+				5638FC5F22744CDC00CB4071 /* TLITasksFooterView.swift in Sources */,
+				5638FCB222744F9F00CB4071 /* TLITag+CoreDataProperties.swift in Sources */,
+				5638FC5422744CDC00CB4071 /* TLIRoundedButton.swift in Sources */,
+				5638FC5222744CDC00CB4071 /* TLICircleButton.swift in Sources */,
+				5638FC4F22744CDC00CB4071 /* TLIListTableViewCell.swift in Sources */,
+				5638FC5C22744CDC00CB4071 /* TLIMenuColorsView.swift in Sources */,
+				5638FC9622744F4000CB4071 /* TLIAddTaskViewDelegate.swift in Sources */,
+				5638FCC52274500A00CB4071 /* UIImage+Tinylog.swift in Sources */,
+				5638FCB722744F9F00CB4071 /* TLINotification+CoreDataProperties.swift in Sources */,
+				5638FC5D22744CDC00CB4071 /* TLITouchableView.swift in Sources */,
+				5638FCBA22744FC100CB4071 /* TLICoreDataTableViewController.swift in Sources */,
+				5638FC8C22744F2200CB4071 /* PlistInfo.swift in Sources */,
+				5638FCB422744F9F00CB4071 /* TLITag.swift in Sources */,
+				5638FCAF22744F9F00CB4071 /* TLITask+CoreDataProperties.swift in Sources */,
+				5638FC5E22744CDC00CB4071 /* SGTextField.swift in Sources */,
+				5638FC5122744CDC00CB4071 /* TLITableViewCell.swift in Sources */,
+				5638FC5022744CDC00CB4071 /* TLITextFieldCell.swift in Sources */,
+				5638FC5622744CDC00CB4071 /* TLICloseButton.swift in Sources */,
 				5609F64E226B4EC700F6AF0E /* Environment.swift in Sources */,
-				564E55531E8AE011008D5D85 /* StepSliderControl.m in Sources */,
-				5609F650226B4EED00F6AF0E /* Language.swift in Sources */,
-				56AC8A951E8C0FCD002EBA59 /* DispatchQueue+Tinylog.swift in Sources */,
-				564E558C1E8AE2D2008D5D85 /* TLISetupViewController.swift in Sources */,
+				5638FCC72274500A00CB4071 /* String+Tinylog.swift in Sources */,
+				5638FC9722744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift in Sources */,
+				5638FC7922744D8200CB4071 /* TLIGroupedTableViewController.swift in Sources */,
+				5638FC5A22744CDC00CB4071 /* ListsFooterView.swift in Sources */,
+				5638FCCF2274501700CB4071 /* TLIAppDelegate.swift in Sources */,
 				565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */,
-				562FAC3D1F4DE73A0008C7D8 /* PlistInfo.swift in Sources */,
-				564E55A51E8AE327008D5D85 /* TLICheckBoxButton.swift in Sources */,
-				564E55C21E8AE411008D5D85 /* TLISettingsTableViewController.swift in Sources */,
-				564E55591E8AE05E008D5D85 /* TLIDeviceInfo.m in Sources */,
-				564E55A61E8AE327008D5D85 /* TLICircleButton.swift in Sources */,
-				564E557B1E8AE24F008D5D85 /* TLISplitViewController.swift in Sources */,
-				564E55B31E8AE338008D5D85 /* TLIHelpTableViewCell.swift in Sources */,
-				564E55451E8ADE48008D5D85 /* TLIList.swift in Sources */,
-				564E559A1E8AE30C008D5D85 /* TLITouchableView.swift in Sources */,
+				5638FC7A22744D8200CB4071 /* TLISettingsTableViewController.swift in Sources */,
+				5638FC8222744D8200CB4071 /* TLIArchiveViewController.swift in Sources */,
+				5638FC5722744CDC00CB4071 /* TLICheckBoxButton.swift in Sources */,
 				56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */,
-				564E55781E8AE238008D5D85 /* TLIArchiveViewController.swift in Sources */,
-				564E55391E8ADE30008D5D85 /* TLICoreDataTableViewController.swift in Sources */,
-				564E55731E8AE217008D5D85 /* TLIResultsTableViewController.swift in Sources */,
-				564E554D1E8ADE48008D5D85 /* TLITask.swift in Sources */,
-				564E55631E8AE152008D5D85 /* TLIGroupedTableViewController.swift in Sources */,
-				564E55941E8AE30C008D5D85 /* SGTextField.swift in Sources */,
-				564E55871E8AE287008D5D85 /* TLITasksViewController.swift in Sources */,
-				564E55BB1E8AE34B008D5D85 /* TLIKeyboardBar.swift in Sources */,
-				564E55991E8AE30C008D5D85 /* TLITasksFooterView.swift in Sources */,
-				564E55771E8AE238008D5D85 /* TLIArchiveTasksViewController.swift in Sources */,
-				56AC7AB31E8A3549006AD29B /* UIImage+Tinylog.swift in Sources */,
+				5638FC4E22744CDC00CB4071 /* TLITaskTableViewCell.swift in Sources */,
+				5638FC5522744CDC00CB4071 /* TLIArchiveButton.swift in Sources */,
+				5638FC9B22744F7C00CB4071 /* Language.swift in Sources */,
+				5638FCC92274500A00CB4071 /* DispatchQueue+Tinylog.swift in Sources */,
+				5638FCB322744F9F00CB4071 /* TLITask.swift in Sources */,
+				5638FC5322744CDC00CB4071 /* TLIExportTasksButton.swift in Sources */,
+				5638FCCB2274500A00CB4071 /* UIFont+Tinylog.swift in Sources */,
 				561A25BE2116EBE500B28644 /* Secrets.swift in Sources */,
-				564E552D1E8ADD17008D5D85 /* TLISettingsFontPickerViewController.swift in Sources */,
-				564E55461E8ADE48008D5D85 /* TLIList+CoreDataProperties.swift in Sources */,
-				564E55A81E8AE327008D5D85 /* TLIExportTasksButton.swift in Sources */,
-				564E55961E8AE30C008D5D85 /* TLIListsFooterView.swift in Sources */,
-				56AC7AB01E8A3549006AD29B /* String+Tinylog.swift in Sources */,
-				56AC7AB11E8A3549006AD29B /* UIColor+Tinylog.swift in Sources */,
-				56119AEF226F916A00F8D798 /* UserDefaultsType.swift in Sources */,
-				564E555D1E8AE0C8008D5D85 /* TLITextField.m in Sources */,
-				564E555A1E8AE05E008D5D85 /* TLIDrawingUtils.m in Sources */,
-				56AC7AB21E8A3549006AD29B /* UIFont+Tinylog.swift in Sources */,
-				564E55C61E8AE43E008D5D85 /* Utils.swift in Sources */,
-				564E554A1E8ADE48008D5D85 /* TLINotification+CoreDataProperties.swift in Sources */,
-				564E556B1E8AE1EF008D5D85 /* TLIEditTaskViewControllerDelegate.swift in Sources */,
-				564E55B71E8AE338008D5D85 /* TLITaskTableViewCell.swift in Sources */,
-				564E55951E8AE30C008D5D85 /* TLIAddTaskView.swift in Sources */,
-				564E55481E8ADE48008D5D85 /* TLIMention+CoreDataProperties.swift in Sources */,
-				565454DD1F4581C40076BD08 /* UIViewController+Tinylog.swift in Sources */,
-				564E55471E8ADE48008D5D85 /* TLIMention.swift in Sources */,
-				564E55A71E8AE327008D5D85 /* TLICloseButton.swift in Sources */,
-				564E55B81E8AE338008D5D85 /* TLITextFieldCell.swift in Sources */,
-				56AC7AA51E8A342F006AD29B /* TLIAppDelegate.swift in Sources */,
-				564E55C01E8AE411008D5D85 /* TLIAboutViewController.swift in Sources */,
-				564E556A1E8AE1EF008D5D85 /* TLIAddTaskViewDelegate.swift in Sources */,
-				564E55971E8AE30C008D5D85 /* TLIMenuColorsView.swift in Sources */,
-				56AC7AA61E8A342F006AD29B /* TLIConstants.swift in Sources */,
-				564E55861E8AE287008D5D85 /* TLIEditTaskViewController.swift in Sources */,
+				5638FCC62274500A00CB4071 /* UIColor+Tinylog.swift in Sources */,
+				5638FC6022744CDC00CB4071 /* TLIKeyboardBar.swift in Sources */,
+				5638FC8622744D8200CB4071 /* SetupViewController.swift in Sources */,
+				5638FC6122744CDC00CB4071 /* TLIAddTaskView.swift in Sources */,
+				5638FC8A22744ECF00CB4071 /* Utils.swift in Sources */,
+				5638FC7B22744D8200CB4071 /* TLIHelpTableViewController.swift in Sources */,
+				5638FC7F22744D8200CB4071 /* TLIEditTaskViewController.swift in Sources */,
+				5638FC8322744D8200CB4071 /* ResultsTableViewController.swift in Sources */,
+				5638FC9522744F4000CB4071 /* TLITextFieldCellDelegate.swift in Sources */,
+				5638FC7D22744D8200CB4071 /* TLISettingsFontPickerViewController.swift in Sources */,
+				5638FC9322744F4000CB4071 /* UserDefaultsType.swift in Sources */,
+				5638FC8722744D8200CB4071 /* TLISplitViewController.swift in Sources */,
+				5638FC5822744CDC00CB4071 /* TLIAddListButton.swift in Sources */,
+				5638FCB622744F9F00CB4071 /* TLIMention.swift in Sources */,
+				5638FC4D22744CDC00CB4071 /* TLIHelpTableViewCell.swift in Sources */,
+				5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */,
+				5638FC7C22744D8200CB4071 /* TLIAboutViewController.swift in Sources */,
+				5638FCB022744F9F00CB4071 /* TLINotification.swift in Sources */,
+				5638FC9A22744F7C00CB4071 /* LocalizedString.swift in Sources */,
+				5638FC8022744D8200CB4071 /* TLITasksViewController.swift in Sources */,
+				5638FC9422744F4000CB4071 /* TLIAddListViewControllerDelegate.swift in Sources */,
+				5638FCD82274503500CB4071 /* TLISyncManager.m in Sources */,
+				5638FCA122744F8800CB4071 /* TLIDrawingUtils.m in Sources */,
+				5638FCB122744F9F00CB4071 /* TLIList+CoreDataProperties.swift in Sources */,
+				5638FC7E22744D8200CB4071 /* TLITextSizeViewController.swift in Sources */,
+				5638FC4C22744CDC00CB4071 /* TLIGroupedTableViewCell.swift in Sources */,
+				5638FCAE22744F9F00CB4071 /* TLIMention+CoreDataProperties.swift in Sources */,
+				5638FCB522744F9F00CB4071 /* TLIList.swift in Sources */,
+				5638FC5922744CDC00CB4071 /* TLITextField.m in Sources */,
+				5638FC8522744D8200CB4071 /* AddListViewController.swift in Sources */,
+				5638FCC82274500A00CB4071 /* NSDate+Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,6 +1017,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */,
+				5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */,
 				5621958D226A5D3F00749A31 /* ListsViewControllerTests.swift in Sources */,
 				56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */,
 				5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */,

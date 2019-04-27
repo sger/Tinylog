@@ -1,5 +1,5 @@
 //
-//  TLISetupViewController.swift
+//  SetupViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 17/10/15.
@@ -10,55 +10,55 @@ import UIKit
 import PureLayout
 import SVProgressHUD
 
-class TLISetupViewController: UIViewController {
+class SetupViewController: UIViewController {
 
     var didSetupConstraints = false
 
-    lazy var subtitleLabel: UILabel? = {
+    lazy var subtitleLabel: UILabel = {
         let subtitleLabel: UILabel = UILabel.newAutoLayout()
         subtitleLabel.lineBreakMode = .byTruncatingTail
         subtitleLabel.numberOfLines = 1
         subtitleLabel.textAlignment = .center
         subtitleLabel.textColor = UIColor.tinylogMainColor
         subtitleLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 34.0)
-        subtitleLabel.text = "iCloud for Tinylog"
+        subtitleLabel.text = localizedString(key: "Sync")
         return subtitleLabel
     }()
 
-    lazy var descriptionLabel: UILabel? = {
+    lazy var descriptionLabel: UILabel = {
         let descriptionLabel: UILabel = UILabel.newAutoLayout()
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.numberOfLines = 3
         descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = UIColor.tinylogMainColor
         descriptionLabel.font = UIFont(name: "HelveticaNeue", size: 28.0)
-        descriptionLabel.text = "iCloud keeps your lists up to date on your iPhone and iPad."
+        descriptionLabel.text = localizedString(key: "Sync_description")
         return descriptionLabel
     }()
 
     lazy var notNowButton: TLIRoundedButton = {
         let notNowButton = TLIRoundedButton.newAutoLayout()
-        notNowButton.setTitle("Later", for: UIControl.State())
+        notNowButton.setTitle(localizedString(key: "Later"), for: UIControl.State())
         notNowButton.backgroundColor = UIColor.tinylogTextColor
         notNowButton.addTarget(
             self,
-            action: #selector(TLISetupViewController.disableiCloudAndDismiss(_:)),
+            action: #selector(SetupViewController.disableiCloudAndDismiss(_:)),
             for: UIControl.Event.touchDown)
         return notNowButton
     }()
 
     lazy var useiCloudButton: TLIRoundedButton = {
         let useiCloudButton = TLIRoundedButton.newAutoLayout()
-        useiCloudButton.setTitle("Use iCloud", for: UIControl.State())
+        useiCloudButton.setTitle(localizedString(key: "Use_iCloud"), for: UIControl.State())
         useiCloudButton.addTarget(
             self,
-            action: #selector(TLISetupViewController.enableiCloudAndDismiss(_:)),
+            action: #selector(SetupViewController.enableiCloudAndDismiss(_:)),
             for: UIControl.Event.touchDown)
         useiCloudButton.backgroundColor = UIColor.tinylogMainColor
         return useiCloudButton
     }()
 
-    lazy var cloudImageView: UIImageView? = {
+    lazy var cloudImageView: UIImageView = {
         let cloudImageView = UIImageView(image: UIImage(named: "cloud"))
         cloudImageView.translatesAutoresizingMaskIntoConstraints = false
         return cloudImageView
@@ -67,51 +67,45 @@ class TLISetupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        self.view.backgroundColor = UIColor(
-            red: 250.0 / 255.0,
-            green: 250.0 / 255.0,
-            blue: 250.0 / 255.0,
-            alpha: 1.0)
+        self.view.backgroundColor = UIColor.tinylogLightGray
     }
 
     override func loadView() {
         self.view = UIView()
-        self.view.addSubview(cloudImageView!)
+        self.view.addSubview(cloudImageView)
         self.view.addSubview(notNowButton)
         self.view.addSubview(useiCloudButton)
-        self.view.addSubview(subtitleLabel!)
-        self.view.addSubview(descriptionLabel!)
+        self.view.addSubview(subtitleLabel)
+        self.view.addSubview(descriptionLabel)
         self.view.setNeedsUpdateConstraints()
     }
 
     override func updateViewConstraints() {
-
         if !didSetupConstraints {
 
-            cloudImageView!.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: self.view, withOffset: -90.0)
-            cloudImageView!.autoAlignAxis(ALAxis.vertical, toSameAxisOf: self.view, withOffset: 0.0)
+            cloudImageView.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: self.view, withOffset: -90.0)
+            cloudImageView.autoAlignAxis(ALAxis.vertical, toSameAxisOf: self.view, withOffset: 0.0)
 
-            subtitleLabel!.autoPinEdge(toSuperviewEdge: .leading, withInset: 20.0)
-            subtitleLabel!.autoPinEdge(toSuperviewEdge: .trailing, withInset: 20.0)
-            subtitleLabel!.autoPinEdge(ALEdge.top, to: ALEdge.bottom, of: cloudImageView!, withOffset: 20.0)
+            subtitleLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 20.0)
+            subtitleLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 20.0)
+            subtitleLabel.autoPinEdge(ALEdge.top, to: ALEdge.bottom, of: cloudImageView, withOffset: 20.0)
 
-            descriptionLabel!.autoPinEdge(toSuperviewEdge: .leading, withInset: 20.0)
-            descriptionLabel!.autoPinEdge(toSuperviewEdge: .trailing, withInset: 20.0)
-            descriptionLabel!.autoPinEdge(ALEdge.top, to: ALEdge.bottom, of: subtitleLabel!, withOffset: 20.0)
+            descriptionLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 20.0)
+            descriptionLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 20.0)
+            descriptionLabel.autoPinEdge(ALEdge.top, to: ALEdge.bottom, of: subtitleLabel, withOffset: 20.0)
 
             notNowButton.autoMatch(.width, to: .width, of: self.view, withMultiplier: 0.5)
-            notNowButton.autoSetDimension(.height, toSize: 55.0)
+            notNowButton.autoSetDimension(.height, toSize: 60.0)
             notNowButton.autoPinEdge(toSuperviewEdge: .left)
             notNowButton.autoPinEdge(toSuperviewEdge: .bottom)
 
             useiCloudButton.autoMatch(.width, to: .width, of: self.view, withMultiplier: 0.5)
-            useiCloudButton.autoSetDimension(.height, toSize: 55.0)
+            useiCloudButton.autoSetDimension(.height, toSize: 60.0)
             useiCloudButton.autoPinEdge(toSuperviewEdge: .bottom)
             useiCloudButton.autoPinEdge(.left, to: .right, of: notNowButton)
 
             didSetupConstraints = true
         }
-
         super.updateViewConstraints()
     }
 
@@ -129,18 +123,16 @@ class TLISetupViewController: UIViewController {
                     SVProgressHUD.setForegroundColor(UIColor.white)
                     SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0)!)
                     SVProgressHUD.showError(
-                        withStatus: "You are not logged in to iCloud.Tap Settings > iCloud to login.")
+                        withStatus: localizedString(key: "Not_logged_in"))
                 }
             }
         })
-
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func disableiCloudAndDismiss(_ button: TLIRoundedButton) {
         Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kSetupScreen)
         Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kTLISyncMode)
-
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }

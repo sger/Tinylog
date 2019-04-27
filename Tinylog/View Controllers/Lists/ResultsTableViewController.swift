@@ -1,5 +1,5 @@
 //
-//  TLIResultsTableViewController.swift
+//  ResultsTableViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLIResultsTableViewController: TLICoreDataTableViewController {
+class ResultsTableViewController: TLICoreDataTableViewController {
 
     let kCellIdentifier = "CellIdentifier"
     var managedObjectContext: NSManagedObjectContext!
