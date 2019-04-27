@@ -1,5 +1,5 @@
 //
-//  TLIAddListViewController.swift
+//  AddListViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
+class AddListViewController: UITableViewController, UITextFieldDelegate {
 
     enum Mode: String {
         case create
@@ -43,12 +43,12 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
             title: "Cancel",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(TLIAddListViewController.cancel(_:)))
+            action: #selector(AddListViewController.cancel(_:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Save",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(TLIAddListViewController.save(_:)))
+            action: #selector(AddListViewController.save(_:)))
 
         menuColorsView = TLIMenuColorsView(
             frame: CGRect(x: 12.0, y: 200.0, width: self.view.frame.width, height: 51.0))

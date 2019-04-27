@@ -33,7 +33,7 @@ class ListsViewControllerTests: XCTestCase {
         list.createdAt = Date()
         try! coreDataManager.managedObjectContext.save()
 
-        let vc = TLIListsViewController()
+        let vc = ListsViewController()
         vc.managedObjectContext = coreDataManager.managedObjectContext
 
         assertSnapshot(matching: vc, as: .image(on: .iPhoneX(.landscape)))
@@ -54,24 +54,34 @@ class ListsViewControllerTests: XCTestCase {
 
         testWithEnvironment(language: .de, block: {
 
-            let vc = TLIListsViewController()
+            let vc = ListsViewController()
             vc.managedObjectContext = coreDataManager.managedObjectContext
 
             assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
             assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneX(.portrait)))
         })
-
-//        combos(Language.languages, [Device.phone4_7inch, Device.phone5_8inch, Device.pad]).forEach { language, device in
-//            testWithEnvironment(language: language) {
-//
-//                let vc = TLIListsViewController()
-//                vc.managedObjectContext = coreDataManager.managedObjectContext
-//                vc.viewWillAppear(true)
-//
-//                let (_, _) = traitControllers(device: device, orientation: .portrait, child: vc)
-//
-//                assertSnapshot(matching: vc, as: .image, named: "lang_\(language)_device_\(device)")
-//            }
-//        }
+    }
+    
+    func testListViewControllerWithFont() {
+        
+        let list = NSEntityDescription.insertNewObject(forEntityName: "List", into: coreDataManager.managedObjectContext) as! TLIList
+        list.title = "my list"
+        list.position = 1
+        list.color = "#6a6de2"
+        list.createdAt = Date()
+        try! coreDataManager.managedObjectContext.save()
+        
+        let userDefaults = MockUserDefaults()
+        userDefaults.set(21.0, forKey: TLIUserDefaults.kFontSize)
+        userDefaults.set(kTLIFontPalatinoKey, forKey: String(kTLIFontDefaultsKey))
+        
+        testWithEnvironment(language: .en, userDefaults: userDefaults, block: {
+            
+            let vc = ListsViewController()
+            vc.managedObjectContext = coreDataManager.managedObjectContext
+            
+            assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
+            assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneX(.portrait)))
+        })
     }
 }

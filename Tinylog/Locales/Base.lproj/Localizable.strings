@@ -6,5 +6,14 @@
   Copyright © 2019 Spiros Gerokostas. All rights reserved.
 */
 
+// TLIListsViewController
 "My_Lists" = "My Lists";
 "Update_lists" = "Last Updated %@";
+
+// TLISetupViewController
+"Sync" = "iCloud for Tinylog";
+"Sync_description" = "iCloud keeps your lists up to date on your iPhone and iPad.";
+"Later" = "Later";
+"Use_iCloud" = "Use iCloud";
+"Not_logged_in" = "You are not logged in to iCloud.Tap Settings > iCloud to login.";
+

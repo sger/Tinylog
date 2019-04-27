@@ -1,17 +1,20 @@
 //
-//  TLIListsFooterView.swift
+//  ListsFooterView.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
+
 import UIKit
 import TTTAttributedLabel
 
-class TLIListsFooterView: UIView {
+class ListsFooterView: UIView {
+    
+    let footerView: UIView = UIView.newAutoLayout()
+    let footHeight: CGFloat = 60
 
-    var infoLabel: TTTAttributedLabel? = {
+    var infoLabel: TTTAttributedLabel = {
         let infoLabel = TTTAttributedLabel.newAutoLayout()
         infoLabel.font = UIFont.regularFontWithSize(16.0)
         infoLabel.textColor = UIColor.tinylogTextColor
@@ -29,18 +32,15 @@ class TLIListsFooterView: UIView {
             alpha: 1.0)
         return borderLineView
     }()
-
-    var currentText: String?
-    let footerView: UIView = UIView.newAutoLayout()
-    let footHeight: CGFloat = 51
+    
     var didSetupContraints = false
 
-    lazy var addListButton: TLIAddListButton? = {
+    lazy var addListButton: TLIAddListButton = {
         let addListButton = TLIAddListButton.newAutoLayout()
         return addListButton
     }()
 
-    lazy var archiveButton: TLIArchiveButton? = {
+    lazy var archiveButton: TLIArchiveButton = {
         let archiveButton = TLIArchiveButton.newAutoLayout()
         return archiveButton
     }()
@@ -51,31 +51,25 @@ class TLIListsFooterView: UIView {
         backgroundColor = UIColor.tinylogLighterGray
 
         footerView.backgroundColor = UIColor.tinylogLighterGray
-        self.addSubview(footerView)
+        addSubview(footerView)
 
-        self.addSubview(borderLineView)
-        self.addSubview(infoLabel!)
-        self.addSubview(addListButton!)
-        self.addSubview(archiveButton!)
+        addSubview(borderLineView)
+        addSubview(infoLabel)
+        addSubview(addListButton)
+        addSubview(archiveButton)
 
-        updateInfoLabel("Last Updated at 10:00:00")
+        updateInfoLabel("")
 
         setNeedsUpdateConstraints()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     func updateInfoLabel(_ str: String) {
-        currentText = str
-        infoLabel?.text = str
-
+        infoLabel.text = str
         setNeedsUpdateConstraints()
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     override func updateConstraints() {
@@ -92,16 +86,16 @@ class TLIListsFooterView: UIView {
             borderLineView.autoSetDimension(.height, toSize: 0.5)
             borderLineView.autoPinEdge(toSuperviewEdge: .top)
 
-            addListButton?.autoSetDimensions(to: CGSize(width: 28.0, height: 28.0))
-            addListButton?.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
-            addListButton?.autoPinEdge(toSuperviewEdge: .left, withInset: padding)
+            addListButton.autoSetDimensions(to: CGSize(width: 28.0, height: 28.0))
+            addListButton.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            addListButton.autoPinEdge(toSuperviewEdge: .left, withInset: padding)
 
-            archiveButton?.autoSetDimensions(to: CGSize(width: 28.0, height: 26.0))
-            archiveButton?.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
-            archiveButton?.autoPinEdge(toSuperviewEdge: .right, withInset: padding)
+            archiveButton.autoSetDimensions(to: CGSize(width: 28.0, height: 26.0))
+            archiveButton.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            archiveButton.autoPinEdge(toSuperviewEdge: .right, withInset: padding)
 
-            infoLabel?.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
-            infoLabel?.autoAlignAxis(.vertical, toSameAxisOf: footerView)
+            infoLabel.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            infoLabel.autoAlignAxis(.vertical, toSameAxisOf: footerView)
 
             didSetupContraints = true
         }

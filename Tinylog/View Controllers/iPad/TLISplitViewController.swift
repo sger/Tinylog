@@ -9,12 +9,12 @@
 import UIKit
 
 class TLISplitViewController: UISplitViewController, UISplitViewControllerDelegate {
-    var listsViewController: TLIListsViewController?
+    var listsViewController: ListsViewController?
     var listViewController: TLITasksViewController?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        listsViewController = TLIListsViewController()
+        listsViewController = ListsViewController()
         listsViewController?.managedObjectContext = TLIAppDelegate.sharedAppDelegate().coreDataManager.managedObjectContext
         listViewController = TLITasksViewController()
 

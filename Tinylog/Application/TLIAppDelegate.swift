@@ -117,7 +117,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
             let splitViewController = TLISplitViewController()
             self.window?.rootViewController = splitViewController
         } else {
-            let listsViewController: TLIListsViewController = TLIListsViewController()
+            let listsViewController: ListsViewController = ListsViewController()
             listsViewController.managedObjectContext = coreDataManager.managedObjectContext//managedObjectContext
             let nc: UINavigationController = UINavigationController(rootViewController: listsViewController)
             self.window?.rootViewController = nc
@@ -228,7 +228,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
         switch identifier {
         case .createNewList:
             if let navigationController = window?.rootViewController as? UINavigationController {
-                if let vc = navigationController.viewControllers[0] as? TLIListsViewController {
+                if let vc = navigationController.viewControllers[0] as? ListsViewController {
                     vc.addNewList(nil)
                 }
             }
