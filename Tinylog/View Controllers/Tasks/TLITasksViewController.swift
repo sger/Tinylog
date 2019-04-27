@@ -249,7 +249,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
             self,
             selector: #selector(TLITasksViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
+                rawValue: TLINotifications.kTLIFontDidChangeNotification),
             object: nil)
     }
 

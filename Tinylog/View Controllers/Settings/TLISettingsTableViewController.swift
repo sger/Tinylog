@@ -48,7 +48,7 @@ class TLISettingsTableViewController: UITableViewController,
             self,
             selector: #selector(TLISettingsTableViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
+                rawValue: TLINotifications.kTLIFontDidChangeNotification),
                 object: nil)
     }
 

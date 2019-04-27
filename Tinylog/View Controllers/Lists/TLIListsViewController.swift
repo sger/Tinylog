@@ -612,7 +612,7 @@ extension TLIListsViewController {
             self,
             selector: #selector(TLIListsViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
+                rawValue: TLINotifications.kTLIFontDidChangeNotification),
             object: nil)
         NotificationCenter.default.addObserver(
             self,

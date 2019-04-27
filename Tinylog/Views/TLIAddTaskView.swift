@@ -46,13 +46,10 @@ class TLIAddTaskView: UIView, UITextFieldDelegate {
 
         self.addSubview(closeButton!)
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(TLIAddTaskView.updateFonts),
-            name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
-                object: nil)
-
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(TLIAddTaskView.updateFonts),
+                                               name: NSNotification.Name(rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                                               object: nil)
         setNeedsUpdateConstraints()
     }
 

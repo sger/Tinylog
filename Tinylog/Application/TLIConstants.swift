@@ -7,8 +7,8 @@
 //
 
 struct TLINotifications {
-    static var kTLIFontDidChangeNotification: NSString = "TLIFontDidChangeNotification"
-    static var kTLIThemeDidChangeNotification: NSString = "TLIThemeDidChangeNotification"
+    static var kTLIFontDidChangeNotification = "TLIFontDidChangeNotification"
+    static var kTLIThemeDidChangeNotification = "TLIThemeDidChangeNotification"
 }
 
 struct TLIUserDefaults {
