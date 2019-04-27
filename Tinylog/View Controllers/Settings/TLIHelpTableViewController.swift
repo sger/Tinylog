@@ -91,7 +91,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
             self,
             selector: #selector(TLIHelpTableViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
+                rawValue: TLINotifications.kTLIFontDidChangeNotification),
             object: nil)
     }
 

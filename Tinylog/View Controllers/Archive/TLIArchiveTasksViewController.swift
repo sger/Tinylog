@@ -186,7 +186,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
             self,
             selector: #selector(TLIArchiveTasksViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String), object: nil)
+                rawValue: TLINotifications.kTLIFontDidChangeNotification), object: nil)
     }
 
     @objc func updateFonts() {

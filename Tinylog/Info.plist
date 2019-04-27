@@ -19,9 +19,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.2.5</string>
 	<key>CFBundleVersion</key>
-	<string>51</string>
+	<string>53</string>
 	<key>CommitShortHash</key>
-	<string>df14faf</string>
+	<string>d83ea55</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>

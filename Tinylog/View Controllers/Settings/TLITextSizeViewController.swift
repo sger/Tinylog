@@ -52,7 +52,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
         super.viewDidDisappear(animated)
         NotificationCenter.default.post(
             name: Notification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
+                rawValue: TLINotifications.kTLIFontDidChangeNotification),
                 object: nil)
     }
     // swiftlint:disable cyclomatic_complexity
@@ -155,7 +155,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
 
         NotificationCenter.default.post(
             name: Notification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
+                rawValue: TLINotifications.kTLIFontDidChangeNotification),
                 object: nil)
 
         self.tableView.reloadData()

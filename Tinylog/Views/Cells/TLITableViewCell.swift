@@ -39,16 +39,14 @@ class TLITableViewCell: UITableViewCell {
             self.setNeedsLayout()
             textField?.becomeFirstResponder()
 
-            UIView.animate(
-                withDuration: TimeInterval(0.4),
-                delay: TimeInterval(0.0),
-                options: UIView.AnimationOptions(),
-                animations: { () -> Void in
-                    self.textField?.alpha = 1
-                    return
-                }, completion: { (_:Bool) -> Void in
-            })
-
+            UIView.animate(withDuration: TimeInterval(0.4),
+                           delay: TimeInterval(0.0),
+                           options: UIView.AnimationOptions(),
+                           animations: { () -> Void in
+                                self.textField?.alpha = 1
+                                return
+                            }, completion: { (_:Bool) -> Void in
+                        })
         } else {
             textField?.resignFirstResponder()
             UIView.animate(
@@ -80,12 +78,10 @@ class TLITableViewCell: UITableViewCell {
         editingLongPressGestureRecognizer?.delegate = self
         self.addGestureRecognizer(editingLongPressGestureRecognizer!)
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(TLITableViewCell.updateFonts),
-            name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
-                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(TLITableViewCell.updateFonts),
+                                               name: NSNotification.Name(rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                                               object: nil)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -128,9 +124,8 @@ class TLITableViewCell: UITableViewCell {
         self.textLabel!.font = UIFont.tinylogFontOfSize(18.0)
     }
 
-    override func gestureRecognizer(
-        _ gestureRecognizer: UIGestureRecognizer,
-        shouldReceive touch: UITouch) -> Bool {
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                                    shouldReceive touch: UITouch) -> Bool {
         return touch.view!.isKind(of: UIControl.self) == false
     }
 

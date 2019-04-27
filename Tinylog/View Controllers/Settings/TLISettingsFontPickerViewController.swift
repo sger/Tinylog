@@ -205,7 +205,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
 
         NotificationCenter.default.post(
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification as String),
+                rawValue: TLINotifications.kTLIFontDidChangeNotification),
                 object: nil)
     }
 }
