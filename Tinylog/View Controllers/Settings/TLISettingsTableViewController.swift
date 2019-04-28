@@ -48,7 +48,7 @@ class TLISettingsTableViewController: UITableViewController,
             self,
             selector: #selector(TLISettingsTableViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
                 object: nil)
     }
 
@@ -94,7 +94,7 @@ class TLISettingsTableViewController: UITableViewController,
                 cell.accessoryType = UITableViewCell.AccessoryType.none
 
                 let userDefaults = Environment.current.userDefaults
-                let syncModeValue = userDefaults.bool(forKey: TLIUserDefaults.kTLISyncMode)
+                let syncModeValue = userDefaults.bool(forKey: EnvUserDefaults.syncMode)
 
                 if syncModeValue {
                     switchMode.setOn(true, animated: false)
@@ -113,12 +113,12 @@ class TLISettingsTableViewController: UITableViewController,
                 cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0)
 
                 let userDefaults = Environment.current.userDefaults
-                let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
+                let useSystemFontSize = userDefaults.bool(forKey: EnvUserDefaults.systemFontSize)
 
                 if useSystemFontSize {
                     cell.detailTextLabel?.text = "System Size"
                 } else {
-                    let fontSize = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
+                    let fontSize = userDefaults.double(forKey: EnvUserDefaults.fontSize)
                     let strFontSize = NSString(format: "%.f", fontSize)
                     cell.detailTextLabel?.text = strFontSize as String
                 }
@@ -142,7 +142,7 @@ class TLISettingsTableViewController: UITableViewController,
         let mode: UISwitch = sender as UISwitch
         let value: NSString = mode.isOn == true ? "on" : "off"
 
-        Environment.current.userDefaults.set(mode.isOn, forKey: TLIUserDefaults.kTLISyncMode)
+        Environment.current.userDefaults.set(mode.isOn, forKey: EnvUserDefaults.syncMode)
 
         Utils.delay(0.2, closure: { () -> Void in
             let syncManager = TLISyncManager.shared()

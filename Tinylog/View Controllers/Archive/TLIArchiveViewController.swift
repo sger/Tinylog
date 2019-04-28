@@ -32,8 +32,8 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class TLIArchiveViewController: TLICoreDataTableViewController,
-    UITextFieldDelegate, TLIAddListViewControllerDelegate,
+class TLIArchiveViewController: CoreDataTableViewController,
+    UITextFieldDelegate, AddListViewControllerDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
     struct RestorationKeys {
@@ -112,7 +112,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
             width: self.view.frame.size.width,
             height: self.view.frame.size.height)
 
-        self.tableView?.register(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        self.tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = 61
 
@@ -164,7 +164,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
             self,
             selector: #selector(TLIArchiveViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
             object: nil)
 
         NotificationCenter.default.addObserver(
@@ -384,7 +384,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! TLIListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! ListTableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
 
         let success = isEstimatedRowHeightInCache(indexPath)
@@ -401,7 +401,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
-        let listTableViewCell: TLIListTableViewCell = cell as! TLIListTableViewCell
+        let listTableViewCell: ListTableViewCell = cell as! ListTableViewCell
         listTableViewCell.currentList = list
     }
 
@@ -509,7 +509,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController,
     func willPresentSearchController(_ searchController: UISearchController) {
         topBarView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 20.0))
         topBarView?.backgroundColor = UIColor.tinylogLightGray
-        TLIAppDelegate.sharedAppDelegate().window?.rootViewController?.view.addSubview(topBarView!)
+        AppDelegate.sharedAppDelegate().window?.rootViewController?.view.addSubview(topBarView!)
     }
 
     func didPresentSearchController(_ searchController: UISearchController) {}

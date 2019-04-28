@@ -14,16 +14,15 @@
 		5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */; };
 		56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataManager.swift */; };
 		561A25BE2116EBE500B28644 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561A25BD2116EBE400B28644 /* Secrets.swift */; };
-		5621958D226A5D3F00749A31 /* ListsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621958C226A5D3F00749A31 /* ListsViewControllerTests.swift */; };
 		5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5628E8CD1E85898700AAFD20 /* Assets.xcassets */; };
 		5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */; };
 		5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */; };
-		5638FC4C22744CDC00CB4071 /* TLIGroupedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3122744CDC00CB4071 /* TLIGroupedTableViewCell.swift */; };
-		5638FC4D22744CDC00CB4071 /* TLIHelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3222744CDC00CB4071 /* TLIHelpTableViewCell.swift */; };
-		5638FC4E22744CDC00CB4071 /* TLITaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3322744CDC00CB4071 /* TLITaskTableViewCell.swift */; };
-		5638FC4F22744CDC00CB4071 /* TLIListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3422744CDC00CB4071 /* TLIListTableViewCell.swift */; };
+		5638FC4C22744CDC00CB4071 /* GroupedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */; };
+		5638FC4D22744CDC00CB4071 /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3222744CDC00CB4071 /* HelpTableViewCell.swift */; };
+		5638FC4E22744CDC00CB4071 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3322744CDC00CB4071 /* TaskTableViewCell.swift */; };
+		5638FC4F22744CDC00CB4071 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3422744CDC00CB4071 /* ListTableViewCell.swift */; };
 		5638FC5022744CDC00CB4071 /* TLITextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3522744CDC00CB4071 /* TLITextFieldCell.swift */; };
-		5638FC5122744CDC00CB4071 /* TLITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3622744CDC00CB4071 /* TLITableViewCell.swift */; };
+		5638FC5122744CDC00CB4071 /* GenericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3622744CDC00CB4071 /* GenericTableViewCell.swift */; };
 		5638FC5222744CDC00CB4071 /* TLICircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3822744CDC00CB4071 /* TLICircleButton.swift */; };
 		5638FC5322744CDC00CB4071 /* TLIExportTasksButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3922744CDC00CB4071 /* TLIExportTasksButton.swift */; };
 		5638FC5422744CDC00CB4071 /* TLIRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3A22744CDC00CB4071 /* TLIRoundedButton.swift */; };
@@ -58,7 +57,7 @@
 		5638FC8A22744ECF00CB4071 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8922744ECF00CB4071 /* Utils.swift */; };
 		5638FC8C22744F2200CB4071 /* PlistInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8B22744F2200CB4071 /* PlistInfo.swift */; };
 		5638FC9322744F4000CB4071 /* UserDefaultsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8E22744F4000CB4071 /* UserDefaultsType.swift */; };
-		5638FC9422744F4000CB4071 /* TLIAddListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8F22744F4000CB4071 /* TLIAddListViewControllerDelegate.swift */; };
+		5638FC9422744F4000CB4071 /* AddListViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC8F22744F4000CB4071 /* AddListViewControllerDelegate.swift */; };
 		5638FC9522744F4000CB4071 /* TLITextFieldCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9022744F4000CB4071 /* TLITextFieldCellDelegate.swift */; };
 		5638FC9622744F4000CB4071 /* TLIAddTaskViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9122744F4000CB4071 /* TLIAddTaskViewDelegate.swift */; };
 		5638FC9722744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC9222744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift */; };
@@ -76,7 +75,7 @@
 		5638FCB522744F9F00CB4071 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCAB22744F9F00CB4071 /* TLIList.swift */; };
 		5638FCB622744F9F00CB4071 /* TLIMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCAC22744F9F00CB4071 /* TLIMention.swift */; };
 		5638FCB722744F9F00CB4071 /* TLINotification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCAD22744F9F00CB4071 /* TLINotification+CoreDataProperties.swift */; };
-		5638FCBA22744FC100CB4071 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCB922744FC100CB4071 /* TLICoreDataTableViewController.swift */; };
+		5638FCBA22744FC100CB4071 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCB922744FC100CB4071 /* CoreDataTableViewController.swift */; };
 		5638FCC52274500A00CB4071 /* UIImage+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCBD2274500A00CB4071 /* UIImage+Tinylog.swift */; };
 		5638FCC62274500A00CB4071 /* UIColor+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCBE2274500A00CB4071 /* UIColor+Tinylog.swift */; };
 		5638FCC72274500A00CB4071 /* String+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCBF2274500A00CB4071 /* String+Tinylog.swift */; };
@@ -84,11 +83,12 @@
 		5638FCC92274500A00CB4071 /* DispatchQueue+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC12274500A00CB4071 /* DispatchQueue+Tinylog.swift */; };
 		5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */; };
 		5638FCCB2274500A00CB4071 /* UIFont+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */; };
-		5638FCCF2274501700CB4071 /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCD2274501700CB4071 /* TLIAppDelegate.swift */; };
-		5638FCD02274501700CB4071 /* TLIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCE2274501700CB4071 /* TLIConstants.swift */; };
+		5638FCCF2274501700CB4071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCD2274501700CB4071 /* AppDelegate.swift */; };
 		5638FCD82274503500CB4071 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCD32274503500CB4071 /* TLISyncManager.m */; };
-		5656E1CD226A39C70065DBEA /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5656E1CC226A39C70065DBEA /* ListTests.swift */; };
+		5638FCDB227451EB00CB4071 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCDA227451EB00CB4071 /* Enums.swift */; };
 		565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */; };
+		5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669ADED2274613400555E56 /* ListsViewControllerTests.swift */; };
+		5669ADF22274613500555E56 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669ADEE2274613400555E56 /* ListTests.swift */; };
 		566BAC071F6ADBD4005B0E4F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */; };
 		566E6A8F226E4A340093783E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566E6A8E226E4A340093783E /* GoogleService-Info.plist */; };
 		56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56892690226C767A00D952A6 /* FindColorByNameTests.swift */; };
@@ -124,7 +124,6 @@
 		5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTests.swift; sourceTree = "<group>"; };
 		56119AEC226F90EA00F8D798 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		561A25BD2116EBE400B28644 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		5621958C226A5D3F00749A31 /* ListsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewControllerTests.swift; sourceTree = "<group>"; };
 		5628E8C31E85898700AAFD20 /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5628E8CD1E85898700AAFD20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5628E8D21E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,12 +131,12 @@
 		5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
 		5628E8DD1E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewControllerTests.swift; sourceTree = "<group>"; };
-		5638FC3122744CDC00CB4071 /* TLIGroupedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIGroupedTableViewCell.swift; sourceTree = "<group>"; };
-		5638FC3222744CDC00CB4071 /* TLIHelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIHelpTableViewCell.swift; sourceTree = "<group>"; };
-		5638FC3322744CDC00CB4071 /* TLITaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITaskTableViewCell.swift; sourceTree = "<group>"; };
-		5638FC3422744CDC00CB4071 /* TLIListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIListTableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedTableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3222744CDC00CB4071 /* HelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3322744CDC00CB4071 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3422744CDC00CB4071 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		5638FC3522744CDC00CB4071 /* TLITextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITextFieldCell.swift; sourceTree = "<group>"; };
-		5638FC3622744CDC00CB4071 /* TLITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITableViewCell.swift; sourceTree = "<group>"; };
+		5638FC3622744CDC00CB4071 /* GenericTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTableViewCell.swift; sourceTree = "<group>"; };
 		5638FC3822744CDC00CB4071 /* TLICircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLICircleButton.swift; sourceTree = "<group>"; };
 		5638FC3922744CDC00CB4071 /* TLIExportTasksButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIExportTasksButton.swift; sourceTree = "<group>"; };
 		5638FC3A22744CDC00CB4071 /* TLIRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIRoundedButton.swift; sourceTree = "<group>"; };
@@ -174,7 +173,7 @@
 		5638FC8922744ECF00CB4071 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5638FC8B22744F2200CB4071 /* PlistInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistInfo.swift; sourceTree = "<group>"; };
 		5638FC8E22744F4000CB4071 /* UserDefaultsType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsType.swift; sourceTree = "<group>"; };
-		5638FC8F22744F4000CB4071 /* TLIAddListViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAddListViewControllerDelegate.swift; sourceTree = "<group>"; };
+		5638FC8F22744F4000CB4071 /* AddListViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListViewControllerDelegate.swift; sourceTree = "<group>"; };
 		5638FC9022744F4000CB4071 /* TLITextFieldCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITextFieldCellDelegate.swift; sourceTree = "<group>"; };
 		5638FC9122744F4000CB4071 /* TLIAddTaskViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAddTaskViewDelegate.swift; sourceTree = "<group>"; };
 		5638FC9222744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIEditTaskViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -194,7 +193,7 @@
 		5638FCAB22744F9F00CB4071 /* TLIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIList.swift; sourceTree = "<group>"; };
 		5638FCAC22744F9F00CB4071 /* TLIMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIMention.swift; sourceTree = "<group>"; };
 		5638FCAD22744F9F00CB4071 /* TLINotification+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLINotification+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5638FCB922744FC100CB4071 /* TLICoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLICoreDataTableViewController.swift; sourceTree = "<group>"; };
+		5638FCB922744FC100CB4071 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
 		5638FCBD2274500A00CB4071 /* UIImage+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Tinylog.swift"; sourceTree = "<group>"; };
 		5638FCBE2274500A00CB4071 /* UIColor+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Tinylog.swift"; sourceTree = "<group>"; };
 		5638FCBF2274500A00CB4071 /* String+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Tinylog.swift"; sourceTree = "<group>"; };
@@ -203,11 +202,10 @@
 		5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Tinylog.swift"; sourceTree = "<group>"; };
 		5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Tinylog.swift"; sourceTree = "<group>"; };
 		5638FCC42274500A00CB4071 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
-		5638FCCD2274501700CB4071 /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAppDelegate.swift; sourceTree = "<group>"; };
-		5638FCCE2274501700CB4071 /* TLIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIConstants.swift; sourceTree = "<group>"; };
+		5638FCCD2274501700CB4071 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5638FCD32274503500CB4071 /* TLISyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLISyncManager.m; sourceTree = "<group>"; };
 		5638FCD52274503500CB4071 /* TLISyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLISyncManager.h; sourceTree = "<group>"; };
-		5656E1CC226A39C70065DBEA /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
+		5638FCDA227451EB00CB4071 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		565DA78C1E86999A00C6E60C /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
 		565DA78D1E86999A00C6E60C /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
 		565DA78E1E86999A00C6E60C /* Tinylog 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -215,6 +213,8 @@
 		565DA7901E86999A00C6E60C /* Tinylog 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 6.xcdatamodel"; sourceTree = "<group>"; };
 		565DA7911E86999A00C6E60C /* Tinylog 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 7.xcdatamodel"; sourceTree = "<group>"; };
 		565DA7921E86999A00C6E60C /* Tinylog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tinylog.xcdatamodel; sourceTree = "<group>"; };
+		5669ADED2274613400555E56 /* ListsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsViewControllerTests.swift; sourceTree = "<group>"; };
+		5669ADEE2274613400555E56 /* ListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		566E6A8E226E4A340093783E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56892690226C767A00D952A6 /* FindColorByNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindColorByNameTests.swift; sourceTree = "<group>"; };
@@ -334,7 +334,6 @@
 			children = (
 				5638FC2C227443C800CB4071 /* View Controllers */,
 				5609F659226B54FC00F6AF0E /* Helpers */,
-				5656E1CB226A39AA0065DBEA /* Lists */,
 				5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */,
 				5628E8DD1E85898700AAFD20 /* Info.plist */,
 				5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */,
@@ -354,6 +353,7 @@
 		5638FC2C227443C800CB4071 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5669ADEC2274613400555E56 /* Lists */,
 				5638FC2B227443BD00CB4071 /* Setup */,
 			);
 			path = "View Controllers";
@@ -364,10 +364,10 @@
 			children = (
 				5638FC3022744CDC00CB4071 /* Cells */,
 				5638FC3722744CDC00CB4071 /* Buttons */,
+				5638FC4422744CDC00CB4071 /* TLITextField.h */,
 				5638FC3F22744CDC00CB4071 /* TLITextField.m */,
 				5638FC4022744CDC00CB4071 /* ListsFooterView.swift */,
 				5638FC4122744CDC00CB4071 /* Controls */,
-				5638FC4422744CDC00CB4071 /* TLITextField.h */,
 				5638FC4522744CDC00CB4071 /* TLIMenuColorsView.swift */,
 				5638FC4622744CDC00CB4071 /* TLITouchableView.swift */,
 				5638FC4722744CDC00CB4071 /* SGTextField.swift */,
@@ -381,12 +381,12 @@
 		5638FC3022744CDC00CB4071 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				5638FC3122744CDC00CB4071 /* TLIGroupedTableViewCell.swift */,
-				5638FC3222744CDC00CB4071 /* TLIHelpTableViewCell.swift */,
-				5638FC3322744CDC00CB4071 /* TLITaskTableViewCell.swift */,
-				5638FC3422744CDC00CB4071 /* TLIListTableViewCell.swift */,
+				5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */,
+				5638FC3222744CDC00CB4071 /* HelpTableViewCell.swift */,
+				5638FC3322744CDC00CB4071 /* TaskTableViewCell.swift */,
+				5638FC3422744CDC00CB4071 /* ListTableViewCell.swift */,
 				5638FC3522744CDC00CB4071 /* TLITextFieldCell.swift */,
-				5638FC3622744CDC00CB4071 /* TLITableViewCell.swift */,
+				5638FC3622744CDC00CB4071 /* GenericTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -515,7 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				5638FC8E22744F4000CB4071 /* UserDefaultsType.swift */,
-				5638FC8F22744F4000CB4071 /* TLIAddListViewControllerDelegate.swift */,
+				5638FC8F22744F4000CB4071 /* AddListViewControllerDelegate.swift */,
 				5638FC9022744F4000CB4071 /* TLITextFieldCellDelegate.swift */,
 				5638FC9122744F4000CB4071 /* TLIAddTaskViewDelegate.swift */,
 				5638FC9222744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift */,
@@ -554,7 +554,7 @@
 		5638FCB822744FC100CB4071 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				5638FCB922744FC100CB4071 /* TLICoreDataTableViewController.swift */,
+				5638FCB922744FC100CB4071 /* CoreDataTableViewController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -586,8 +586,7 @@
 		5638FCCC2274501700CB4071 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				5638FCCD2274501700CB4071 /* TLIAppDelegate.swift */,
-				5638FCCE2274501700CB4071 /* TLIConstants.swift */,
+				5638FCCD2274501700CB4071 /* AppDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -606,17 +605,34 @@
 			children = (
 				561A25BD2116EBE400B28644 /* Secrets.swift */,
 				5609F64D226B4EC700F6AF0E /* Environment.swift */,
+				5638FCDA227451EB00CB4071 /* Enums.swift */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
 		};
-		5656E1CB226A39AA0065DBEA /* Lists */ = {
+		5669ADEC2274613400555E56 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				5656E1CC226A39C70065DBEA /* ListTests.swift */,
-				5621958C226A5D3F00749A31 /* ListsViewControllerTests.swift */,
+				5669ADED2274613400555E56 /* ListsViewControllerTests.swift */,
+				5669ADEE2274613400555E56 /* ListTests.swift */,
+				5669ADEF2274613400555E56 /* __Snapshots__ */,
 			);
 			path = Lists;
+			sourceTree = "<group>";
+		};
+		5669ADEF2274613400555E56 /* __Snapshots__ */ = {
+			isa = PBXGroup;
+			children = (
+				5669ADF02274613400555E56 /* ListsViewControllerTests */,
+			);
+			path = __Snapshots__;
+			sourceTree = "<group>";
+		};
+		5669ADF02274613400555E56 /* ListsViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ListsViewControllerTests;
 			sourceTree = "<group>";
 		};
 		566BAC051F6ADBD3005B0E4F /* Storyboards */ = {
@@ -940,23 +956,22 @@
 				5638FC5B22744CDC00CB4071 /* StepSliderControl.m in Sources */,
 				5638FCA222744F8800CB4071 /* TLIDeviceInfo.m in Sources */,
 				5638FC8122744D8200CB4071 /* TLIArchiveTasksViewController.swift in Sources */,
-				5638FCD02274501700CB4071 /* TLIConstants.swift in Sources */,
 				5638FC5F22744CDC00CB4071 /* TLITasksFooterView.swift in Sources */,
 				5638FCB222744F9F00CB4071 /* TLITag+CoreDataProperties.swift in Sources */,
 				5638FC5422744CDC00CB4071 /* TLIRoundedButton.swift in Sources */,
 				5638FC5222744CDC00CB4071 /* TLICircleButton.swift in Sources */,
-				5638FC4F22744CDC00CB4071 /* TLIListTableViewCell.swift in Sources */,
+				5638FC4F22744CDC00CB4071 /* ListTableViewCell.swift in Sources */,
 				5638FC5C22744CDC00CB4071 /* TLIMenuColorsView.swift in Sources */,
 				5638FC9622744F4000CB4071 /* TLIAddTaskViewDelegate.swift in Sources */,
 				5638FCC52274500A00CB4071 /* UIImage+Tinylog.swift in Sources */,
 				5638FCB722744F9F00CB4071 /* TLINotification+CoreDataProperties.swift in Sources */,
 				5638FC5D22744CDC00CB4071 /* TLITouchableView.swift in Sources */,
-				5638FCBA22744FC100CB4071 /* TLICoreDataTableViewController.swift in Sources */,
+				5638FCBA22744FC100CB4071 /* CoreDataTableViewController.swift in Sources */,
 				5638FC8C22744F2200CB4071 /* PlistInfo.swift in Sources */,
 				5638FCB422744F9F00CB4071 /* TLITag.swift in Sources */,
 				5638FCAF22744F9F00CB4071 /* TLITask+CoreDataProperties.swift in Sources */,
 				5638FC5E22744CDC00CB4071 /* SGTextField.swift in Sources */,
-				5638FC5122744CDC00CB4071 /* TLITableViewCell.swift in Sources */,
+				5638FC5122744CDC00CB4071 /* GenericTableViewCell.swift in Sources */,
 				5638FC5022744CDC00CB4071 /* TLITextFieldCell.swift in Sources */,
 				5638FC5622744CDC00CB4071 /* TLICloseButton.swift in Sources */,
 				5609F64E226B4EC700F6AF0E /* Environment.swift in Sources */,
@@ -964,13 +979,13 @@
 				5638FC9722744F4000CB4071 /* TLIEditTaskViewControllerDelegate.swift in Sources */,
 				5638FC7922744D8200CB4071 /* TLIGroupedTableViewController.swift in Sources */,
 				5638FC5A22744CDC00CB4071 /* ListsFooterView.swift in Sources */,
-				5638FCCF2274501700CB4071 /* TLIAppDelegate.swift in Sources */,
+				5638FCCF2274501700CB4071 /* AppDelegate.swift in Sources */,
 				565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */,
 				5638FC7A22744D8200CB4071 /* TLISettingsTableViewController.swift in Sources */,
 				5638FC8222744D8200CB4071 /* TLIArchiveViewController.swift in Sources */,
 				5638FC5722744CDC00CB4071 /* TLICheckBoxButton.swift in Sources */,
 				56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */,
-				5638FC4E22744CDC00CB4071 /* TLITaskTableViewCell.swift in Sources */,
+				5638FC4E22744CDC00CB4071 /* TaskTableViewCell.swift in Sources */,
 				5638FC5522744CDC00CB4071 /* TLIArchiveButton.swift in Sources */,
 				5638FC9B22744F7C00CB4071 /* Language.swift in Sources */,
 				5638FCC92274500A00CB4071 /* DispatchQueue+Tinylog.swift in Sources */,
@@ -992,19 +1007,20 @@
 				5638FC8722744D8200CB4071 /* TLISplitViewController.swift in Sources */,
 				5638FC5822744CDC00CB4071 /* TLIAddListButton.swift in Sources */,
 				5638FCB622744F9F00CB4071 /* TLIMention.swift in Sources */,
-				5638FC4D22744CDC00CB4071 /* TLIHelpTableViewCell.swift in Sources */,
+				5638FC4D22744CDC00CB4071 /* HelpTableViewCell.swift in Sources */,
 				5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */,
 				5638FC7C22744D8200CB4071 /* TLIAboutViewController.swift in Sources */,
 				5638FCB022744F9F00CB4071 /* TLINotification.swift in Sources */,
 				5638FC9A22744F7C00CB4071 /* LocalizedString.swift in Sources */,
 				5638FC8022744D8200CB4071 /* TLITasksViewController.swift in Sources */,
-				5638FC9422744F4000CB4071 /* TLIAddListViewControllerDelegate.swift in Sources */,
+				5638FC9422744F4000CB4071 /* AddListViewControllerDelegate.swift in Sources */,
 				5638FCD82274503500CB4071 /* TLISyncManager.m in Sources */,
 				5638FCA122744F8800CB4071 /* TLIDrawingUtils.m in Sources */,
 				5638FCB122744F9F00CB4071 /* TLIList+CoreDataProperties.swift in Sources */,
 				5638FC7E22744D8200CB4071 /* TLITextSizeViewController.swift in Sources */,
-				5638FC4C22744CDC00CB4071 /* TLIGroupedTableViewCell.swift in Sources */,
+				5638FC4C22744CDC00CB4071 /* GroupedTableViewCell.swift in Sources */,
 				5638FCAE22744F9F00CB4071 /* TLIMention+CoreDataProperties.swift in Sources */,
+				5638FCDB227451EB00CB4071 /* Enums.swift in Sources */,
 				5638FCB522744F9F00CB4071 /* TLIList.swift in Sources */,
 				5638FC5922744CDC00CB4071 /* TLITextField.m in Sources */,
 				5638FC8522744D8200CB4071 /* AddListViewController.swift in Sources */,
@@ -1018,11 +1034,11 @@
 			files = (
 				5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */,
 				5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */,
-				5621958D226A5D3F00749A31 /* ListsViewControllerTests.swift in Sources */,
 				56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */,
 				5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */,
+				5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */,
 				5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */,
-				5656E1CD226A39C70065DBEA /* ListTests.swift in Sources */,
+				5669ADF22274613500555E56 /* ListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

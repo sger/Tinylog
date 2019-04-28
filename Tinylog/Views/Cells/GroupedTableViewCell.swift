@@ -1,5 +1,5 @@
 //
-//  TLIGroupedTableViewCell.swift
+//  GroupedTableViewCell.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,9 +8,9 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class TLIGroupedTableViewCell: UITableViewCell {
+class GroupedTableViewCell: UITableViewCell {
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.white
         self.textLabel?.font = UIFont.tinylogInterfaceFontOfSize(17.0)!
@@ -18,7 +18,7 @@ class TLIGroupedTableViewCell: UITableViewCell {
         self.detailTextLabel?.font = UIFont.tinylogInterfaceFontOfSize(17.0)!
         self.detailTextLabel?.textColor = UIColor.tinylogTextColor
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

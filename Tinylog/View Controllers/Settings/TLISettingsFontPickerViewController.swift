@@ -176,7 +176,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TLIGroupedTableViewCell = TLIGroupedTableViewCell(
+        let cell: GroupedTableViewCell = GroupedTableViewCell(
             style: UITableViewCell.CellStyle.default,
             reuseIdentifier: "CellIdentifier")
         let key: NSString = self.keys()!.object(at: indexPath.row) as! NSString
@@ -205,7 +205,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
 
         NotificationCenter.default.post(
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
                 object: nil)
     }
 }

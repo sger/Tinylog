@@ -29,7 +29,7 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class TLITasksViewController: TLICoreDataTableViewController,
+class TLITasksViewController: CoreDataTableViewController,
     TLIAddTaskViewDelegate,
     TTTAttributedLabelDelegate,
     TLIEditTaskViewControllerDelegate {
@@ -194,9 +194,9 @@ class TLITasksViewController: TLICoreDataTableViewController,
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         self.tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        self.tableView?.register(TLITaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        self.tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
+        self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
         self.tableView?.frame = CGRect(
             x: 0.0,
             y: 0.0,
@@ -249,7 +249,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
             self,
             selector: #selector(TLITasksViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
             object: nil)
     }
 
@@ -593,7 +593,7 @@ class TLITasksViewController: TLICoreDataTableViewController,
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
 
-            let taskTableViewCell: TLITaskTableViewCell = cell as! TLITaskTableViewCell
+            let taskTableViewCell: TaskTableViewCell = cell as! TaskTableViewCell
             taskTableViewCell.managedObjectContext = managedObjectContext
             taskTableViewCell.currentTask = task
 
@@ -619,8 +619,8 @@ class TLITasksViewController: TLICoreDataTableViewController,
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell: TLITaskTableViewCell = tableView.dequeueReusableCell(
-                withIdentifier: kCellIdentifier) as! TLITaskTableViewCell
+            let cell: TaskTableViewCell = tableView.dequeueReusableCell(
+                withIdentifier: kCellIdentifier) as! TaskTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.checkBoxButton.addTarget(
                 self,

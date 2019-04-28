@@ -18,7 +18,7 @@ class AddListViewController: UITableViewController, UITextFieldDelegate {
     var managedObjectContext: NSManagedObjectContext!
     var name: UITextField?
     var menuColorsView: TLIMenuColorsView?
-    var delegate: TLIAddListViewControllerDelegate?
+    var delegate: AddListViewControllerDelegate?
     var mode: Mode = .create
     var list: TLIList?
 
@@ -55,9 +55,11 @@ class AddListViewController: UITableViewController, UITextFieldDelegate {
         self.tableView.tableFooterView = menuColorsView
 
         if mode == .create {
-            self.title = "Add List"
+            title = "Add List"
+            view.accessibilityIdentifier = "AddList"
         } else if mode == .edit {
-            self.title = "Edit List"
+            title = "Edit List"
+            view.accessibilityIdentifier = "EditList"
             if let list = list {
                 // swiftlint:disable force_unwrapping
                 self.menuColorsView!.currentColor = list.color

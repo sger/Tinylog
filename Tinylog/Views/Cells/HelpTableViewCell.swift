@@ -1,5 +1,5 @@
 //
-//  TLIHelpTableViewCell.swift
+//  HelpTableViewCell.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -10,7 +10,7 @@ import UIKit
 import TTTAttributedLabel
 import SGBackgroundView
 
-class TLIHelpTableViewCell: TLITableViewCell {
+class HelpTableViewCell: GenericTableViewCell {
 
     var didSetupConstraints = false
     var bgView: SGBackgroundView?
@@ -62,47 +62,11 @@ class TLIHelpTableViewCell: TLITableViewCell {
         }
         super.updateConstraints()
     }
-    // swiftlint:disable cyclomatic_complexity
+    
     override func updateFonts() {
         super.updateFonts()
 
-        let userDefaults = Environment.current.userDefaults
-        if let useSystemFontSize: String = userDefaults.object(forKey: TLIUserDefaults.kSystemFontSize) as? String {
-
-            if useSystemFontSize == "on" {
-                if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
-                    helpLabel.font = UIFont.preferredAvenirFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
-                    helpLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                } else if TLISettingsFontPickerViewController.selectedKey() == "Courier" {
-                    helpLabel.font = UIFont.preferredCourierFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                } else if TLISettingsFontPickerViewController.selectedKey() == "Georgia" {
-                    helpLabel.font = UIFont.preferredGeorgiaFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                } else if TLISettingsFontPickerViewController.selectedKey() == "Menlo" {
-                    helpLabel.font = UIFont.preferredMenloFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                } else if TLISettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
-                    helpLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                } else if TLISettingsFontPickerViewController.selectedKey() == "Palatino" {
-                    helpLabel.font = UIFont.preferredPalatinoFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
-                    helpLabel.font = UIFont.preferredIowanFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
-                    helpLabel.font = UIFont.preferredSFFontForTextStyle(
-                        UIFont.TextStyle.body.rawValue as NSString)
-                }
-            } else {
-                let fontSize = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
-                helpLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize))
-            }
-        }
+        helpLabel.font = tinylogFont
     }
 
     override func layoutSubviews() {

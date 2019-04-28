@@ -48,7 +48,7 @@ class TLIAddTaskView: UIView, UITextFieldDelegate {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(TLIAddTaskView.updateFonts),
-                                               name: NSNotification.Name(rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                                               name: NSNotification.Name(rawValue: Notifications.fontDidChangeNotification),
                                                object: nil)
         setNeedsUpdateConstraints()
     }

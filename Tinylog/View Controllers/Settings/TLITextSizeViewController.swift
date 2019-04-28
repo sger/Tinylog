@@ -52,7 +52,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
         super.viewDidDisappear(animated)
         NotificationCenter.default.post(
             name: Notification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
                 object: nil)
     }
     // swiftlint:disable cyclomatic_complexity
@@ -77,7 +77,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                 cell.accessoryType = UITableViewCell.AccessoryType.none
 
                 let userDefaults = Environment.current.userDefaults
-                let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
+                let useSystemFontSize = userDefaults.bool(forKey: EnvUserDefaults.systemFontSize)
 
                 if useSystemFontSize {
                     switchMode.setOn(true, animated: false)
@@ -88,7 +88,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
             } else if indexPath.row == 1 {
 
                 let userDefaults = Environment.current.userDefaults
-                let size = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
+                let size = userDefaults.double(forKey: EnvUserDefaults.fontSize)
 
                 var defaultValue: Int = 0
                 for (index, number) in numbers.enumerated() {
@@ -115,7 +115,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                     for: UIControl.Event.valueChanged)
                 cell.contentView.addSubview(stepSlider)
 
-                let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
+                let useSystemFontSize = userDefaults.bool(forKey: EnvUserDefaults.systemFontSize)
 
                 if useSystemFontSize {
                     stepSlider.alpha = 0.5
@@ -131,7 +131,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
     @objc func sliderValue(_ sender: UISlider!) {
         let slider: UISlider = sender as UISlider
         let number = numbers[Int(slider.value)]
-        Environment.current.userDefaults.set(Float(number), forKey: TLIUserDefaults.kFontSize)
+        Environment.current.userDefaults.set(Float(number), forKey: EnvUserDefaults.fontSize)
     }
 
     // MARK: Actions
@@ -140,7 +140,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
         let mode: UISwitch = sender as UISwitch
         let value: NSString = mode.isOn == true ? "on" : "off"
 
-        Environment.current.userDefaults.set(mode.isOn, forKey: TLIUserDefaults.kSystemFontSize)
+        Environment.current.userDefaults.set(mode.isOn, forKey: EnvUserDefaults.systemFontSize)
 
         let indexPath = IndexPath(row: 1, section: 0)
         let cell = self.tableView.cellForRow(at: indexPath)
@@ -155,7 +155,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
 
         NotificationCenter.default.post(
             name: Notification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
                 object: nil)
 
         self.tableView.reloadData()

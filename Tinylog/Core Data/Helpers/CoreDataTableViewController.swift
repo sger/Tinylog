@@ -1,5 +1,5 @@
 //
-//  TLICoreDataTableViewController.swift
+//  CoreDataTableViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 17/10/15.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
+class CoreDataTableViewController: UIViewController, UITableViewDataSource,
     UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     var tableView: UITableView?
@@ -64,7 +64,7 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
     // swiftlint:disable line_length
     func performFetch() {
         if debug! {
-            print("Running \(NSStringFromClass(TLICoreDataTableViewController.self)) \(NSStringFromSelector(#function))")
+            print("Running \(NSStringFromClass(CoreDataTableViewController.self)) \(NSStringFromSelector(#function))")
         }
 
         if self.frc != nil {
@@ -143,12 +143,11 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource,
         }
     }
     // swiftlint:disable cyclomatic_complexity
-    func controller(
-        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
-        didChange anObject: Any,
-        at indexPath: IndexPath?,
-        for type: NSFetchedResultsChangeType,
-        newIndexPath: IndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
 
             if ignoreNextUpdates {
                 return
