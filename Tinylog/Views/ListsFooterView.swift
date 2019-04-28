@@ -25,11 +25,7 @@ class ListsFooterView: UIView {
 
     var borderLineView: UIView = {
         let borderLineView = UIView.newAutoLayout()
-        borderLineView.backgroundColor = UIColor(
-            red: 213.0 / 255.0,
-            green: 213.0 / 255.0,
-            blue: 213.0 / 255.0,
-            alpha: 1.0)
+        borderLineView.backgroundColor = UIColor(named: "tableViewSeparator")
         return borderLineView
     }()
     
@@ -37,6 +33,7 @@ class ListsFooterView: UIView {
 
     lazy var addListButton: TLIAddListButton = {
         let addListButton = TLIAddListButton.newAutoLayout()
+        addListButton.accessibilityIdentifier = "addListButton"
         return addListButton
     }()
 

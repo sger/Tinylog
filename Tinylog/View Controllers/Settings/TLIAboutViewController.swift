@@ -54,7 +54,7 @@ class TLIAboutViewController: TLIGroupedTableViewController,
         super.viewDidDisappear(animated)
         NotificationCenter.default.post(
             name: Notification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
                 object: nil)
     }
 

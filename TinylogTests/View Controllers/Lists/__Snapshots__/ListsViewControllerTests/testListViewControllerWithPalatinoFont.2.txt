@@ -1,20 +1,20 @@
 <UIView; frame = (0 0; 375 812); autoresize = W+H; layer = <CALayer>>
    | <UITableView; frame = (0 0; 375 762); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {375, 64.333335876464844}; adjustedContentInset: {44, 0, 0, 0}>
    |    | <UIView; frame = (0 -44; 375 762); autoresize = W+H; layer = <CALayer>>
-   |    | <Tinylog.TLIListTableViewCell; baseClass = UITableViewCell; frame = (0 0; 375 64.3333); autoresize = W; gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    | <Tinylog.ListTableViewCell; baseClass = UITableViewCell; frame = (0 0; 375 64.3333); autoresize = W; layer = <CALayer>>
    |    |    | <UITableViewCellContentView; frame = (0 0; 375 64); gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 309 24); text = 'my list'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
    |    |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (335 17; 30 30); text = '0'; clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
    |    |    | <_UITableViewCellSeparatorView; frame = (16 64; 359 0.333333); layer = <CALayer>>
    |    | <UIView; frame = (0 64.3333; 375 0); layer = <CALayer>>
-   |    | <UIImageView; frame = (3 712.667; 369 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
-   |    | <UIImageView; frame = (369.667 657; 2.33333 58); alpha = 0; opaque = NO; autoresize = LM; userInteractionEnabled = NO; layer = <CALayer>>
+   |    | <UIImageView; frame = (6 712.667; 363 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
+   |    | <UIImageView; frame = (369.667 641.333; 2.33333 70.6667); alpha = 0; opaque = NO; autoresize = LM; userInteractionEnabled = NO; layer = <CALayer>>
    | <UILabel; frame = (81 397.333; 213 17.6667); text = 'Tap + icon to create a ne...'; hidden = YES; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   | <Tinylog.TLIListsFooterView; frame = (0 727; 375 85); layer = <CALayer>>
-   |    | <UIView; frame = (0 0; 375 51); layer = <CALayer>>
+   | <Tinylog.ListsFooterView; frame = (0 718; 375 94); layer = <CALayer>>
+   |    | <UIView; frame = (0 0; 375 60); layer = <CALayer>>
    |    | <UIView; frame = (0 0; 375 0.666667); layer = <CALayer>>
-   |    | <TTTAttributedLabel; baseClass = UILabel; frame = (94.6667 15.6667; 186 20); text = 'Last Updated at 10:00:00'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    | <Tinylog.TLIAddListButton; baseClass = UIButton; frame = (20 11.6667; 28 28); opaque = NO; tintColor = UIExtendedSRGBColorSpace 0.168627 0.682353 0.901961 1; layer = <CALayer>>
+   |    | <TTTAttributedLabel; baseClass = UILabel; frame = (187.667 30; 0 0); text = ''; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
+   |    | <Tinylog.TLIAddListButton; baseClass = UIButton; frame = (20 16; 28 28); opaque = NO; tintColor = UIExtendedSRGBColorSpace 0.168627 0.682353 0.901961 1; layer = <CALayer>>
    |    |    | <UIImageView; frame = (0 0; 28 28); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>
-   |    | <Tinylog.TLIArchiveButton; baseClass = UIButton; frame = (327 12.6667; 28 26); opaque = NO; layer = <CALayer>>
+   |    | <Tinylog.TLIArchiveButton; baseClass = UIButton; frame = (327 17; 28 26); opaque = NO; layer = <CALayer>>
    |    |    | <UIImageView; frame = (0 0; 28 26); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>

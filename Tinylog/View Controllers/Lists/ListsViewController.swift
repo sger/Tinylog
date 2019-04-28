@@ -31,9 +31,9 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class ListsViewController: TLICoreDataTableViewController,
+class ListsViewController: CoreDataTableViewController,
     UITextFieldDelegate,
-    TLIAddListViewControllerDelegate,
+    AddListViewControllerDelegate,
     UISearchControllerDelegate,
     UISearchBarDelegate,
     UISearchResultsUpdating {
@@ -86,50 +86,49 @@ class ListsViewController: TLICoreDataTableViewController,
 
         configureFetch()
 
-        self.title = localizedString(key: "My_Lists")
+        title = localizedString(key: "My_Lists")
+        view.accessibilityIdentifier = "MyLists"
 
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundView = UIView()
-        self.tableView?.backgroundView?.backgroundColor = UIColor.clear
-        self.tableView?.separatorColor = UIColor(named: "tableViewSeparator")
-        self.tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        self.tableView?.register(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = 61
-        self.tableView?.frame = CGRect(
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundView = UIView()
+        tableView?.backgroundView?.backgroundColor = UIColor.clear
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.rowHeight = UITableView.automaticDimension
+        tableView?.estimatedRowHeight = 61
+        tableView?.frame = CGRect(
             x: 0.0,
             y: 0.0,
-            width: self.view.frame.size.width,
-            height: self.view.frame.size.height - 50.0)
-        self.tableView?.tableFooterView = UIView()
+            width: view.frame.size.width,
+            height: view.frame.size.height - 50.0)
+        tableView?.tableFooterView = UIView()
 
         resultsTableViewController = ResultsTableViewController()
 
         addSearchController(with: "Search", searchResultsUpdater: self, searchResultsController: resultsTableViewController!)
 
         let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
-        let settingsButton: UIButton = UIButton(type: UIButton.ButtonType.custom)
+        let settingsButton: UIButton = UIButton(type: .custom)
+        settingsButton.accessibilityIdentifier = "settingsButton"
         settingsButton.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         settingsButton.setBackgroundImage(settingsImage, for: UIControl.State())
         settingsButton.setBackgroundImage(settingsImage, for: UIControl.State.highlighted)
-        settingsButton.addTarget(
-            self,
-            action: #selector(ListsViewController.displaySettings(_:)),
-            for: UIControl.Event.touchDown)
+        settingsButton.addTarget(self,
+                                 action: #selector(ListsViewController.displaySettings(_:)),
+                                 for: UIControl.Event.touchDown)
 
         let settingsBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.leftBarButtonItem = settingsBarButtonItem
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = settingsBarButtonItem
 
-        listsFooterView?.addListButton.addTarget(
-            self,
-            action: #selector(ListsViewController.addNewList(_:)),
-            for: UIControl.Event.touchDown)
-        listsFooterView?.archiveButton.addTarget(
-            self,
-            action: #selector(ListsViewController.displayArchive(_:)),
-            for: UIControl.Event.touchDown)
+        listsFooterView?.addListButton.addTarget(self,
+                                                 action: #selector(ListsViewController.addNewList(_:)),
+                                                 for: UIControl.Event.touchDown)
+        listsFooterView?.archiveButton.addTarget(self,
+                                                 action: #selector(ListsViewController.displayArchive(_:)),
+                                                 for: UIControl.Event.touchDown)
 
         setEditing(false, animated: false)
 
@@ -192,7 +191,7 @@ class ListsViewController: TLICoreDataTableViewController,
             dateFormatter.timeStyle = DateFormatter.Style.short
 
             //check for connectivity
-            if TLIAppDelegate.sharedAppDelegate().networkMode == "notReachable" {
+            if AppDelegate.sharedAppDelegate().networkMode == "notReachable" {
                 listsFooterView?.updateInfoLabel("Offline")
             } else {
                 listsFooterView?.updateInfoLabel(
@@ -210,7 +209,7 @@ class ListsViewController: TLICoreDataTableViewController,
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
-            if TLIAppDelegate.sharedAppDelegate().networkMode == "notReachable" {
+            if AppDelegate.sharedAppDelegate().networkMode == "notReachable" {
                 listsFooterView?.updateInfoLabel("Offline")
             } else {
                 listsFooterView?.updateInfoLabel("Syncing...")
@@ -288,7 +287,7 @@ class ListsViewController: TLICoreDataTableViewController,
 
         let userDefaults = Environment.current.userDefaults
 
-        if userDefaults.bool(forKey: TLIUserDefaults.kSetupScreen) {
+        if userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
             Utils.delay(0.1, closure: { () -> Void in
                 self.displaySetup()
             })
@@ -420,7 +419,7 @@ class ListsViewController: TLICoreDataTableViewController,
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! TLIListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! ListTableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
 
         let success = isEstimatedRowHeightInCache(indexPath)
@@ -437,7 +436,7 @@ class ListsViewController: TLICoreDataTableViewController,
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
-        let listTableViewCell: TLIListTableViewCell = cell as! TLIListTableViewCell
+        let listTableViewCell: ListTableViewCell = cell as! ListTableViewCell
         listTableViewCell.currentList = list
     }
 
@@ -612,7 +611,7 @@ extension ListsViewController {
             self,
             selector: #selector(ListsViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
             object: nil)
         NotificationCenter.default.addObserver(
             self,

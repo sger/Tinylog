@@ -10,7 +10,7 @@ BRANCH ?= master
 DIST_BRANCH = $(RELEASE)-dist
 
 ifeq ($(PLATFORM), iOS)
-	DESTINATION ?= 'platform=iOS Simulator,name=iPhone 7,OS=12.0'
+	DESTINATION ?= 'platform=iOS Simulator,name=iPhone X,OS=12.2'
 endif
 
 XCPRETTY :=

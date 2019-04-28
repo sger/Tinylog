@@ -37,7 +37,7 @@ extension UIViewController {
     }
 }
 
-extension TLICoreDataTableViewController {
+extension CoreDataTableViewController {
     func checkForEmptyResults() -> Bool {
         if let fetchedObjects = self.frc?.fetchedObjects {
             if fetchedObjects.isEmpty {

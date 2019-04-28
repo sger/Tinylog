@@ -1,5 +1,5 @@
 //
-//  TLIAppDelegate.swift
+//  AppDelegate.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 16/10/15.
@@ -14,7 +14,7 @@ import Firebase
 
 /// TLIAppDelegate Application Logic.
 @UIApplicationMain
-class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembleDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembleDelegate {
 
     /**
      Identifier for 3d Touch.
@@ -46,8 +46,8 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
 
      - Returns: TLIAppDelegate instance.
      */
-    class func sharedAppDelegate() -> TLIAppDelegate {
-        guard let delegate = UIApplication.shared.delegate as? TLIAppDelegate else {
+    class func sharedAppDelegate() -> AppDelegate {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
         }
         return delegate
@@ -79,9 +79,9 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
 
         Environment.current.userDefaults.register(defaults:
             [String(kTLIFontDefaultsKey): kTLIFontHelveticaNeueKey,
-            TLIUserDefaults.kTLISyncMode: false,
-            TLIUserDefaults.kFontSize: 17.0,
-            TLIUserDefaults.kSetupScreen: true])
+            EnvUserDefaults.syncMode: false,
+            EnvUserDefaults.fontSize: 17.0,
+            EnvUserDefaults.setupScreen: true])
 
         do {
             try FileManager.default.createDirectory(
@@ -239,11 +239,11 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnse
 
 // MARK: Notifications
 
-extension TLIAppDelegate {
+extension AppDelegate {
     fileprivate func registerNotifications() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIAppDelegate.reachabilityDidChange(_:)),
+            selector: #selector(AppDelegate.reachabilityDidChange(_:)),
             name: NSNotification.Name.reachabilityChanged,
             object: nil)
     }

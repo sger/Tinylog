@@ -78,7 +78,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
             width: self.view.frame.size.width,
             height: self.view.frame.size.height - 50.0)
 
-        self.tableView?.register(TLIHelpTableViewCell.self, forCellReuseIdentifier: helpCellIdentifier)
+        self.tableView?.register(HelpTableViewCell.self, forCellReuseIdentifier: helpCellIdentifier)
         self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = 61
 
@@ -91,7 +91,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
             self,
             selector: #selector(TLIHelpTableViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification),
+                rawValue: Notifications.fontDidChangeNotification),
             object: nil)
     }
 
@@ -109,7 +109,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
     }
 
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
-        if let helpTableViewCell: TLIHelpTableViewCell = cell as? TLIHelpTableViewCell {
+        if let helpTableViewCell: HelpTableViewCell = cell as? HelpTableViewCell {
             helpTableViewCell.helpLabel.text = helpArr[indexPath.row]
         }
     }
@@ -137,7 +137,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
     }
     // swiftlint:disable force_cast
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: helpCellIdentifier) as! TLIHelpTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: helpCellIdentifier) as! HelpTableViewCell
         self.configureCell(cell, indexPath: indexPath)
 
         let success = isEstimatedRowHeightInCache(indexPath)

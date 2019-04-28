@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ResultsTableViewController: TLICoreDataTableViewController {
+class ResultsTableViewController: CoreDataTableViewController {
 
     let kCellIdentifier = "CellIdentifier"
     var managedObjectContext: NSManagedObjectContext!
 
-    lazy var noResultsLabel: UILabel? = {
+    lazy var noResultsLabel: UILabel = {
         let noResultsLabel: UILabel = UILabel()
         noResultsLabel.font = UIFont.tinylogFontOfSize(16.0)
         noResultsLabel.textColor = UIColor.tinylogTextColor
@@ -38,19 +38,19 @@ class ResultsTableViewController: TLICoreDataTableViewController {
             y: 0.0,
             width: self.view.frame.size.width,
             height: self.view.frame.size.height)
-        self.tableView?.register(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        self.tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
+        self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
         // swiftlint:disable force_unwrapping
-        self.view.addSubview(self.noResultsLabel!)
+        self.view.addSubview(self.noResultsLabel)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.checkForEmptyResults() {
-            self.noResultsLabel?.isHidden = false
+            self.noResultsLabel.isHidden = false
         } else {
-            self.noResultsLabel?.isHidden = true
+            self.noResultsLabel.isHidden = true
         }
     }
 
@@ -70,14 +70,14 @@ class ResultsTableViewController: TLICoreDataTableViewController {
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         if let list: TLIList = self.frc?.object(at: indexPath) as? TLIList,
-            let listTableViewCell: TLIListTableViewCell = cell as? TLIListTableViewCell {
+            let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell {
                 listTableViewCell.currentList = list
         }
     }
 
     // swiftlint:disable force_cast
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! TLIListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! ListTableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }

@@ -30,7 +30,7 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class TLIArchiveTasksViewController: TLICoreDataTableViewController,
+class TLIArchiveTasksViewController: CoreDataTableViewController,
     TTTAttributedLabelDelegate, TLIEditTaskViewControllerDelegate {
 
     let kCellIdentifier = "CellIdentifier"
@@ -143,10 +143,10 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
             alpha: 1.0)
         self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
 
-        self.tableView?.register(TLITaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        self.tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
 
         self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
+        self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
         self.tableView?.frame = CGRect(
             x: 0.0,
             y: 0.0,
@@ -186,7 +186,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
             self,
             selector: #selector(TLIArchiveTasksViewController.updateFonts),
             name: NSNotification.Name(
-                rawValue: TLINotifications.kTLIFontDidChangeNotification), object: nil)
+                rawValue: Notifications.fontDidChangeNotification), object: nil)
     }
 
     @objc func updateFonts() {
@@ -419,7 +419,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         if let task: TLITask = self.frc?.object(at: indexPath) as? TLITask,
-            let taskTableViewCell: TLITaskTableViewCell = cell as? TLITaskTableViewCell {
+            let taskTableViewCell: TaskTableViewCell = cell as? TaskTableViewCell {
             taskTableViewCell.managedObjectContext = managedObjectContext
             taskTableViewCell.currentTask = task
         }
@@ -431,8 +431,8 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController,
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell: TLITaskTableViewCell = tableView.dequeueReusableCell(
-                withIdentifier: kCellIdentifier) as! TLITaskTableViewCell
+            let cell: TaskTableViewCell = tableView.dequeueReusableCell(
+                withIdentifier: kCellIdentifier) as! TaskTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)

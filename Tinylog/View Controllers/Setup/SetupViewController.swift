@@ -38,6 +38,7 @@ class SetupViewController: UIViewController {
 
     lazy var notNowButton: TLIRoundedButton = {
         let notNowButton = TLIRoundedButton.newAutoLayout()
+        notNowButton.accessibilityIdentifier = "notNowButton"
         notNowButton.setTitle(localizedString(key: "Later"), for: UIControl.State())
         notNowButton.backgroundColor = UIColor.tinylogTextColor
         notNowButton.addTarget(
@@ -49,6 +50,7 @@ class SetupViewController: UIViewController {
 
     lazy var useiCloudButton: TLIRoundedButton = {
         let useiCloudButton = TLIRoundedButton.newAutoLayout()
+        notNowButton.accessibilityIdentifier = "useiCloudButton"
         useiCloudButton.setTitle(localizedString(key: "Use_iCloud"), for: UIControl.State())
         useiCloudButton.addTarget(
             self,
@@ -110,8 +112,8 @@ class SetupViewController: UIViewController {
     }
 
     @objc func enableiCloudAndDismiss(_ button: TLIRoundedButton) {
-        Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kSetupScreen)
-        Environment.current.userDefaults.set(true, forKey: TLIUserDefaults.kTLISyncMode)
+        Environment.current.userDefaults.set(false, forKey: EnvUserDefaults.setupScreen)
+        Environment.current.userDefaults.set(true, forKey: EnvUserDefaults.syncMode)
 
         let syncManager = TLISyncManager.shared()
         syncManager?.connect(toSyncService: IDMICloudService, withCompletion: { (error) -> Void in
@@ -131,8 +133,8 @@ class SetupViewController: UIViewController {
     }
 
     @objc func disableiCloudAndDismiss(_ button: TLIRoundedButton) {
-        Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kSetupScreen)
-        Environment.current.userDefaults.set(false, forKey: TLIUserDefaults.kTLISyncMode)
+        Environment.current.userDefaults.set(false, forKey: EnvUserDefaults.setupScreen)
+        Environment.current.userDefaults.set(false, forKey: EnvUserDefaults.syncMode)
         dismiss(animated: true, completion: nil)
     }
 }

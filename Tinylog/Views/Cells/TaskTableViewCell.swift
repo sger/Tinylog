@@ -1,5 +1,5 @@
 //
-//  TLITaskTableViewCell.swift
+//  TaskTableViewCell.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -9,7 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 
-class TLITaskTableViewCell: TLITableViewCell {
+class TaskTableViewCell: GenericTableViewCell {
 
     let kLabelHorizontalInsets: CGFloat = 60.0
     let kLabelVerticalInsets: CGFloat = 10.0
@@ -23,7 +23,7 @@ class TLITaskTableViewCell: TLITableViewCell {
     var currentTask: TLITask? {
         didSet {
 
-            //Fetch all objects from list
+            // Fetch all objects from list
 
             let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
             let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
@@ -98,7 +98,7 @@ class TLITaskTableViewCell: TLITableViewCell {
         contentView.addSubview(taskLabel)
 
         checkBoxButton.tableViewCell = self
-        self.contentView.addSubview(checkBoxButton)
+        contentView.addSubview(checkBoxButton)
 
         updateFonts()
     }
@@ -124,37 +124,11 @@ class TLITaskTableViewCell: TLITableViewCell {
 
         super.updateConstraints()
     }
-    // swiftlint:disable cyclomatic_complexity
-    // swiftlint:disable line_length
+   
     override func updateFonts() {
-        let userDefaults = Environment.current.userDefaults
-        let useSystemFontSize = userDefaults.bool(forKey: TLIUserDefaults.kSystemFontSize)
-
-        if useSystemFontSize {
-            if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
-                taskLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
-                taskLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Courier" {
-                taskLabel.font = UIFont.preferredCourierFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Georgia" {
-                taskLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Menlo" {
-                taskLabel.font = UIFont.preferredMenloFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
-                taskLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Palatino" {
-                taskLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
-                taskLabel.font = UIFont.preferredIowanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
-                taskLabel.font = UIFont.preferredSFFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            }
-
-        } else {
-            let fontSize = userDefaults.double(forKey: TLIUserDefaults.kFontSize)
-            taskLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize))
-        }
+        super.updateFonts()
+        
+        taskLabel.font = tinylogFont
     }
 
     override func layoutSubviews() {
