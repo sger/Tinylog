@@ -31,14 +31,14 @@ class ListsFooterView: UIView {
     
     var didSetupContraints = false
 
-    lazy var addListButton: TLIAddListButton = {
-        let addListButton = TLIAddListButton.newAutoLayout()
+    lazy var addListButton: AddListButton = {
+        let addListButton = AddListButton.newAutoLayout()
         addListButton.accessibilityIdentifier = "addListButton"
         return addListButton
     }()
 
-    lazy var archiveButton: TLIArchiveButton = {
-        let archiveButton = TLIArchiveButton.newAutoLayout()
+    lazy var archiveButton: ArchiveButton = {
+        let archiveButton = ArchiveButton.newAutoLayout()
         return archiveButton
     }()
 

@@ -18,23 +18,23 @@ class GenericTableViewCell: UITableViewCell {
         
         if useSystemFontSize {
             
-            if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
+            if SettingsFontPickerViewController.selectedKey() == "Avenir" {
                 return UIFont.preferredAvenirFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
+            } else if SettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
                 return UIFont.preferredHelveticaNeueFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Courier" {
+            } else if SettingsFontPickerViewController.selectedKey() == "Courier" {
                 return UIFont.preferredCourierFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Georgia" {
+            } else if SettingsFontPickerViewController.selectedKey() == "Georgia" {
                 return UIFont.preferredGeorgiaFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Menlo" {
+            } else if SettingsFontPickerViewController.selectedKey() == "Menlo" {
                 return UIFont.preferredMenloFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
+            } else if SettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
                 return UIFont.preferredTimesNewRomanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Palatino" {
+            } else if SettingsFontPickerViewController.selectedKey() == "Palatino" {
                 return UIFont.preferredPalatinoFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
+            } else if SettingsFontPickerViewController.selectedKey() == "Iowan" {
                 return UIFont.preferredIowanFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
-            } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
+            } else if SettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
                 return UIFont.preferredSFFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             }
         }

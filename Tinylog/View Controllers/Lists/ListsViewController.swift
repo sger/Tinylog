@@ -254,8 +254,8 @@ class ListsViewController: CoreDataTableViewController,
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 
-    @objc func displayArchive(_ button: TLIArchiveButton) {
-        let archiveViewController: TLIArchiveViewController = TLIArchiveViewController()
+    @objc func displayArchive(_ button: ArchiveButton) {
+        let archiveViewController: ArchiveViewController = ArchiveViewController()
         archiveViewController.managedObjectContext = managedObjectContext
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
@@ -265,7 +265,7 @@ class ListsViewController: CoreDataTableViewController,
     // MARK: Display Settings
 
     @objc func displaySettings(_ sender: UIButton) {
-        let settingsViewController: TLISettingsTableViewController = TLISettingsTableViewController()
+        let settingsViewController: SettingsTableViewController = SettingsTableViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: settingsViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
@@ -452,11 +452,11 @@ class ListsViewController: CoreDataTableViewController,
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         // swiftlint:disable line_length
         if  IS_IPAD {
-            TLISplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
-            TLISplitViewController.sharedSplitViewController().listViewController?.managedObject = list
-            TLISplitViewController.sharedSplitViewController().listViewController?.title = list.title
+            SplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
+            SplitViewController.sharedSplitViewController().listViewController?.managedObject = list
+            SplitViewController.sharedSplitViewController().listViewController?.title = list.title
         } else {
-            let tasksViewController: TLITasksViewController = TLITasksViewController()
+            let tasksViewController: TasksViewController = TasksViewController()
             tasksViewController.managedObjectContext = managedObjectContext
             tasksViewController.list = list
             self.navigationController?.pushViewController(tasksViewController, animated: true)
@@ -491,10 +491,10 @@ class ListsViewController: CoreDataTableViewController,
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         // swiftlint:disable line_length
         if IS_IPAD {
-            TLISplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
-            TLISplitViewController.sharedSplitViewController().listViewController?.managedObject = list
+            SplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
+            SplitViewController.sharedSplitViewController().listViewController?.managedObject = list
         } else {
-            let tasksViewController: TLITasksViewController = TLITasksViewController()
+            let tasksViewController: TasksViewController = TasksViewController()
             tasksViewController.managedObjectContext = managedObjectContext
             tasksViewController.list = list
             tasksViewController.focusTextField = true

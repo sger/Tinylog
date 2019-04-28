@@ -1,5 +1,5 @@
 //
-//  TLICloseButton.swift
+//  TLIArchiveButton.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLICloseButton: UIButton {
+class ArchiveButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,11 +17,12 @@ class TLICloseButton: UIButton {
 
     func setup() {
         self.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-        self.setBackgroundImage(UIImage(named: "close"), for: UIControl.State())
-        self.setBackgroundImage(UIImage(named: "close"), for: UIControl.State.highlighted)
+        self.setBackgroundImage(UIImage(named: "741-box"), for: UIControl.State())
+        self.setBackgroundImage(UIImage(named: "741-box"), for: UIControl.State.highlighted)
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }

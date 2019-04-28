@@ -1,5 +1,5 @@
 //
-//  TLICircleButton.swift
+//  CircleButton.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLICircleButton: UIButton {
+class CircleButton: UIButton {
 
     var borderColor: UIColor?
     var borderSize: CGFloat?

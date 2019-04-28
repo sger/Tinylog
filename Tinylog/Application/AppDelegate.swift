@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
         if  IS_IPAD {
-            let splitViewController = TLISplitViewController()
+            let splitViewController = SplitViewController()
             self.window?.rootViewController = splitViewController
         } else {
             let listsViewController: ListsViewController = ListsViewController()

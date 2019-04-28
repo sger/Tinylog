@@ -1,5 +1,5 @@
 //
-//  TLISettingsFontPickerViewController.swift
+//  SettingsFontPickerViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -9,7 +9,7 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class TLISettingsFontPickerViewController: UITableViewController {
+class SettingsFontPickerViewController: UITableViewController {
 
     var currentIndexPath: NSIndexPath?
 
@@ -18,7 +18,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
         self.title = "Font"
         self.view.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        let selectedKey: NSString? = TLISettingsFontPickerViewController.selectedKey()!
+        let selectedKey: NSString? = SettingsFontPickerViewController.selectedKey()!
 
         if selectedKey != nil {
 
@@ -154,7 +154,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
         guard let key = key as? String else {
             fatalError()
         }
-        return TLISettingsFontPickerViewController.textForKey(key: key)
+        return SettingsFontPickerViewController.textForKey(key: key)
     }
 
     func cellImageForKey(key: AnyObject) -> UIImage? {
@@ -180,7 +180,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
             style: UITableViewCell.CellStyle.default,
             reuseIdentifier: "CellIdentifier")
         let key: NSString = self.keys()!.object(at: indexPath.row) as! NSString
-        let selectedKey = TLISettingsFontPickerViewController.selectedKey()!
+        let selectedKey = SettingsFontPickerViewController.selectedKey()!
         cell.textLabel!.text = self.cellTextForKey(key: key) as String?
         cell.tintColor = UIColor.tinylogMainColor
 
@@ -199,7 +199,7 @@ class TLISettingsFontPickerViewController: UITableViewController {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         currentIndexPath = indexPath as NSIndexPath
 
-        TLISettingsFontPickerViewController.setSelectedKey(
+        SettingsFontPickerViewController.setSelectedKey(
             key: self.keys()!.object(at: indexPath.row) as! NSString)
         self.navigationController?.popViewController(animated: true)
 

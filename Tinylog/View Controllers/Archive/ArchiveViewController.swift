@@ -1,5 +1,5 @@
 //
-//  TLIArchiveViewController.swift
+//  ArchiveViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -32,7 +32,7 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class TLIArchiveViewController: CoreDataTableViewController,
+class ArchiveViewController: CoreDataTableViewController,
     UITextFieldDelegate, AddListViewControllerDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
@@ -144,38 +144,38 @@ class TLIArchiveViewController: CoreDataTableViewController,
             title: "Close",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(TLIArchiveViewController.close(_:)))
+            action: #selector(ArchiveViewController.close(_:)))
 
         setEditing(false, animated: false)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveViewController.syncActivityDidEndNotification(_:)),
+            selector: #selector(ArchiveViewController.syncActivityDidEndNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidEnd,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveViewController.syncActivityDidBeginNotification(_:)),
+            selector: #selector(ArchiveViewController.syncActivityDidBeginNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidBegin,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveViewController.updateFonts),
+            selector: #selector(ArchiveViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification),
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveViewController.appBecomeActive),
+            selector: #selector(ArchiveViewController.appBecomeActive),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveViewController.onChangeSize(_:)),
+            selector: #selector(ArchiveViewController.onChangeSize(_:)),
             name: UIContentSizeCategory.didChangeNotification,
             object: nil)
 
@@ -418,10 +418,10 @@ class TLIArchiveViewController: CoreDataTableViewController,
 
         // swiftlint:disable line_length
         if  IS_IPAD {
-            TLISplitViewController.sharedSplitViewController().listViewController?.managedObject = list
-            TLISplitViewController.sharedSplitViewController().listViewController?.enableDidSelectRowAtIndexPath = false
+            SplitViewController.sharedSplitViewController().listViewController?.managedObject = list
+            SplitViewController.sharedSplitViewController().listViewController?.enableDidSelectRowAtIndexPath = false
         } else {
-            let tasksViewController: TLITasksViewController = TLITasksViewController()
+            let tasksViewController: TasksViewController = TasksViewController()
             tasksViewController.managedObjectContext = managedObjectContext
             tasksViewController.enableDidSelectRowAtIndexPath = false
             tasksViewController.list = list
@@ -451,7 +451,7 @@ class TLIArchiveViewController: CoreDataTableViewController,
     func onClose(_ addListViewController: AddListViewController, list: TLIList) {
         let indexPath = self.frc?.indexPath(forObject: list)
         self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
-        let tasksViewController: TLITasksViewController = TLITasksViewController()
+        let tasksViewController: TasksViewController = TasksViewController()
         tasksViewController.managedObjectContext = managedObjectContext
         tasksViewController.list = list
         tasksViewController.focusTextField = true

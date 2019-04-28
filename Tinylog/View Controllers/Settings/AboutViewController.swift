@@ -1,5 +1,5 @@
 //
-//  TLIAboutViewController.swift
+//  AboutViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class TLIAboutViewController: TLIGroupedTableViewController,
+class AboutViewController: GroupedTableViewController,
     UIGestureRecognizerDelegate,
     MFMailComposeViewControllerDelegate {
     let aboutCellIdentifier = "AboutCellIdentifier"
@@ -115,7 +115,7 @@ class TLIAboutViewController: TLIGroupedTableViewController,
             label.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(
                 target: self,
-                action: #selector(TLIAboutViewController.viewWebsite))
+                action: #selector(AboutViewController.viewWebsite))
             label.addGestureRecognizer(tap)
             return view
         }

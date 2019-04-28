@@ -35,13 +35,13 @@ class TLITasksFooterView: UIView {
     var currentText: String?
     var didSetupContraints = false
 
-    lazy var exportTasksButton: TLIExportTasksButton? = {
-        let exportTasksButton = TLIExportTasksButton.newAutoLayout()
+    lazy var exportTasksButton: ExportTasksButton? = {
+        let exportTasksButton = ExportTasksButton.newAutoLayout()
         return exportTasksButton
     }()
 
-    lazy var archiveButton: TLIArchiveButton? = {
-        let archiveButton = TLIArchiveButton.newAutoLayout()
+    lazy var archiveButton: ArchiveButton? = {
+        let archiveButton = ArchiveButton.newAutoLayout()
         return archiveButton
     }()
 

@@ -1,14 +1,14 @@
 //
-//  TLIAddListButton.swift
+//  RoundedButton.swift
 //  Tinylog
 //
-//  Created by Spiros Gerokostas on 18/10/15.
+//  Created by Spiros Gerokostas on 17/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
 
 import UIKit
 
-class TLIAddListButton: UIButton {
+class RoundedButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -16,14 +16,9 @@ class TLIAddListButton: UIButton {
     }
 
     func setup() {
-
-        let origImage = UIImage(named: "plus")
-        let tintedImage = origImage?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        //btn.setImage(tintedImage, for: .normal)
-        tintColor = UIColor.tinylogMainColor
-
-        self.setBackgroundImage(tintedImage, for: UIControl.State())
-        self.setBackgroundImage(tintedImage, for: UIControl.State.highlighted)
+        self.setTitleColor(UIColor.white, for: UIControl.State())
+        self.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
+        self.titleLabel?.font = UIFont.mediumFontWithSize(17.0)
     }
 
     required init(coder aDecoder: NSCoder) {

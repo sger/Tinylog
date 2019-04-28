@@ -55,7 +55,7 @@ class TLIMenuColorsView: UIView {
         var index: Int = 0
 
         for item in colors {
-            let button: TLICircleButton = TLICircleButton(
+            let button: CircleButton = CircleButton(
                 frame: CGRect(x: 0.0, y: 0.0, width: radius, height: radius))
             button.tag = tagOffset + index
             button.backgroundColor = UIColor(rgba: item)

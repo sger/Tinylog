@@ -1,5 +1,5 @@
 //
-//  TLIEditTaskViewController.swift
+//  EditTaskViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,13 +8,13 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class TLIEditTaskViewController: UIViewController {
+class EditTaskViewController: UIViewController {
 
     var indexPath: IndexPath?
     var task: TLITask?
     var textView: UITextView?
     var keyboardRect: CGRect?
-    var delegate: TLIEditTaskViewControllerDelegate?
+    var delegate: EditTaskViewControllerDelegate?
     var saveOnClose: Bool = true
     var managedObjectContext: NSManagedObjectContext!
 
@@ -27,13 +27,13 @@ class TLIEditTaskViewController: UIViewController {
             title: "Close",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(TLIEditTaskViewController.close(_:)))
+            action: #selector(EditTaskViewController.close(_:)))
 
         let saveBarButtonItem: UIBarButtonItem = UIBarButtonItem(
             title: "Save",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(TLIEditTaskViewController.save(_:)))
+            action: #selector(EditTaskViewController.save(_:)))
 
         self.navigationItem.rightBarButtonItems = [saveBarButtonItem]
 
@@ -48,12 +48,12 @@ class TLIEditTaskViewController: UIViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIEditTaskViewController.keyboardWillShow(_:)),
+            selector: #selector(EditTaskViewController.keyboardWillShow(_:)),
             name: UIResponder.keyboardWillShowNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIEditTaskViewController.keyboardWillHide(_:)),
+            selector: #selector(EditTaskViewController.keyboardWillHide(_:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
     }

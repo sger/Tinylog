@@ -253,7 +253,7 @@ extension UIFont {
 
     class func tinylogFontNameForStyle(_ style: NSString) -> NSString? {
         return UIFont.tinylogFontNameForFontKey(
-            TLISettingsFontPickerViewController.selectedKey()!,
+            SettingsFontPickerViewController.selectedKey()!,
             style: style)
     }
 
@@ -282,32 +282,32 @@ extension UIFont {
 
     class func tinylogFontOfSize(_ fontSize: CGFloat) -> UIFont {
         var size: CGFloat = fontSize
-        size += TLISettingsFontPickerViewController.fontSizeAdjustment()
-        return UIFont.tinylogFontOfSize(fontSize, key: TLISettingsFontPickerViewController.selectedKey()!)!
+        size += SettingsFontPickerViewController.fontSizeAdjustment()
+        return UIFont.tinylogFontOfSize(fontSize, key: SettingsFontPickerViewController.selectedKey()!)!
     }
 
     class func italicTinylogFontOfSize(_ fontSize: CGFloat) -> UIFont {
         var size: CGFloat = fontSize
-        size += TLISettingsFontPickerViewController.fontSizeAdjustment()
+        size += SettingsFontPickerViewController.fontSizeAdjustment()
         return UIFont.italicTinylogFontOfSize(
             fontSize,
-            key: TLISettingsFontPickerViewController.selectedKey()!)!
+            key: SettingsFontPickerViewController.selectedKey()!)!
     }
 
     class func boldTinylogFontOfSize(_ fontSize: CGFloat) -> UIFont {
         var size: CGFloat = fontSize
-        size += TLISettingsFontPickerViewController.fontSizeAdjustment()
+        size += SettingsFontPickerViewController.fontSizeAdjustment()
         return UIFont.boldTinylogFontOfSize(
             fontSize,
-            key: TLISettingsFontPickerViewController.selectedKey()!)!
+            key: SettingsFontPickerViewController.selectedKey()!)!
     }
 
     class func boldItalicTinylogFontOfSize(_ fontSize: CGFloat) -> UIFont {
         var size: CGFloat = fontSize
-        size += TLISettingsFontPickerViewController.fontSizeAdjustment()
+        size += SettingsFontPickerViewController.fontSizeAdjustment()
         return UIFont.boldItalicTinylogFontOfSize(
             fontSize,
-            key: TLISettingsFontPickerViewController.selectedKey()!)!
+            key: SettingsFontPickerViewController.selectedKey()!)!
     }
 
     // MARK: Interface
