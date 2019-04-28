@@ -13,6 +13,7 @@ import SnapshotTesting
 class SetupViewControllerTests: XCTestCase {
 
     func testSetupViewControllerWithEnLanguage() {
+        //record = true
         testWithEnvironment(language: .en, block: {
             let vc = SetupViewController()
             assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
@@ -24,6 +25,7 @@ class SetupViewControllerTests: XCTestCase {
     }
     
     func testSetupViewControllerWithDeLanguage() {
+        //record = true
         testWithEnvironment(language: .de, block: {
             let vc = SetupViewController()
             assertSnapshot(matching: vc, as: .image(on: .iPhoneX))

@@ -615,24 +615,8 @@
 			children = (
 				5669ADED2274613400555E56 /* ListsViewControllerTests.swift */,
 				5669ADEE2274613400555E56 /* ListTests.swift */,
-				5669ADEF2274613400555E56 /* __Snapshots__ */,
 			);
 			path = Lists;
-			sourceTree = "<group>";
-		};
-		5669ADEF2274613400555E56 /* __Snapshots__ */ = {
-			isa = PBXGroup;
-			children = (
-				5669ADF02274613400555E56 /* ListsViewControllerTests */,
-			);
-			path = __Snapshots__;
-			sourceTree = "<group>";
-		};
-		5669ADF02274613400555E56 /* ListsViewControllerTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ListsViewControllerTests;
 			sourceTree = "<group>";
 		};
 		566BAC051F6ADBD3005B0E4F /* Storyboards */ = {
