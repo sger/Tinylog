@@ -1,5 +1,5 @@
 //
-//  TLIHelpTableViewController.swift
+//  HelpTableViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -29,7 +29,7 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDelegate {
+class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     var estimatedRowHeightCache: NSMutableDictionary?
     let helpCellIdentifier = "HelpCellIdentifier"
@@ -89,7 +89,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIHelpTableViewController.updateFonts),
+            selector: #selector(HelpTableViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification),
             object: nil)

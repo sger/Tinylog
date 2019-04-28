@@ -1,5 +1,5 @@
 //
-//  TLIAddTaskView.swift
+//  AddTaskView.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class TLIAddTaskView: UIView, UITextFieldDelegate {
+class AddTaskView: UIView, UITextFieldDelegate {
 
     var textField: TLITextField? = {
         let textField = TLITextField.newAutoLayout()
@@ -26,13 +26,13 @@ class TLIAddTaskView: UIView, UITextFieldDelegate {
         return textField
     }()
 
-    var closeButton: TLICloseButton? = {
-        let closeButton = TLICloseButton.newAutoLayout()
+    var closeButton: CloseButton? = {
+        let closeButton = CloseButton.newAutoLayout()
         closeButton.isHidden = true
         return closeButton
     }()
 
-    var delegate: TLIAddTaskViewDelegate?
+    var delegate: AddTaskViewDelegate?
     var didSetupContraints = false
 
     override init(frame: CGRect) {
@@ -47,7 +47,7 @@ class TLIAddTaskView: UIView, UITextFieldDelegate {
         self.addSubview(closeButton!)
 
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(TLIAddTaskView.updateFonts),
+                                               selector: #selector(AddTaskView.updateFonts),
                                                name: NSNotification.Name(rawValue: Notifications.fontDidChangeNotification),
                                                object: nil)
         setNeedsUpdateConstraints()

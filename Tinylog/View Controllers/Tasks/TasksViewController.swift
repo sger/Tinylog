@@ -1,5 +1,5 @@
 //
-//  TLITasksViewController.swift
+//  TasksViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -29,10 +29,10 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class TLITasksViewController: CoreDataTableViewController,
-    TLIAddTaskViewDelegate,
+class TasksViewController: CoreDataTableViewController,
+    AddTaskViewDelegate,
     TTTAttributedLabelDelegate,
-    TLIEditTaskViewControllerDelegate {
+    EditTaskViewControllerDelegate {
 
     let kCellIdentifier = "CellIdentifier"
     var managedObjectContext: NSManagedObjectContext!
@@ -63,7 +63,7 @@ class TLITasksViewController: CoreDataTableViewController,
         addTransparentLayer.alpha = 0.0
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
-            action: #selector(TLITasksViewController.transparentLayerTapped(_:)))
+            action: #selector(TasksViewController.transparentLayerTapped(_:)))
         addTransparentLayer.addGestureRecognizer(tapGestureRecognizer)
         return addTransparentLayer
     }()
@@ -88,16 +88,16 @@ class TLITasksViewController: CoreDataTableViewController,
         return noListSelected
     }()
 
-    lazy var addTaskView: TLIAddTaskView? = {
-        let header: TLIAddTaskView = TLIAddTaskView(
+    lazy var addTaskView: AddTaskView? = {
+        let header: AddTaskView = AddTaskView(
             frame: CGRect(
                 x: 0.0,
                 y: 0.0,
                 width: self.tableView!.bounds.size.width,
-                height: TLIAddTaskView.height()))
+                height: AddTaskView.height()))
         header.closeButton?.addTarget(
             self,
-            action: #selector(TLITasksViewController.transparentLayerTapped(_:)),
+            action: #selector(TasksViewController.transparentLayerTapped(_:)),
             for: UIControl.Event.touchDown)
         header.delegate = self
         return header
@@ -206,11 +206,11 @@ class TLITasksViewController: CoreDataTableViewController,
 
         tasksFooterView?.exportTasksButton?.addTarget(
             self,
-            action: #selector(TLITasksViewController.exportTasks(_:)),
+            action: #selector(TasksViewController.exportTasks(_:)),
             for: UIControl.Event.touchDown)
         tasksFooterView?.archiveButton?.addTarget(
             self,
-            action: #selector(TLITasksViewController.displayArchive(_:)),
+            action: #selector(TasksViewController.displayArchive(_:)),
             for: UIControl.Event.touchDown)
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
@@ -227,27 +227,27 @@ class TLITasksViewController: CoreDataTableViewController,
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLITasksViewController.onChangeSize(_:)),
+            selector: #selector(TasksViewController.onChangeSize(_:)),
             name: UIContentSizeCategory.didChangeNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLITasksViewController.syncActivityDidEndNotification(_:)),
+            selector: #selector(TasksViewController.syncActivityDidEndNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidEnd,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLITasksViewController.syncActivityDidBeginNotification(_:)),
+            selector: #selector(TasksViewController.syncActivityDidBeginNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidBegin,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLITasksViewController.appBecomeActive),
+            selector: #selector(TasksViewController.appBecomeActive),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLITasksViewController.updateFonts),
+            selector: #selector(TasksViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification),
             object: nil)
@@ -373,7 +373,7 @@ class TLITasksViewController: CoreDataTableViewController,
         topConstraint?.autoRemove()
         heightConstraint?.autoRemove()
 
-        let posY: CGFloat = TLIAddTaskView.height() + topDistance
+        let posY: CGFloat = AddTaskView.height() + topDistance
 
         topConstraint = addTransparentLayer?.autoPinEdge(toSuperviewEdge: .top, withInset: posY)
         heightConstraint = addTransparentLayer?.autoMatch(
@@ -406,8 +406,8 @@ class TLITasksViewController: CoreDataTableViewController,
         setEditing(false, animated: false)
     }
 
-    @objc func displayArchive(_ button: TLIArchiveButton) {
-        let viewController: TLIArchiveTasksViewController = TLIArchiveTasksViewController()
+    @objc func displayArchive(_ button: ArchiveButton) {
+        let viewController: ArchiveTasksViewController = ArchiveTasksViewController()
         viewController.managedObjectContext = managedObjectContext
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
@@ -468,13 +468,13 @@ class TLITasksViewController: CoreDataTableViewController,
                 title: "Done",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
-                action: #selector(TLITasksViewController.toggleEditMode(_:)))
+                action: #selector(TasksViewController.toggleEditMode(_:)))
         } else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Edit",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
-                action: #selector(TLITasksViewController.toggleEditMode(_:)))
+                action: #selector(TasksViewController.toggleEditMode(_:)))
         }
     }
 
@@ -608,7 +608,7 @@ class TLITasksViewController: CoreDataTableViewController,
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if enableDidSelectRowAtIndexPath {
-            return TLIAddTaskView.height()
+            return AddTaskView.height()
         }
         return 0
     }
@@ -624,7 +624,7 @@ class TLITasksViewController: CoreDataTableViewController,
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.checkBoxButton.addTarget(
                 self,
-                action: #selector(TLITasksViewController.toggleComplete(_:)),
+                action: #selector(TasksViewController.toggleComplete(_:)),
                 for: UIControl.Event.touchUpInside)
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
@@ -652,10 +652,10 @@ class TLITasksViewController: CoreDataTableViewController,
         }
     }
 
-    @objc func toggleComplete(_ button: TLICheckBoxButton) {
+    @objc func toggleComplete(_ button: CheckBoxButton) {
         if enableDidSelectRowAtIndexPath {
 
-            let button: TLICheckBoxButton = button as TLICheckBoxButton
+            let button: CheckBoxButton = button as CheckBoxButton
             let indexPath: IndexPath?  = self.tableView?.indexPath(for: button.tableViewCell!)!
 
             if !(indexPath != nil) {
@@ -696,15 +696,15 @@ class TLITasksViewController: CoreDataTableViewController,
     }
 
     // MARK: TLIAddTaskViewDelegate
-    func addTaskViewDidBeginEditing(_ addTaskView: TLIAddTaskView) {
+    func addTaskViewDidBeginEditing(_ addTaskView: AddTaskView) {
         displayTransparentLayer()
     }
 
-    func addTaskViewDidEndEditing(_ addTaskView: TLIAddTaskView) {
+    func addTaskViewDidEndEditing(_ addTaskView: AddTaskView) {
         hideTransparentLayer()
     }
 
-    func addTaskView(_ addTaskView: TLIAddTaskView, title: NSString) {
+    func addTaskView(_ addTaskView: AddTaskView, title: NSString) {
 
         do {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
@@ -798,7 +798,7 @@ class TLITasksViewController: CoreDataTableViewController,
 
     // MARK: Edit Task
     func editTask(_ task: TLITask, indexPath: IndexPath) {
-        let editTaskViewController: TLIEditTaskViewController = TLIEditTaskViewController()
+        let editTaskViewController: EditTaskViewController = EditTaskViewController()
         editTaskViewController.managedObjectContext = managedObjectContext
         editTaskViewController.task = task
         editTaskViewController.indexPath = indexPath
@@ -845,7 +845,7 @@ class TLITasksViewController: CoreDataTableViewController,
         self.tableView?.reloadData()
     }
 
-    func onClose(_ editTaskViewController: TLIEditTaskViewController, indexPath: IndexPath) {
+    func onClose(_ editTaskViewController: EditTaskViewController, indexPath: IndexPath) {
         self.currentIndexPath = indexPath
         self.tableView?.reloadData()
     }

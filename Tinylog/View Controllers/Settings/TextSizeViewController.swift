@@ -1,5 +1,5 @@
 //
-//  TLITextSizeViewController.swift
+//  TextSizeViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecognizerDelegate {
+class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDelegate {
     let textSizeCellIdentifier = "TextSizeCellIdentifier"
     let numbers = [13, 14, 15, 16, 17, 18, 19, 20, 21]
 
@@ -70,7 +70,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                     frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 20.0))
                 switchMode.addTarget(
                     self,
-                    action: #selector(TLITextSizeViewController.toggleSystemFontSize(_:)),
+                    action: #selector(TextSizeViewController.toggleSystemFontSize(_:)),
                     for: UIControl.Event.valueChanged)
                 switchMode.onTintColor = UIColor.tinylogMainColor
                 cell.accessoryView = switchMode
@@ -111,7 +111,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                 stepSlider.isContinuous = true
                 stepSlider.addTarget(
                     self,
-                    action: #selector(TLITextSizeViewController.sliderValue(_:)),
+                    action: #selector(TextSizeViewController.sliderValue(_:)),
                     for: UIControl.Event.valueChanged)
                 cell.contentView.addSubview(stepSlider)
 

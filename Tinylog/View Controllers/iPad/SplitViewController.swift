@@ -1,5 +1,5 @@
 //
-//  TLISplitViewController.swift
+//  SplitViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class TLISplitViewController: UISplitViewController, UISplitViewControllerDelegate {
+class SplitViewController: UISplitViewController, UISplitViewControllerDelegate {
     var listsViewController: ListsViewController?
-    var listViewController: TLITasksViewController?
+    var listViewController: TasksViewController?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         listsViewController = ListsViewController()
         listsViewController?.managedObjectContext = AppDelegate.sharedAppDelegate().coreDataManager.managedObjectContext
-        listViewController = TLITasksViewController()
+        listViewController = TasksViewController()
 
         // swiftlint:disable force_unwrapping
         let listsVC: UINavigationController = UINavigationController(rootViewController: listsViewController!)
@@ -30,9 +30,9 @@ class TLISplitViewController: UISplitViewController, UISplitViewControllerDelega
         fatalError("init(coder:) has not been implemented")
     }
 
-    class func sharedSplitViewController() -> TLISplitViewController {
+    class func sharedSplitViewController() -> SplitViewController {
         guard let splitViewController = AppDelegate.sharedAppDelegate().window?.rootViewController
-            as? TLISplitViewController else {
+            as? SplitViewController else {
             fatalError()
         }
         return splitViewController

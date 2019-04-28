@@ -1,5 +1,5 @@
 //
-//  TLIExportTasksButton.swift
+//  ExportTasksButton.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLIExportTasksButton: UIButton {
+class ExportTasksButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

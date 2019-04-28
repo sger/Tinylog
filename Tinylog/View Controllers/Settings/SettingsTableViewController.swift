@@ -1,5 +1,5 @@
 //
-//  TLISettingsTableViewController.swift
+//  SettingsTableViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 import SVProgressHUD
 
-class TLISettingsTableViewController: UITableViewController,
+class SettingsTableViewController: UITableViewController,
     MFMailComposeViewControllerDelegate,
     UIGestureRecognizerDelegate {
 
@@ -36,7 +36,7 @@ class TLISettingsTableViewController: UITableViewController,
             title: "Done",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(TLISettingsTableViewController.close(_:)))
+            action: #selector(SettingsTableViewController.close(_:)))
         self.view.backgroundColor = UIColor.tinylogLightGray
         self.tableView?.backgroundColor = UIColor.tinylogLightGray
         self.title = "Settings"
@@ -46,7 +46,7 @@ class TLISettingsTableViewController: UITableViewController,
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLISettingsTableViewController.updateFonts),
+            selector: #selector(SettingsTableViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification),
                 object: nil)
@@ -87,7 +87,7 @@ class TLISettingsTableViewController: UITableViewController,
                         height: 20.0))
                 switchMode.addTarget(
                     self,
-                    action: #selector(TLISettingsTableViewController.toggleSyncSettings(_:)),
+                    action: #selector(SettingsTableViewController.toggleSyncSettings(_:)),
                     for: UIControl.Event.valueChanged)
                 switchMode.onTintColor = UIColor.tinylogMainColor
                 cell.accessoryView = switchMode
@@ -106,8 +106,8 @@ class TLISettingsTableViewController: UITableViewController,
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Font"
                 // swiftlint:disable line_length
-                cell.detailTextLabel?.text = TLISettingsFontPickerViewController.textForSelectedKey() as String?
-                cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0, key: TLISettingsFontPickerViewController.selectedKey()!)
+                cell.detailTextLabel?.text = SettingsFontPickerViewController.textForSelectedKey() as String?
+                cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0, key: SettingsFontPickerViewController.selectedKey()!)
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = "Text Size"
                 cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0)
@@ -231,9 +231,9 @@ class TLISettingsTableViewController: UITableViewController,
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                viewController = TLISettingsFontPickerViewController()
+                viewController = SettingsFontPickerViewController()
             } else if indexPath.row == 1 {
-                viewController = TLITextSizeViewController()
+                viewController = TextSizeViewController()
             }
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
@@ -280,11 +280,11 @@ class TLISettingsTableViewController: UITableViewController,
                     }
                 }
             } else if indexPath.row == 2 {
-                viewController = TLIHelpTableViewController()
+                viewController = HelpTableViewController()
             }
         } else if indexPath.section == 3 {
             if indexPath.row == 0 {
-                viewController = TLIAboutViewController()
+                viewController = AboutViewController()
             }
         }
         if viewController != nil {

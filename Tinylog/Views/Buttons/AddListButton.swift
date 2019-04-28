@@ -1,14 +1,14 @@
 //
-//  TLIRoundedButton.swift
+//  AddListButton.swift
 //  Tinylog
 //
-//  Created by Spiros Gerokostas on 17/10/15.
+//  Created by Spiros Gerokostas on 18/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
 
 import UIKit
 
-class TLIRoundedButton: UIButton {
+class AddListButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -16,9 +16,14 @@ class TLIRoundedButton: UIButton {
     }
 
     func setup() {
-        self.setTitleColor(UIColor.white, for: UIControl.State())
-        self.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
-        self.titleLabel?.font = UIFont.mediumFontWithSize(17.0)
+
+        let origImage = UIImage(named: "plus")
+        let tintedImage = origImage?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        //btn.setImage(tintedImage, for: .normal)
+        tintColor = UIColor.tinylogMainColor
+
+        self.setBackgroundImage(tintedImage, for: UIControl.State())
+        self.setBackgroundImage(tintedImage, for: UIControl.State.highlighted)
     }
 
     required init(coder aDecoder: NSCoder) {

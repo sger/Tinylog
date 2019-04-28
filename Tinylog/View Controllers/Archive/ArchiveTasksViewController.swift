@@ -1,5 +1,5 @@
 //
-//  TLIArchiveTasksViewController.swift
+//  ArchiveTasksViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -30,8 +30,8 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-class TLIArchiveTasksViewController: CoreDataTableViewController,
-    TTTAttributedLabelDelegate, TLIEditTaskViewControllerDelegate {
+class ArchiveTasksViewController: CoreDataTableViewController,
+    TTTAttributedLabelDelegate, EditTaskViewControllerDelegate {
 
     let kCellIdentifier = "CellIdentifier"
     let kReminderCellIdentifier = "ReminderCellIdentifier"
@@ -129,7 +129,7 @@ class TLIArchiveTasksViewController: CoreDataTableViewController,
             title: "Close",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(TLIArchiveTasksViewController.close(_:)))
+            action: #selector(ArchiveTasksViewController.close(_:)))
 
         self.view.backgroundColor = UIColor(
             red: 250.0 / 255.0,
@@ -159,32 +159,32 @@ class TLIArchiveTasksViewController: CoreDataTableViewController,
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveTasksViewController.onChangeSize(_:)),
+            selector: #selector(ArchiveTasksViewController.onChangeSize(_:)),
             name: UIContentSizeCategory.didChangeNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveTasksViewController.deviceOrientationChanged),
+            selector: #selector(ArchiveTasksViewController.deviceOrientationChanged),
             name: UIDevice.orientationDidChangeNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveTasksViewController.syncActivityDidEndNotification(_:)),
+            selector: #selector(ArchiveTasksViewController.syncActivityDidEndNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidEnd, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveTasksViewController.syncActivityDidBeginNotification(_:)),
+            selector: #selector(ArchiveTasksViewController.syncActivityDidBeginNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidBegin, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveTasksViewController.appBecomeActive),
+            selector: #selector(ArchiveTasksViewController.appBecomeActive),
             name: UIApplication.didBecomeActiveNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TLIArchiveTasksViewController.updateFonts),
+            selector: #selector(ArchiveTasksViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification), object: nil)
     }
@@ -258,8 +258,8 @@ class TLIArchiveTasksViewController: CoreDataTableViewController,
         setEditing(false, animated: false)
     }
 
-    func displayArchive(_ button: TLIArchiveButton) {
-        let archiveViewController: TLIArchiveViewController = TLIArchiveViewController()
+    func displayArchive(_ button: ArchiveButton) {
+        let archiveViewController: ArchiveViewController = ArchiveViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
@@ -308,13 +308,13 @@ class TLIArchiveTasksViewController: CoreDataTableViewController,
                 title: "Done",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
-                action: #selector(TLIArchiveTasksViewController.toggleEditMode(_:)))
+                action: #selector(ArchiveTasksViewController.toggleEditMode(_:)))
         } else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Edit",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
-                action: #selector(TLIArchiveTasksViewController.toggleEditMode(_:)))
+                action: #selector(ArchiveTasksViewController.toggleEditMode(_:)))
         }
     }
 
@@ -470,7 +470,7 @@ class TLIArchiveTasksViewController: CoreDataTableViewController,
 
     // MARK: Edit Task
     func editTask(_ task: TLITask, indexPath: IndexPath) {
-        let editTaskViewController: TLIEditTaskViewController = TLIEditTaskViewController()
+        let editTaskViewController: EditTaskViewController = EditTaskViewController()
         editTaskViewController.managedObjectContext = managedObjectContext
         editTaskViewController.task = task
         editTaskViewController.indexPath = indexPath
@@ -517,7 +517,7 @@ class TLIArchiveTasksViewController: CoreDataTableViewController,
         self.tableView?.reloadData()
     }
 
-    func onClose(_ editTaskViewController: TLIEditTaskViewController, indexPath: IndexPath) {
+    func onClose(_ editTaskViewController: EditTaskViewController, indexPath: IndexPath) {
         self.currentIndexPath = indexPath
         self.tableView?.reloadData()
     }

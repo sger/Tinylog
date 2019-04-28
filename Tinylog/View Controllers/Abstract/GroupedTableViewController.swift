@@ -1,5 +1,5 @@
 //
-//  TLIGroupedTableViewController.swift
+//  GroupedTableViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLIGroupedTableViewController: UITableViewController {
+class GroupedTableViewController: UITableViewController {
 
     // MARK: Initializers
 

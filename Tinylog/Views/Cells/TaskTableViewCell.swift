@@ -16,7 +16,7 @@ class TaskTableViewCell: GenericTableViewCell {
     var didSetupConstraints = false
     let taskLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
 
-    let checkBoxButton: TLICheckBoxButton = TLICheckBoxButton.newAutoLayout()
+    let checkBoxButton: CheckBoxButton = CheckBoxButton.newAutoLayout()
     var checkMarkIcon: UIImageView?
     var managedObjectContext: NSManagedObjectContext!
 
