@@ -14,7 +14,7 @@
    |    | <UIView; frame = (0 0; 375 60); layer = <CALayer>>
    |    | <UIView; frame = (0 0; 375 0.666667); layer = <CALayer>>
    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (187.667 30; 0 0); text = ''; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    | <Tinylog.TLIAddListButton; baseClass = UIButton; frame = (20 16; 28 28); opaque = NO; tintColor = UIExtendedSRGBColorSpace 0.168627 0.682353 0.901961 1; layer = <CALayer>>
+   |    | <Tinylog.AddListButton; baseClass = UIButton; frame = (20 16; 28 28); opaque = NO; tintColor = UIExtendedSRGBColorSpace 0.168627 0.682353 0.901961 1; layer = <CALayer>>
    |    |    | <UIImageView; frame = (0 0; 28 28); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>
-   |    | <Tinylog.TLIArchiveButton; baseClass = UIButton; frame = (327 17; 28 26); opaque = NO; layer = <CALayer>>
+   |    | <Tinylog.ArchiveButton; baseClass = UIButton; frame = (327 17; 28 26); opaque = NO; layer = <CALayer>>
    |    |    | <UIImageView; frame = (0 0; 28 26); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>
