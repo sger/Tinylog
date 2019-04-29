@@ -11,28 +11,26 @@ import XCTest
 import SnapshotTesting
 
 class SetupViewControllerTests: XCTestCase {
-
-    func testSetupViewControllerWithEnLanguage() {
-        //record = true
-        testWithEnvironment(language: .en, block: {
-            let vc = SetupViewController()
-            assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
-            assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneX(.portrait)))
-            
-            assertSnapshot(matching: vc, as: .image(on: .iPhoneXsMax))
-            assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneXsMax(.portrait)))
-        })
+    
+    func testSetupViewControllerInPortaitMode() {
+       // record = true
+        combos(Language.languages, SnapshotTestingDevices.portrait).forEach { language, device in
+            testWithEnvironment(language: language, block: {
+                let vc = SetupViewController()
+                assertSnapshot(matching: vc, as: .image(on: device))
+                assertSnapshot(matching: vc, as: .recursiveDescription(on: device))
+            })
+        }
     }
     
-    func testSetupViewControllerWithDeLanguage() {
-        //record = true
-        testWithEnvironment(language: .de, block: {
-            let vc = SetupViewController()
-            assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
-            assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneX(.portrait)))
-            
-            assertSnapshot(matching: vc, as: .image(on: .iPhoneXsMax))
-            assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneXsMax(.portrait)))
-        })
+    func testSetupViewControllerInLandscapeMode() {
+        // record = true
+        combos(Language.languages, SnapshotTestingDevices.landscape).forEach { language, device in
+            testWithEnvironment(language: language, block: {
+                let vc = SetupViewController()
+                assertSnapshot(matching: vc, as: .image(on: device))
+                assertSnapshot(matching: vc, as: .recursiveDescription(on: device))
+            })
+        }
     }
 }
