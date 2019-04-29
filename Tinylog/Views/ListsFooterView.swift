@@ -12,7 +12,7 @@ import TTTAttributedLabel
 class ListsFooterView: UIView {
     
     let footerView: UIView = UIView.newAutoLayout()
-    let footHeight: CGFloat = 60
+    let footerHeight: CGFloat = 60
 
     var infoLabel: TTTAttributedLabel = {
         let infoLabel = TTTAttributedLabel.newAutoLayout()
@@ -47,7 +47,7 @@ class ListsFooterView: UIView {
 
         backgroundColor = UIColor.tinylogLighterGray
 
-        footerView.backgroundColor = UIColor.tinylogLighterGray
+        footerView.backgroundColor = UIColor.red//UIColor.tinylogLighterGray
         addSubview(footerView)
 
         addSubview(borderLineView)
@@ -76,7 +76,7 @@ class ListsFooterView: UIView {
         if !didSetupContraints {
 
             footerView.autoMatch(.width, to: .width, of: self)
-            footerView.autoSetDimension(.height, toSize: footHeight)
+            footerView.autoSetDimension(.height, toSize: footerHeight)
             footerView.autoPinEdge(toSuperviewEdge: .top)
 
             borderLineView.autoMatch(.width, to: .width, of: self)

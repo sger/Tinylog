@@ -156,7 +156,7 @@ class ListsViewController: CoreDataTableViewController,
             emptyListsLabel?.autoCenterInSuperview()
 
             listsFooterView?.autoMatch(.width, to: .width, of: self.view)
-            listsFooterView?.autoSetDimension(.height, toSize: listsFooterView!.footHeight + self.view.safeAreaInsets.bottom)
+            listsFooterView?.autoSetDimension(.height, toSize: listsFooterView!.footerHeight + self.view.safeAreaInsets.bottom)
             listsFooterView?.autoPinEdge(toSuperviewEdge: .left)
             listsFooterView?.autoPinEdge(toSuperviewEdge: .bottom)
 

@@ -16,6 +16,7 @@
 		561A25BE2116EBE500B28644 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561A25BD2116EBE400B28644 /* Secrets.swift */; };
 		5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5628E8CD1E85898700AAFD20 /* Assets.xcassets */; };
 		5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */; };
+		563256822276124000DCB848 /* Devices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563256812276124000DCB848 /* Devices.swift */; };
 		5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */; };
 		5638FC4C22744CDC00CB4071 /* GroupedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */; };
 		5638FC4D22744CDC00CB4071 /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3222744CDC00CB4071 /* HelpTableViewCell.swift */; };
@@ -130,6 +131,7 @@
 		5628E8D71E85898700AAFD20 /* TinylogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentTests.swift; sourceTree = "<group>"; };
 		5628E8DD1E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		563256812276124000DCB848 /* Devices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Devices.swift; sourceTree = "<group>"; };
 		5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewControllerTests.swift; sourceTree = "<group>"; };
 		5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedTableViewCell.swift; sourceTree = "<group>"; };
 		5638FC3222744CDC00CB4071 /* HelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */,
+				563256812276124000DCB848 /* Devices.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */,
 				5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */,
 				56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */,
+				563256822276124000DCB848 /* Devices.swift in Sources */,
 				5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */,
 				5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */,
 				5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */,
