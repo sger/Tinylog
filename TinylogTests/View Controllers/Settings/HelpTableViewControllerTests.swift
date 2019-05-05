@@ -14,8 +14,13 @@ class HelpTableViewControllerTests: XCTestCase {
 
     func testHelpTableViewControllerInPortaitMode() {
         // record = true
+        
+        let userDefaults = MockUserDefaults()
+        userDefaults.set(21.0, forKey: EnvUserDefaults.fontSize)
+        userDefaults.set(kTLIFontHelveticaNeueKey, forKey: String(kTLIFontDefaultsKey))
+        
         combos(Language.languages, SnapshotTestingDevices.portrait).forEach { language, device in
-            testWithEnvironment(language: language, block: {
+            testWithEnvironment(language: language, userDefaults: userDefaults, block: {
                 let vc = HelpTableViewController()
                 assertSnapshot(matching: vc, as: .image(on: device))
                 assertSnapshot(matching: vc, as: .recursiveDescription(on: device))
@@ -25,8 +30,13 @@ class HelpTableViewControllerTests: XCTestCase {
 
     func testHelpTableViewControllerInLandscapeMode() {
         // record = true
+        
+        let userDefaults = MockUserDefaults()
+        userDefaults.set(21.0, forKey: EnvUserDefaults.fontSize)
+        userDefaults.set(kTLIFontHelveticaNeueKey, forKey: String(kTLIFontDefaultsKey))
+        
         combos(Language.languages, SnapshotTestingDevices.landscape).forEach { language, device in
-            testWithEnvironment(language: language, block: {
+            testWithEnvironment(language: language, userDefaults: userDefaults, block: {
                 let vc = HelpTableViewController()
                 assertSnapshot(matching: vc, as: .image(on: device))
                 assertSnapshot(matching: vc, as: .recursiveDescription(on: device))

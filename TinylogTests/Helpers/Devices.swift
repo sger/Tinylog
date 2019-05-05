@@ -18,5 +18,6 @@ struct SnapshotTestingDevices {
     static let landscape = [ViewImageConfig.iPhoneX(.landscape),
                             ViewImageConfig.iPhoneXsMax(.landscape),
                             ViewImageConfig.iPadPro12_9(.landscape),
-                            ViewImageConfig.iPhone8(.landscape)]
+                            ViewImageConfig.iPhone8(.landscape),
+                            ViewImageConfig.iPhoneSe(.landscape)]
 }

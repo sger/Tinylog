@@ -1,28 +1,24 @@
-<UITableView; frame = (0 0; 812 375); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {812, 961.99999237060547}; adjustedContentInset: {44, 0, 24, 0}>
-   | <UIView; frame = (0 -44; 812 375); autoresize = W+H; layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 301.667; 812 60.3333); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (44 0; 724 60); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 692 20); text = 'Zeigen Sie Archive an, in...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 60; 796 0.333333); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 241.333; 812 60.3333); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (44 0; 724 60); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 692 20); text = 'Zeigen Sie Aufgaben an, i...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 60; 796 0.333333); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 181; 812 60.3333); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (44 0; 724 60); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 692 20); text = 'Erstellen Sie eine neue A...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 60; 796 0.333333); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 120.667; 812 60.3333); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (44 0; 724 60); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 692 20); text = 'Durchsuchen Sie alle Ihre...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 60; 796 0.333333); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 60.3333; 812 60.3333); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (44 0; 724 60); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 692 20); text = 'Durchsuchen Sie alle Ihre...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 60; 796 0.333333); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 0; 812 60.3333); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (44 0; 724 60); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 692 20); text = 'Erstellen Sie eine neue L...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 60; 796 0.333333); layer = <CALayer>>
-   | <UIImageView; frame = (762.667 3; 2.33333 109.667); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
-   | <UIImageView; frame = (47 301.667; 715.667 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+<UITableView; frame = (0 0; 568 320); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {568, 1011.6666793823242}; adjustedContentInset: {44, 0, 0, 0}>
+   | <UIView; frame = (0 -44; 568 320); autoresize = W+H; layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 286.333; 568 65.3333); hidden = YES; autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 568 65); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 536 25); text = 'View tasks by tapping a l...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 65; 552 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 221; 568 65.3333); autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 568 65); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 536 25); text = 'Create a new task by tapp...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 65; 552 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 130.667; 568 90.3333); autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 568 90); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 536 50); text = 'Search all your lists wit...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 90; 552 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 65.3333; 568 65.3333); autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 568 65); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 536 25); text = 'Search all your lists wit...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 65; 552 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 0; 568 65.3333); autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 568 65); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 536 25); text = 'Create a new list by tapp...'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 65; 552 0.333333); layer = <CALayer>>
+   | <UIImageView; frame = (3 270.667; 559.667 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
+   | <UIImageView; frame = (562.667 3; 2.33333 86); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
