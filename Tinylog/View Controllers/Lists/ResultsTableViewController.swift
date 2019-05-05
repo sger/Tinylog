@@ -41,7 +41,6 @@ class ResultsTableViewController: CoreDataTableViewController {
         self.tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
-        // swiftlint:disable force_unwrapping
         self.view.addSubview(self.noResultsLabel)
     }
 

@@ -12,6 +12,7 @@ disabled_rules:
   - trailing_comma
   - weak_delegate
   - redundant_optional_initialization
+  - force_try
 opt_in_rules:
   - empty_count
   - force_unwrapping

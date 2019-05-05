@@ -1,5 +1,5 @@
 //
-//  TLITextFieldCellDelegate.swift
+//  TextFieldCellDelegate.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol TLITextFieldCellDelegate {
+@objc protocol TextFieldCellDelegate {
     @objc optional func shouldReturnForIndexPath(_ indexPath: IndexPath!, value: String) -> Bool
     @objc optional func updateTextLabelAtIndexPath(_ indexPath: IndexPath, value: String)
     @objc optional func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool

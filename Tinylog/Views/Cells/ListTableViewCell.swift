@@ -64,11 +64,7 @@ class ListTableViewCell: GenericTableViewCell {
         contentView.addSubview(totalTasksLabel)
 
         let selectedBackgroundView = UIView(frame: frame)
-        selectedBackgroundView.backgroundColor = UIColor(
-            red: 244.0 / 255.0,
-            green: 244.0 / 255.0,
-            blue: 244.0 / 255.0,
-            alpha: 1.0)
+        selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         self.selectedBackgroundView = selectedBackgroundView
 

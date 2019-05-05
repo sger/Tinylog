@@ -10,13 +10,13 @@ import UIKit
 import TTTAttributedLabel
 
 class ListsFooterView: UIView {
-    
+
     let footerView: UIView = UIView.newAutoLayout()
     let footerHeight: CGFloat = 60
 
     var infoLabel: TTTAttributedLabel = {
         let infoLabel = TTTAttributedLabel.newAutoLayout()
-        infoLabel.font = UIFont.regularFontWithSize(16.0)
+        infoLabel.font = UIFont.regularFontWithSize(14.0)
         infoLabel.textColor = UIColor.tinylogTextColor
         infoLabel.verticalAlignment = TTTAttributedLabelVerticalAlignment.top
         infoLabel.text = ""
@@ -28,7 +28,7 @@ class ListsFooterView: UIView {
         borderLineView.backgroundColor = UIColor(named: "tableViewSeparator")
         return borderLineView
     }()
-    
+
     var didSetupContraints = false
 
     lazy var addListButton: AddListButton = {
@@ -47,7 +47,7 @@ class ListsFooterView: UIView {
 
         backgroundColor = UIColor.tinylogLighterGray
 
-        footerView.backgroundColor = UIColor.red//UIColor.tinylogLighterGray
+        footerView.backgroundColor = UIColor.tinylogLighterGray
         addSubview(footerView)
 
         addSubview(borderLineView)
@@ -59,7 +59,7 @@ class ListsFooterView: UIView {
 
         setNeedsUpdateConstraints()
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -84,14 +84,14 @@ class ListsFooterView: UIView {
             borderLineView.autoPinEdge(toSuperviewEdge: .top)
 
             addListButton.autoSetDimensions(to: CGSize(width: 28.0, height: 28.0))
-            addListButton.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            addListButton.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
             addListButton.autoPinEdge(toSuperviewEdge: .left, withInset: padding)
 
             archiveButton.autoSetDimensions(to: CGSize(width: 28.0, height: 26.0))
-            archiveButton.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            archiveButton.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
             archiveButton.autoPinEdge(toSuperviewEdge: .right, withInset: padding)
 
-            infoLabel.autoAlignAxis(.horizontal, toSameAxisOf: footerView)
+            infoLabel.autoAlignAxis(.horizontal, toSameAxisOf: footerView, withOffset: -5.0)
             infoLabel.autoAlignAxis(.vertical, toSameAxisOf: footerView)
 
             didSetupContraints = true

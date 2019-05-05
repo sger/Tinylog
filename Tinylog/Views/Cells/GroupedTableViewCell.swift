@@ -18,7 +18,7 @@ class GroupedTableViewCell: UITableViewCell {
         self.detailTextLabel?.font = UIFont.tinylogInterfaceFontOfSize(17.0)!
         self.detailTextLabel?.textColor = UIColor.tinylogTextColor
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -1,5 +1,5 @@
 //
-//  TLITasksFooterView.swift
+//  TasksFooterView.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -9,7 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 
-class TLITasksFooterView: UIView {
+class TasksFooterView: UIView {
 
     var borderLineView: UIView = {
         let borderLineView = UIView.newAutoLayout()

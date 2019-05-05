@@ -55,7 +55,7 @@ class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDel
                 rawValue: Notifications.fontDidChangeNotification),
                 object: nil)
     }
-    // swiftlint:disable cyclomatic_complexity
+
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
         cell.accessoryType = UITableViewCell.AccessoryType.none
         cell.selectionStyle = UITableViewCell.SelectionStyle.none

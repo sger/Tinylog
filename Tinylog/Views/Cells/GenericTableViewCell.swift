@@ -9,15 +9,15 @@
 import UIKit
 
 class GenericTableViewCell: UITableViewCell {
-    
+
     static let cellHeight: CGFloat = 51.0
-    
+
     var tinylogFont: UIFont? {
         let userDefaults = Environment.current.userDefaults
         let useSystemFontSize = userDefaults.bool(forKey: EnvUserDefaults.systemFontSize)
-        
+
         if useSystemFontSize {
-            
+
             if SettingsFontPickerViewController.selectedKey() == "Avenir" {
                 return UIFont.preferredAvenirFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             } else if SettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
@@ -38,7 +38,7 @@ class GenericTableViewCell: UITableViewCell {
                 return UIFont.preferredSFFontForTextStyle(UIFont.TextStyle.body.rawValue as NSString)
             }
         }
-        
+
         let fontSize = userDefaults.double(forKey: EnvUserDefaults.fontSize)
         return UIFont.tinylogFontOfSize(CGFloat(fontSize))
     }
@@ -50,7 +50,8 @@ class GenericTableViewCell: UITableViewCell {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(GenericTableViewCell.updateFonts),
-                                               name: NSNotification.Name(rawValue: Notifications.fontDidChangeNotification),
+                                               name: NSNotification.Name(
+                                                rawValue: Notifications.fontDidChangeNotification),
                                                object: nil)
     }
 
@@ -62,7 +63,7 @@ class GenericTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         if !selected {
-            self.textLabel!.backgroundColor = UIColor.clear
+            self.textLabel?.backgroundColor = UIColor.clear
         }
     }
 

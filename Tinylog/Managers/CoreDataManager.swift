@@ -30,6 +30,7 @@ class CoreDataManager {
         return self.storeDirectoryURL.appendingPathComponent("store.sqlite")
     }
 
+    // swiftlint:disable force_unwrapping
     private lazy var managedObjectModel: NSManagedObjectModel = {
         let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         let modelURL = Bundle.main.url(forResource: self.model, withExtension: "momd")!
@@ -43,7 +44,8 @@ class CoreDataManager {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let storeType = self.memory ? NSInMemoryStoreType : NSSQLiteStoreType
 
-        let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
+        let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+                       NSInferMappingModelAutomaticallyOption: true]
         try! coordinator.addPersistentStore(ofType: storeType,
                                             configurationName: nil,
                                             at: self.storeURL,

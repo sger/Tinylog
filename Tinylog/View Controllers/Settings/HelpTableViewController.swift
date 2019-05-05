@@ -7,49 +7,26 @@
 //
 
 import UIKit
-import MessageUI
-// Consider refactoring the code to use the non-optional operators.
-private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-// Consider refactoring the code to use the non-optional operators.
-private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegate {
 
-    var estimatedRowHeightCache: NSMutableDictionary?
     let helpCellIdentifier = "HelpCellIdentifier"
-    var helpArr = [
-        "Create a new list by tapping Plus icon at bottom left",
-        "Search all your lists with the search field at the top",
-        "Search all your lists with by typing 'purple', 'blue', 'red', 'orange', 'green', 'yellow' tags",
-        "Create a new task by tapping text field at the top",
-        "View tasks by tapping a list",
-        "View archives by tapping Archive icon at bottom right",
-        "Reorder lists and tasks by tapping 'Edit'",
-        "Archive a list by swiping to the left and tapping 'Archive'",
-        "Edit a list by swiping to the left and tapping 'Edit'",
-        "Delete a list by swiping to the left and tapping 'Delete'",
-        "Restore a list by swiping to the left and tapping 'Restore'",
-        "Tap checkbox to complete tasks",
-        "Create web links by typing http:// for example http://www.tinylogapp.com",
-        "Enable iCloud by tapping Settings icon",
-        "Change font or size by tapping Settings icon",
-        "Thanks for choosing Tinylog"]
+    var data = [localizedString(key: "Help_instructions1"),
+                localizedString(key: "Help_instructions2"),
+                localizedString(key: "Help_instructions3"),
+                localizedString(key: "Help_instructions4"),
+                localizedString(key: "Help_instructions5"),
+                localizedString(key: "Help_instructions6"),
+                localizedString(key: "Help_instructions7"),
+                localizedString(key: "Help_instructions8"),
+                localizedString(key: "Help_instructions9"),
+                localizedString(key: "Help_instructions10"),
+                localizedString(key: "Help_instructions11"),
+                localizedString(key: "Help_instructions12"),
+                localizedString(key: "Help_instructions13"),
+                localizedString(key: "Help_instructions14"),
+                localizedString(key: "Help_instructions15"),
+                localizedString(key: "Help_instructions16")]
 
     // MARK: Initializers
 
@@ -67,125 +44,71 @@ class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundView = UIView()
-        self.tableView?.backgroundView?.backgroundColor = UIColor.clear
-        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.tableView?.frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: self.view.frame.size.width,
-            height: self.view.frame.size.height - 50.0)
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundView = UIView()
+        tableView?.backgroundView?.backgroundColor = UIColor.clear
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        tableView?.register(HelpTableViewCell.self, forCellReuseIdentifier: helpCellIdentifier)
+        tableView?.rowHeight = UITableView.automaticDimension
+        tableView?.estimatedRowHeight = 60
 
-        self.tableView?.register(HelpTableViewCell.self, forCellReuseIdentifier: helpCellIdentifier)
-        self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = 61
+        title = "Help"
 
-        self.title = "Help"
-        // swiftlint:disable force_unwrapping
-        self.navigationController?.interactivePopGestureRecognizer!.isEnabled = true
-        self.navigationController?.interactivePopGestureRecognizer!.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
 
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(HelpTableViewController.updateFonts),
-            name: NSNotification.Name(
-                rawValue: Notifications.fontDidChangeNotification),
-            object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(HelpTableViewController.updateFonts),
+                                               name: NSNotification.Name(
+                                                rawValue: Notifications.fontDidChangeNotification),
+                                               object: nil)
     }
 
     @objc func updateFonts() {
         self.navigationController?.navigationBar.setNeedsDisplay()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        initEstimatedRowHeightCacheIfNeeded()
-    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        tableView?.frame = CGRect(x: 0.0, y: 0.0,
+                                  width: view.frame.size.width,
+                                  height: view.frame.size.height)
     }
 
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
         if let helpTableViewCell: HelpTableViewCell = cell as? HelpTableViewCell {
-            helpTableViewCell.helpLabel.text = helpArr[indexPath.row]
+            helpTableViewCell.helpLabel.text = data[indexPath.row]
         }
     }
 
     // MARK: Actions
 
     func close(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
-
-    override func tableView(
-        _ tableView: UITableView,
-        estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
-    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return helpArr.count
+        return data.count
     }
-    // swiftlint:disable force_cast
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: helpCellIdentifier) as! HelpTableViewCell
-        self.configureCell(cell, indexPath: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: helpCellIdentifier) as? HelpTableViewCell {
+            configureCell(cell, indexPath: indexPath)
 
-        let success = isEstimatedRowHeightInCache(indexPath)
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
 
-        if success != nil {
-            let cellSize: CGSize = cell.systemLayoutSizeFitting(
-                CGSize(width: self.view.frame.size.width, height: 0),
-                withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
-                verticalFittingPriority: UILayoutPriority(rawValue: 61))
-            putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
+            return cell
         }
-
-        cell.setNeedsUpdateConstraints()
-        cell.updateConstraintsIfNeeded()
-
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
-
-    func putEstimatedCellHeightToCache(_ indexPath: IndexPath, height: CGFloat) {
-        initEstimatedRowHeightCacheIfNeeded()
-        estimatedRowHeightCache?.setValue(height, forKey: NSString(format: "%ld", indexPath.row) as String)
-    }
-
-    func initEstimatedRowHeightCacheIfNeeded() {
-        if estimatedRowHeightCache == nil {
-            estimatedRowHeightCache = NSMutableDictionary()
-        }
-    }
-
-    func getEstimatedCellHeightFromCache(_ indexPath: IndexPath, defaultHeight: CGFloat) -> CGFloat? {
-        initEstimatedRowHeightCacheIfNeeded()
-
-        let height: CGFloat? = estimatedRowHeightCache!.value(
-            forKey: NSString(format: "%ld", indexPath.row) as String) as? CGFloat
-
-        if height != nil {
-            return floor(height!)
-        }
-        return defaultHeight
-    }
-
-    func isEstimatedRowHeightInCache(_ indexPath: IndexPath) -> Bool? {
-        let value = getEstimatedCellHeightFromCache(indexPath, defaultHeight: 0)
-        if value > 0 {
-            return true
-        }
-        return false
+        return UITableViewCell()
     }
 }
