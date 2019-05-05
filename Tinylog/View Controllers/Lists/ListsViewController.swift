@@ -9,29 +9,8 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 import CoreData
-//// Consider refactoring the code to use the non-optional operators.
-//private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-//  switch (lhs, rhs) {
-//  case let (l?, r?):
-//    return l < r
-//  case (nil, _?):
-//    return true
-//  default:
-//    return false
-//  }
-//}
-//
-//// Consider refactoring the code to use the non-optional operators.
-//private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-//  switch (lhs, rhs) {
-//  case let (l?, r?):
-//    return l > r
-//  default:
-//    return rhs < lhs
-//  }
-//}
 
-class ListsViewController: CoreDataTableViewController,
+final class ListsViewController: CoreDataTableViewController,
     UITextFieldDelegate,
     AddListViewControllerDelegate,
     UISearchControllerDelegate,
@@ -43,7 +22,6 @@ class ListsViewController: CoreDataTableViewController,
     let kEstimateRowHeight = 61
     let kCellIdentifier = "CellIdentifier"
     var editingIndexPath: IndexPath?
-    var estimatedRowHeightCache: NSMutableDictionary?
     var resultsTableViewController: ResultsTableViewController?
     var didSetupContraints = false
 
@@ -285,20 +263,17 @@ class ListsViewController: CoreDataTableViewController,
 
         let userDefaults = Environment.current.userDefaults
         
-        print("setup \(userDefaults.bool(forKey: EnvUserDefaults.setupScreen))")
-
         if userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
             Utils.delay(0.1, closure: { () -> Void in
                 self.displaySetup()
             })
-        } else {
+        } else if userDefaults.bool(forKey: EnvUserDefaults.syncMode) {
             startSync()
         }
 
         if tableView!.indexPathForSelectedRow != nil {
             tableView?.deselectRow(at: tableView!.indexPathForSelectedRow!, animated: animated)
         }
-        //initEstimatedRowHeightCacheIfNeeded()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -407,35 +382,22 @@ class ListsViewController: CoreDataTableViewController,
 
         updateList(list, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
 
-        // swiftlint:disable force_try
         try! managedObjectContext.save()
     }
 
-//    func tableView(_ tableView: UITableView,
-//                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
-//    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! ListTableViewCell
-        self.configureCell(cell, atIndexPath: indexPath)
-
-//        let success = isEstimatedRowHeightInCache(indexPath)
-//
-//        if success != nil {
-//            let cellSize: CGSize = cell.systemLayoutSizeFitting(
-//                CGSize(width: self.view.frame.size.width, height: 0),
-//                withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
-//                verticalFittingPriority: UILayoutPriority(rawValue: 61))
-//            putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
-//        }
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as? ListTableViewCell {
+            configureCell(cell, atIndexPath: indexPath)
+            return cell
+        }
+        return UITableViewCell()
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
-        let listTableViewCell: ListTableViewCell = cell as! ListTableViewCell
-        listTableViewCell.currentList = list
+        if let list: TLIList = self.frc?.object(at: indexPath) as? TLIList,
+            let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell {
+            listTableViewCell.currentList = list
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -503,37 +465,6 @@ class ListsViewController: CoreDataTableViewController,
 
        checkForLists()
     }
-
-    func putEstimatedCellHeightToCache(_ indexPath: IndexPath, height: CGFloat) {
-        initEstimatedRowHeightCacheIfNeeded()
-        estimatedRowHeightCache?.setValue(height, forKey: NSString(format: "%ld", indexPath.row) as String)
-    }
-
-    func initEstimatedRowHeightCacheIfNeeded() {
-        if estimatedRowHeightCache == nil {
-            estimatedRowHeightCache = NSMutableDictionary()
-        }
-    }
-
-    func getEstimatedCellHeightFromCache(_ indexPath: IndexPath, defaultHeight: CGFloat) -> CGFloat? {
-        initEstimatedRowHeightCacheIfNeeded()
-
-        let height: CGFloat? = estimatedRowHeightCache!.value(
-            forKey: NSString(format: "%ld", indexPath.row) as String) as? CGFloat
-
-        if height != nil {
-            return floor(height!)
-        }
-        return defaultHeight
-    }
-
-//    func isEstimatedRowHeightInCache(_ indexPath: IndexPath) -> Bool? {
-//        let value = getEstimatedCellHeightFromCache(indexPath, defaultHeight: 0)
-//        if value > 0 {
-//            return true
-//        }
-//        return false
-//    }
 
     // MARK: UISearchBarDelegate
 

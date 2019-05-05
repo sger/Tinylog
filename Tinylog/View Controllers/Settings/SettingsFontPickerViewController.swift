@@ -47,15 +47,15 @@ class SettingsFontPickerViewController: UITableViewController {
     }
 
     // make large, medium, small
-    class func fontSizeAdjustment() -> CGFloat {
+    static func fontSizeAdjustment() -> CGFloat {
         return 0.0
     }
 
-    class func defaultsKey() -> NSString? {
+    static func defaultsKey() -> NSString? {
         return FontKeys.kTLIFontDefaultsKey
     }
 
-    class func valueMap() -> NSDictionary? {
+    static func valueMap() -> NSDictionary? {
         var map: NSDictionary?
 
         let _onceToken = NSUUID().uuidString
@@ -161,11 +161,11 @@ class SettingsFontPickerViewController: UITableViewController {
         return nil
     }
 
-    class func textForKey(key: String) -> String? {
+    static func textForKey(key: String) -> String? {
         return valueMap()?.object(forKey: key) as? String
     }
 
-    class func textForSelectedKey() -> String? {
+    static func textForSelectedKey() -> String? {
         return textForKey(key: selectedKey()! as String)!
     }
 
