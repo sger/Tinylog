@@ -93,8 +93,8 @@
 		568F7E061F2BA12E00CFDDDD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */; };
 		568F7E081F2BA14300CFDDDD /* SnapshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */; };
 		56B7B7D9227EBCEE003BCAC3 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7D8227EBCEE003BCAC3 /* TLISyncManager.m */; };
-		56B7B7DB227EC8F0003BCAC3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DA227EC8F0003BCAC3 /* Enums.swift */; };
-		56B7B7DD227EC913003BCAC3 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DC227EC913003BCAC3 /* Environment.swift */; };
+		56B7B7E0227ECADB003BCAC3 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DE227ECADB003BCAC3 /* Environment.swift */; };
+		56B7B7E1227ECADB003BCAC3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DF227ECADB003BCAC3 /* Enums.swift */; };
 		5C1884CDA759F78478648025 /* Pods_TinylogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FDB230F560367662A28D96 /* Pods_TinylogTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -224,8 +224,8 @@
 		56B7AD931E858B81004BB429 /* Tinylog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tinylog.entitlements; sourceTree = "<group>"; };
 		56B7B7D7227EBCEE003BCAC3 /* TLISyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLISyncManager.h; sourceTree = "<group>"; };
 		56B7B7D8227EBCEE003BCAC3 /* TLISyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLISyncManager.m; sourceTree = "<group>"; };
-		56B7B7DA227EC8F0003BCAC3 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		56B7B7DC227EC913003BCAC3 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		56B7B7DE227ECADB003BCAC3 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		56B7B7DF227ECADB003BCAC3 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		72FDB230F560367662A28D96 /* Pods_TinylogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinylogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D4301E616F787A62B48BBD /* Pods-TinylogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.release.xcconfig"; sourceTree = "<group>"; };
 		CCCB1EEBF9EAC162DF797006 /* Pods_Tinylog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinylog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -599,6 +599,8 @@
 		5638FCCC2274501700CB4071 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				56B7B7DF227ECADB003BCAC3 /* Enums.swift */,
+				56B7B7DE227ECADB003BCAC3 /* Environment.swift */,
 				5638FCCD2274501700CB4071 /* AppDelegate.swift */,
 			);
 			path = Application;
@@ -607,8 +609,6 @@
 		56487F8F1F644E150080192C /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				56B7B7DC227EC913003BCAC3 /* Environment.swift */,
-				56B7B7DA227EC8F0003BCAC3 /* Enums.swift */,
 				561A25BD2116EBE400B28644 /* Secrets.swift */,
 			);
 			path = Configs;
@@ -966,6 +966,7 @@
 				5638FC8C22744F2200CB4071 /* PlistInfo.swift in Sources */,
 				5638FCB422744F9F00CB4071 /* TLITag.swift in Sources */,
 				5638FCAF22744F9F00CB4071 /* TLITask+CoreDataProperties.swift in Sources */,
+				56B7B7E0227ECADB003BCAC3 /* Environment.swift in Sources */,
 				5638FC5122744CDC00CB4071 /* GenericTableViewCell.swift in Sources */,
 				5638FC5022744CDC00CB4071 /* TextFieldCell.swift in Sources */,
 				5638FC5622744CDC00CB4071 /* CloseButton.swift in Sources */,
@@ -993,10 +994,8 @@
 				5638FC6122744CDC00CB4071 /* AddTaskView.swift in Sources */,
 				5638FC8A22744ECF00CB4071 /* Utils.swift in Sources */,
 				5638FC7B22744D8200CB4071 /* HelpTableViewController.swift in Sources */,
-				56B7B7DB227EC8F0003BCAC3 /* Enums.swift in Sources */,
 				5638FC7F22744D8200CB4071 /* EditTaskViewController.swift in Sources */,
 				5638FC8322744D8200CB4071 /* ResultsTableViewController.swift in Sources */,
-				56B7B7DD227EC913003BCAC3 /* Environment.swift in Sources */,
 				5638FC9522744F4000CB4071 /* TextFieldCellDelegate.swift in Sources */,
 				5638FC7D22744D8200CB4071 /* SettingsFontPickerViewController.swift in Sources */,
 				5638FC9322744F4000CB4071 /* UserDefaultsType.swift in Sources */,
@@ -1018,6 +1017,7 @@
 				5638FCB522744F9F00CB4071 /* TLIList.swift in Sources */,
 				5638FC5922744CDC00CB4071 /* TLITextField.m in Sources */,
 				5638FC8522744D8200CB4071 /* AddListViewController.swift in Sources */,
+				56B7B7E1227ECADB003BCAC3 /* Enums.swift in Sources */,
 				5638FCC82274500A00CB4071 /* NSDate+Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
