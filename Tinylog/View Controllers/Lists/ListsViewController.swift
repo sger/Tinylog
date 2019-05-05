@@ -9,27 +9,27 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 import CoreData
-// Consider refactoring the code to use the non-optional operators.
-private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// Consider refactoring the code to use the non-optional operators.
-private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
+//// Consider refactoring the code to use the non-optional operators.
+//private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+//  switch (lhs, rhs) {
+//  case let (l?, r?):
+//    return l < r
+//  case (nil, _?):
+//    return true
+//  default:
+//    return false
+//  }
+//}
+//
+//// Consider refactoring the code to use the non-optional operators.
+//private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+//  switch (lhs, rhs) {
+//  case let (l?, r?):
+//    return l > r
+//  default:
+//    return rhs < lhs
+//  }
+//}
 
 class ListsViewController: CoreDataTableViewController,
     UITextFieldDelegate,
@@ -47,12 +47,12 @@ class ListsViewController: CoreDataTableViewController,
     var resultsTableViewController: ResultsTableViewController?
     var didSetupContraints = false
 
-    var listsFooterView: ListsFooterView? = {
+    var listsFooterView: ListsFooterView = {
         let listsFooterView = ListsFooterView.newAutoLayout()
         return listsFooterView
     }()
 
-    lazy var emptyListsLabel: UILabel? = {
+    lazy var emptyListsLabel: UILabel = {
         let noListsLabel: UILabel = UILabel.newAutoLayout()
         noListsLabel.font = UIFont.tinylogFontOfSize(16.0)
         noListsLabel.textColor = UIColor.tinylogTextColor
@@ -97,12 +97,7 @@ class ListsViewController: CoreDataTableViewController,
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         tableView?.rowHeight = UITableView.automaticDimension
-        tableView?.estimatedRowHeight = 61
-        tableView?.frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: view.frame.size.width,
-            height: view.frame.size.height - 50.0)
+        tableView?.estimatedRowHeight = 60
         tableView?.tableFooterView = UIView()
 
         resultsTableViewController = ResultsTableViewController()
@@ -123,12 +118,12 @@ class ListsViewController: CoreDataTableViewController,
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = settingsBarButtonItem
 
-        listsFooterView?.addListButton.addTarget(self,
-                                                 action: #selector(ListsViewController.addNewList(_:)),
-                                                 for: UIControl.Event.touchDown)
-        listsFooterView?.archiveButton.addTarget(self,
-                                                 action: #selector(ListsViewController.displayArchive(_:)),
-                                                 for: UIControl.Event.touchDown)
+        listsFooterView.addListButton.addTarget(self,
+                                                action: #selector(ListsViewController.addNewList(_:)),
+                                                for: UIControl.Event.touchDown)
+        listsFooterView.archiveButton.addTarget(self,
+                                                action: #selector(ListsViewController.displayArchive(_:)),
+                                                for: UIControl.Event.touchDown)
 
         setEditing(false, animated: false)
 
@@ -140,8 +135,8 @@ class ListsViewController: CoreDataTableViewController,
 
     override func loadView() {
         super.loadView()
-        view.addSubview(emptyListsLabel!)
-        view.addSubview(listsFooterView!)
+        view.addSubview(emptyListsLabel)
+        view.addSubview(listsFooterView)
         view.setNeedsUpdateConstraints()
     }
 
@@ -153,12 +148,12 @@ class ListsViewController: CoreDataTableViewController,
 
         if !didSetupContraints {
 
-            emptyListsLabel?.autoCenterInSuperview()
+            emptyListsLabel.autoCenterInSuperview()
 
-            listsFooterView?.autoMatch(.width, to: .width, of: self.view)
-            listsFooterView?.autoSetDimension(.height, toSize: listsFooterView!.footerHeight + self.view.safeAreaInsets.bottom)
-            listsFooterView?.autoPinEdge(toSuperviewEdge: .left)
-            listsFooterView?.autoPinEdge(toSuperviewEdge: .bottom)
+            listsFooterView.autoMatch(.width, to: .width, of: self.view)
+            listsFooterView.autoSetDimension(.height, toSize: listsFooterView.footerHeight)
+            listsFooterView.autoPinEdge(toSuperviewEdge: .left)
+            listsFooterView.autoPinEdge(toSuperviewEdge: .bottom)
 
             didSetupContraints = true
         }
@@ -192,11 +187,10 @@ class ListsViewController: CoreDataTableViewController,
 
             //check for connectivity
             if AppDelegate.sharedAppDelegate().networkMode == "notReachable" {
-                listsFooterView?.updateInfoLabel("Offline")
+                listsFooterView.updateInfoLabel("Offline")
             } else {
-                listsFooterView?.updateInfoLabel(
-                    NSString(
-                        format: "Last Updated %@", dateFormatter.string(for: Date())!) as String)
+                listsFooterView.updateInfoLabel(NSString(format: "Last Updated %@",
+                                                         dateFormatter.string(for: Date())!) as String)
             }
 
             checkForLists()
@@ -210,15 +204,19 @@ class ListsViewController: CoreDataTableViewController,
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
             if AppDelegate.sharedAppDelegate().networkMode == "notReachable" {
-                listsFooterView?.updateInfoLabel("Offline")
+                listsFooterView.updateInfoLabel("Offline")
             } else {
-                listsFooterView?.updateInfoLabel("Syncing...")
+                listsFooterView.updateInfoLabel("Syncing...")
             }
         }
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+
+        tableView?.frame = CGRect(x: 0.0, y: 0.0,
+                                  width: view.frame.size.width,
+                                  height: view.frame.size.height - listsFooterView.footerHeight)
     }
 
     override func viewWillTransition(
@@ -298,23 +296,21 @@ class ListsViewController: CoreDataTableViewController,
         if tableView!.indexPathForSelectedRow != nil {
             tableView?.deselectRow(at: tableView!.indexPathForSelectedRow!, animated: animated)
         }
-        initEstimatedRowHeightCacheIfNeeded()
+        //initEstimatedRowHeightCacheIfNeeded()
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: "Done",
-                style: UIBarButtonItem.Style.plain,
-                target: self,
-                action: #selector(ListsViewController.toggleEditMode(_:)))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done",
+                                                                style: UIBarButtonItem.Style.plain,
+                                                                target: self,
+                                                                action: #selector(ListsViewController.toggleEditMode(_:)))
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: "Edit",
-                style: UIBarButtonItem.Style.plain,
-                target: self,
-                action: #selector(ListsViewController.toggleEditMode(_:)))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
+                                                                style: UIBarButtonItem.Style.plain,
+                                                                target: self,
+                                                                action: #selector(ListsViewController.toggleEditMode(_:)))
         }
     }
 
@@ -413,24 +409,24 @@ class ListsViewController: CoreDataTableViewController,
         try! managedObjectContext.save()
     }
 
-    func tableView(_ tableView: UITableView,
-                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
-    }
+//    func tableView(_ tableView: UITableView,
+//                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
+//    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! ListTableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
 
-        let success = isEstimatedRowHeightInCache(indexPath)
-
-        if success != nil {
-            let cellSize: CGSize = cell.systemLayoutSizeFitting(
-                CGSize(width: self.view.frame.size.width, height: 0),
-                withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
-                verticalFittingPriority: UILayoutPriority(rawValue: 61))
-            putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
-        }
+//        let success = isEstimatedRowHeightInCache(indexPath)
+//
+//        if success != nil {
+//            let cellSize: CGSize = cell.systemLayoutSizeFitting(
+//                CGSize(width: self.view.frame.size.width, height: 0),
+//                withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
+//                verticalFittingPriority: UILayoutPriority(rawValue: 61))
+//            putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
+//        }
         return cell
     }
 
@@ -467,7 +463,9 @@ class ListsViewController: CoreDataTableViewController,
         return "Delete"
     }
 
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commitEditingStyle editingStyle: UITableViewCell.EditingStyle,
+                   forRowAtIndexPath indexPath: IndexPath) {
         if editingStyle != UITableViewCell.EditingStyle.delete {
             return
         }
@@ -498,7 +496,7 @@ class ListsViewController: CoreDataTableViewController,
             tasksViewController.managedObjectContext = managedObjectContext
             tasksViewController.list = list
             tasksViewController.focusTextField = true
-            self.navigationController?.pushViewController(tasksViewController, animated: true)
+            navigationController?.pushViewController(tasksViewController, animated: true)
         }
 
        checkForLists()
@@ -527,13 +525,13 @@ class ListsViewController: CoreDataTableViewController,
         return defaultHeight
     }
 
-    func isEstimatedRowHeightInCache(_ indexPath: IndexPath) -> Bool? {
-        let value = getEstimatedCellHeightFromCache(indexPath, defaultHeight: 0)
-        if value > 0 {
-            return true
-        }
-        return false
-    }
+//    func isEstimatedRowHeightInCache(_ indexPath: IndexPath) -> Bool? {
+//        let value = getEstimatedCellHeightFromCache(indexPath, defaultHeight: 0)
+//        if value > 0 {
+//            return true
+//        }
+//        return false
+//    }
 
     // MARK: UISearchBarDelegate
 
@@ -636,9 +634,9 @@ extension ListsViewController {
         let results = TLIList.lists(with: managedObjectContext)
 
         if results.isEmpty {
-            self.emptyListsLabel?.isHidden = false
+            self.emptyListsLabel.isHidden = false
         } else {
-            self.emptyListsLabel?.isHidden = true
+            self.emptyListsLabel.isHidden = true
         }
     }
 }

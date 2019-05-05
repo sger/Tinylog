@@ -16,6 +16,8 @@ class SettingsTableViewController: UITableViewController,
 
     let settingsCellIdentifier = "SettingsCellIdentifier"
 
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+
     // MARK: Initializers
 
     override init(style: UITableView.Style) {
@@ -139,6 +141,7 @@ class SettingsTableViewController: UITableViewController,
     // MARK: Actions
 
     @objc func toggleSyncSettings(_ sender: UISwitch) {
+        selectionFeedbackGenerator.selectionChanged()
         let mode: UISwitch = sender as UISwitch
         let value: NSString = mode.isOn == true ? "on" : "off"
 

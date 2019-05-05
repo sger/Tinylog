@@ -41,7 +41,7 @@ class ArchiveTasksViewController: CoreDataTableViewController,
     var estimatedRowHeightCache: NSMutableDictionary?
     var currentIndexPath: IndexPath?
     var focusTextField: Bool?
-    var tasksFooterView: TLITasksFooterView?
+    var tasksFooterView: TasksFooterView?
     var orientation: String = "portrait"
 
     lazy var noTasksLabel: UILabel? = {

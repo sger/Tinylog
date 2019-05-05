@@ -45,8 +45,8 @@ class TasksViewController: CoreDataTableViewController,
     var topConstraint: NSLayoutConstraint?
     var heightConstraint: NSLayoutConstraint?
 
-    var tasksFooterView: TLITasksFooterView? = {
-        let tasksFooterView = TLITasksFooterView.newAutoLayout()
+    var tasksFooterView: TasksFooterView? = {
+        let tasksFooterView = TasksFooterView.newAutoLayout()
         return tasksFooterView
     }()
 

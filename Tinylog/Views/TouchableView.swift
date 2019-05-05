@@ -1,5 +1,5 @@
 //
-//  TLITouchableView.swift
+//  TouchableView.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLITouchableView: UIView {
+class TouchableView: UIView {
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         for item in self.subviews {

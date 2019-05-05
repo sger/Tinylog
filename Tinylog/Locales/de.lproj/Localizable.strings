@@ -6,12 +6,32 @@
   Copyright © 2019 Spiros Gerokostas. All rights reserved.
 */
 
+// ListsViewController
 "My_Lists" = "Meine Listen";
 "Update_lists" = "Letzte Aktualisierung %@";
 
-// TLISetupViewController
+// SetupViewController
 "Sync" = "iCloud für Tinylog";
 "Sync_description" = "iCloud hält Ihre Listen auf Ihrem iPhone und iPad auf dem neuesten Stand.";
 "Later" = "Später";
 "Use_iCloud" = "Benutze iCloud";
 "Not_logged_in" = "Sie sind nicht bei iCloud angemeldet. Tippen Sie auf Einstellungen> iCloud, um sich anzumelden.";
+
+// HelpTableViewController
+"Help" = "Hilfe";
+"Help_instructions1" = "Erstellen Sie eine neue Liste, indem Sie unten links auf das Plus-Symbol tippen";
+"Help_instructions2" = "Durchsuchen Sie alle Ihre Listen mit dem Suchfeld oben";
+"Help_instructions3" = "Durchsuchen Sie alle Ihre Listen mit den Tags 'lila', 'blau', 'rot', 'orange', 'grün', 'gelb'";
+"Help_instructions4" = "Erstellen Sie eine neue Aufgabe, indem Sie oben auf das Textfeld tippen";
+"Help_instructions5" = "Zeigen Sie Aufgaben an, indem Sie auf eine Liste tippen";
+"Help_instructions6" = "Zeigen Sie Archive an, indem Sie unten rechts auf Archivsymbol tippen";
+"Help_instructions7" = "Listen und Aufgaben neu anordnen, indem Sie auf 'Bearbeiten' tippen";
+"Help_instructions8" = "Archivieren Sie eine Liste, indem Sie nach links streichen und auf 'Archiv' tippen.";
+"Help_instructions9" = "Bearbeiten Sie eine Liste, indem Sie nach links streichen und auf 'Bearbeiten' tippen.";
+"Help_instructions10" = "Löschen Sie eine Liste, indem Sie nach links streichen und auf 'Löschen' tippen.";
+"Help_instructions11" = "Wiederherstellen einer Liste durch Wischen nach links und Tippen auf 'Wiederherstellen'";
+"Help_instructions12" = "Tippen Sie auf das Kontrollkästchen, um die Aufgaben abzuschließen";
+"Help_instructions13" = "Erstellen Sie Weblinks, indem Sie http: // eingeben, beispielsweise http://www.tinylogapp.com";
+"Help_instructions14" = "Aktivieren Sie iCloud, indem Sie auf das Symbol Einstellungen tippen";
+"Help_instructions15" = "Ändern Sie die Schriftart oder -größe, indem Sie auf das Symbol Einstellungen tippen";
+"Help_instructions16" = "Vielen Dank, dass Sie sich für Tinylog entschieden haben";

@@ -17,7 +17,7 @@ class AddListViewController: UITableViewController, UITextFieldDelegate {
 
     var managedObjectContext: NSManagedObjectContext!
     var name: UITextField?
-    var menuColorsView: TLIMenuColorsView?
+    var menuColorsView: MenuColorsView?
     var delegate: AddListViewControllerDelegate?
     var mode: Mode = .create
     var list: TLIList?
@@ -50,7 +50,7 @@ class AddListViewController: UITableViewController, UITextFieldDelegate {
             target: self,
             action: #selector(AddListViewController.save(_:)))
 
-        menuColorsView = TLIMenuColorsView(
+        menuColorsView = MenuColorsView(
             frame: CGRect(x: 12.0, y: 200.0, width: self.view.frame.width, height: 51.0))
         self.tableView.tableFooterView = menuColorsView
 
@@ -90,7 +90,7 @@ class AddListViewController: UITableViewController, UITextFieldDelegate {
         _ tableView: UITableView,
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath) {
-        if let textFieldCell: TLITextFieldCell = cell as? TLITextFieldCell {
+        if let textFieldCell: TextFieldCell = cell as? TextFieldCell {
             if indexPath.row == 0 {
                 if list != nil {
                     textFieldCell.textField?.text = list?.title
@@ -110,14 +110,14 @@ class AddListViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TLITextFieldCell = TLITextFieldCell(
+        let cell: TextFieldCell = TextFieldCell(
             style: UITableViewCell.CellStyle.default,
             reuseIdentifier: "CellIdentifier")
         configureCell(cell, indexPath: indexPath)
         return cell
     }
 
-    func configureCell(_ cell: TLITextFieldCell, indexPath: IndexPath) {
+    func configureCell(_ cell: TextFieldCell, indexPath: IndexPath) {
         if indexPath.row == 0 {
             cell.textField?.placeholder = "Name"
             cell.backgroundColor = UIColor.white

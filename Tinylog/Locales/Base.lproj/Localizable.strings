@@ -6,14 +6,33 @@
   Copyright © 2019 Spiros Gerokostas. All rights reserved.
 */
 
-// TLIListsViewController
+// ListsViewController
 "My_Lists" = "My Lists";
 "Update_lists" = "Last Updated %@";
 
-// TLISetupViewController
+// SetupViewController
 "Sync" = "iCloud for Tinylog";
 "Sync_description" = "iCloud keeps your lists up to date on your iPhone and iPad.";
 "Later" = "Later";
 "Use_iCloud" = "Use iCloud";
 "Not_logged_in" = "You are not logged in to iCloud.Tap Settings > iCloud to login.";
+
+// HelpTableViewController
+"Help" = "Help";
+"Help_instructions1" = "Create a new list by tapping Plus icon at bottom left";
+"Help_instructions2" = "Search all your lists with the search field at the top";
+"Help_instructions3" = "Search all your lists with by typing 'purple', 'blue', 'red', 'orange', 'green', 'yellow' tags";
+"Help_instructions4" = "Create a new task by tapping text field at the top";
+"Help_instructions5" = "View tasks by tapping a list";
+"Help_instructions6" = "View archives by tapping Archive icon at bottom right";
+"Help_instructions7" = "Reorder lists and tasks by tapping 'Edit'";
+"Help_instructions8" = "Archive a list by swiping to the left and tapping 'Archive'";
+"Help_instructions9" = "Edit a list by swiping to the left and tapping 'Edit'";
+"Help_instructions10" = "Delete a list by swiping to the left and tapping 'Delete'";
+"Help_instructions11" = "Restore a list by swiping to the left and tapping 'Restore'";
+"Help_instructions12" = "Tap checkbox to complete tasks";
+"Help_instructions13" = "Create web links by typing http:// for example http://www.tinylogapp.com";
+"Help_instructions14" = "Enable iCloud by tapping Settings icon";
+"Help_instructions15" = "Change font or size by tapping Settings icon";
+"Help_instructions16" = "Thanks for choosing Tinylog";
 

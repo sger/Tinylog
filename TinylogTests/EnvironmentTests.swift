@@ -5,7 +5,7 @@
 //  Created by Spiros Gerokostas on 24/03/2017.
 //  Copyright © 2017 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable line_length
+
 import XCTest
 @testable import Tinylog
 

@@ -124,10 +124,10 @@ class TaskTableViewCell: GenericTableViewCell {
 
         super.updateConstraints()
     }
-   
+
     override func updateFonts() {
         super.updateFonts()
-        
+
         taskLabel.font = tinylogFont
     }
 
@@ -141,7 +141,8 @@ class TaskTableViewCell: GenericTableViewCell {
     }
 
     func updateAttributedText() {
-        taskLabel.setText(currentTask?.displayLongText) { (mutableAttributedString) -> NSMutableAttributedString? in
+        taskLabel.setText(currentTask?.displayLongText) {
+            (mutableAttributedString) -> NSMutableAttributedString? in
             return mutableAttributedString
         }
         if let textTaskLabel = taskLabel.text, let total = textTaskLabel as? NSString {

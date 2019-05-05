@@ -11,7 +11,7 @@ import XCTest
 import SnapshotTesting
 
 class SetupViewControllerTests: XCTestCase {
-    
+
     func testSetupViewControllerInPortaitMode() {
        // record = true
         combos(Language.languages, SnapshotTestingDevices.portrait).forEach { language, device in
@@ -22,7 +22,7 @@ class SetupViewControllerTests: XCTestCase {
             })
         }
     }
-    
+
     func testSetupViewControllerInLandscapeMode() {
         // record = true
         combos(Language.languages, SnapshotTestingDevices.landscape).forEach { language, device in

@@ -1,5 +1,5 @@
 //
-//  TLIKeyboardBar.swift
+//  KeyboardBar.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TLIKeyboardBar: UIView, UIInputViewAudioFeedback {
+class KeyboardBar: UIView, UIInputViewAudioFeedback {
 
     var keyInputView: UIKeyInput?
     let buttonHashTag: UIButton = UIButton()
@@ -28,7 +28,7 @@ class TLIKeyboardBar: UIView, UIInputViewAudioFeedback {
         buttonHashTag.setTitle("#", for: UIControl.State())
         buttonHashTag.addTarget(
             self,
-            action: #selector(TLIKeyboardBar.buttonHashTagPressed(_:)),
+            action: #selector(KeyboardBar.buttonHashTagPressed(_:)),
             for: UIControl.Event.touchUpInside)
         self.addSubview(buttonHashTag)
     }

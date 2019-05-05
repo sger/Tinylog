@@ -11,24 +11,12 @@ import SnapshotTesting
 struct SnapshotTestingDevices {
     static let portrait = [ViewImageConfig.iPhoneX(.portrait),
                            ViewImageConfig.iPhoneXsMax(.portrait),
-                           ViewImageConfig.iPadMini(.portrait),
-                           ViewImageConfig.iPadPro10_5(.portrait),
-                           ViewImageConfig.iPadPro11(.portrait),
                            ViewImageConfig.iPadPro12_9(.portrait),
                            ViewImageConfig.iPhone8(.portrait),
-                           ViewImageConfig.iPhone8Plus(.portrait),
-                           ViewImageConfig.iPhoneSe(.portrait),
-                           ViewImageConfig.iPhoneXr(.portrait)]
-    
+                           ViewImageConfig.iPhoneSe(.portrait)]
+
     static let landscape = [ViewImageConfig.iPhoneX(.landscape),
                             ViewImageConfig.iPhoneXsMax(.landscape),
-                            ViewImageConfig.iPadMini(.landscape),
-                            ViewImageConfig.iPadPro10_5(.landscape),
-                            ViewImageConfig.iPadPro11(.landscape),
                             ViewImageConfig.iPadPro12_9(.landscape),
-                            ViewImageConfig.iPhone8(.landscape),
-                            ViewImageConfig.iPhone8Plus(.landscape),
-                            ViewImageConfig.iPhoneSe(.landscape),
-                            ViewImageConfig.iPhoneXr(.landscape)]
+                            ViewImageConfig.iPhone8(.landscape)]
 }
-

@@ -11,7 +11,7 @@ import UIKit
 class CheckBoxButton: UIButton {
 
     var tableViewCell: UITableViewCell?
-    var circleView: TLITouchableView?
+    var circleView: TouchableView?
     var checkMarkIcon: UIImageView?
 
     override init(frame: CGRect) {
@@ -24,7 +24,7 @@ class CheckBoxButton: UIButton {
     }
 
     func setup() {
-        circleView = TLITouchableView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0))
+        circleView = TouchableView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: 30.0))
         circleView?.layer.cornerRadius = 30.0 / 2
         circleView?.layer.borderColor = UIColor.tinylogMainColor.cgColor
         circleView?.layer.borderWidth = 1.0

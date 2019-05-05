@@ -1,5 +1,5 @@
 //
-//  TLIMenuColorsView.swift
+//  MenuColorsView.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,7 +8,7 @@
 // swiftlint:disable force_cast
 import UIKit
 
-class TLIMenuColorsView: UIView {
+class MenuColorsView: UIView {
 
     var colors = ["#6a6de2", "#008efe", "#fe4565", "#ffa600", "#50de72", "#ffd401"]
     var buttonsContainer: UIView?
@@ -61,7 +61,7 @@ class TLIMenuColorsView: UIView {
             button.backgroundColor = UIColor(rgba: item)
             button.addTarget(
                 self,
-                action: #selector(TLIMenuColorsView.buttonPressed(_:)),
+                action: #selector(MenuColorsView.buttonPressed(_:)),
                 for: UIControl.Event.touchDown)
             buttonsContainer?.addSubview(button)
             index += 1

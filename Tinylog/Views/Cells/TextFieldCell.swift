@@ -1,5 +1,5 @@
 //
-//  TLITextFieldCell.swift
+//  TextFieldCell.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -8,11 +8,11 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class TLITextFieldCell: UITableViewCell, UITextFieldDelegate, TLITextFieldCellDelegate {
+class TextFieldCell: UITableViewCell, UITextFieldDelegate, TextFieldCellDelegate {
 
     var textField: TLITextField?
     var indexPath: IndexPath?
-    var delegate: TLITextFieldCellDelegate?
+    var delegate: TextFieldCellDelegate?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
