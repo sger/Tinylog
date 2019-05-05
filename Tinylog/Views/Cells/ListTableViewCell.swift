@@ -102,8 +102,8 @@ class ListTableViewCell: GenericTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.contentView.setNeedsLayout()
-        self.contentView.layoutIfNeeded()
+        contentView.setNeedsLayout()
+        contentView.layoutIfNeeded()
 
         listLabel.preferredMaxLayoutWidth = listLabel.frame.width
     }
