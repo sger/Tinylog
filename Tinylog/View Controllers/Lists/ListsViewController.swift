@@ -284,6 +284,8 @@ class ListsViewController: CoreDataTableViewController,
         checkForLists()
 
         let userDefaults = Environment.current.userDefaults
+        
+        print("setup \(userDefaults.bool(forKey: EnvUserDefaults.setupScreen))")
 
         if userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
             Utils.delay(0.1, closure: { () -> Void in
