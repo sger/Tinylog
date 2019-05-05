@@ -514,9 +514,7 @@ final class ListsViewController: CoreDataTableViewController,
                 do {
                     try resultsController.frc?.performFetch()
                     resultsController.tableView?.reloadData()
-                    if resultsController.checkForEmptyResults() {
-                        print("no results")
-                    }
+                    resultsController.showNoResults()
                 } catch let error as NSError {
                     fatalError(error.localizedDescription)
                 }

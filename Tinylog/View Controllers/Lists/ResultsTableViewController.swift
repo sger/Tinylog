@@ -30,45 +30,48 @@ class ResultsTableViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.tableView?.frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: self.view.frame.size.width,
-            height: self.view.frame.size.height)
-        self.tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
-        self.view.addSubview(self.noResultsLabel)
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundView = UIView()
+        tableView?.backgroundView?.backgroundColor = UIColor.clear
+        tableView?.backgroundColor = UIColor.tinylogLightGray
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.rowHeight = UITableView.automaticDimension
+        tableView?.estimatedRowHeight = 60
+        tableView?.tableFooterView = UIView()
+        
+        view.addSubview(noResultsLabel)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.checkForEmptyResults() {
-            self.noResultsLabel.isHidden = false
-        } else {
-            self.noResultsLabel.isHidden = true
-        }
+        showNoResults()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView?.frame = CGRect(x: 0.0, y: 0.0,
+                                  width: view.frame.size.width,
+                                  height: view.frame.size.height)
     }
 
     func configureFetch() {
-
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         let remoteIDDescriptor  = NSSortDescriptor(key: "remoteID", ascending: true)
         fetchRequest.sortDescriptors = [positionDescriptor, remoteIDDescriptor]
-        self.frc = NSFetchedResultsController(
+        frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: managedObjectContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
-        self.frc?.delegate = self
+        frc?.delegate = self
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let list: TLIList = self.frc?.object(at: indexPath) as? TLIList,
+        if let list: TLIList = frc?.object(at: indexPath) as? TLIList,
             let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell {
                 listTableViewCell.currentList = list
         }
@@ -76,8 +79,20 @@ class ResultsTableViewController: CoreDataTableViewController {
 
     // swiftlint:disable force_cast
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! ListTableViewCell
-        self.configureCell(cell, atIndexPath: indexPath)
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as? ListTableViewCell {
+            configureCell(cell, atIndexPath: indexPath)
+            return cell
+        }
+        return UITableViewCell()
+    }
+}
+
+extension ResultsTableViewController {
+    func showNoResults() {
+        if checkForEmptyResults() {
+            noResultsLabel.isHidden = false
+        } else {
+            noResultsLabel.isHidden = true
+        }
     }
 }
