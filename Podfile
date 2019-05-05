@@ -14,6 +14,7 @@ target 'Tinylog' do
 	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"
   pod 'Firebase/Core'
+  pod 'SwiftLint'
 
   target 'TinylogTests' do
     inherit! :search_paths
