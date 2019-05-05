@@ -23,3 +23,6 @@ type_body_length:
   error: 400
 excluded:
   - Pods
+  - TinylogTests
+  - TinylogUITests
+  - vendor
