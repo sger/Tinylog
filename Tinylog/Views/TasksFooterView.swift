@@ -78,7 +78,7 @@ class TasksFooterView: UIView {
         if !didSetupContraints {
 
             footerView.autoMatch(.width, to: .width, of: self)
-            footerView.autoSetDimension(.height, toSize: 51.0)
+            footerView.autoSetDimension(.height, toSize: 60.0)
             footerView.autoPinEdge(toSuperviewEdge: .bottom)
 
             borderLineView.autoMatch(.width, to: .width, of: self)

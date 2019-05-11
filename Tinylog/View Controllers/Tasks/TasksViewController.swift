@@ -42,8 +42,8 @@ class TasksViewController: CoreDataTableViewController,
     var currentIndexPath: IndexPath?
     var focusTextField: Bool?
 
-    var topConstraint: NSLayoutConstraint?
-    var heightConstraint: NSLayoutConstraint?
+//    var topConstraint: NSLayoutConstraint?
+//    var heightConstraint: NSLayoutConstraint?
 
     var tasksFooterView: TasksFooterView? = {
         let tasksFooterView = TasksFooterView.newAutoLayout()
@@ -52,10 +52,10 @@ class TasksViewController: CoreDataTableViewController,
 
     var orientation: String = "portrait"
     var enableDidSelectRowAtIndexPath = true
-    var didSetupContraints = false
+    //var didSetupContraints = false
 
     lazy var addTransparentLayer: UIView? = {
-        let addTransparentLayer: UIView = UIView.newAutoLayout()
+        let addTransparentLayer: UIView = UIView()
         addTransparentLayer.autoresizingMask = [
             UIView.AutoresizingMask.flexibleWidth,
             UIView.AutoresizingMask.flexibleBottomMargin]
@@ -69,7 +69,7 @@ class TasksViewController: CoreDataTableViewController,
     }()
 
     lazy var noTasksLabel: UILabel? = {
-        let noTasksLabel: UILabel = UILabel.newAutoLayout()
+        let noTasksLabel: UILabel = UILabel()
         noTasksLabel.font = UIFont.regularFontWithSize(18.0)
         noTasksLabel.textColor = UIColor.tinylogTextColor
         noTasksLabel.text = "Tap text field to create a new task."
@@ -78,7 +78,7 @@ class TasksViewController: CoreDataTableViewController,
     }()
 
     lazy var noListSelected: UILabel? = {
-        let noListSelected: UILabel = UILabel.newAutoLayout()
+        let noListSelected: UILabel = UILabel()
         noListSelected.font = UIFont.regularFontWithSize(16.0)
         noListSelected.textColor = UIColor.tinylogTextColor
         noListSelected.textAlignment = NSTextAlignment.center
@@ -197,13 +197,39 @@ class TasksViewController: CoreDataTableViewController,
         self.tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableView.automaticDimension
         self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
-        self.tableView?.frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: self.view.frame.size.width,
-            height: self.view.frame.size.height - 50.0)
         self.tableView?.tableFooterView = UIView()
+        tableView?.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+        })
 
+        tasksFooterView?.snp.makeConstraints { (make) in
+            make.left.equalTo(view)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            make.width.equalTo(view)
+            make.height.equalTo(60.0)
+        }
+        
+        noListSelected?.snp.makeConstraints({ (make) in
+            make.center.equalToSuperview()
+        })
+        
+        noTasksLabel?.snp.makeConstraints({ (make) in
+            make.center.equalToSuperview()
+        })
+        
+        
+        addTransparentLayer?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(AddTaskView.height())
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-60)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+        })
+        
         tasksFooterView?.exportTasksButton?.addTarget(
             self,
             action: #selector(TasksViewController.exportTasks(_:)),
@@ -351,38 +377,6 @@ class TasksViewController: CoreDataTableViewController,
         view.addSubview(addTransparentLayer!)
 
         view.setNeedsUpdateConstraints()
-    }
-
-    override func updateViewConstraints() {
-
-        if !didSetupContraints {
-
-            noListSelected?.autoCenterInSuperview()
-            noTasksLabel?.autoCenterInSuperview()
-
-            tasksFooterView?.autoMatch(.width, to: .width, of: self.view)
-            tasksFooterView?.autoSetDimension(.height, toSize: 51.0)
-            tasksFooterView?.autoPinEdge(toSuperviewEdge: .left)
-            tasksFooterView?.autoPinEdge(toSuperviewEdge: .bottom)
-
-            addTransparentLayer?.autoMatch(.width, to: .width, of: self.view)
-
-            didSetupContraints = true
-        }
-
-        topConstraint?.autoRemove()
-        heightConstraint?.autoRemove()
-
-        let posY: CGFloat = AddTaskView.height() + topDistance
-
-        topConstraint = addTransparentLayer?.autoPinEdge(toSuperviewEdge: .top, withInset: posY)
-        heightConstraint = addTransparentLayer?.autoMatch(
-            .height,
-            to: .height,
-            of: self.view,
-            withOffset: -51.0 - posY)
-
-        super.updateViewConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -613,10 +607,10 @@ class TasksViewController: CoreDataTableViewController,
         return 0
     }
 
-    func tableView(_ tableView: UITableView,
-                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 52)!)
-    }
+//    func tableView(_ tableView: UITableView,
+//                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 52)!)
+//    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell: TaskTableViewCell = tableView.dequeueReusableCell(
@@ -629,14 +623,14 @@ class TasksViewController: CoreDataTableViewController,
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
 
-            let height = isEstimatedRowHeightInCache(indexPath)
-            if height != nil {
-                let cellSize: CGSize = cell.systemLayoutSizeFitting(
-                    CGSize(width: self.view.frame.size.width, height: 0),
-                    withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
-                    verticalFittingPriority: UILayoutPriority(rawValue: 52))
-                putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
-            }
+//            let height = isEstimatedRowHeightInCache(indexPath)
+//            if height != nil {
+//                let cellSize: CGSize = cell.systemLayoutSizeFitting(
+//                    CGSize(width: self.view.frame.size.width, height: 0),
+//                    withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
+//                    verticalFittingPriority: UILayoutPriority(rawValue: 52))
+//                putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
+//            }
             return cell
 
     }
