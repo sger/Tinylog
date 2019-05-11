@@ -7,8 +7,9 @@
 */
 
 // ListsViewController
-"My_Lists" = "My Lists";
+"My_lists" = "My Lists";
 "Update_lists" = "Last Updated %@";
+"Empty_lists" = "Tap + icon to create a new list.";
 
 // SetupViewController
 "Sync" = "iCloud for Tinylog";

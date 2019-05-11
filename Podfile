@@ -15,6 +15,7 @@ target 'Tinylog' do
 	pod "Ensembles", "~> 1.0"
   pod 'Firebase/Core'
   pod 'SwiftLint'
+  pod 'SnapKit', '~> 5.0.0'
 
   target 'TinylogTests' do
     inherit! :search_paths
