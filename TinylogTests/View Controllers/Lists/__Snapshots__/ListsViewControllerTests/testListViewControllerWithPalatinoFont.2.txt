@@ -1,14 +1,14 @@
 <UIView; frame = (0 0; 375 812); autoresize = W+H; layer = <CALayer>>
-   | <UITableView; frame = (0 44; 375 674); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, 0}; contentSize: {375, 64.333335876464844}; adjustedContentInset: {0, 0, 0, 0}>
+   | <UITableView; frame = (0 44; 375 674); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, 0}; contentSize: {375, 63.666667938232422}; adjustedContentInset: {0, 0, 0, 0}>
    |    | <UIView; frame = (0 0; 375 674); autoresize = W+H; layer = <CALayer>>
-   |    | <Tinylog.ListTableViewCell; baseClass = UITableViewCell; frame = (0 0; 375 64.3333); autoresize = W; layer = <CALayer>>
-   |    |    | <UITableViewCellContentView; frame = (0 0; 375 64); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (16 20; 309 24); text = 'my list'; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    |    |    | <TTTAttributedLabel; baseClass = UILabel; frame = (335 17; 30 30); text = '0'; clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <_UILabelLayer>>
-   |    |    | <_UITableViewCellSeparatorView; frame = (16 64; 359 0.333333); layer = <CALayer>>
-   |    | <UIView; frame = (0 64.3333; 375 0); layer = <CALayer>>
+   |    | <Tinylog.ListTableViewCell; baseClass = UITableViewCell; frame = (0 0; 375 63.6667); autoresize = W; layer = <CALayer>>
+   |    |    | <UITableViewCellContentView; frame = (0 0; 375 63.3333); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    |    | <UILabel; frame = (16 20; 309 23.3333); text = 'my list'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    |    |    | <UILabel; frame = (329 16.6667; 30 30); text = '0'; clipsToBounds = YES; autoresize = W+H; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    |    | <_UITableViewCellSeparatorView; frame = (16 63.3333; 359 0.333333); layer = <CALayer>>
+   |    | <UIView; frame = (0 63.6667; 375 0); layer = <CALayer>>
    |    | <UIImageView; frame = (3 668.667; 369 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
-   |    | <UIImageView; frame = (369.667 612.667; 2.33333 58.3333); alpha = 0; opaque = NO; autoresize = LM; userInteractionEnabled = NO; layer = <CALayer>>
+   |    | <UIImageView; frame = (369.667 613.333; 2.33333 57.6667); alpha = 0; opaque = NO; autoresize = LM; userInteractionEnabled = NO; layer = <CALayer>>
    | <UILabel; frame = (81 397.333; 213 17.6667); text = 'Tap + icon to create a ne...'; hidden = YES; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    | <Tinylog.ListsFooterView; frame = (0 718; 375 60); layer = <CALayer>>
    |    | <UIView; frame = (0 0; 0 60); layer = <CALayer>>

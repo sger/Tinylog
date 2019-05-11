@@ -24,7 +24,6 @@ final class ListsViewController: CoreDataTableViewController,
     let kCellIdentifier = "CellIdentifier"
     var editingIndexPath: IndexPath?
     var resultsTableViewController: ResultsTableViewController?
-    var didSetupContraints = false
 
     var listsFooterView: ListsFooterView = {
         let listsFooterView = ListsFooterView()

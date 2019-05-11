@@ -13,10 +13,9 @@ class TaskTableViewCell: GenericTableViewCell {
 
     let kLabelHorizontalInsets: CGFloat = 60.0
     let kLabelVerticalInsets: CGFloat = 10.0
-    var didSetupConstraints = false
-    let taskLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
+    let taskLabel: TTTAttributedLabel = TTTAttributedLabel(frame: CGRect.zero)
 
-    let checkBoxButton: CheckBoxButton = CheckBoxButton.newAutoLayout()
+    let checkBoxButton: CheckBoxButton = CheckBoxButton()
     var checkMarkIcon: UIImageView?
     var managedObjectContext: NSManagedObjectContext!
 
@@ -99,30 +98,25 @@ class TaskTableViewCell: GenericTableViewCell {
 
         checkBoxButton.tableViewCell = self
         contentView.addSubview(checkBoxButton)
+        
+        taskLabel.snp.makeConstraints { (maker) in
+            maker.top.equalToSuperview().inset(20.0)
+            maker.leading.equalToSuperview().inset(16.0)
+            maker.trailing.equalToSuperview().inset(50.0)
+            maker.bottom.equalToSuperview().inset(20.0)
+        }
+        
+        checkBoxButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30.0, height: 30.0))
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().inset(16.0)
+        }
 
         updateFonts()
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func updateConstraints() {
-        if !didSetupConstraints {
-
-            taskLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
-            taskLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 16.0)
-            taskLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 50.0)
-            taskLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
-
-            checkBoxButton.autoSetDimensions(to: CGSize(width: 30.0, height: 30.0))
-            checkBoxButton.autoAlignAxis(.horizontal, toSameAxisOf: self.contentView, withOffset: 0.0)
-            checkBoxButton.autoPinEdge(.left, to: .right, of: taskLabel, withOffset: 10.0)
-
-            didSetupConstraints = true
-        }
-
-        super.updateConstraints()
     }
 
     override func updateFonts() {

@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import TTTAttributedLabel
 
-class ListTableViewCell: GenericTableViewCell {
+final class ListTableViewCell: GenericTableViewCell {
 
     let kRadius: CGFloat = 30.0
-    var didSetupConstraints = false
-    let listLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
-    let totalTasksLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
+    let listLabel = UILabel()
+    let totalTasksLabel = UILabel()
 
     var currentList: TLIList? {
         didSet {
@@ -67,29 +65,25 @@ class ListTableViewCell: GenericTableViewCell {
         selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         self.selectedBackgroundView = selectedBackgroundView
+        
+        listLabel.snp.makeConstraints { (maker) in
+            maker.top.equalToSuperview().inset(20.0)
+            maker.leading.equalToSuperview().inset(16.0)
+            maker.trailing.equalToSuperview().inset(50.0)
+            maker.bottom.equalToSuperview().inset(20.0)
+        }
+        
+        totalTasksLabel.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: kRadius, height: kRadius))
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().inset(16.0)
+        }
 
         updateFonts()
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func updateConstraints() {
-        if !didSetupConstraints {
-
-            listLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
-            listLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 16.0)
-            listLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 50.0)
-            listLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
-
-            totalTasksLabel.autoSetDimensions(to: CGSize(width: kRadius, height: kRadius))
-            totalTasksLabel.autoAlignAxis(.horizontal, toSameAxisOf: self.contentView, withOffset: 0.0)
-            totalTasksLabel.autoPinEdge(.left, to: .right, of: listLabel, withOffset: 10.0)
-
-            didSetupConstraints = true
-        }
-        super.updateConstraints()
     }
 
     override func updateFonts() {
