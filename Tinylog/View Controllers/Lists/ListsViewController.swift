@@ -11,12 +11,7 @@ import UIKit
 import CoreData
 import SnapKit
 
-final class ListsViewController: CoreDataTableViewController,
-    UITextFieldDelegate,
-    AddListViewControllerDelegate,
-    UISearchControllerDelegate,
-    UISearchBarDelegate,
-    UISearchResultsUpdating {
+final class ListsViewController: CoreDataTableViewController {
 
     var managedObjectContext: NSManagedObjectContext!
 
@@ -138,7 +133,7 @@ final class ListsViewController: CoreDataTableViewController,
     }
 
     @objc func onChangeSize(_ notification: Notification) {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     @objc func appBecomeActive() {
@@ -154,7 +149,7 @@ final class ListsViewController: CoreDataTableViewController,
     }
 
     @objc func updateFonts() {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     @objc func syncActivityDidEndNotification(_ notification: Notification) {
@@ -176,7 +171,7 @@ final class ListsViewController: CoreDataTableViewController,
 
             checkForLists()
 
-            self.tableView?.reloadData()
+            tableView?.reloadData()
         }
     }
 
@@ -208,13 +203,7 @@ final class ListsViewController: CoreDataTableViewController,
     }
 
     @objc func addNewList(_ sender: UIButton?) {
-        let addListViewController: AddListViewController = AddListViewController()
-        addListViewController.managedObjectContext = managedObjectContext
-        addListViewController.delegate = self
-        addListViewController.mode = .create
-        let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        createAddListViewController(.create, managedObjectContext: managedObjectContext)
     }
 
     // MARK: Display Setup
@@ -288,49 +277,6 @@ final class ListsViewController: CoreDataTableViewController,
 
     @objc func toggleEditMode(_ sender: UIBarButtonItem) {
         setEditing(!isEditing, animated: true)
-    }
-
-    // MARK: UITableViewDataSource
-
-    func tableView(_ tableView: UITableView,
-                   editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let editRowAction = UITableViewRowAction(
-            style: UITableViewRowAction.Style.default,
-            title: "Edit", handler: {_, indexpath in
-
-                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
-
-                let addListViewController: AddListViewController = AddListViewController()
-                addListViewController.managedObjectContext = self.managedObjectContext
-                addListViewController.delegate = self
-                addListViewController.list = list
-                addListViewController.mode = .edit
-                let nc: UINavigationController = UINavigationController(
-                    rootViewController: addListViewController)
-                nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
-                self.navigationController?.present(nc, animated: true, completion: nil)
-        })
-        editRowAction.backgroundColor = UIColor.tinylogEditRowAction
-        let archiveRowAction = UITableViewRowAction(
-            style: UITableViewRowAction.Style.default,
-            title: "Archive",
-            handler: {_, indexpath in
-                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
-                list.archivedAt = Date()
-                // swiftlint:disable force_try
-                try! self.managedObjectContext.save()
-                self.checkForLists()
-        })
-        archiveRowAction.backgroundColor = UIColor.tinylogMainColor
-        return [archiveRowAction, editRowAction]
-    }
-
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
     }
 
     func listAtIndexPath(_ indexPath: IndexPath) -> TLIList? {
@@ -439,83 +385,6 @@ final class ListsViewController: CoreDataTableViewController,
     func performBackgroundUpdates(_ completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
         completionHandler(UIBackgroundFetchResult.newData)
     }
-
-    func onClose(_ addListViewController: AddListViewController, list: TLIList) {
-
-        let indexPath = self.frc?.indexPath(forObject: list)
-        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
-
-        let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-        // swiftlint:disable line_length
-        if IS_IPAD {
-            SplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
-            SplitViewController.sharedSplitViewController().listViewController?.managedObject = list
-        } else {
-            let tasksViewController: TasksViewController = TasksViewController()
-            tasksViewController.managedObjectContext = managedObjectContext
-            tasksViewController.list = list
-            tasksViewController.focusTextField = true
-            navigationController?.pushViewController(tasksViewController, animated: true)
-        }
-
-       checkForLists()
-    }
-
-    // MARK: UISearchBarDelegate
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        resultsTableViewController?.frc?.delegate = nil
-        resultsTableViewController?.frc = nil
-    }
-
-    // MARK: UISearchControllerDelegate
-
-    func presentSearchController(_ searchController: UISearchController) {}
-
-    func willPresentSearchController(_ searchController: UISearchController) {}
-
-    func didPresentSearchController(_ searchController: UISearchController) {}
-
-    func willDismissSearchController(_ searchController: UISearchController) {}
-
-    func didDismissSearchController(_ searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as! ResultsTableViewController
-        resultsController.frc?.delegate = nil
-        resultsController.frc = nil
-    }
-
-    // MARK: UISearchResultsUpdating
-
-    func updateSearchResults(for searchController: UISearchController) {
-
-        if let text = searchController.searchBar.text {
-            if !text.isEmpty {
-                let lowercasedText = text.lowercased()
-                let color = Utils.findColorByName(lowercasedText)
-                let resultsController = searchController.searchResultsController as! ResultsTableViewController
-                let fetchRequest = TLIList.filter(with: lowercasedText, color: color)
-
-                resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                   managedObjectContext: managedObjectContext,
-                                                                   sectionNameKeyPath: nil,
-                                                                   cacheName: nil)
-                resultsController.frc?.delegate = self
-
-                do {
-                    try resultsController.frc?.performFetch()
-                    resultsController.tableView?.reloadData()
-                    resultsController.showNoResults()
-                } catch let error as NSError {
-                    fatalError(error.localizedDescription)
-                }
-            }
-        }
-    }
 }
 
 extension ListsViewController {
@@ -564,5 +433,132 @@ extension ListsViewController {
         } else {
             self.emptyListsLabel.isHidden = true
         }
+    }
+    
+    private func createAddListViewController(_ mode: AddListViewController.Mode,
+                                             managedObjectContext: NSManagedObjectContext,
+                                             list: TLIList? = nil) {
+        let addListViewController: AddListViewController = AddListViewController()
+        addListViewController.managedObjectContext = managedObjectContext
+        addListViewController.delegate = self
+        addListViewController.mode = mode
+        addListViewController.list = list
+        let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
+        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        self.navigationController?.present(nc, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension ListsViewController {
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let editRowAction = UITableViewRowAction(
+            style: UITableViewRowAction.Style.default,
+            title: "Edit", handler: {_, indexpath in
+                
+                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
+                self.createAddListViewController(.edit, managedObjectContext: self.managedObjectContext, list: list)
+        })
+        
+        editRowAction.backgroundColor = UIColor.tinylogEditRowAction
+        let archiveRowAction = UITableViewRowAction(
+            style: UITableViewRowAction.Style.default,
+            title: "Archive",
+            handler: {_, indexpath in
+                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
+                list.archivedAt = Date()
+                // swiftlint:disable force_try
+                try! self.managedObjectContext.save()
+                self.checkForLists()
+        })
+        
+        archiveRowAction.backgroundColor = UIColor.tinylogMainColor
+        return [archiveRowAction, editRowAction]
+    }
+}
+
+extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+    
+    // MARK: UISearchBarDelegate
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        resultsTableViewController?.frc?.delegate = nil
+        resultsTableViewController?.frc = nil
+    }
+    
+    // MARK: UISearchControllerDelegate
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        let resultsController = searchController.searchResultsController as! ResultsTableViewController
+        resultsController.frc?.delegate = nil
+        resultsController.frc = nil
+    }
+    
+    // MARK: UISearchResultsUpdating
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let text = searchController.searchBar.text {
+            if !text.isEmpty {
+                let lowercasedText = text.lowercased()
+                let color = Utils.findColorByName(lowercasedText)
+                let resultsController = searchController.searchResultsController as! ResultsTableViewController
+                let fetchRequest = TLIList.filter(with: lowercasedText, color: color)
+                
+                resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                   managedObjectContext: managedObjectContext,
+                                                                   sectionNameKeyPath: nil,
+                                                                   cacheName: nil)
+                resultsController.frc?.delegate = self
+                
+                do {
+                    try resultsController.frc?.performFetch()
+                    resultsController.tableView?.reloadData()
+                    resultsController.showNoResults()
+                } catch let error as NSError {
+                    fatalError(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
+extension ListsViewController: AddListViewControllerDelegate {
+    
+    func onClose(_ addListViewController: AddListViewController, list: TLIList) {
+        
+        let indexPath = self.frc?.indexPath(forObject: list)
+        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
+        
+        let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
+        // swiftlint:disable line_length
+        if IS_IPAD {
+            SplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
+            SplitViewController.sharedSplitViewController().listViewController?.managedObject = list
+        } else {
+            let tasksViewController: TasksViewController = TasksViewController()
+            tasksViewController.managedObjectContext = managedObjectContext
+            tasksViewController.list = list
+            tasksViewController.focusTextField = true
+            navigationController?.pushViewController(tasksViewController, animated: true)
+        }
+        
+        checkForLists()
     }
 }

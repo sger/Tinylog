@@ -11,7 +11,7 @@ import SnapKit
 
 class ListsFooterView: UIView {
 
-    let footerView: UIView = UIView.newAutoLayout()
+    let footerView: UIView = UIView()
     let footerHeight: CGFloat = 60
 
     var infoLabel: UILabel = {
@@ -29,8 +29,6 @@ class ListsFooterView: UIView {
         return borderLineView
     }()
 
-    var didSetupContraints = false
-
     var addListButton: AddListButton = {
         let addListButton = AddListButton()
         addListButton.accessibilityIdentifier = "addListButton"
@@ -38,8 +36,7 @@ class ListsFooterView: UIView {
     }()
 
     var archiveButton: ArchiveButton = {
-        let archiveButton = ArchiveButton()
-        return archiveButton
+        return ArchiveButton()
     }()
 
     override init(frame: CGRect) {
@@ -88,9 +85,9 @@ class ListsFooterView: UIView {
 
         setNeedsUpdateConstraints()
     }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     func updateInfoLabel(_ str: String) {
