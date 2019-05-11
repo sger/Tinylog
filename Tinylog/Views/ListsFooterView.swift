@@ -7,38 +7,38 @@
 //
 
 import UIKit
-import TTTAttributedLabel
+import SnapKit
 
 class ListsFooterView: UIView {
 
     let footerView: UIView = UIView.newAutoLayout()
     let footerHeight: CGFloat = 60
 
-    var infoLabel: TTTAttributedLabel = {
-        let infoLabel = TTTAttributedLabel.newAutoLayout()
+    var infoLabel: UILabel = {
+        let infoLabel = UILabel()
         infoLabel.font = UIFont.regularFontWithSize(14.0)
         infoLabel.textColor = UIColor.tinylogTextColor
-        infoLabel.verticalAlignment = TTTAttributedLabelVerticalAlignment.top
+        infoLabel.textAlignment = NSTextAlignment.center
         infoLabel.text = ""
         return infoLabel
     }()
 
     var borderLineView: UIView = {
-        let borderLineView = UIView.newAutoLayout()
+        let borderLineView = UIView()
         borderLineView.backgroundColor = UIColor(named: "tableViewSeparator")
         return borderLineView
     }()
 
     var didSetupContraints = false
 
-    lazy var addListButton: AddListButton = {
-        let addListButton = AddListButton.newAutoLayout()
+    var addListButton: AddListButton = {
+        let addListButton = AddListButton()
         addListButton.accessibilityIdentifier = "addListButton"
         return addListButton
     }()
 
-    lazy var archiveButton: ArchiveButton = {
-        let archiveButton = ArchiveButton.newAutoLayout()
+    var archiveButton: ArchiveButton = {
+        let archiveButton = ArchiveButton()
         return archiveButton
     }()
 
@@ -56,6 +56,35 @@ class ListsFooterView: UIView {
         addSubview(archiveButton)
 
         updateInfoLabel("")
+        
+        footerView.snp.makeConstraints { (make) in
+            make.top.equalTo(self)
+            make.left.equalTo(self)
+            make.height.equalTo(footerHeight)
+        }
+        
+        borderLineView.snp.makeConstraints { (make) in
+            make.top.equalTo(self)
+            make.left.equalTo(self)
+            make.width.equalTo(self)
+            make.height.equalTo(0.5)
+        }
+        
+        addListButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 28.0, height: 28.0))
+            make.centerY.equalTo(self)
+            make.left.equalTo(self).offset(20.0)
+        }
+        
+        archiveButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 28.0, height: 28.0))
+            make.centerY.equalTo(self)
+            make.right.equalTo(self).offset(-20.0)
+        }
+        
+        infoLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(self)
+        }
 
         setNeedsUpdateConstraints()
     }
@@ -67,35 +96,5 @@ class ListsFooterView: UIView {
     func updateInfoLabel(_ str: String) {
         infoLabel.text = str
         setNeedsUpdateConstraints()
-    }
-
-    override func updateConstraints() {
-
-        let padding: CGFloat = 20.0
-
-        if !didSetupContraints {
-
-            footerView.autoMatch(.width, to: .width, of: self)
-            footerView.autoSetDimension(.height, toSize: footerHeight)
-            footerView.autoPinEdge(toSuperviewEdge: .top)
-
-            borderLineView.autoMatch(.width, to: .width, of: self)
-            borderLineView.autoSetDimension(.height, toSize: 0.5)
-            borderLineView.autoPinEdge(toSuperviewEdge: .top)
-
-            addListButton.autoSetDimensions(to: CGSize(width: 28.0, height: 28.0))
-            addListButton.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
-            addListButton.autoPinEdge(toSuperviewEdge: .left, withInset: padding)
-
-            archiveButton.autoSetDimensions(to: CGSize(width: 28.0, height: 26.0))
-            archiveButton.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
-            archiveButton.autoPinEdge(toSuperviewEdge: .right, withInset: padding)
-
-            infoLabel.autoAlignAxis(.horizontal, toSameAxisOf: footerView, withOffset: -5.0)
-            infoLabel.autoAlignAxis(.vertical, toSameAxisOf: footerView)
-
-            didSetupContraints = true
-        }
-        super.updateConstraints()
     }
 }

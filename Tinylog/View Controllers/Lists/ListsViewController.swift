@@ -9,6 +9,7 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 import CoreData
+import SnapKit
 
 final class ListsViewController: CoreDataTableViewController,
     UITextFieldDelegate,
@@ -26,16 +27,16 @@ final class ListsViewController: CoreDataTableViewController,
     var didSetupContraints = false
 
     var listsFooterView: ListsFooterView = {
-        let listsFooterView = ListsFooterView.newAutoLayout()
+        let listsFooterView = ListsFooterView()
         return listsFooterView
     }()
 
-    lazy var emptyListsLabel: UILabel = {
-        let noListsLabel: UILabel = UILabel.newAutoLayout()
+    var emptyListsLabel: UILabel = {
+        let noListsLabel: UILabel = UILabel()
         noListsLabel.font = UIFont.tinylogFontOfSize(16.0)
         noListsLabel.textColor = UIColor.tinylogTextColor
         noListsLabel.textAlignment = NSTextAlignment.center
-        noListsLabel.text = "Tap + icon to create a new list."
+        noListsLabel.text = localizedString(key: "Empty_lists")
         return noListsLabel
     }()
 
@@ -64,10 +65,10 @@ final class ListsViewController: CoreDataTableViewController,
 
         configureFetch()
 
-        title = localizedString(key: "My_Lists")
+        title = localizedString(key: "My_lists")
         view.accessibilityIdentifier = "MyLists"
 
-        view.backgroundColor = UIColor.tinylogLightGray
+        view.backgroundColor = UIColor.tinylogLighterGray
         tableView?.backgroundColor = UIColor.tinylogLightGray
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
@@ -77,6 +78,14 @@ final class ListsViewController: CoreDataTableViewController,
         tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = 60
         tableView?.tableFooterView = UIView()
+        tableView?.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-listsFooterView.footerHeight)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+        })
 
         resultsTableViewController = ResultsTableViewController()
 
@@ -95,6 +104,13 @@ final class ListsViewController: CoreDataTableViewController,
         let settingsBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = settingsBarButtonItem
+        
+        listsFooterView.snp.makeConstraints { (make) in
+            make.left.equalTo(view)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            make.width.equalTo(view)
+            make.height.equalTo(listsFooterView.footerHeight)
+        }
 
         listsFooterView.addListButton.addTarget(self,
                                                 action: #selector(ListsViewController.addNewList(_:)),
@@ -102,6 +118,10 @@ final class ListsViewController: CoreDataTableViewController,
         listsFooterView.archiveButton.addTarget(self,
                                                 action: #selector(ListsViewController.displayArchive(_:)),
                                                 for: UIControl.Event.touchDown)
+        
+        emptyListsLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(view)
+        }
 
         setEditing(false, animated: false)
 
@@ -120,22 +140,6 @@ final class ListsViewController: CoreDataTableViewController,
 
     @objc func onChangeSize(_ notification: Notification) {
         self.tableView?.reloadData()
-    }
-
-    override func updateViewConstraints() {
-
-        if !didSetupContraints {
-
-            emptyListsLabel.autoCenterInSuperview()
-
-            listsFooterView.autoMatch(.width, to: .width, of: self.view)
-            listsFooterView.autoSetDimension(.height, toSize: listsFooterView.footerHeight)
-            listsFooterView.autoPinEdge(toSuperviewEdge: .left)
-            listsFooterView.autoPinEdge(toSuperviewEdge: .bottom)
-
-            didSetupContraints = true
-        }
-        super.updateViewConstraints()
     }
 
     @objc func appBecomeActive() {
@@ -187,14 +191,6 @@ final class ListsViewController: CoreDataTableViewController,
                 listsFooterView.updateInfoLabel("Syncing...")
             }
         }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        tableView?.frame = CGRect(x: 0.0, y: 0.0,
-                                  width: view.frame.size.width,
-                                  height: view.frame.size.height - listsFooterView.footerHeight)
     }
 
     override func viewWillTransition(

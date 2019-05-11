@@ -9,6 +9,7 @@
 // ListsViewController
 "My_Lists" = "Meine Listen";
 "Update_lists" = "Letzte Aktualisierung %@";
+"Empty_lists" = "Tippen Sie auf das Symbol +, um eine neue Liste zu erstellen.";
 
 // SetupViewController
 "Sync" = "iCloud für Tinylog";
