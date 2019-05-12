@@ -1,5 +1,5 @@
 //
-//  ArchiveViewController.swift
+//  ArchivesViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -9,56 +9,16 @@
 import UIKit
 import CoreData
 import Reachability
-// swiftlint:disable force_unwrapping
-// Consider refactoring the code to use the non-optional operators.
-private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
 
-// Consider refactoring the code to use the non-optional operators.
-private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
-class ArchiveViewController: CoreDataTableViewController,
+class ArchivesViewController: CoreDataTableViewController,
     UITextFieldDelegate, AddListViewControllerDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
-
-    struct RestorationKeys {
-        static let viewControllerTitle = "ViewControllerTitleKey"
-        static let searchControllerIsActive = "SearchControllerIsActiveKey"
-        static let searchBarText = "SearchBarTextKey"
-        static let searchBarIsFirstResponder = "SearchBarIsFirstResponderKey"
-    }
-
-    // State restoration values.
-    struct SearchControllerRestorableState {
-        var wasActive = false
-        var wasFirstResponder = false
-    }
-
-    var restoredState = SearchControllerRestorableState()
 
     let kEstimateRowHeight = 61
     let kCellIdentifier = "CellIdentifier"
     var managedObjectContext: NSManagedObjectContext!
     var editingIndexPath: IndexPath?
-    var estimatedRowHeightCache: NSMutableDictionary?
     var resultsTableViewController: ResultsTableViewController?
-    var searchController: UISearchController?
-    var topBarView: UIView?
 
     func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
@@ -80,7 +40,7 @@ class ArchiveViewController: CoreDataTableViewController,
         }
     }
 
-    lazy var noListsLabel: UILabel? = {
+    lazy var emptyArchivesLabel: UILabel = {
         let noTasksLabel: UILabel = UILabel()
         noTasksLabel.font = UIFont.tinylogFontOfSize(16.0)
         noTasksLabel.textColor = UIColor.tinylogTextColor
@@ -101,86 +61,73 @@ class ArchiveViewController: CoreDataTableViewController,
 
         self.title = "My Archives"
 
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundView = UIView()
-        self.tableView?.backgroundView?.backgroundColor = UIColor.clear
-        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.tableView?.frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: self.view.frame.size.width,
-            height: self.view.frame.size.height)
-
-        self.tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = 61
-
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundView = UIView()
+        tableView?.backgroundView?.backgroundColor = UIColor.clear
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.rowHeight = UITableView.automaticDimension
+        tableView?.estimatedRowHeight = 60
+        tableView?.tableFooterView = UIView()
+        tableView?.translatesAutoresizingMaskIntoConstraints = false
+        
+        tableView?.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+        })
+        
         resultsTableViewController = ResultsTableViewController()
-        resultsTableViewController?.tableView?.delegate = self
-        searchController = UISearchController(searchResultsController: resultsTableViewController)
-        searchController?.searchResultsUpdater = self
-        searchController?.searchBar.sizeToFit()
-        searchController?.searchBar.backgroundColor = UIColor.tinylogLightGray
-        searchController?.searchBar.searchBarStyle = UISearchBar.Style.minimal
-        searchController?.searchBar.setSearchFieldBackgroundImage(
-            UIImage(named: "search-bar-bg-gray"), for: UIControl.State())
+        
+        addSearchController(with: "Search", searchResultsUpdater: self, searchResultsController: resultsTableViewController!)
 
-        searchController?.searchBar.tintColor = UIColor.tinylogMainColor
-
-        if let searchField: UITextField = searchController?.searchBar.value(
-            forKey: "searchField") as? UITextField {
-            searchField.textColor = UIColor.tinylogTextColor
+        view.addSubview(emptyArchivesLabel)
+        
+        emptyArchivesLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(view)
         }
-
-        self.tableView?.tableHeaderView = searchController?.searchBar
-        searchController?.delegate = self
-        searchController?.dimsBackgroundDuringPresentation = false
-        searchController?.searchBar.delegate = self
-
-        self.view.addSubview(self.noListsLabel!)
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Close",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(ArchiveViewController.close(_:)))
+            action: #selector(ArchivesViewController.close(_:)))
 
         setEditing(false, animated: false)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveViewController.syncActivityDidEndNotification(_:)),
+            selector: #selector(ArchivesViewController.syncActivityDidEndNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidEnd,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveViewController.syncActivityDidBeginNotification(_:)),
+            selector: #selector(ArchivesViewController.syncActivityDidBeginNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidBegin,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveViewController.updateFonts),
+            selector: #selector(ArchivesViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification),
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveViewController.appBecomeActive),
+            selector: #selector(ArchivesViewController.appBecomeActive),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveViewController.onChangeSize(_:)),
+            selector: #selector(ArchivesViewController.onChangeSize(_:)),
             name: UIContentSizeCategory.didChangeNotification,
             object: nil)
-
-        definesPresentationContext = true
-
     }
 
     @objc func onChangeSize(_ notification: Notification) {
@@ -222,43 +169,21 @@ class ArchiveViewController: CoreDataTableViewController,
         self.dismiss(animated: true, completion: nil)
     }
 
-    // swiftlint:disable force_unwrapping
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        // Restore the searchController's active state.
-        if restoredState.wasActive {
-            searchController!.isActive = restoredState.wasActive
-            restoredState.wasActive = false
-
-            if restoredState.wasFirstResponder {
-                searchController!.searchBar.becomeFirstResponder()
-                restoredState.wasFirstResponder = false
-            }
-        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         setEditing(false, animated: false)
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.noListsLabel!.frame = CGRect(
-            x: self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0,
-            y: self.view.frame.size.height / 2.0 - 44.0 / 2.0,
-            width: self.view.frame.size.width,
-            height: 44.0)
-    }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkForLists()
         if tableView!.indexPathForSelectedRow != nil {
             tableView?.deselectRow(at: tableView!.indexPathForSelectedRow!, animated: animated)
         }
-        initEstimatedRowHeightCacheIfNeeded()
     }
 
     func checkForLists() {
@@ -273,9 +198,9 @@ class ArchiveViewController: CoreDataTableViewController,
             let results = try managedObjectContext.fetch(fetchRequest)
 
             if results.isEmpty {
-                self.noListsLabel?.isHidden = false
+                self.emptyArchivesLabel.isHidden = false
             } else {
-                self.noListsLabel?.isHidden = true
+                self.emptyArchivesLabel.isHidden = true
             }
         } catch let error as NSError {
             fatalError(error.localizedDescription)
@@ -283,27 +208,25 @@ class ArchiveViewController: CoreDataTableViewController,
     }
 
     // MARK: UITableViewDataSource
-
-    func tableView(
-        _ tableView: UITableView,
-        editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]? {
-
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
             title: "Delete", handler: {_, indexpath in
-            if let list: TLIList = self.frc?.object(at: indexpath) as? TLIList {
-                self.managedObjectContext.delete(list)
-                // swiftlint:disable force_try
-                try! self.managedObjectContext.save()
-                self.checkForLists()
-            }
+                if let list: TLIList = self.frc?.object(at: indexpath) as? TLIList {
+                    self.managedObjectContext.delete(list)
+                    // swiftlint:disable force_try
+                    try! self.managedObjectContext.save()
+                    self.tableView?.reloadData()
+                    self.checkForLists()
+                }
         })
         deleteRowAction.backgroundColor = UIColor(
             red: 254.0 / 255.0,
             green: 69.0 / 255.0,
             blue: 101.0 / 255.0,
             alpha: 1.0)
-
+        
         let restoreRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
             title: "Restore",
@@ -311,19 +234,12 @@ class ArchiveViewController: CoreDataTableViewController,
                 if let list: TLIList = self.frc?.object(at: indexpath) as? TLIList {
                     list.archivedAt = nil
                     try! self.managedObjectContext.save()
+                    self.tableView?.reloadData()
                     self.checkForLists()
                 }
         })
         restoreRowAction.backgroundColor = UIColor.tinylogMainColor
         return [restoreRowAction, deleteRowAction]
-    }
-
-    func tableView(_ tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    func tableView(_ tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
-        return true
     }
 
     func listAtIndexPath(_ indexPath: IndexPath) -> TLIList? {
@@ -358,6 +274,14 @@ class ArchiveViewController: CoreDataTableViewController,
             tmpList.position = fetchedLists.count-index as NSNumber
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
     func tableView(
         _ tableView: UITableView,
@@ -377,25 +301,9 @@ class ArchiveViewController: CoreDataTableViewController,
         try! managedObjectContext.save()
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
-        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! ListTableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
-
-        let success = isEstimatedRowHeightInCache(indexPath)
-
-        if success != nil {
-            let cellSize: CGSize = cell.systemLayoutSizeFitting(
-                CGSize(width: self.view.frame.size.width, height: 0),
-                withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
-                verticalFittingPriority: UILayoutPriority(rawValue: 61))
-            putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
-        }
         return cell
     }
 
@@ -458,38 +366,6 @@ class ArchiveViewController: CoreDataTableViewController,
         self.navigationController?.pushViewController(tasksViewController, animated: true)
     }
 
-    func putEstimatedCellHeightToCache(_ indexPath: IndexPath, height: CGFloat) {
-        initEstimatedRowHeightCacheIfNeeded()
-        estimatedRowHeightCache?.setValue(height, forKey: NSString(format: "%ld", indexPath.row) as String)
-    }
-
-    func initEstimatedRowHeightCacheIfNeeded() {
-        if estimatedRowHeightCache == nil {
-            estimatedRowHeightCache = NSMutableDictionary()
-        }
-    }
-
-    func getEstimatedCellHeightFromCache(_ indexPath: IndexPath, defaultHeight: CGFloat) -> CGFloat? {
-        initEstimatedRowHeightCacheIfNeeded()
-
-        let height: CGFloat? = estimatedRowHeightCache!.value(
-            forKey: NSString(format: "%ld", indexPath.row) as String) as? CGFloat
-
-        if height != nil {
-            return floor(height!)
-        }
-
-        return defaultHeight
-    }
-
-    func isEstimatedRowHeightInCache(_ indexPath: IndexPath) -> Bool? {
-        let value = getEstimatedCellHeightFromCache(indexPath, defaultHeight: 0)
-        if value > 0 {
-            return true
-        }
-        return false
-    }
-
     // MARK: UISearchBarDelegate
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -507,15 +383,11 @@ class ArchiveViewController: CoreDataTableViewController,
     func presentSearchController(_ searchController: UISearchController) {}
 
     func willPresentSearchController(_ searchController: UISearchController) {
-        topBarView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.size.width, height: 20.0))
-        topBarView?.backgroundColor = UIColor.tinylogLightGray
-        AppDelegate.sharedAppDelegate().window?.rootViewController?.view.addSubview(topBarView!)
     }
 
     func didPresentSearchController(_ searchController: UISearchController) {}
 
     func willDismissSearchController(_ searchController: UISearchController) {
-        topBarView?.removeFromSuperview()
     }
 
     func didDismissSearchController(_ searchController: UISearchController) {
@@ -527,49 +399,27 @@ class ArchiveViewController: CoreDataTableViewController,
     // MARK: UISearchResultsUpdating
 
     func updateSearchResults(for searchController: UISearchController) {
-
-        if searchController.searchBar.text!.length() > 0 {
-            let color = findColorByName(searchController.searchBar.text!.lowercased())
-            let resultsController = searchController.searchResultsController as! ResultsTableViewController
-
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
-            let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
-            let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
-            fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
-            let titlePredicate = NSPredicate(format: "title CONTAINS[cd] %@ AND archivedAt != nil", searchController.searchBar.text!.lowercased())
-            let colorPredicate = NSPredicate(format: "color CONTAINS[cd] %@ AND archivedAt != nil", color)
-            let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, colorPredicate])
-            fetchRequest.predicate = predicate
-            resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-            resultsController.frc?.delegate = self
-
-            do {
-                try resultsController.frc?.performFetch()
-                resultsController.tableView?.reloadData()
-                if resultsController.checkForEmptyResults() {
+        
+        if let text = searchController.searchBar.text {
+            if !text.isEmpty {
+                let lowercasedText = text.lowercased()
+                let color = Utils.findColorByName(lowercasedText)
+                let fetchRequest = TLIList.filterArchivedLists(with: text, color: color)
+                let resultsController = searchController.searchResultsController as! ResultsTableViewController
+                resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                   managedObjectContext: managedObjectContext,
+                                                                   sectionNameKeyPath: nil,
+                                                                   cacheName: nil)
+                resultsController.frc?.delegate = self
+                
+                do {
+                    try resultsController.frc?.performFetch()
+                    resultsController.tableView?.reloadData()
+                    resultsController.showNoResults()
+                } catch let error as NSError {
+                    fatalError(error.localizedDescription)
                 }
-            } catch let error as NSError {
-                fatalError(error.localizedDescription)
             }
-        }
-    }
-
-    func findColorByName(_ name: String) -> String {
-        switch name {
-        case "purple":
-            return "#6a6de2"
-        case "blue":
-            return "#008efe"
-        case "red":
-            return "#fe4565"
-        case "orange":
-            return "#ffa600"
-        case "green":
-            return "#50de72"
-        case "yellow":
-            return "#ffd401"
-        default:
-            return ""
         }
     }
 }

@@ -259,7 +259,7 @@ class ArchiveTasksViewController: CoreDataTableViewController,
     }
 
     func displayArchive(_ button: ArchiveButton) {
-        let archiveViewController: ArchiveViewController = ArchiveViewController()
+        let archiveViewController: ArchivesViewController = ArchivesViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
