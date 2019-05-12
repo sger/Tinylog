@@ -8,7 +8,6 @@
 
 import UIKit
 import Reachability
-import SGReachability
 import Ensembles
 import Firebase
 
@@ -34,9 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
     /// The instance of the UIWindow.
     var window: UIWindow?
-
-    /// Access globally network status.
-    var networkMode: String?
 
     /// Access core data managed object context.
     let coreDataManager = CoreDataManager(model: "Tinylog")
@@ -107,7 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
             }
 
         FirebaseApp.configure()
-        SGReachabilityController.shared()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -139,33 +134,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
 
-        if let displaySetupScreen = UserDefaults.standard.object(forKey: "kSetupScreen") as? String {
-            if displaySetupScreen == "on" {
-            }
-        }
-
         // Setup for notifications
         registerNotifications()
+            
+        _ = ReachabilityManager.instance
 
         return true
     }
 
     deinit {
         unregisterNotifications()
-    }
-
-    @objc func reachabilityDidChange(_ notification: Notification) {
-        if let reachability: Reachability = notification.object as? Reachability {
-            if reachability.isReachable() {
-                if reachability.isReachableViaWiFi() {
-                    networkMode = "wifi"
-                } else if reachability.isReachableViaWWAN() {
-                    networkMode = "wwan"
-                }
-            } else {
-                networkMode = "notReachable"
-            }
-        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {}
@@ -241,17 +219,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
 extension AppDelegate {
     fileprivate func registerNotifications() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(AppDelegate.reachabilityDidChange(_:)),
-            name: NSNotification.Name.reachabilityChanged,
-            object: nil)
     }
 
     fileprivate func unregisterNotifications() {
-        NotificationCenter.default.removeObserver(
-            self, name: NSNotification.Name.reachabilityChanged,
-            object: nil)
     }
 }
 

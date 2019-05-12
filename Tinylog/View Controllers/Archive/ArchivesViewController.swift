@@ -72,20 +72,20 @@ class ArchivesViewController: CoreDataTableViewController,
         tableView?.estimatedRowHeight = 60
         tableView?.tableFooterView = UIView()
         tableView?.translatesAutoresizingMaskIntoConstraints = false
-        
+
         tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             make.left.equalTo(view)
             make.right.equalTo(view)
         })
-        
+
         resultsTableViewController = ResultsTableViewController()
-        
+
         addSearchController(with: "Search", searchResultsUpdater: self, searchResultsController: resultsTableViewController!)
 
         view.addSubview(emptyArchivesLabel)
-        
+
         emptyArchivesLabel.snp.makeConstraints { (make) in
             make.center.equalTo(view)
         }
@@ -177,7 +177,7 @@ class ArchivesViewController: CoreDataTableViewController,
         super.viewDidDisappear(animated)
         setEditing(false, animated: false)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkForLists()
@@ -208,7 +208,7 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     // MARK: UITableViewDataSource
-    
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
@@ -226,7 +226,7 @@ class ArchivesViewController: CoreDataTableViewController,
             green: 69.0 / 255.0,
             blue: 101.0 / 255.0,
             alpha: 1.0)
-        
+
         let restoreRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
             title: "Restore",
@@ -274,11 +274,11 @@ class ArchivesViewController: CoreDataTableViewController,
             tmpList.position = fetchedLists.count-index as NSNumber
         }
     }
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -399,7 +399,7 @@ class ArchivesViewController: CoreDataTableViewController,
     // MARK: UISearchResultsUpdating
 
     func updateSearchResults(for searchController: UISearchController) {
-        
+
         if let text = searchController.searchBar.text {
             if !text.isEmpty {
                 let lowercasedText = text.lowercased()
@@ -411,7 +411,7 @@ class ArchivesViewController: CoreDataTableViewController,
                                                                    sectionNameKeyPath: nil,
                                                                    cacheName: nil)
                 resultsController.frc?.delegate = self
-                
+
                 do {
                     try resultsController.frc?.performFetch()
                     resultsController.tableView?.reloadData()

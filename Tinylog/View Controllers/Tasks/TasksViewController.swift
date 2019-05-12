@@ -193,7 +193,7 @@ class TasksViewController: CoreDataTableViewController,
         self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
         self.tableView?.tableFooterView = UIView()
         tableView?.translatesAutoresizingMaskIntoConstraints = false
-        
+
         tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-60)
@@ -207,23 +207,22 @@ class TasksViewController: CoreDataTableViewController,
             make.width.equalTo(view)
             make.height.equalTo(60.0)
         }
-        
+
         noListSelected?.snp.makeConstraints({ (make) in
             make.center.equalToSuperview()
         })
-        
+
         noTasksLabel?.snp.makeConstraints({ (make) in
             make.center.equalToSuperview()
         })
-        
-        
+
         addTransparentLayer?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(AddTaskView.height)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-60)
             make.left.equalTo(view)
             make.right.equalTo(view)
         })
-        
+
         tasksFooterView.exportTasksButton.addTarget(
             self,
             action: #selector(TasksViewController.exportTasks(_:)),

@@ -98,14 +98,14 @@ class TaskTableViewCell: GenericTableViewCell {
 
         checkBoxButton.tableViewCell = self
         contentView.addSubview(checkBoxButton)
-        
+
         taskLabel.snp.makeConstraints { (maker) in
             maker.top.equalToSuperview().inset(20.0)
             maker.leading.equalToSuperview().inset(16.0)
             maker.trailing.equalToSuperview().inset(50.0)
             maker.bottom.equalToSuperview().inset(20.0)
         }
-        
+
         checkBoxButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 30.0, height: 30.0))
             make.centerY.equalToSuperview()

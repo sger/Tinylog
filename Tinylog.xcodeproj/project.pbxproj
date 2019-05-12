@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		185C99393E0FFB186A3B1DE4 /* Pods_Tinylog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCB1EEBF9EAC162DF797006 /* Pods_Tinylog.framework */; };
+		5606BF862288690C00AD0F5B /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5606BF852288690C00AD0F5B /* ReachabilityManager.swift */; };
 		5609F649226B4DCB00F6AF0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5609F647226B4DCB00F6AF0E /* Localizable.strings */; };
 		5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */; };
 		5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */; };
@@ -119,6 +120,7 @@
 /* Begin PBXFileReference section */
 		034E13532B5D4A3280918EFF /* Pods-Tinylog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinylog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog.debug.xcconfig"; sourceTree = "<group>"; };
 		29E91D341FDF61B134BED598 /* Pods-TinylogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5606BF852288690C00AD0F5B /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		5609F648226B4DCB00F6AF0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5609F64A226B4E0200F6AF0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Environment.swift"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				56B7B7D7227EBCEE003BCAC3 /* TLISyncManager.h */,
 				56B7B7D8227EBCEE003BCAC3 /* TLISyncManager.m */,
 				56119AEC226F90EA00F8D798 /* CoreDataManager.swift */,
+				5606BF852288690C00AD0F5B /* ReachabilityManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -926,9 +929,8 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Tinylog/Pods-Tinylog-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Ensembles/Ensembles.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SGBackgroundView/SGBackgroundView.framework",
-				"${BUILT_PRODUCTS_DIR}/SGReachability/SGReachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
@@ -940,7 +942,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGBackgroundView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGReachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
@@ -1028,6 +1029,7 @@
 				5638FCB522744F9F00CB4071 /* TLIList.swift in Sources */,
 				5638FC5922744CDC00CB4071 /* TLITextField.m in Sources */,
 				5638FC8522744D8200CB4071 /* AddListViewController.swift in Sources */,
+				5606BF862288690C00AD0F5B /* ReachabilityManager.swift in Sources */,
 				56B7B7E1227ECADB003BCAC3 /* Enums.swift in Sources */,
 				5638FCC82274500A00CB4071 /* NSDate+Utilities.m in Sources */,
 			);

@@ -7,14 +7,13 @@ target 'Tinylog' do
 
   # Pods for Tinylog
   pod 'TTTAttributedLabel'
-	pod 'Reachability'
 	pod 'SVProgressHUD'
-	pod 'SGReachability'
 	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"
   pod 'Firebase/Core'
   pod 'SwiftLint'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'ReachabilitySwift'
 
   target 'TinylogTests' do
     inherit! :search_paths
