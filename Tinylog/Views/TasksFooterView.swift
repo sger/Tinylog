@@ -12,7 +12,7 @@ import TTTAttributedLabel
 class TasksFooterView: UIView {
 
     var borderLineView: UIView = {
-        let borderLineView = UIView.newAutoLayout()
+        let borderLineView = UIView()
         borderLineView.backgroundColor = UIColor(
             red: 213.0 / 255.0,
             green: 213.0 / 255.0,
@@ -21,13 +21,13 @@ class TasksFooterView: UIView {
         return borderLineView
     }()
 
-    let footerView: UIView = UIView.newAutoLayout()
+    let footerView: UIView = UIView()
 
-    var infoLabel: TTTAttributedLabel? = {
-        let infoLabel = TTTAttributedLabel.newAutoLayout()
+    var infoLabel: UILabel = {
+        let infoLabel = UILabel()
         infoLabel.font = UIFont.regularFontWithSize(14.0)
         infoLabel.textColor = UIColor.tinylogTextColor
-        infoLabel.verticalAlignment = TTTAttributedLabelVerticalAlignment.top
+        //infoLabel.verticalAlignment = TTTAttributedLabelVerticalAlignment.top
         infoLabel.text = ""
         return infoLabel
     }()
@@ -35,13 +35,13 @@ class TasksFooterView: UIView {
     var currentText: String?
     var didSetupContraints = false
 
-    lazy var exportTasksButton: ExportTasksButton? = {
-        let exportTasksButton = ExportTasksButton.newAutoLayout()
+    var exportTasksButton: ExportTasksButton = {
+        let exportTasksButton = ExportTasksButton()
         return exportTasksButton
     }()
 
-    lazy var archiveButton: ArchiveButton? = {
-        let archiveButton = ArchiveButton.newAutoLayout()
+    var archiveButton: ArchiveButton = {
+        let archiveButton = ArchiveButton()
         return archiveButton
     }()
 
@@ -52,51 +52,51 @@ class TasksFooterView: UIView {
         addSubview(footerView)
 
         addSubview(borderLineView)
-        addSubview(infoLabel!)
+        addSubview(infoLabel)
 
-        addSubview(exportTasksButton!)
-        addSubview(archiveButton!)
+        addSubview(exportTasksButton)
+        addSubview(archiveButton)
 
         updateInfoLabel("")
+        
+        footerView.snp.makeConstraints { (make) in
+            make.top.equalTo(self)
+            make.left.equalTo(self)
+            make.height.equalTo(60.0)
+        }
+        
+        borderLineView.snp.makeConstraints { (make) in
+            make.top.equalTo(self)
+            make.left.equalTo(self)
+            make.width.equalTo(self)
+            make.height.equalTo(0.5)
+        }
+        
+        exportTasksButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 21.0, height: 28.0))
+            make.centerY.equalTo(self)
+            make.left.equalTo(self).offset(20.0)
+        }
+        
+        archiveButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 28.0, height: 28.0))
+            make.centerY.equalTo(self)
+            make.right.equalTo(self).offset(-20.0)
+        }
+        
+        infoLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(self)
+        }
 
         setNeedsUpdateConstraints()
     }
 
     func updateInfoLabel(_ str: String) {
         currentText = str
-        infoLabel?.text = str
+        infoLabel.text = str
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func updateConstraints() {
-
-        let smallPadding: CGFloat = 16.0
-
-        if !didSetupContraints {
-
-            footerView.autoMatch(.width, to: .width, of: self)
-            footerView.autoSetDimension(.height, toSize: 60.0)
-            footerView.autoPinEdge(toSuperviewEdge: .bottom)
-
-            borderLineView.autoMatch(.width, to: .width, of: self)
-            borderLineView.autoSetDimension(.height, toSize: 0.5)
-            borderLineView.autoPinEdge(toSuperviewEdge: .top)
-
-            exportTasksButton?.autoSetDimensions(to: CGSize(width: 21.0, height: 28.0))
-            exportTasksButton?.autoAlignAxis(toSuperviewAxis: .horizontal)
-            exportTasksButton?.autoPinEdge(toSuperviewEdge: .left, withInset: smallPadding)
-
-            archiveButton?.autoSetDimensions(to: CGSize(width: 28.0, height: 26.0))
-            archiveButton?.autoAlignAxis(toSuperviewAxis: .horizontal)
-            archiveButton?.autoPinEdge(toSuperviewEdge: .right, withInset: smallPadding)
-
-            infoLabel?.autoCenterInSuperview()
-
-            didSetupContraints = true
-        }
-        super.updateConstraints()
     }
 }

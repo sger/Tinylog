@@ -45,8 +45,8 @@ class TasksViewController: CoreDataTableViewController,
 //    var topConstraint: NSLayoutConstraint?
 //    var heightConstraint: NSLayoutConstraint?
 
-    var tasksFooterView: TasksFooterView? = {
-        let tasksFooterView = TasksFooterView.newAutoLayout()
+    var tasksFooterView: TasksFooterView = {
+        let tasksFooterView = TasksFooterView()
         return tasksFooterView
     }()
 
@@ -207,7 +207,7 @@ class TasksViewController: CoreDataTableViewController,
             make.right.equalTo(view)
         })
 
-        tasksFooterView?.snp.makeConstraints { (make) in
+        tasksFooterView.snp.makeConstraints { (make) in
             make.left.equalTo(view)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             make.width.equalTo(view)
@@ -230,11 +230,11 @@ class TasksViewController: CoreDataTableViewController,
             make.right.equalTo(view)
         })
         
-        tasksFooterView?.exportTasksButton?.addTarget(
+        tasksFooterView.exportTasksButton.addTarget(
             self,
             action: #selector(TasksViewController.exportTasks(_:)),
             for: UIControl.Event.touchDown)
-        tasksFooterView?.archiveButton?.addTarget(
+        tasksFooterView.archiveButton.addTarget(
             self,
             action: #selector(TasksViewController.displayArchive(_:)),
             for: UIControl.Event.touchDown)
@@ -319,12 +319,12 @@ class TasksViewController: CoreDataTableViewController,
             let total: Int = results.count - resultsCompleted.count
 
             if total == results.count {
-                tasksFooterView?.updateInfoLabel("All tasks completed")
+                tasksFooterView.updateInfoLabel("All tasks completed")
             } else {
                 if total > 1 {
-                    tasksFooterView?.updateInfoLabel("\(total) completed tasks")
+                    tasksFooterView.updateInfoLabel("\(total) completed tasks")
                 } else {
-                    tasksFooterView?.updateInfoLabel("\(total) completed task")
+                    tasksFooterView.updateInfoLabel("\(total) completed task")
                 }
             }
         } catch let error as NSError {
@@ -373,7 +373,7 @@ class TasksViewController: CoreDataTableViewController,
 
         view.addSubview(noListSelected!)
         view.addSubview(noTasksLabel!)
-        view.addSubview(tasksFooterView!)
+        view.addSubview(tasksFooterView)
         view.addSubview(addTransparentLayer!)
 
         view.setNeedsUpdateConstraints()
