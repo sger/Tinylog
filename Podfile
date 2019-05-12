@@ -9,7 +9,6 @@ target 'Tinylog' do
   pod 'TTTAttributedLabel'
 	pod 'Reachability'
 	pod 'SVProgressHUD'
-	pod 'PureLayout'
 	pod 'SGReachability'
 	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"

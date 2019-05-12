@@ -37,13 +37,8 @@ class TasksViewController: CoreDataTableViewController,
     let kCellIdentifier = "CellIdentifier"
     var managedObjectContext: NSManagedObjectContext!
     var list: TLIList?
-    var offscreenCells: NSMutableDictionary?
-    var estimatedRowHeightCache: NSMutableDictionary?
     var currentIndexPath: IndexPath?
     var focusTextField: Bool?
-
-//    var topConstraint: NSLayoutConstraint?
-//    var heightConstraint: NSLayoutConstraint?
 
     var tasksFooterView: TasksFooterView = {
         let tasksFooterView = TasksFooterView()
@@ -52,7 +47,6 @@ class TasksViewController: CoreDataTableViewController,
 
     var orientation: String = "portrait"
     var enableDidSelectRowAtIndexPath = true
-    //var didSetupContraints = false
 
     lazy var addTransparentLayer: UIView? = {
         let addTransparentLayer: UIView = UIView()
@@ -94,8 +88,8 @@ class TasksViewController: CoreDataTableViewController,
                 x: 0.0,
                 y: 0.0,
                 width: self.tableView!.bounds.size.width,
-                height: AddTaskView.height()))
-        header.closeButton?.addTarget(
+                height: AddTaskView.height))
+        header.closeButton.addTarget(
             self,
             action: #selector(TasksViewController.transparentLayerTapped(_:)),
             for: UIControl.Event.touchDown)
@@ -224,7 +218,7 @@ class TasksViewController: CoreDataTableViewController,
         
         
         addTransparentLayer?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(AddTaskView.height())
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(AddTaskView.height)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-60)
             make.left.equalTo(view)
             make.right.equalTo(view)
@@ -421,7 +415,7 @@ class TasksViewController: CoreDataTableViewController,
         super.viewDidAppear(animated)
 
         if focusTextField != nil {
-            self.addTaskView?.textField?.becomeFirstResponder()
+            self.addTaskView?.textField.becomeFirstResponder()
             focusTextField = false
         }
     }
@@ -602,15 +596,10 @@ class TasksViewController: CoreDataTableViewController,
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if enableDidSelectRowAtIndexPath {
-            return AddTaskView.height()
+            return AddTaskView.height
         }
         return 0
     }
-
-//    func tableView(_ tableView: UITableView,
-//                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 52)!)
-//    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell: TaskTableViewCell = tableView.dequeueReusableCell(
@@ -623,14 +612,6 @@ class TasksViewController: CoreDataTableViewController,
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
 
-//            let height = isEstimatedRowHeightInCache(indexPath)
-//            if height != nil {
-//                let cellSize: CGSize = cell.systemLayoutSizeFitting(
-//                    CGSize(width: self.view.frame.size.width, height: 0),
-//                    withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
-//                    verticalFittingPriority: UILayoutPriority(rawValue: 52))
-//                putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
-//            }
             return cell
 
     }
@@ -787,7 +768,7 @@ class TasksViewController: CoreDataTableViewController,
     }
 
     @objc func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
-        self.addTaskView?.textField?.resignFirstResponder()
+        self.addTaskView?.textField.resignFirstResponder()
     }
 
     // MARK: Edit Task
@@ -800,43 +781,6 @@ class TasksViewController: CoreDataTableViewController,
         let nc: UINavigationController = UINavigationController(rootViewController: editTaskViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
         self.navigationController?.present(nc, animated: true, completion: nil)
-    }
-
-    func putEstimatedCellHeightToCache(_ indexPath: IndexPath, height: CGFloat) {
-        initEstimatedRowHeightCacheIfNeeded()
-        estimatedRowHeightCache?.setValue(height, forKey: NSString(format: "%ld", indexPath.row) as String)
-    }
-
-    func initEstimatedRowHeightCacheIfNeeded() {
-        if estimatedRowHeightCache == nil {
-            estimatedRowHeightCache = NSMutableDictionary()
-        }
-    }
-
-    func getEstimatedCellHeightFromCache(_ indexPath: IndexPath, defaultHeight: CGFloat) -> CGFloat? {
-        initEstimatedRowHeightCacheIfNeeded()
-
-        let height: CGFloat? = estimatedRowHeightCache!.value(
-            forKey: NSString(format: "%ld", indexPath.row) as String) as? CGFloat
-
-        if height != nil {
-            return height
-        }
-
-        return defaultHeight
-    }
-
-    func isEstimatedRowHeightInCache(_ indexPath: IndexPath) -> Bool? {
-        let value = getEstimatedCellHeightFromCache(indexPath, defaultHeight: 0)
-        if value > 0 {
-            return true
-        }
-        return false
-    }
-
-    func tableViewReloadData() {
-        estimatedRowHeightCache = NSMutableDictionary()
-        self.tableView?.reloadData()
     }
 
     func onClose(_ editTaskViewController: EditTaskViewController, indexPath: IndexPath) {

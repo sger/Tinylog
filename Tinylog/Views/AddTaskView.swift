@@ -9,9 +9,11 @@
 import UIKit
 
 class AddTaskView: UIView, UITextFieldDelegate {
+    
+    static let height: CGFloat = 44.0
 
-    var textField: TLITextField? = {
-        let textField = TLITextField.newAutoLayout()
+    var textField: TLITextField = {
+        let textField = TLITextField()
         textField.backgroundColor = UIColor.clear
         textField.font = UIFont.tinylogFontOfSize(17.0)
         textField.textColor = UIColor.tinylogLightGray
@@ -26,8 +28,8 @@ class AddTaskView: UIView, UITextFieldDelegate {
         return textField
     }()
 
-    var closeButton: CloseButton? = {
-        let closeButton = CloseButton.newAutoLayout()
+    var closeButton: CloseButton = {
+        let closeButton = CloseButton()
         closeButton.isHidden = true
         return closeButton
     }()
@@ -38,13 +40,26 @@ class AddTaskView: UIView, UITextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.backgroundColor = UIColor.tinylogMainColor
+        autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundColor = UIColor.tinylogMainColor
 
-        textField!.delegate = self
-        self.addSubview(textField!)
+        textField.delegate = self
+        addSubview(textField)
+        
+        textField.snp.makeConstraints { (maker) in
+            maker.top.equalToSuperview().inset(10.0)
+            maker.leading.equalToSuperview().inset(16.0)
+            maker.trailing.equalToSuperview().inset(50.0)
+            maker.bottom.equalToSuperview().inset(10.0)
+        }
 
-        self.addSubview(closeButton!)
+        addSubview(closeButton)
+        
+        closeButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 18.0, height: 18.0))
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().inset(16.0)
+        }
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(AddTaskView.updateFonts),
@@ -57,12 +72,8 @@ class AddTaskView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    class func height() -> CGFloat {
-        return 44.0
-    }
-
     @objc func updateFonts() {
-        textField?.font = UIFont.tinylogFontOfSize(17.0)
+        textField.font = UIFont.tinylogFontOfSize(17.0)
     }
 
     // MARK: UITextFieldDelegate
@@ -70,13 +81,13 @@ class AddTaskView: UIView, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.addTaskViewDidBeginEditing!(self)
         textField.placeholder = ""
-        closeButton?.isHidden = false
+        closeButton.isHidden = false
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.addTaskViewDidEndEditing!(self)
         textField.placeholder = "Add new task"
-        closeButton?.isHidden = true
+        closeButton.isHidden = true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -89,25 +100,5 @@ class AddTaskView: UIView, UITextFieldDelegate {
         textField.text = nil
         delegate?.addTaskView(self, title: title)
         return false
-    }
-
-    override func updateConstraints() {
-
-        let smallPadding: CGFloat = 16.0
-
-        if !didSetupContraints {
-
-            textField!.autoPinEdge(toSuperviewEdge: .top, withInset: 10.0)
-            textField!.autoPinEdge(toSuperviewEdge: .leading, withInset: 16.0)
-            textField!.autoPinEdge(toSuperviewEdge: .trailing, withInset: 50.0)
-            textField!.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10.0)
-
-            closeButton?.autoSetDimensions(to: CGSize(width: 18.0, height: 18.0))
-            closeButton?.autoAlignAxis(toSuperviewAxis: .horizontal)
-            closeButton?.autoPinEdge(toSuperviewEdge: .right, withInset: smallPadding)
-
-            didSetupContraints = true
-        }
-        super.updateConstraints()
     }
 }
