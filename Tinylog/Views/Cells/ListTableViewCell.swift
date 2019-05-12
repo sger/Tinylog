@@ -65,14 +65,14 @@ final class ListTableViewCell: GenericTableViewCell {
         selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         self.selectedBackgroundView = selectedBackgroundView
-        
+
         listLabel.snp.makeConstraints { (maker) in
             maker.top.equalToSuperview().inset(20.0)
             maker.leading.equalToSuperview().inset(16.0)
             maker.trailing.equalToSuperview().inset(50.0)
             maker.bottom.equalToSuperview().inset(20.0)
         }
-        
+
         totalTasksLabel.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: kRadius, height: kRadius))
             make.centerY.equalToSuperview()

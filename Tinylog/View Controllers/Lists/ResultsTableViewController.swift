@@ -40,7 +40,7 @@ class ResultsTableViewController: CoreDataTableViewController {
         tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = 60
         tableView?.tableFooterView = UIView()
-        
+
         view.addSubview(noResultsLabel)
     }
 
@@ -48,10 +48,10 @@ class ResultsTableViewController: CoreDataTableViewController {
         super.viewWillAppear(animated)
         showNoResults()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         tableView?.frame = CGRect(x: 0.0, y: 0.0,
                                   width: view.frame.size.width,
                                   height: view.frame.size.height)

@@ -52,10 +52,8 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Reachability (3.2)
+  - ReachabilitySwift (4.3.1)
   - SGBackgroundView (1.3)
-  - SGReachability (1.0):
-    - Reachability
   - SnapKit (5.0.0)
   - SnapshotTesting (1.5.0)
   - SVProgressHUD (2.2.5)
@@ -65,9 +63,8 @@ PODS:
 DEPENDENCIES:
   - Ensembles (~> 1.0)
   - Firebase/Core
-  - Reachability
+  - ReachabilitySwift
   - SGBackgroundView
-  - SGReachability
   - SnapKit (~> 5.0.0)
   - SnapshotTesting (~> 1.5)
   - SVProgressHUD
@@ -84,9 +81,8 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - nanopb
-    - Reachability
+    - ReachabilitySwift
     - SGBackgroundView
-    - SGReachability
     - SnapKit
     - SnapshotTesting
     - SVProgressHUD
@@ -102,15 +98,14 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 7f028ea162b72c8f326daec74afc95d94f7a47d6
   GoogleUtilities: f1faafc033ea203adf1783ce00af455bb99d0e5b
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   SGBackgroundView: 3dbf380b9a54eeedfb6176ad750055d7d47e84eb
-  SGReachability: abf9b7c6695750939268fb0e7197ea2d69536f22
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SnapshotTesting: 9ca1d80f6322509a035856170c11d0571b1f7171
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 009a898ef2a1c851f45e1b59349bf6ff2ddc990d
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 38c2ed0a078f64e68e1deb4f6ac6223dd8a0ae5d
+PODFILE CHECKSUM: b378a199f0f0fcb1f3e221e90b10d0cd87b0ddcc
 
 COCOAPODS: 1.6.1

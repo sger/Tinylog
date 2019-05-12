@@ -67,31 +67,31 @@ final class SetupViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.tinylogLightGray
-        
+
         cloudImageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview().offset(-90)
             make.centerX.equalToSuperview().offset
         }
-        
+
         subtitleLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(20.0)
             make.right.equalToSuperview().inset(20.0)
             make.top.equalTo(cloudImageView.snp.bottom).offset(20.0)
         }
-        
+
         descriptionLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(20.0)
             make.right.equalToSuperview().inset(20.0)
             make.top.equalTo(subtitleLabel.snp.bottom).offset(20.0)
         }
-        
+
         notNowButton.snp.makeConstraints { (make) in
             make.width.equalToSuperview().multipliedBy(0.5)
             make.height.equalTo(60.0)
             make.left.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
+
         useiCloudButton.snp.makeConstraints { (make) in
             make.width.equalToSuperview().multipliedBy(0.5)
             make.height.equalTo(60.0)

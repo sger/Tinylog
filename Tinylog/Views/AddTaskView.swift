@@ -9,7 +9,7 @@
 import UIKit
 
 class AddTaskView: UIView, UITextFieldDelegate {
-    
+
     static let height: CGFloat = 44.0
 
     var textField: TLITextField = {
@@ -45,7 +45,7 @@ class AddTaskView: UIView, UITextFieldDelegate {
 
         textField.delegate = self
         addSubview(textField)
-        
+
         textField.snp.makeConstraints { (maker) in
             maker.top.equalToSuperview().inset(10.0)
             maker.leading.equalToSuperview().inset(16.0)
@@ -54,7 +54,7 @@ class AddTaskView: UIView, UITextFieldDelegate {
         }
 
         addSubview(closeButton)
-        
+
         closeButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 18.0, height: 18.0))
             make.centerY.equalToSuperview()

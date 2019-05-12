@@ -53,39 +53,39 @@ class ListsFooterView: UIView {
         addSubview(archiveButton)
 
         updateInfoLabel("")
-        
+
         footerView.snp.makeConstraints { (make) in
             make.top.equalTo(self)
             make.left.equalTo(self)
             make.height.equalTo(footerHeight)
         }
-        
+
         borderLineView.snp.makeConstraints { (make) in
             make.top.equalTo(self)
             make.left.equalTo(self)
             make.width.equalTo(self)
             make.height.equalTo(0.5)
         }
-        
+
         addListButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 28.0, height: 28.0))
             make.centerY.equalTo(self)
             make.left.equalTo(self).offset(20.0)
         }
-        
+
         archiveButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 28.0, height: 28.0))
             make.centerY.equalTo(self)
             make.right.equalTo(self).offset(-20.0)
         }
-        
+
         infoLabel.snp.makeConstraints { (make) in
             make.center.equalTo(self)
         }
 
         setNeedsUpdateConstraints()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

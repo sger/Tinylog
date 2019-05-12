@@ -17,9 +17,10 @@ final class ListsViewController: CoreDataTableViewController {
 
     let kEstimateRowHeight = 61
     let kCellIdentifier = "CellIdentifier"
-    var editingIndexPath: IndexPath?
-    var resultsTableViewController: ResultsTableViewController?
 
+    private var resultsTableViewController: ResultsTableViewController?
+    fileprivate let reachability = ReachabilityManager.instance.reachability!
+    
     var listsFooterView: ListsFooterView = {
         let listsFooterView = ListsFooterView()
         return listsFooterView
@@ -73,7 +74,7 @@ final class ListsViewController: CoreDataTableViewController {
         tableView?.estimatedRowHeight = 60
         tableView?.tableFooterView = UIView()
         tableView?.translatesAutoresizingMaskIntoConstraints = false
-        
+
         tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-listsFooterView.footerHeight)
@@ -98,7 +99,7 @@ final class ListsViewController: CoreDataTableViewController {
         let settingsBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = settingsBarButtonItem
-        
+
         listsFooterView.snp.makeConstraints { (make) in
             make.left.equalTo(view)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
@@ -112,13 +113,13 @@ final class ListsViewController: CoreDataTableViewController {
         listsFooterView.archiveButton.addTarget(self,
                                                 action: #selector(ListsViewController.displayArchive(_:)),
                                                 for: UIControl.Event.touchDown)
-        
+
         emptyListsLabel.snp.makeConstraints { (make) in
             make.center.equalTo(view)
         }
 
         setEditing(false, animated: false)
-
+        
         registerNotifications()
     }
     deinit {
@@ -161,12 +162,11 @@ final class ListsViewController: CoreDataTableViewController {
             dateFormatter.dateStyle = DateFormatter.Style.short
             dateFormatter.timeStyle = DateFormatter.Style.short
 
-            //check for connectivity
-            if AppDelegate.sharedAppDelegate().networkMode == "notReachable" {
-                listsFooterView.updateInfoLabel("Offline")
-            } else {
-                listsFooterView.updateInfoLabel(NSString(format: "Last Updated %@",
+            if reachability.connection == .wifi || reachability.connection == .cellular {
+                self.listsFooterView.updateInfoLabel(NSString(format: "Last Updated %@",
                                                          dateFormatter.string(for: Date())!) as String)
+            } else if reachability.connection == .none {
+                self.listsFooterView.updateInfoLabel("Offline")
             }
 
             checkForLists()
@@ -178,11 +178,11 @@ final class ListsViewController: CoreDataTableViewController {
     @objc func syncActivityDidBeginNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
-
-            if AppDelegate.sharedAppDelegate().networkMode == "notReachable" {
-                listsFooterView.updateInfoLabel("Offline")
+            
+            if reachability.connection == .none {
+                self.listsFooterView.updateInfoLabel("Offline")
             } else {
-                listsFooterView.updateInfoLabel("Syncing...")
+                self.listsFooterView.updateInfoLabel("Syncing...")
             }
         }
     }
@@ -246,7 +246,7 @@ final class ListsViewController: CoreDataTableViewController {
         checkForLists()
 
         let userDefaults = Environment.current.userDefaults
-        
+
         if userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
             Utils.delay(0.1, closure: { () -> Void in
                 self.displaySetup()
@@ -434,7 +434,7 @@ extension ListsViewController {
             self.emptyListsLabel.isHidden = true
         }
     }
-    
+
     private func createAddListViewController(_ mode: AddListViewController.Mode,
                                              managedObjectContext: NSManagedObjectContext,
                                              list: TLIList? = nil) {
@@ -452,25 +452,25 @@ extension ListsViewController {
 // MARK: - UITableViewDataSource
 
 extension ListsViewController {
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
+
         let editRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
             title: "Edit", handler: {_, indexpath in
-                
+
                 let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
                 self.createAddListViewController(.edit, managedObjectContext: self.managedObjectContext, list: list)
         })
-        
+
         editRowAction.backgroundColor = UIColor.tinylogEditRowAction
         let archiveRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
@@ -483,51 +483,51 @@ extension ListsViewController {
                 self.checkForLists()
                 self.tableView?.reloadData()
         })
-        
+
         archiveRowAction.backgroundColor = UIColor.tinylogMainColor
         return [archiveRowAction, editRowAction]
     }
 }
 
 extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
-    
+
     // MARK: UISearchBarDelegate
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         resultsTableViewController?.frc?.delegate = nil
         resultsTableViewController?.frc = nil
     }
-    
+
     // MARK: UISearchControllerDelegate
-    
+
     func didDismissSearchController(_ searchController: UISearchController) {
         let resultsController = searchController.searchResultsController as! ResultsTableViewController
         resultsController.frc?.delegate = nil
         resultsController.frc = nil
     }
-    
+
     // MARK: UISearchResultsUpdating
-    
+
     func updateSearchResults(for searchController: UISearchController) {
-        
+
         if let text = searchController.searchBar.text {
             if !text.isEmpty {
                 let lowercasedText = text.lowercased()
                 let color = Utils.findColorByName(lowercasedText)
                 let resultsController = searchController.searchResultsController as! ResultsTableViewController
                 let fetchRequest = TLIList.filterLists(with: lowercasedText, color: color)
-                
+
                 resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: managedObjectContext,
                                                                    sectionNameKeyPath: nil,
                                                                    cacheName: nil)
                 resultsController.frc?.delegate = self
-                
+
                 do {
                     try resultsController.frc?.performFetch()
                     resultsController.tableView?.reloadData()
@@ -541,12 +541,12 @@ extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, 
 }
 
 extension ListsViewController: AddListViewControllerDelegate {
-    
+
     func onClose(_ addListViewController: AddListViewController, list: TLIList) {
-        
+
         let indexPath = self.frc?.indexPath(forObject: list)
         self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
-        
+
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
         // swiftlint:disable line_length
         if IS_IPAD {
@@ -559,7 +559,7 @@ extension ListsViewController: AddListViewControllerDelegate {
             tasksViewController.focusTextField = true
             navigationController?.pushViewController(tasksViewController, animated: true)
         }
-        
+
         checkForLists()
     }
 }

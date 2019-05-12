@@ -34,7 +34,7 @@ final class HelpTableViewCell: GenericTableViewCell {
             maker.trailing.equalToSuperview().inset(10.0)
             maker.bottom.equalToSuperview().inset(20.0)
         }
-        
+
         let selectedBackgroundView = UIView(frame: frame)
         selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw
