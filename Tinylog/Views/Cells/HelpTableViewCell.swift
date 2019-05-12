@@ -11,8 +11,7 @@ import TTTAttributedLabel
 
 final class HelpTableViewCell: GenericTableViewCell {
 
-    var didSetupConstraints = false
-    let helpLabel: TTTAttributedLabel = TTTAttributedLabel.newAutoLayout()
+    let helpLabel = UILabel()
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -29,6 +28,13 @@ final class HelpTableViewCell: GenericTableViewCell {
         helpLabel.textColor = UIColor.tinylogTextColor
         contentView.addSubview(helpLabel)
 
+        helpLabel.snp.makeConstraints { (maker) in
+            maker.top.equalToSuperview().inset(20.0)
+            maker.leading.equalToSuperview().inset(16.0)
+            maker.trailing.equalToSuperview().inset(10.0)
+            maker.bottom.equalToSuperview().inset(20.0)
+        }
+        
         let selectedBackgroundView = UIView(frame: frame)
         selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw
@@ -42,19 +48,6 @@ final class HelpTableViewCell: GenericTableViewCell {
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func updateConstraints() {
-        if !didSetupConstraints {
-
-            helpLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 20.0)
-            helpLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 16.0)
-            helpLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16.0)
-            helpLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 20.0)
-
-            didSetupConstraints = true
-        }
-        super.updateConstraints()
     }
 
     override func updateFonts() {

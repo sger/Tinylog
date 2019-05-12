@@ -7,15 +7,12 @@
 //
 // swiftlint:disable force_unwrapping
 import UIKit
-import PureLayout
 import SVProgressHUD
 
-class SetupViewController: UIViewController {
-
-    var didSetupConstraints = false
+final class SetupViewController: UIViewController {
 
     lazy var subtitleLabel: UILabel = {
-        let subtitleLabel: UILabel = UILabel.newAutoLayout()
+        let subtitleLabel: UILabel = UILabel()
         subtitleLabel.lineBreakMode = .byTruncatingTail
         subtitleLabel.numberOfLines = 1
         subtitleLabel.textAlignment = .center
@@ -26,7 +23,7 @@ class SetupViewController: UIViewController {
     }()
 
     lazy var descriptionLabel: UILabel = {
-        let descriptionLabel: UILabel = UILabel.newAutoLayout()
+        let descriptionLabel: UILabel = UILabel()
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.numberOfLines = 3
         descriptionLabel.textAlignment = .center
@@ -37,7 +34,7 @@ class SetupViewController: UIViewController {
     }()
 
     lazy var notNowButton: RoundedButton = {
-        let notNowButton = RoundedButton.newAutoLayout()
+        let notNowButton = RoundedButton()
         notNowButton.accessibilityIdentifier = "notNowButton"
         notNowButton.setTitle(localizedString(key: "Later"), for: UIControl.State())
         notNowButton.backgroundColor = UIColor.tinylogTextColor
@@ -49,7 +46,7 @@ class SetupViewController: UIViewController {
     }()
 
     lazy var useiCloudButton: RoundedButton = {
-        let useiCloudButton = RoundedButton.newAutoLayout()
+        let useiCloudButton = RoundedButton()
         notNowButton.accessibilityIdentifier = "useiCloudButton"
         useiCloudButton.setTitle(localizedString(key: "Use_iCloud"), for: UIControl.State())
         useiCloudButton.addTarget(
@@ -70,6 +67,37 @@ class SetupViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.tinylogLightGray
+        
+        cloudImageView.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview().offset(-90)
+            make.centerX.equalToSuperview().offset
+        }
+        
+        subtitleLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().inset(20.0)
+            make.right.equalToSuperview().inset(20.0)
+            make.top.equalTo(cloudImageView.snp.bottom).offset(20.0)
+        }
+        
+        descriptionLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().inset(20.0)
+            make.right.equalToSuperview().inset(20.0)
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(20.0)
+        }
+        
+        notNowButton.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().multipliedBy(0.5)
+            make.height.equalTo(60.0)
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        useiCloudButton.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().multipliedBy(0.5)
+            make.height.equalTo(60.0)
+            make.left.equalTo(notNowButton.snp.right)
+            make.bottom.equalToSuperview()
+        }
     }
 
     override func loadView() {
@@ -80,35 +108,6 @@ class SetupViewController: UIViewController {
         self.view.addSubview(subtitleLabel)
         self.view.addSubview(descriptionLabel)
         self.view.setNeedsUpdateConstraints()
-    }
-
-    override func updateViewConstraints() {
-        if !didSetupConstraints {
-
-            cloudImageView.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: self.view, withOffset: -90.0)
-            cloudImageView.autoAlignAxis(ALAxis.vertical, toSameAxisOf: self.view, withOffset: 0.0)
-
-            subtitleLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 20.0)
-            subtitleLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 20.0)
-            subtitleLabel.autoPinEdge(ALEdge.top, to: ALEdge.bottom, of: cloudImageView, withOffset: 20.0)
-
-            descriptionLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 20.0)
-            descriptionLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 20.0)
-            descriptionLabel.autoPinEdge(ALEdge.top, to: ALEdge.bottom, of: subtitleLabel, withOffset: 20.0)
-
-            notNowButton.autoMatch(.width, to: .width, of: self.view, withMultiplier: 0.5)
-            notNowButton.autoSetDimension(.height, toSize: 60.0)
-            notNowButton.autoPinEdge(toSuperviewEdge: .left)
-            notNowButton.autoPinEdge(toSuperviewEdge: .bottom)
-
-            useiCloudButton.autoMatch(.width, to: .width, of: self.view, withMultiplier: 0.5)
-            useiCloudButton.autoSetDimension(.height, toSize: 60.0)
-            useiCloudButton.autoPinEdge(toSuperviewEdge: .bottom)
-            useiCloudButton.autoPinEdge(.left, to: .right, of: notNowButton)
-
-            didSetupConstraints = true
-        }
-        super.updateViewConstraints()
     }
 
     @objc func enableiCloudAndDismiss(_ button: RoundedButton) {
