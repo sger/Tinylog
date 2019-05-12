@@ -94,16 +94,26 @@ extension TLIList {
         }
     }
 
-    static func filter(with title: String, color: String) -> NSFetchRequest<NSFetchRequestResult> {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
+    static func filterLists(with text: String, color: String) -> NSFetchRequest<NSFetchRequestResult> {
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
         let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
-        let titlePredicate = NSPredicate(
-            format: "title CONTAINS[cd] %@ AND archivedAt = nil", title)
+        let titlePredicate = NSPredicate(format: "title CONTAINS[cd] %@ AND archivedAt = nil", text)
         let colorPredicate = NSPredicate(format: "color CONTAINS[cd] %@ AND archivedAt = nil", color)
-        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, colorPredicate])
-        fetchRequest.predicate = predicate
+        return TLIList.filter(with: [titlePredicate, colorPredicate], descriptors: [positionDescriptor, titleDescriptor])
+    }
+    
+    static func filter(with predicates: [NSPredicate], descriptors: [NSSortDescriptor]) -> NSFetchRequest<NSFetchRequestResult> {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
+        fetchRequest.sortDescriptors = descriptors
+        fetchRequest.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         return fetchRequest
+    }
+    
+    static func filterArchivedLists(with text: String, color: String) -> NSFetchRequest<NSFetchRequestResult> {
+        let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
+        let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
+        let titlePredicate = NSPredicate(format: "title CONTAINS[cd] %@ AND archivedAt != nil", text)
+        let colorPredicate = NSPredicate(format: "color CONTAINS[cd] %@ AND archivedAt != nil", color)
+        return TLIList.filter(with: [titlePredicate, colorPredicate], descriptors: [positionDescriptor, titleDescriptor])
     }
 }

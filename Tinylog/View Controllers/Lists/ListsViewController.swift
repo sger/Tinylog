@@ -215,7 +215,7 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     @objc func displayArchive(_ button: ArchiveButton) {
-        let archiveViewController: ArchiveViewController = ArchiveViewController()
+        let archiveViewController: ArchivesViewController = ArchivesViewController()
         archiveViewController.managedObjectContext = managedObjectContext
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
@@ -481,6 +481,7 @@ extension ListsViewController {
                 // swiftlint:disable force_try
                 try! self.managedObjectContext.save()
                 self.checkForLists()
+                self.tableView?.reloadData()
         })
         
         archiveRowAction.backgroundColor = UIColor.tinylogMainColor
@@ -519,7 +520,7 @@ extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, 
                 let lowercasedText = text.lowercased()
                 let color = Utils.findColorByName(lowercasedText)
                 let resultsController = searchController.searchResultsController as! ResultsTableViewController
-                let fetchRequest = TLIList.filter(with: lowercasedText, color: color)
+                let fetchRequest = TLIList.filterLists(with: lowercasedText, color: color)
                 
                 resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: managedObjectContext,

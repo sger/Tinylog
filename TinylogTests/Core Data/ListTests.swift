@@ -55,10 +55,30 @@ class ListTests: XCTestCase {
         secondList?.color = "blue"
         try! coreDataManager.managedObjectContext.save()
 
-        let fetchRequest = TLIList.filter(with: "firstList", color: "red")
+        let fetchRequest = TLIList.filterLists(with: "firstList", color: "red")
         let lists = try! coreDataManager.managedObjectContext.fetch(fetchRequest) as? [TLIList]
 
         XCTAssertEqual(lists?.first?.title, "firstList")
         XCTAssertEqual(lists?.first?.color, "red")
+    }
+    
+    func testFilterArchivedLists() {
+        let firstList = NSEntityDescription.insertNewObject(forEntityName: "List",
+                                                            into: coreDataManager.managedObjectContext) as? TLIList
+        firstList?.title = "firstList"
+        firstList?.color = "red"
+        firstList?.archivedAt = Date()
+        let secondList = NSEntityDescription.insertNewObject(forEntityName: "List",
+                                                             into: coreDataManager.managedObjectContext) as? TLIList
+        secondList?.title = "secondList"
+        secondList?.color = "blue"
+        try! coreDataManager.managedObjectContext.save()
+        
+        let fetchRequest = TLIList.filterArchivedLists(with: "firstList", color: "red")
+        let lists = try! coreDataManager.managedObjectContext.fetch(fetchRequest) as? [TLIList]
+        
+        XCTAssertEqual(lists?.first?.title, "firstList")
+        XCTAssertEqual(lists?.first?.color, "red")
+        XCTAssertNotNil(lists?.first?.archivedAt)
     }
 }
