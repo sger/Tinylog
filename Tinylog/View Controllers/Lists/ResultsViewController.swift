@@ -36,11 +36,11 @@ class ResultsViewController: CoreDataTableViewController {
         tableView?.tableFooterView = UIView()
 
         view.addSubview(noResultsLabel)
-        
+
         noResultsLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
         }
-        
+
         tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
@@ -53,7 +53,7 @@ class ResultsViewController: CoreDataTableViewController {
         super.viewWillAppear(animated)
         showNoResults()
     }
-    
+
     func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
