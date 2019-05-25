@@ -11,7 +11,7 @@ import UIKit
 final class ListTableViewCell: GenericTableViewCell {
 
     static let cellIdentifier = "ListTableViewCell"
-    
+
     let kRadius: CGFloat = 30.0
     let listLabel = UILabel()
     let totalTasksLabel = UILabel()
