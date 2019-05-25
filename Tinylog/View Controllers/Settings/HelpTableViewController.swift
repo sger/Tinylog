@@ -10,7 +10,7 @@ import UIKit
 
 class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegate {
 
-    let helpCellIdentifier = "HelpCellIdentifier"
+    let helpCellIdentifier = "HelpTableViewCell"
     var data = [localizedString(key: "Help_instructions1"),
                 localizedString(key: "Help_instructions2"),
                 localizedString(key: "Help_instructions3"),
@@ -37,6 +37,7 @@ class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegat
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -101,14 +102,10 @@ class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegat
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: helpCellIdentifier) as? HelpTableViewCell {
-            configureCell(cell, indexPath: indexPath)
-
-            cell.setNeedsUpdateConstraints()
-            cell.updateConstraintsIfNeeded()
-
-            return cell
-        }
-        return UITableViewCell()
+        let cell: HelpTableViewCell = tableView.dequeue(for: indexPath)
+        configureCell(cell, indexPath: indexPath)
+        cell.setNeedsUpdateConstraints()
+        cell.updateConstraintsIfNeeded()
+        return cell
     }
 }

@@ -52,5 +52,5 @@
    |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Erstellen Sie eine neue L...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
-   | <UIImageView; frame = (31.6667 762.667; 311.333 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
-   | <UIImageView; frame = (369.667 -12.3333; 2.33333 585.333); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+   | <UIImageView; frame = (6 728.667; 363 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
+   | <UIImageView; frame = (369.667 -37.6667; 2.33333 601.333); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>

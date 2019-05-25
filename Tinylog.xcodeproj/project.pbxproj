@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		185C99393E0FFB186A3B1DE4 /* Pods_Tinylog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCB1EEBF9EAC162DF797006 /* Pods_Tinylog.framework */; };
+		5601EADE2298527F00A57819 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601EADD2298527F00A57819 /* ReusableView.swift */; };
+		5601EAE0229852FE00A57819 /* UITableView+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601EADF229852FE00A57819 /* UITableView+Tinylog.swift */; };
 		5606BF862288690C00AD0F5B /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5606BF852288690C00AD0F5B /* ReachabilityManager.swift */; };
 		5609F649226B4DCB00F6AF0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5609F647226B4DCB00F6AF0E /* Localizable.strings */; };
 		5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */; };
@@ -50,7 +52,7 @@
 		5638FC8022744D8200CB4071 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6D22744D8200CB4071 /* TasksViewController.swift */; };
 		5638FC8122744D8200CB4071 /* ArchiveTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6F22744D8200CB4071 /* ArchiveTasksViewController.swift */; };
 		5638FC8222744D8200CB4071 /* ArchivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7022744D8200CB4071 /* ArchivesViewController.swift */; };
-		5638FC8322744D8200CB4071 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7222744D8200CB4071 /* ResultsTableViewController.swift */; };
+		5638FC8322744D8200CB4071 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7222744D8200CB4071 /* ResultsViewController.swift */; };
 		5638FC8422744D8200CB4071 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7322744D8200CB4071 /* ListsViewController.swift */; };
 		5638FC8522744D8200CB4071 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7422744D8200CB4071 /* AddListViewController.swift */; };
 		5638FC8622744D8200CB4071 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7622744D8200CB4071 /* SetupViewController.swift */; };
@@ -120,6 +122,8 @@
 /* Begin PBXFileReference section */
 		034E13532B5D4A3280918EFF /* Pods-Tinylog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinylog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog.debug.xcconfig"; sourceTree = "<group>"; };
 		29E91D341FDF61B134BED598 /* Pods-TinylogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5601EADD2298527F00A57819 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		5601EADF229852FE00A57819 /* UITableView+Tinylog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Tinylog.swift"; sourceTree = "<group>"; };
 		5606BF852288690C00AD0F5B /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		5609F648226B4DCB00F6AF0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5609F64A226B4E0200F6AF0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -169,7 +173,7 @@
 		5638FC6D22744D8200CB4071 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		5638FC6F22744D8200CB4071 /* ArchiveTasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveTasksViewController.swift; sourceTree = "<group>"; };
 		5638FC7022744D8200CB4071 /* ArchivesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivesViewController.swift; sourceTree = "<group>"; };
-		5638FC7222744D8200CB4071 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		5638FC7222744D8200CB4071 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		5638FC7322744D8200CB4071 /* ListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
 		5638FC7422744D8200CB4071 /* AddListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
 		5638FC7622744D8200CB4071 /* SetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
@@ -496,7 +500,7 @@
 		5638FC7122744D8200CB4071 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				5638FC7222744D8200CB4071 /* ResultsTableViewController.swift */,
+				5638FC7222744D8200CB4071 /* ResultsViewController.swift */,
 				5638FC7322744D8200CB4071 /* ListsViewController.swift */,
 				5638FC7422744D8200CB4071 /* AddListViewController.swift */,
 			);
@@ -538,6 +542,7 @@
 				5638FC9022744F4000CB4071 /* TextFieldCellDelegate.swift */,
 				5638FC9122744F4000CB4071 /* AddTaskViewDelegate.swift */,
 				5638FC9222744F4000CB4071 /* EditTaskViewControllerDelegate.swift */,
+				5601EADD2298527F00A57819 /* ReusableView.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -598,6 +603,7 @@
 				5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */,
 				5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */,
 				5638FCC42274500A00CB4071 /* NSDate+Utilities.h */,
+				5601EADF229852FE00A57819 /* UITableView+Tinylog.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -966,6 +972,7 @@
 				5638FC8122744D8200CB4071 /* ArchiveTasksViewController.swift in Sources */,
 				5638FC5F22744CDC00CB4071 /* TasksFooterView.swift in Sources */,
 				5638FCB222744F9F00CB4071 /* TLITag+CoreDataProperties.swift in Sources */,
+				5601EADE2298527F00A57819 /* ReusableView.swift in Sources */,
 				5638FC5422744CDC00CB4071 /* RoundedButton.swift in Sources */,
 				5638FC5222744CDC00CB4071 /* CircleButton.swift in Sources */,
 				5638FC4F22744CDC00CB4071 /* ListTableViewCell.swift in Sources */,
@@ -1007,7 +1014,7 @@
 				5638FC8A22744ECF00CB4071 /* Utils.swift in Sources */,
 				5638FC7B22744D8200CB4071 /* HelpTableViewController.swift in Sources */,
 				5638FC7F22744D8200CB4071 /* EditTaskViewController.swift in Sources */,
-				5638FC8322744D8200CB4071 /* ResultsTableViewController.swift in Sources */,
+				5638FC8322744D8200CB4071 /* ResultsViewController.swift in Sources */,
 				5638FC9522744F4000CB4071 /* TextFieldCellDelegate.swift in Sources */,
 				5638FC7D22744D8200CB4071 /* SettingsFontPickerViewController.swift in Sources */,
 				5638FC9322744F4000CB4071 /* UserDefaultsType.swift in Sources */,
@@ -1021,6 +1028,7 @@
 				5638FC9A22744F7C00CB4071 /* LocalizedString.swift in Sources */,
 				5638FC8022744D8200CB4071 /* TasksViewController.swift in Sources */,
 				5638FC9422744F4000CB4071 /* AddListViewControllerDelegate.swift in Sources */,
+				5601EAE0229852FE00A57819 /* UITableView+Tinylog.swift in Sources */,
 				5638FCA122744F8800CB4071 /* TLIDrawingUtils.m in Sources */,
 				5638FCB122744F9F00CB4071 /* TLIList+CoreDataProperties.swift in Sources */,
 				5638FC7E22744D8200CB4071 /* TextSizeViewController.swift in Sources */,
