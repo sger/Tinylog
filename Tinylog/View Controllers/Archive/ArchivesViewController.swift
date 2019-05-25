@@ -15,10 +15,10 @@ class ArchivesViewController: CoreDataTableViewController,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
     let kEstimateRowHeight = 61
-    let kCellIdentifier = "CellIdentifier"
+    let kCellIdentifier = "ListTableViewCell"
     var managedObjectContext: NSManagedObjectContext!
     var editingIndexPath: IndexPath?
-    var resultsTableViewController: ResultsTableViewController?
+    var resultsTableViewController: ResultsViewController?
 
     func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
@@ -80,9 +80,11 @@ class ArchivesViewController: CoreDataTableViewController,
             make.right.equalTo(view)
         })
 
-        resultsTableViewController = ResultsTableViewController()
+        resultsTableViewController = ResultsViewController()
 
-        addSearchController(with: "Search", searchResultsUpdater: self, searchResultsController: resultsTableViewController!)
+        addSearchController(with: "Search",
+                            searchResultsUpdater: self,
+                            searchResultsController: resultsTableViewController!)
 
         view.addSubview(emptyArchivesLabel)
 
@@ -302,15 +304,15 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as! ListTableViewCell
-        self.configureCell(cell, atIndexPath: indexPath)
+        let cell: ListTableViewCell = tableView.dequeue(for: indexPath)
+        configureCell(cell, atIndexPath: indexPath)
         return cell
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
         let listTableViewCell: ListTableViewCell = cell as! ListTableViewCell
-        listTableViewCell.currentList = list
+        listTableViewCell.list = list
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
@@ -391,7 +393,7 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     func didDismissSearchController(_ searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as! ResultsTableViewController
+        let resultsController = searchController.searchResultsController as! ResultsViewController
         resultsController.frc?.delegate = nil
         resultsController.frc = nil
     }
@@ -405,7 +407,7 @@ class ArchivesViewController: CoreDataTableViewController,
                 let lowercasedText = text.lowercased()
                 let color = Utils.findColorByName(lowercasedText)
                 let fetchRequest = TLIList.filterArchivedLists(with: text, color: color)
-                let resultsController = searchController.searchResultsController as! ResultsTableViewController
+                let resultsController = searchController.searchResultsController as! ResultsViewController
                 resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: managedObjectContext,
                                                                    sectionNameKeyPath: nil,

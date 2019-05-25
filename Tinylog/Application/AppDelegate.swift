@@ -136,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
         // Setup for notifications
         registerNotifications()
-            
+
         _ = ReachabilityManager.instance
 
         return true

@@ -16,11 +16,10 @@ final class ListsViewController: CoreDataTableViewController {
     var managedObjectContext: NSManagedObjectContext!
 
     let kEstimateRowHeight = 61
-    let kCellIdentifier = "CellIdentifier"
 
-    private var resultsTableViewController: ResultsTableViewController?
+    private var resultsViewController: ResultsViewController?
     fileprivate let reachability = ReachabilityManager.instance.reachability!
-    
+
     var listsFooterView: ListsFooterView = {
         let listsFooterView = ListsFooterView()
         return listsFooterView
@@ -69,7 +68,7 @@ final class ListsViewController: CoreDataTableViewController {
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellIdentifier)
         tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = 60
         tableView?.tableFooterView = UIView()
@@ -82,9 +81,11 @@ final class ListsViewController: CoreDataTableViewController {
             make.right.equalTo(view)
         })
 
-        resultsTableViewController = ResultsTableViewController()
+        resultsViewController = ResultsViewController()
 
-        addSearchController(with: "Search", searchResultsUpdater: self, searchResultsController: resultsTableViewController!)
+        addSearchController(with: "Search",
+                            searchResultsUpdater: self,
+                            searchResultsController: resultsViewController!)
 
         let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
         let settingsButton: UIButton = UIButton(type: .custom)
@@ -119,7 +120,7 @@ final class ListsViewController: CoreDataTableViewController {
         }
 
         setEditing(false, animated: false)
-        
+
         registerNotifications()
     }
     deinit {
@@ -178,7 +179,7 @@ final class ListsViewController: CoreDataTableViewController {
     @objc func syncActivityDidBeginNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            
+
             if reachability.connection == .none {
                 self.listsFooterView.updateInfoLabel("Offline")
             } else {
@@ -327,17 +328,15 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as? ListTableViewCell {
-            configureCell(cell, atIndexPath: indexPath)
-            return cell
-        }
-        return UITableViewCell()
+        let cell: ListTableViewCell = tableView.dequeue(for: indexPath)
+        configureCell(cell, atIndexPath: indexPath)
+        return cell
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         if let list: TLIList = self.frc?.object(at: indexPath) as? TLIList,
             let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell {
-            listTableViewCell.currentList = list
+            listTableViewCell.list = list
         }
     }
 
@@ -347,7 +346,7 @@ final class ListsViewController: CoreDataTableViewController {
         if tableView == self.tableView {
             list = self.frc?.object(at: indexPath) as! TLIList
         } else {
-            list = resultsTableViewController?.frc?.object(at: indexPath) as! TLIList
+            list = resultsViewController?.frc?.object(at: indexPath) as! TLIList
         }
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
@@ -499,14 +498,14 @@ extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, 
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        resultsTableViewController?.frc?.delegate = nil
-        resultsTableViewController?.frc = nil
+        resultsViewController?.frc?.delegate = nil
+        resultsViewController?.frc = nil
     }
 
     // MARK: UISearchControllerDelegate
 
     func didDismissSearchController(_ searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as! ResultsTableViewController
+        let resultsController = searchController.searchResultsController as! ResultsViewController
         resultsController.frc?.delegate = nil
         resultsController.frc = nil
     }
@@ -519,7 +518,7 @@ extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, 
             if !text.isEmpty {
                 let lowercasedText = text.lowercased()
                 let color = Utils.findColorByName(lowercasedText)
-                let resultsController = searchController.searchResultsController as! ResultsTableViewController
+                let resultsController = searchController.searchResultsController as! ResultsViewController
                 let fetchRequest = TLIList.filterLists(with: lowercasedText, color: color)
 
                 resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -548,7 +547,7 @@ extension ListsViewController: AddListViewControllerDelegate {
         self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-        // swiftlint:disable line_length
+
         if IS_IPAD {
             SplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
             SplitViewController.sharedSplitViewController().listViewController?.managedObject = list

@@ -34,7 +34,7 @@ class TasksViewController: CoreDataTableViewController,
     TTTAttributedLabelDelegate,
     EditTaskViewControllerDelegate {
 
-    let kCellIdentifier = "CellIdentifier"
+    let kCellIdentifier = "TaskTableViewCell"
     var managedObjectContext: NSManagedObjectContext!
     var list: TLIList?
     var currentIndexPath: IndexPath?
@@ -601,9 +601,7 @@ class TasksViewController: CoreDataTableViewController,
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell: TaskTableViewCell = tableView.dequeueReusableCell(
-                withIdentifier: kCellIdentifier) as! TaskTableViewCell
-            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        let cell: TaskTableViewCell = tableView.dequeue(for: indexPath)
             cell.checkBoxButton.addTarget(
                 self,
                 action: #selector(TasksViewController.toggleComplete(_:)),

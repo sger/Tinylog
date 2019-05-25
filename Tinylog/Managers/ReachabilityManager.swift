@@ -9,13 +9,14 @@
 import Reachability
 
 final class ReachabilityManager {
-    
+
+    /// Singleton
     static let instance = ReachabilityManager()
-    
+
+    /// Instance of the Reachability object
     var reachability: Reachability!
-    
+
     private init() {
-        print("Initialize Reachability")
         reachability = Reachability()
         try! reachability.startNotifier()
     }

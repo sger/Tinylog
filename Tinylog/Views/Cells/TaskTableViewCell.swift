@@ -89,6 +89,7 @@ class TaskTableViewCell: GenericTableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         backgroundColor = UIColor.tinylogLightGray
+        selectionStyle = .none
 
         taskLabel.lineBreakMode = .byTruncatingTail
         taskLabel.numberOfLines = 0

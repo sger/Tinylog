@@ -10,17 +10,19 @@ import UIKit
 
 final class ListTableViewCell: GenericTableViewCell {
 
+    static let cellIdentifier = "ListTableViewCell"
+    
     let kRadius: CGFloat = 30.0
     let listLabel = UILabel()
     let totalTasksLabel = UILabel()
 
-    var currentList: TLIList? {
+    var list: TLIList? {
         didSet {
             updateFonts()
-            if let currentList = currentList,
-                let total = currentList.total as? Int,
-                let color = currentList.color {
-                listLabel.text = currentList.title
+            if let list = list,
+                let total = list.total as? Int,
+                let color = list.color {
+                listLabel.text = list.title
                 totalTasksLabel.text = String(total)
                 totalTasksLabel.layer.borderColor = UIColor(rgba: color).cgColor
                 totalTasksLabel.textColor = UIColor(rgba: color)
@@ -40,7 +42,7 @@ final class ListTableViewCell: GenericTableViewCell {
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        self.currentList = nil
+        self.list = nil
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         backgroundColor = UIColor.tinylogLightGray
