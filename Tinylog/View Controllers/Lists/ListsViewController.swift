@@ -14,9 +14,6 @@ import SnapKit
 final class ListsViewController: CoreDataTableViewController {
 
     var managedObjectContext: NSManagedObjectContext!
-
-    let kEstimateRowHeight = 61
-
     private var resultsViewController: ResultsViewController?
     fileprivate let reachability = ReachabilityManager.instance.reachability!
 
@@ -62,8 +59,8 @@ final class ListsViewController: CoreDataTableViewController {
         title = localizedString(key: "My_lists")
         view.accessibilityIdentifier = "MyLists"
 
-        view.backgroundColor = UIColor.tinylogLighterGray
-        tableView?.backgroundColor = UIColor.tinylogLightGray
+        view.backgroundColor = UIColor.white
+        tableView?.backgroundColor = UIColor.white
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
@@ -211,7 +208,7 @@ final class ListsViewController: CoreDataTableViewController {
     func displaySetup() {
         let setupViewController: SetupViewController = SetupViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 
@@ -219,7 +216,7 @@ final class ListsViewController: CoreDataTableViewController {
         let archiveViewController: ArchivesViewController = ArchivesViewController()
         archiveViewController.managedObjectContext = managedObjectContext
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 
@@ -228,7 +225,7 @@ final class ListsViewController: CoreDataTableViewController {
     @objc func displaySettings(_ sender: UIButton) {
         let settingsViewController: SettingsTableViewController = SettingsTableViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: settingsViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 
@@ -443,7 +440,7 @@ extension ListsViewController {
         addListViewController.mode = mode
         addListViewController.list = list
         let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 }

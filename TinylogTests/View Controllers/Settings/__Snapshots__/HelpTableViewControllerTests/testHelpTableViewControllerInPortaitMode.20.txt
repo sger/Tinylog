@@ -37,4 +37,4 @@
    |    |    | <UILabel; frame = (16 20; 294 73.6667); text = 'Erstellen Sie eine neue L...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 304 0.333333); layer = <CALayer>>
    | <UIImageView; frame = (6 518.667; 308 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
-   | <UIImageView; frame = (314.667 -37.3333; 2.33333 314.333); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+   | <UIImageView; frame = (314.667 -38; 2.33333 314.667); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>

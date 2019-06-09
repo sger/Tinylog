@@ -17,7 +17,7 @@ class ArchivesViewControllerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        //record = true
+        // record = true
         coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
     }
     

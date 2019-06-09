@@ -261,7 +261,7 @@ class ArchiveTasksViewController: CoreDataTableViewController,
     func displayArchive(_ button: ArchiveButton) {
         let archiveViewController: ArchivesViewController = ArchivesViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 
@@ -476,7 +476,7 @@ class ArchiveTasksViewController: CoreDataTableViewController,
         editTaskViewController.indexPath = indexPath
         editTaskViewController.delegate = self
         let nc: UINavigationController = UINavigationController(rootViewController: editTaskViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 

@@ -60,5 +60,5 @@
    |    | <UITableViewCellContentView; frame = (0 0; 414 89); gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 388 49); text = 'Create a new list by tapp...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 89; 398 0.333333); layer = <CALayer>>
-   | <UIImageView; frame = (31.6667 846.667; 350.333 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
-   | <UIImageView; frame = (408.667 -12.3333; 2.33333 718.333); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+   | <UIImageView; frame = (3 812.667; 405.667 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
+   | <UIImageView; frame = (408.667 3; 2.33333 701); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>

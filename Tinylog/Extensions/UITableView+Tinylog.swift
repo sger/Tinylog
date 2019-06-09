@@ -8,6 +8,7 @@
 
 import UIKit
 
+// swiftlint:disable force_cast
 extension UITableView {
     func dequeue<T: UITableViewCell>(for indexPath: IndexPath) -> T {
         let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath)
