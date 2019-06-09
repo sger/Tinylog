@@ -406,7 +406,7 @@ class TasksViewController: CoreDataTableViewController,
         }
 
         let nc: UINavigationController = UINavigationController(rootViewController: viewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 
@@ -667,7 +667,7 @@ class TasksViewController: CoreDataTableViewController,
         }
     }
 
-    // MARK: TLIAddTaskViewDelegate
+    // MARK: AddTaskViewDelegate
     func addTaskViewDidBeginEditing(_ addTaskView: AddTaskView) {
         displayTransparentLayer()
     }
@@ -676,7 +676,7 @@ class TasksViewController: CoreDataTableViewController,
         hideTransparentLayer()
     }
 
-    func addTaskView(_ addTaskView: AddTaskView, title: NSString) {
+    func addTaskView(_ addTaskView: AddTaskView, title: String) {
 
         do {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
@@ -776,7 +776,7 @@ class TasksViewController: CoreDataTableViewController,
         editTaskViewController.indexPath = indexPath
         editTaskViewController.delegate = self
         let nc: UINavigationController = UINavigationController(rootViewController: editTaskViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.formSheet
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 

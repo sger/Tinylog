@@ -42,9 +42,9 @@ class ListsFooterView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = UIColor.tinylogLighterGray
+        backgroundColor = UIColor.white
 
-        footerView.backgroundColor = UIColor.tinylogLighterGray
+        footerView.backgroundColor = UIColor.white
         addSubview(footerView)
 
         addSubview(borderLineView)

@@ -70,7 +70,7 @@ final class SetupViewController: UIViewController {
 
         cloudImageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview().offset(-90)
-            make.centerX.equalToSuperview().offset
+            make.centerX.equalToSuperview()
         }
 
         subtitleLabel.snp.makeConstraints { (make) in

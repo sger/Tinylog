@@ -45,7 +45,7 @@ final class ListTableViewCell: GenericTableViewCell {
         self.list = nil
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = UIColor.tinylogLightGray
+        backgroundColor = UIColor.white
 
         listLabel.lineBreakMode = .byTruncatingTail
         listLabel.numberOfLines = 0

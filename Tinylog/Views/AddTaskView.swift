@@ -5,20 +5,21 @@
 //  Created by Spiros Gerokostas on 18/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
+
 import UIKit
 
-class AddTaskView: UIView, UITextFieldDelegate {
+final class AddTaskView: UIView, UITextFieldDelegate {
 
-    static let height: CGFloat = 44.0
+    static let height: CGFloat = 54.0
+
+    private let attributedPlaceholder = NSAttributedString(string: localizedString(key: "Add_new_task"),
+                                                           attributes: [.foregroundColor: UIColor.tinylogLightGray])
 
     var textField: TLITextField = {
         let textField = TLITextField()
         textField.backgroundColor = UIColor.clear
         textField.font = UIFont.tinylogFontOfSize(17.0)
         textField.textColor = UIColor.tinylogLightGray
-        textField.placeholder = "Add new task"
-        textField.setValue(UIColor.tinylogLightGray, forKeyPath: "_placeholderLabel.textColor")
         textField.autocapitalizationType = UITextAutocapitalizationType.sentences
         textField.autocorrectionType = UITextAutocorrectionType.yes
         textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
@@ -34,8 +35,7 @@ class AddTaskView: UIView, UITextFieldDelegate {
         return closeButton
     }()
 
-    var delegate: AddTaskViewDelegate?
-    var didSetupContraints = false
+    weak var delegate: AddTaskViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,6 +43,7 @@ class AddTaskView: UIView, UITextFieldDelegate {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundColor = UIColor.tinylogMainColor
 
+        textField.attributedPlaceholder = attributedPlaceholder
         textField.delegate = self
         addSubview(textField)
 
@@ -65,6 +66,7 @@ class AddTaskView: UIView, UITextFieldDelegate {
                                                selector: #selector(AddTaskView.updateFonts),
                                                name: NSNotification.Name(rawValue: Notifications.fontDidChangeNotification),
                                                object: nil)
+
         setNeedsUpdateConstraints()
     }
 
@@ -72,33 +74,36 @@ class AddTaskView: UIView, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func updateFonts() {
+    @objc private func updateFonts() {
         textField.font = UIFont.tinylogFontOfSize(17.0)
     }
 
     // MARK: UITextFieldDelegate
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        delegate?.addTaskViewDidBeginEditing!(self)
-        textField.placeholder = ""
+        delegate?.addTaskViewDidBeginEditing(self)
+        textField.attributedPlaceholder = nil
         closeButton.isHidden = false
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        delegate?.addTaskViewDidEndEditing!(self)
-        textField.placeholder = "Add new task"
+        delegate?.addTaskViewDidEndEditing(self)
+        textField.attributedPlaceholder = attributedPlaceholder
         closeButton.isHidden = true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text!.length() == 0 {
+
+        if let text = textField.text, text.length() == 0 {
             textField.resignFirstResponder()
             return false
         }
 
-        let title: NSString = textField.text! as NSString
-        textField.text = nil
-        delegate?.addTaskView(self, title: title)
+        if let text = textField.text {
+            textField.text = nil
+            delegate?.addTaskView(self, title: text)
+        }
+
         return false
     }
 }
