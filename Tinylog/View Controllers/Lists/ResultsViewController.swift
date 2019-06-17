@@ -17,7 +17,7 @@ class ResultsViewController: CoreDataTableViewController {
         noResultsLabel.font = UIFont.tinylogFontOfSize(16.0)
         noResultsLabel.textColor = UIColor.tinylogTextColor
         noResultsLabel.textAlignment = NSTextAlignment.center
-        noResultsLabel.text = "No Results"
+        noResultsLabel.text = localizedString(key: "No_results")
         return noResultsLabel
     }()
 
@@ -84,7 +84,6 @@ class ResultsViewController: CoreDataTableViewController {
 extension ResultsViewController {
     func showNoResults() {
         if checkForEmptyResults() {
-            print("!!!!!!!!!!!")
             noResultsLabel.isHidden = false
         } else {
             noResultsLabel.isHidden = true

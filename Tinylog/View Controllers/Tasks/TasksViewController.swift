@@ -579,11 +579,9 @@ class TasksViewController: CoreDataTableViewController,
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
-
-            let taskTableViewCell: TaskTableViewCell = cell as! TaskTableViewCell
-            taskTableViewCell.managedObjectContext = managedObjectContext
-            taskTableViewCell.currentTask = task
-
+        let taskTableViewCell: TaskTableViewCell = cell as! TaskTableViewCell
+        taskTableViewCell.managedObjectContext = managedObjectContext
+        taskTableViewCell.currentTask = task
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

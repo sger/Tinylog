@@ -14,10 +14,7 @@ class ArchivesViewController: CoreDataTableViewController,
     UITextFieldDelegate, AddListViewControllerDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
-    let kEstimateRowHeight = 61
-    let kCellIdentifier = "ListTableViewCell"
     var managedObjectContext: NSManagedObjectContext!
-    var editingIndexPath: IndexPath?
     var resultsTableViewController: ResultsViewController?
 
     func configureFetch() {
@@ -59,7 +56,7 @@ class ArchivesViewController: CoreDataTableViewController,
 
         configureFetch()
 
-        self.title = "My Archives"
+        title = "My Archives"
 
         view.backgroundColor = UIColor.tinylogLightGray
         tableView?.backgroundColor = UIColor.tinylogLightGray
@@ -67,7 +64,7 @@ class ArchivesViewController: CoreDataTableViewController,
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellIdentifier)
         tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = 60
         tableView?.tableFooterView = UIView()
