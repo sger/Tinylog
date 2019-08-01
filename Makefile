@@ -28,7 +28,7 @@ clean:
 	$(XCODEBUILD) clean $(BUILD_FLAGS) $(XCPRETTY)
 
 bootstrap: dependencies
-	brew update || brew update
+	brew update
 	brew unlink swiftlint || true
 	brew install swiftlint
 	brew link --overwrite swiftlint
@@ -40,11 +40,11 @@ cocoapods:
 	pod install
 
 lint:
-		swiftlint lint --reporter json --strict
+	swiftlint lint --reporter json --strict
 
 secrets:
-		mkdir -p Tinylog/Configs \
-		&& cp -n Configs/Secrets.swift.example Tinylog/Configs/Secrets.swift \
-		|| true; \
+	mkdir -p Tinylog/Configs \
+	&& cp -n Configs/Secrets.swift.example Tinylog/Configs/Secrets.swift \
+	|| true; \
 
 .PHONY: test clean dependencies lint deploy cocoapods

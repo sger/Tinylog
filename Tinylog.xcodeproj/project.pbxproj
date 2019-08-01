@@ -15,7 +15,6 @@
 		5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */; };
 		5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */; };
 		56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataManager.swift */; };
-		561A25BE2116EBE500B28644 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561A25BD2116EBE400B28644 /* Secrets.swift */; };
 		5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5628E8CD1E85898700AAFD20 /* Assets.xcassets */; };
 		5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */; };
 		562B1ECE22774CE2000EF38C /* HelpTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B1ECD22774CE2000EF38C /* HelpTableViewControllerTests.swift */; };
@@ -96,6 +95,7 @@
 		56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56892690226C767A00D952A6 /* FindColorByNameTests.swift */; };
 		568F7E061F2BA12E00CFDDDD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */; };
 		568F7E081F2BA14300CFDDDD /* SnapshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */; };
+		56A2D93022F35D4C002BFF20 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A2D92F22F35D4C002BFF20 /* Secrets.swift */; };
 		56B7B7D9227EBCEE003BCAC3 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7D8227EBCEE003BCAC3 /* TLISyncManager.m */; };
 		56B7B7E0227ECADB003BCAC3 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DE227ECADB003BCAC3 /* Environment.swift */; };
 		56B7B7E1227ECADB003BCAC3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DF227ECADB003BCAC3 /* Enums.swift */; };
@@ -130,7 +130,6 @@
 		5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Environment.swift"; sourceTree = "<group>"; };
 		5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTests.swift; sourceTree = "<group>"; };
 		56119AEC226F90EA00F8D798 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		561A25BD2116EBE400B28644 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		5628E8C31E85898700AAFD20 /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5628E8CD1E85898700AAFD20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5628E8D21E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,6 +227,7 @@
 		568F7DFF1F2BA0DC00CFDDDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotsUITests.swift; sourceTree = "<group>"; };
+		56A2D92F22F35D4C002BFF20 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		56B7AD8F1E858B25004BB429 /* Tinylog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tinylog-Bridging-Header.h"; sourceTree = "<group>"; };
 		56B7AD931E858B81004BB429 /* Tinylog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tinylog.entitlements; sourceTree = "<group>"; };
 		56B7B7D7227EBCEE003BCAC3 /* TLISyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLISyncManager.h; sourceTree = "<group>"; };
@@ -621,7 +621,7 @@
 		56487F8F1F644E150080192C /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				561A25BD2116EBE400B28644 /* Secrets.swift */,
+				56A2D92F22F35D4C002BFF20 /* Secrets.swift */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -977,6 +977,7 @@
 				5638FCC52274500A00CB4071 /* UIImage+Tinylog.swift in Sources */,
 				5638FCB722744F9F00CB4071 /* TLINotification+CoreDataProperties.swift in Sources */,
 				5638FC5D22744CDC00CB4071 /* TouchableView.swift in Sources */,
+				56A2D93022F35D4C002BFF20 /* Secrets.swift in Sources */,
 				5638FCBA22744FC100CB4071 /* CoreDataTableViewController.swift in Sources */,
 				5638FC8C22744F2200CB4071 /* PlistInfo.swift in Sources */,
 				5638FCB422744F9F00CB4071 /* TLITag.swift in Sources */,
@@ -1002,7 +1003,6 @@
 				5638FCB322744F9F00CB4071 /* TLITask.swift in Sources */,
 				5638FC5322744CDC00CB4071 /* ExportTasksButton.swift in Sources */,
 				5638FCCB2274500A00CB4071 /* UIFont+Tinylog.swift in Sources */,
-				561A25BE2116EBE500B28644 /* Secrets.swift in Sources */,
 				5638FCC62274500A00CB4071 /* UIColor+Tinylog.swift in Sources */,
 				5638FC6022744CDC00CB4071 /* KeyboardBar.swift in Sources */,
 				5638FC8622744D8200CB4071 /* SetupViewController.swift in Sources */,
