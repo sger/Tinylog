@@ -5,6 +5,7 @@ notifications:
 branches:
   only:
     - feature/version2
+    - release-dist
 
 env:
   - LC_CTYPE=en_US.UTF-8 LANG=en_US.UTF-8
