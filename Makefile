@@ -67,6 +67,6 @@ deploy:
 	@git push -f origin $(MASTER_BRANCH)
 	@git branch -d $(MASTER_BRANCH)
 
-	@echo "Deploy has been sent to Travis CI!"
+	@echo "Deploy completed"
 
 .PHONY: test clean dependencies lint deploy cocoapods
