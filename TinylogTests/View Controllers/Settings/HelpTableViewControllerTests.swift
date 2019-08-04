@@ -12,8 +12,12 @@ import SnapshotTesting
 
 class HelpTableViewControllerTests: XCTestCase {
 
+    override func setUp() {
+        super.setUp()
+        //record = true
+    }
+    
     func testHelpTableViewControllerInPortaitMode() {
-//        record = true
         
         let userDefaults = MockUserDefaults()
         userDefaults.set(21.0, forKey: EnvUserDefaults.fontSize)
@@ -29,7 +33,6 @@ class HelpTableViewControllerTests: XCTestCase {
     }
 
     func testHelpTableViewControllerInLandscapeMode() {
-//        record = true
         
         let userDefaults = MockUserDefaults()
         userDefaults.set(21.0, forKey: EnvUserDefaults.fontSize)
