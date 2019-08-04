@@ -83,6 +83,8 @@ final class ListsViewController: CoreDataTableViewController {
         addSearchController(with: "Search",
                             searchResultsUpdater: self,
                             searchResultsController: resultsViewController!)
+        
+        resultsViewController?.tableView?.delegate = self
 
         let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
         let settingsButton: UIButton = UIButton(type: .custom)
@@ -120,6 +122,7 @@ final class ListsViewController: CoreDataTableViewController {
 
         registerNotifications()
     }
+    
     deinit {
         unregisterNotifications()
     }
@@ -209,7 +212,7 @@ final class ListsViewController: CoreDataTableViewController {
         let setupViewController: SetupViewController = SetupViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 
     @objc func displayArchive(_ button: ArchiveButton) {
@@ -217,7 +220,7 @@ final class ListsViewController: CoreDataTableViewController {
         archiveViewController.managedObjectContext = managedObjectContext
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 
     // MARK: Display Settings
@@ -226,7 +229,7 @@ final class ListsViewController: CoreDataTableViewController {
         let settingsViewController: SettingsTableViewController = SettingsTableViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: settingsViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -278,12 +281,12 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     func listAtIndexPath(_ indexPath: IndexPath) -> TLIList? {
-        let list = self.frc?.object(at: indexPath) as! TLIList?
+        let list = frc?.object(at: indexPath) as! TLIList?
         return list
     }
 
     func updateList(_ list: TLIList, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedLists: [AnyObject] = (self.frc?.fetchedObjects as [AnyObject]?)!
+        var fetchedLists: [AnyObject] = (frc?.fetchedObjects as [AnyObject]?)!
 
         // Remove current list item
         fetchedLists = fetchedLists.filter { $0 as! TLIList != list }
@@ -291,7 +294,7 @@ final class ListsViewController: CoreDataTableViewController {
         var sortedIndex = destinationIndexPath.row
 
         for sectionIndex in 0..<destinationIndexPath.section {
-            sortedIndex += (self.frc?.sections?[sectionIndex].numberOfObjects)!
+            sortedIndex += (frc?.sections?[sectionIndex].numberOfObjects)!
 
             if sectionIndex == sourceIndexPath.section {
                 sortedIndex -= 1
@@ -315,9 +318,9 @@ final class ListsViewController: CoreDataTableViewController {
 
         // Disable fetched results controller
 
-        self.ignoreNextUpdates = true
+        ignoreNextUpdates = true
 
-        let list = self.listAtIndexPath(sourceIndexPath)!
+        let list = listAtIndexPath(sourceIndexPath)!
 
         updateList(list, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
 
@@ -331,7 +334,7 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let list: TLIList = self.frc?.object(at: indexPath) as? TLIList,
+        if let list: TLIList = frc?.object(at: indexPath) as? TLIList,
             let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell {
             listTableViewCell.list = list
         }
@@ -341,7 +344,7 @@ final class ListsViewController: CoreDataTableViewController {
         var list: TLIList
 
         if tableView == self.tableView {
-            list = self.frc?.object(at: indexPath) as! TLIList
+            list = frc?.object(at: indexPath) as! TLIList
         } else {
             list = resultsViewController?.frc?.object(at: indexPath) as! TLIList
         }
@@ -356,11 +359,12 @@ final class ListsViewController: CoreDataTableViewController {
             let tasksViewController: TasksViewController = TasksViewController()
             tasksViewController.managedObjectContext = managedObjectContext
             tasksViewController.list = list
-            self.navigationController?.pushViewController(tasksViewController, animated: true)
+            navigationController?.pushViewController(tasksViewController, animated: true)
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: IndexPath) -> String! {
+    func tableView(_ tableView: UITableView,
+                   titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: IndexPath) -> String! {
         return "Delete"
     }
 
@@ -371,7 +375,7 @@ final class ListsViewController: CoreDataTableViewController {
             return
         }
 
-        let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
+        let list: TLIList = frc?.object(at: indexPath) as! TLIList
 
         managedObjectContext.delete(list)
 
@@ -425,9 +429,9 @@ extension ListsViewController {
         let results = TLIList.lists(with: managedObjectContext)
 
         if results.isEmpty {
-            self.emptyListsLabel.isHidden = false
+            emptyListsLabel.isHidden = false
         } else {
-            self.emptyListsLabel.isHidden = true
+            emptyListsLabel.isHidden = true
         }
     }
 
@@ -441,7 +445,7 @@ extension ListsViewController {
         addListViewController.list = list
         let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 }
 
@@ -540,7 +544,7 @@ extension ListsViewController: AddListViewControllerDelegate {
 
     func onClose(_ addListViewController: AddListViewController, list: TLIList) {
 
-        let indexPath = self.frc?.indexPath(forObject: list)
+        let indexPath = frc?.indexPath(forObject: list)
         self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)

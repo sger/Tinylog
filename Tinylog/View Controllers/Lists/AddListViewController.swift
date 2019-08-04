@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddListViewController: UITableViewController, UITextFieldDelegate {
+final class AddListViewController: UITableViewController, UITextFieldDelegate {
 
     enum Mode: String {
         case create

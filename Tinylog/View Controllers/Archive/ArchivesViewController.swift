@@ -56,10 +56,11 @@ class ArchivesViewController: CoreDataTableViewController,
 
         configureFetch()
 
-        title = "My Archives"
-
-        view.backgroundColor = UIColor.tinylogLightGray
-        tableView?.backgroundColor = UIColor.tinylogLightGray
+        title = localizedString(key: "My_archives")
+        view.accessibilityIdentifier = "MyArchives"
+        
+        view.backgroundColor = UIColor.white
+        tableView?.backgroundColor = UIColor.white
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
@@ -69,6 +70,7 @@ class ArchivesViewController: CoreDataTableViewController,
         tableView?.estimatedRowHeight = 60
         tableView?.tableFooterView = UIView()
         tableView?.translatesAutoresizingMaskIntoConstraints = false
+        tableView?.allowsSelection = false
 
         tableView?.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
@@ -290,7 +292,7 @@ class ArchivesViewController: CoreDataTableViewController,
             return
         }
 
-        //Disable fetched results controller
+        // Disable fetched results controller
         self.ignoreNextUpdates = true
 
         let list = self.listAtIndexPath(sourceIndexPath)!
@@ -310,30 +312,6 @@ class ArchivesViewController: CoreDataTableViewController,
         let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
         let listTableViewCell: ListTableViewCell = cell as! ListTableViewCell
         listTableViewCell.list = list
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
-        var list: TLIList
-
-        if tableView == self.tableView {
-            list = self.frc?.object(at: indexPath) as! TLIList
-        } else {
-            list = resultsTableViewController?.frc?.object(at: indexPath) as! TLIList
-        }
-
-        let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-        // swiftlint:disable line_length
-        if  IS_IPAD {
-            SplitViewController.sharedSplitViewController().listViewController?.managedObject = list
-            SplitViewController.sharedSplitViewController().listViewController?.enableDidSelectRowAtIndexPath = false
-        } else {
-            let tasksViewController: TasksViewController = TasksViewController()
-            tasksViewController.managedObjectContext = managedObjectContext
-            tasksViewController.enableDidSelectRowAtIndexPath = false
-            tasksViewController.list = list
-            self.navigationController?.pushViewController(tasksViewController, animated: true)
-        }
     }
 
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: IndexPath) -> String! {
