@@ -1,56 +1,56 @@
-<UITableView; frame = (0 0; 375 812); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {375, 1539.5}; adjustedContentInset: {44, 0, 34, 0}>
+<UITableView; frame = (0 0; 375 812); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {375, 1538.6666793823242}; adjustedContentInset: {44, 0, 34, 0}>
    | <UIView; frame = (0 -44; 375 812); autoresize = W+H; layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 1245.5; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (0 0; 375 113.5); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <UILabel; frame = (16 20; 349 73.5); text = 'Erstellen Sie Weblinks, i...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 1156; 375 89.5); hidden = YES; autoresize = W; layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 1244.67; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Erstellen Sie Weblinks, i...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 1155.33; 375 89.3333); hidden = YES; autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 375 89); gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 349 49); text = 'Tippen Sie auf das Kontro...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 1042; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (0 0; 375 113.5); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <UILabel; frame = (16 20; 349 73.5); text = 'Wiederherstellen einer Li...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 928; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (0 0; 375 113.5); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <UILabel; frame = (16 20; 349 73.5); text = 'Löschen Sie eine Liste, i...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 814; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (0 0; 375 113.5); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <UILabel; frame = (16 20; 349 73.5); text = 'Bearbeiten Sie eine Liste...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 700; 375 114); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (0 0; 375 113.5); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <UILabel; frame = (16 20; 349 73.5); text = 'Archivieren Sie eine List...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 610.5; 375 89.5); autoresize = W; layer = <CALayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 1041.33; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Wiederherstellen einer Li...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 927.333; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Löschen Sie eine Liste, i...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 813.333; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Bearbeiten Sie eine Liste...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 699.333; 375 114); autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Archivieren Sie eine List...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 610; 375 89.3333); autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 375 89); gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 349 49); text = 'Listen und Aufgaben neu a...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 521; 375 89.5); autoresize = W; layer = <CALayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 520.667; 375 89.3333); autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 375 89); gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 349 49); text = 'Zeigen Sie Archive an, in...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 431.5; 375 89.5); autoresize = W; layer = <CALayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 431.333; 375 89.3333); autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 375 89); gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 349 49); text = 'Zeigen Sie Aufgaben an, i...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 317.5; 375 114); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (0 0; 375 113.5); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <UILabel; frame = (16 20; 349 73.5); text = 'Erstellen Sie eine neue A...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 203.5; 375 114); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (0 0; 375 113.5); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <UILabel; frame = (16 20; 349 73.5); text = 'Durchsuchen Sie alle Ihre...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 114; 375 89.5); autoresize = W; layer = <CALayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 317.333; 375 114); autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Erstellen Sie eine neue A...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 203.333; 375 114); autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Durchsuchen Sie alle Ihre...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 114; 375 89.3333); autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 375 89); gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 349 49); text = 'Durchsuchen Sie alle Ihre...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.5); layer = <CALayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 89; 359 0.333333); layer = <CALayer>>
    | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 0; 375 114); autoresize = W; layer = <CALayer>>
-   |    | <UITableViewCellContentView; frame = (0 0; 375 113.5); gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    | <UILabel; frame = (16 20; 349 73.5); text = 'Erstellen Sie eine neue L...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <UIImageView; frame = (6 728.5; 363 2.5); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
-   | <UIImageView; frame = (369.5 -37.5; 2.5 601); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 375 113.667); gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 349 73.6667); text = 'Erstellen Sie eine neue L...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 113.667; 359 0.333333); layer = <CALayer>>
+   | <UIImageView; frame = (31.6667 762.667; 311.333 2.33333); alpha = 0; opaque = NO; autoresize = TM; userInteractionEnabled = NO; layer = <CALayer>>
+   | <UIImageView; frame = (369.667 -12.3333; 2.33333 585.333); opaque = NO; autoresize = LM; userInteractionEnabled = NO; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>

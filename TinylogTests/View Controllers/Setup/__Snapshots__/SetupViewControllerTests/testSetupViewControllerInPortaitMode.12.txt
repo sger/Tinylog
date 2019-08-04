@@ -1,8 +1,8 @@
 <UIView; frame = (0 0; 375 812); autoresize = W+H; layer = <CALayer>>
-   | <UIImageView; frame = (115.5 271; 144 90); opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>
-   | <Tinylog.RoundedButton; baseClass = UIButton; frame = (0 752; 187.5 60); opaque = NO; layer = <CALayer>>
-   |    | <UIButtonLabel; frame = (68 20; 52 20.5); text = 'Später'; opaque = NO; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   | <Tinylog.RoundedButton; baseClass = UIButton; frame = (187.5 752; 187.5 60); opaque = NO; layer = <CALayer>>
-   |    | <UIButtonLabel; frame = (34.5 20; 119 20.5); text = 'Benutze iCloud'; opaque = NO; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   | <UILabel; frame = (20 381; 335 40.5); text = 'iCloud für Tinylog'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   | <UILabel; frame = (20 441.5; 335 98); text = 'iCloud hält Ihre Listen a...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   | <UIImageView; frame = (115.667 271; 144 90); opaque = NO; userInteractionEnabled = NO; layer = <CALayer>>
+   | <Tinylog.RoundedButton; baseClass = UIButton; frame = (0 752; 187.667 60); opaque = NO; layer = <CALayer>>
+   |    | <UIButtonLabel; frame = (68 20; 52 20.3333); text = 'Später'; opaque = NO; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   | <Tinylog.RoundedButton; baseClass = UIButton; frame = (187.667 752; 187.333 60); opaque = NO; layer = <CALayer>>
+   |    | <UIButtonLabel; frame = (34.3333 20; 119 20.3333); text = 'Benutze iCloud'; opaque = NO; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   | <UILabel; frame = (20 381; 335 40.3333); text = 'iCloud für Tinylog'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   | <UILabel; frame = (20 441.333; 335 98); text = 'iCloud hält Ihre Listen a...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
