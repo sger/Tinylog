@@ -15,22 +15,6 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembleDelegate {
 
-    /**
-     Identifier for 3d Touch.
-
-     - CreateNewList: Create a new list.
-     */
-    enum ShortcutIdentifier: String {
-
-        case createNewList
-        init?(fullIdentifier: String) {
-            guard let shortIdentifier = fullIdentifier.components(separatedBy: ".").last else {
-                return nil
-            }
-            self.init(rawValue: shortIdentifier)
-        }
-    }
-
     /// The instance of the UIWindow.
     var window: UIWindow?
 
@@ -49,13 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
         return delegate
     }
 
-    func application(_ application: UIApplication,
-                     performActionFor shortcutItem: UIApplicationShortcutItem,
-                     completionHandler: @escaping (Bool) -> Void) {
-
-        completionHandler(handleShortcut(shortcutItem))
-    }
-
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
@@ -63,13 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
         // Use verbose logging for sync
         // CDESetCurrentLoggingLevel(CDELoggingLevel.verbose.rawValue)
-
-        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem]
-            as? UIApplicationShortcutItem {
-
-            handleShortcut(shortcutItem)
-            return false
-        }
 
         // Register defaults
 
@@ -189,28 +159,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
                     completionHandler(UIBackgroundFetchResult.newData)
                 }
             }
-        }
-    }
-
-    @discardableResult fileprivate func handleShortcut(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
-
-        let shortcutType = shortcutItem.type
-        guard let shortcutIdentifier = ShortcutIdentifier(fullIdentifier: shortcutType) else {
-            return false
-        }
-
-        return selectTabBarItemForIdentifier(shortcutIdentifier)
-    }
-
-    fileprivate func selectTabBarItemForIdentifier(_ identifier: ShortcutIdentifier) -> Bool {
-        switch identifier {
-        case .createNewList:
-            if let navigationController = window?.rootViewController as? UINavigationController {
-                if let vc = navigationController.viewControllers[0] as? ListsViewController {
-                    vc.addNewList(nil)
-                }
-            }
-            return true
         }
     }
 }

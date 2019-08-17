@@ -98,19 +98,13 @@ final class ListsViewController: CoreDataTableViewController {
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = settingsBarButtonItem
 
+        listsFooterView.delegate = self
         listsFooterView.snp.makeConstraints { (make) in
             make.left.equalTo(view)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             make.width.equalTo(view)
             make.height.equalTo(listsFooterView.footerHeight)
         }
-
-        listsFooterView.addListButton.addTarget(self,
-                                                action: #selector(ListsViewController.addNewList(_:)),
-                                                for: UIControl.Event.touchDown)
-        listsFooterView.archiveButton.addTarget(self,
-                                                action: #selector(ListsViewController.displayArchive(_:)),
-                                                for: UIControl.Event.touchDown)
 
         emptyListsLabel.snp.makeConstraints { (make) in
             make.center.equalTo(view)
@@ -120,6 +114,7 @@ final class ListsViewController: CoreDataTableViewController {
 
         registerNotifications()
     }
+    
     deinit {
         unregisterNotifications()
     }
@@ -142,8 +137,7 @@ final class ListsViewController: CoreDataTableViewController {
     func startSync() {
         let syncManager: TLISyncManager = TLISyncManager.shared()
         if syncManager.canSynchronize() {
-            syncManager.synchronize { (_) -> Void in
-            }
+            syncManager.synchronize { (_) -> Void in }
         }
     }
 
@@ -200,22 +194,11 @@ final class ListsViewController: CoreDataTableViewController {
             })
     }
 
-    @objc func addNewList(_ sender: UIButton?) {
-        createAddListViewController(.create, managedObjectContext: managedObjectContext)
-    }
-
-    // MARK: Display Setup
+    // MARK: - Display Setup
+    
     func displaySetup() {
         let setupViewController: SetupViewController = SetupViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
-    }
-
-    @objc func displayArchive(_ button: ArchiveButton) {
-        let archiveViewController: ArchivesViewController = ArchivesViewController()
-        archiveViewController.managedObjectContext = managedObjectContext
-        let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
@@ -226,7 +209,7 @@ final class ListsViewController: CoreDataTableViewController {
         let settingsViewController: SettingsTableViewController = SettingsTableViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: settingsViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -278,12 +261,12 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     func listAtIndexPath(_ indexPath: IndexPath) -> TLIList? {
-        let list = self.frc?.object(at: indexPath) as! TLIList?
+        let list = frc?.object(at: indexPath) as! TLIList?
         return list
     }
 
     func updateList(_ list: TLIList, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedLists: [AnyObject] = (self.frc?.fetchedObjects as [AnyObject]?)!
+        var fetchedLists: [AnyObject] = (frc?.fetchedObjects as [AnyObject]?)!
 
         // Remove current list item
         fetchedLists = fetchedLists.filter { $0 as! TLIList != list }
@@ -291,7 +274,7 @@ final class ListsViewController: CoreDataTableViewController {
         var sortedIndex = destinationIndexPath.row
 
         for sectionIndex in 0..<destinationIndexPath.section {
-            sortedIndex += (self.frc?.sections?[sectionIndex].numberOfObjects)!
+            sortedIndex += (frc?.sections?[sectionIndex].numberOfObjects)!
 
             if sectionIndex == sourceIndexPath.section {
                 sortedIndex -= 1
@@ -302,7 +285,7 @@ final class ListsViewController: CoreDataTableViewController {
 
         for(index, list) in fetchedLists.enumerated() {
             let tmpList = list as! TLIList
-            tmpList.position = fetchedLists.count-index as NSNumber
+            tmpList.position = fetchedLists.count - index as NSNumber
         }
     }
 
@@ -315,9 +298,9 @@ final class ListsViewController: CoreDataTableViewController {
 
         // Disable fetched results controller
 
-        self.ignoreNextUpdates = true
+        ignoreNextUpdates = true
 
-        let list = self.listAtIndexPath(sourceIndexPath)!
+        let list = listAtIndexPath(sourceIndexPath)!
 
         updateList(list, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
 
@@ -331,7 +314,7 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let list: TLIList = self.frc?.object(at: indexPath) as? TLIList,
+        if let list: TLIList = frc?.object(at: indexPath) as? TLIList,
             let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell {
             listTableViewCell.list = list
         }
@@ -341,7 +324,7 @@ final class ListsViewController: CoreDataTableViewController {
         var list: TLIList
 
         if tableView == self.tableView {
-            list = self.frc?.object(at: indexPath) as! TLIList
+            list = frc?.object(at: indexPath) as! TLIList
         } else {
             list = resultsViewController?.frc?.object(at: indexPath) as! TLIList
         }
@@ -356,7 +339,7 @@ final class ListsViewController: CoreDataTableViewController {
             let tasksViewController: TasksViewController = TasksViewController()
             tasksViewController.managedObjectContext = managedObjectContext
             tasksViewController.list = list
-            self.navigationController?.pushViewController(tasksViewController, animated: true)
+            navigationController?.pushViewController(tasksViewController, animated: true)
         }
     }
 
@@ -371,7 +354,7 @@ final class ListsViewController: CoreDataTableViewController {
             return
         }
 
-        let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
+        let list: TLIList = frc?.object(at: indexPath) as! TLIList
 
         managedObjectContext.delete(list)
 
@@ -425,9 +408,9 @@ extension ListsViewController {
         let results = TLIList.lists(with: managedObjectContext)
 
         if results.isEmpty {
-            self.emptyListsLabel.isHidden = false
+            emptyListsLabel.isHidden = false
         } else {
-            self.emptyListsLabel.isHidden = true
+            emptyListsLabel.isHidden = true
         }
     }
 
@@ -441,7 +424,7 @@ extension ListsViewController {
         addListViewController.list = list
         let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 }
 
@@ -461,7 +444,7 @@ extension ListsViewController {
 
         let editRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
-            title: "Edit", handler: {_, indexpath in
+            title: "Edit", handler: { _, indexpath in
 
                 let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
                 self.createAddListViewController(.edit, managedObjectContext: self.managedObjectContext, list: list)
@@ -540,8 +523,8 @@ extension ListsViewController: AddListViewControllerDelegate {
 
     func onClose(_ addListViewController: AddListViewController, list: TLIList) {
 
-        let indexPath = self.frc?.indexPath(forObject: list)
-        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
+        let indexPath = frc?.indexPath(forObject: list)
+        tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
@@ -557,5 +540,21 @@ extension ListsViewController: AddListViewControllerDelegate {
         }
 
         checkForLists()
+    }
+}
+
+// MARK: - ListsFooterViewDelegate
+
+extension ListsViewController: ListsFooterViewDelegate {
+    func displayAddNewListVC(_ listsFooterView: ListsFooterView) {
+        createAddListViewController(.create, managedObjectContext: managedObjectContext)
+    }
+    
+    func displayArchivesVC(_ listsFooterView: ListsFooterView) {
+        let archiveViewController: ArchivesViewController = ArchivesViewController()
+        archiveViewController.managedObjectContext = managedObjectContext
+        let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
+        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 }

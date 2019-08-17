@@ -99,6 +99,7 @@
 		56B7B7D9227EBCEE003BCAC3 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7D8227EBCEE003BCAC3 /* TLISyncManager.m */; };
 		56B7B7E0227ECADB003BCAC3 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DE227ECADB003BCAC3 /* Environment.swift */; };
 		56B7B7E1227ECADB003BCAC3 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DF227ECADB003BCAC3 /* Enums.swift */; };
+		56E4E6E4230868290085DBC4 /* ListsFooterViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E4E6E3230868290085DBC4 /* ListsFooterViewDelegate.swift */; };
 		5C1884CDA759F78478648025 /* Pods_TinylogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FDB230F560367662A28D96 /* Pods_TinylogTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -234,6 +235,7 @@
 		56B7B7D8227EBCEE003BCAC3 /* TLISyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLISyncManager.m; sourceTree = "<group>"; };
 		56B7B7DE227ECADB003BCAC3 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		56B7B7DF227ECADB003BCAC3 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		56E4E6E3230868290085DBC4 /* ListsFooterViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsFooterViewDelegate.swift; sourceTree = "<group>"; };
 		72FDB230F560367662A28D96 /* Pods_TinylogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinylogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D4301E616F787A62B48BBD /* Pods-TinylogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.release.xcconfig"; sourceTree = "<group>"; };
 		CCCB1EEBF9EAC162DF797006 /* Pods_Tinylog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinylog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -543,6 +545,7 @@
 				5638FC9122744F4000CB4071 /* AddTaskViewDelegate.swift */,
 				5638FC9222744F4000CB4071 /* EditTaskViewControllerDelegate.swift */,
 				5601EADD2298527F00A57819 /* ReusableView.swift */,
+				56E4E6E3230868290085DBC4 /* ListsFooterViewDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1009,6 +1012,7 @@
 				5638FC6122744CDC00CB4071 /* AddTaskView.swift in Sources */,
 				5638FC8A22744ECF00CB4071 /* Utils.swift in Sources */,
 				5638FC7B22744D8200CB4071 /* HelpTableViewController.swift in Sources */,
+				56E4E6E4230868290085DBC4 /* ListsFooterViewDelegate.swift in Sources */,
 				5638FC7F22744D8200CB4071 /* EditTaskViewController.swift in Sources */,
 				5638FC8322744D8200CB4071 /* ResultsViewController.swift in Sources */,
 				5638FC9522744F4000CB4071 /* TextFieldCellDelegate.swift in Sources */,

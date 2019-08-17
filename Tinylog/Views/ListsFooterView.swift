@@ -9,12 +9,14 @@
 import UIKit
 import SnapKit
 
-class ListsFooterView: UIView {
+final class ListsFooterView: UIView {
 
-    let footerView: UIView = UIView()
+    private let footerView: UIView = UIView()
     let footerHeight: CGFloat = 60
+    
+    weak var delegate: ListsFooterViewDelegate?
 
-    var infoLabel: UILabel = {
+    private var infoLabel: UILabel = {
         let infoLabel = UILabel()
         infoLabel.font = UIFont.regularFontWithSize(14.0)
         infoLabel.textColor = UIColor.tinylogTextColor
@@ -23,19 +25,19 @@ class ListsFooterView: UIView {
         return infoLabel
     }()
 
-    var borderLineView: UIView = {
+    private var borderLineView: UIView = {
         let borderLineView = UIView()
         borderLineView.backgroundColor = UIColor(named: "tableViewSeparator")
         return borderLineView
     }()
 
-    var addListButton: AddListButton = {
+    private var addListButton: AddListButton = {
         let addListButton = AddListButton()
         addListButton.accessibilityIdentifier = "addListButton"
         return addListButton
     }()
 
-    var archiveButton: ArchiveButton = {
+    private var archiveButton: ArchiveButton = {
         return ArchiveButton()
     }()
 
@@ -82,6 +84,14 @@ class ListsFooterView: UIView {
         infoLabel.snp.makeConstraints { (make) in
             make.center.equalTo(self)
         }
+        
+        addListButton.addTarget(self,
+                                action: #selector(addNewList(_:)),
+                                for: .touchDown)
+        
+        archiveButton.addTarget(self,
+                                action: #selector(displayArchive(_:)),
+                                for: .touchDown)
 
         setNeedsUpdateConstraints()
     }
@@ -93,5 +103,15 @@ class ListsFooterView: UIView {
     func updateInfoLabel(_ str: String) {
         infoLabel.text = str
         setNeedsUpdateConstraints()
+    }
+    
+    // MARK: - Actions
+    
+    @objc func addNewList(_ sender: AddListButton) {
+        delegate?.displayAddNewListVC(self)
+    }
+    
+    @objc func displayArchive(_ button: ArchiveButton) {
+        delegate?.displayArchivesVC(self)
     }
 }

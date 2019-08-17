@@ -740,11 +740,7 @@ class TasksViewController: CoreDataTableViewController,
             options: UIView.AnimationOptions.allowUserInteraction,
             animations: {
                 self.addTransparentLayer!.alpha = 0.0
-            }, completion: { finished in
-                if finished {
-                    //self.addTransparentLayer?.removeFromSuperview()
-                }
-        })
+            }, completion: nil)
     }
 
     // MARK: TTTAttributedLabelDelegate
