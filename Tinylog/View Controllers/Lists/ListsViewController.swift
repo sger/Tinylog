@@ -527,11 +527,7 @@ extension ListsViewController: AddListViewControllerDelegate {
     func onClose(_ addListViewController: AddListViewController, list: TLIList) {
 
         let indexPath = frc?.indexPath(forObject: list)
-<<<<<<< HEAD
         tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
-=======
-        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
->>>>>>> d605b96c916934476d4bdb01d979c9dcdef60d02
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
