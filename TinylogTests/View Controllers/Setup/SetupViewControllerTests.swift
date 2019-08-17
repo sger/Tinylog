@@ -12,8 +12,12 @@ import SnapshotTesting
 
 class SetupViewControllerTests: XCTestCase {
 
+    override func setUp() {
+        super.setUp()
+        //record = true
+    }
+    
     func testSetupViewControllerInPortaitMode() {
-        // record = true
         combos(Language.languages, SnapshotTestingDevices.portrait).forEach { language, device in
             testWithEnvironment(language: language, block: {
                 let vc = SetupViewController()
@@ -24,7 +28,6 @@ class SetupViewControllerTests: XCTestCase {
     }
 
     func testSetupViewControllerInLandscapeMode() {
-        // record = true
         combos(Language.languages, SnapshotTestingDevices.landscape).forEach { language, device in
             testWithEnvironment(language: language, block: {
                 let vc = SetupViewController()

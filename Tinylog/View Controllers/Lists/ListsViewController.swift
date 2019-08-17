@@ -83,6 +83,8 @@ final class ListsViewController: CoreDataTableViewController {
         addSearchController(with: "Search",
                             searchResultsUpdater: self,
                             searchResultsController: resultsViewController!)
+        
+        resultsViewController?.tableView?.delegate = self
 
         let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
         let settingsButton: UIButton = UIButton(type: .custom)
@@ -200,7 +202,7 @@ final class ListsViewController: CoreDataTableViewController {
         let setupViewController: SetupViewController = SetupViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 
     // MARK: Display Settings
@@ -343,7 +345,8 @@ final class ListsViewController: CoreDataTableViewController {
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: IndexPath) -> String! {
+    func tableView(_ tableView: UITableView,
+                   titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: IndexPath) -> String! {
         return "Delete"
     }
 
@@ -524,7 +527,11 @@ extension ListsViewController: AddListViewControllerDelegate {
     func onClose(_ addListViewController: AddListViewController, list: TLIList) {
 
         let indexPath = frc?.indexPath(forObject: list)
+<<<<<<< HEAD
         tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
+=======
+        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
+>>>>>>> d605b96c916934476d4bdb01d979c9dcdef60d02
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
