@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultsViewController: CoreDataTableViewController {
+final class ResultsViewController: CoreDataTableViewController {
 
     var managedObjectContext: NSManagedObjectContext!
 
@@ -24,7 +24,8 @@ class ResultsViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.tinylogLightGray
+        view.backgroundColor = UIColor.white
+        tableView?.backgroundColor = UIColor.white
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.backgroundColor = UIColor.tinylogLightGray
