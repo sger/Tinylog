@@ -14,7 +14,7 @@ class AboutViewController: GroupedTableViewController,
     MFMailComposeViewControllerDelegate {
     let aboutCellIdentifier = "AboutCellIdentifier"
 
-    // MARK: Initializers
+    // MARK: - Initializers
 
     override init() {
         super.init(style: UITableView.Style.grouped)
@@ -35,11 +35,11 @@ class AboutViewController: GroupedTableViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "About"
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        title = "About"
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundColor = UIColor.tinylogLightGray
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +59,6 @@ class AboutViewController: GroupedTableViewController,
     }
 
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
-
         cell.textLabel?.font = UIFont.tinylogFontOfSize(17.0)
         cell.textLabel?.textColor = UIColor.tinylogTextColor
         cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(15.0)
@@ -182,7 +181,7 @@ class AboutViewController: GroupedTableViewController,
                             NSAttributedString.Key.font: UIFont.mediumFontWithSize(16.0)]
                         mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedString.Key: Any]
                         mailer.navigationBar.tintColor = UIColor.tinylogMainColor
-                        self.present(mailer, animated: true, completion: nil)
+                        present(mailer, animated: true, completion: nil)
                         mailer.viewControllers.last?.navigationItem.title = "Tinylog"
                     }
                 } else {
@@ -233,8 +232,6 @@ class AboutViewController: GroupedTableViewController,
         default:
             break
         }
-        self.dismiss(animated: true, completion: { () -> Void in
-
-        })
+        self.dismiss(animated: true, completion: nil)
     }
 }

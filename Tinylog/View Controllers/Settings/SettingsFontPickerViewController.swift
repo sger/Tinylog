@@ -15,20 +15,19 @@ class SettingsFontPickerViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Font"
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
+        title = "Font"
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundColor = UIColor.tinylogLightGray
         let selectedKey: NSString? = SettingsFontPickerViewController.selectedKey()!
 
         if selectedKey != nil {
 
             let row = self.keys()?.index(of: selectedKey!)
-            self.currentIndexPath = NSIndexPath(row: row!, section: 0)
-            self.tableView.reloadData()
-            self.tableView.scrollToRow(
-                at: self.currentIndexPath! as IndexPath,
-                at: UITableView.ScrollPosition.middle,
-                animated: false)
+            currentIndexPath = NSIndexPath(row: row!, section: 0)
+            tableView.reloadData()
+            tableView.scrollToRow(at: currentIndexPath! as IndexPath,
+                                  at: UITableView.ScrollPosition.middle,
+                                  animated: false)
         }
     }
 
@@ -200,8 +199,8 @@ class SettingsFontPickerViewController: UITableViewController {
         currentIndexPath = indexPath as NSIndexPath
 
         SettingsFontPickerViewController.setSelectedKey(
-            key: self.keys()!.object(at: indexPath.row) as! NSString)
-        self.navigationController?.popViewController(animated: true)
+            key: keys()!.object(at: indexPath.row) as! NSString)
+        navigationController?.popViewController(animated: true)
 
         NotificationCenter.default.post(
             name: NSNotification.Name(

@@ -14,16 +14,16 @@ class EditTaskViewController: UIViewController {
     var task: TLITask?
     var textView: UITextView?
     var keyboardRect: CGRect?
-    var delegate: EditTaskViewControllerDelegate?
+    weak var delegate: EditTaskViewControllerDelegate?
     var saveOnClose: Bool = true
     var managedObjectContext: NSManagedObjectContext!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Edit Task"
-        self.view.backgroundColor = UIColor.white
+        title = "Edit Task"
+        view.backgroundColor = UIColor.white
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Close",
             style: UIBarButtonItem.Style.plain,
             target: self,
@@ -35,7 +35,7 @@ class EditTaskViewController: UIViewController {
             target: self,
             action: #selector(EditTaskViewController.save(_:)))
 
-        self.navigationItem.rightBarButtonItems = [saveBarButtonItem]
+        navigationItem.rightBarButtonItems = [saveBarButtonItem]
 
         textView = UITextView(frame: CGRect.zero)
         textView?.autocorrectionType = UITextAutocorrectionType.yes
@@ -44,7 +44,7 @@ class EditTaskViewController: UIViewController {
         textView?.text = task?.displayLongText
         textView?.textColor = UIColor.tinylogTextColor
         textView?.font = UIFont.tinylogFontOfSize(17.0)
-        self.view.addSubview(textView!)
+        view.addSubview(textView!)
 
         NotificationCenter.default.addObserver(
             self,
@@ -71,7 +71,7 @@ class EditTaskViewController: UIViewController {
     @objc func keyboardWillHide(_ notification: Notification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         keyboardRect = CGRect.zero
-        let size: CGSize = self.view.bounds.size
+        let size: CGSize = view.bounds.size
         var heightAdjust: CGFloat
 
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
@@ -100,12 +100,12 @@ class EditTaskViewController: UIViewController {
 
     @objc func close(_ sender: UIButton) {
         saveOnClose = false
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 
     @objc func save(_ sender: UIButton) {
         saveOnClose = true
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 
     override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
@@ -163,6 +163,6 @@ class EditTaskViewController: UIViewController {
     }
 
     func hideKeyboard() {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
 }

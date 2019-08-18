@@ -34,17 +34,18 @@ class SettingsTableViewController: UITableViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Done",
             style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(SettingsTableViewController.close(_:)))
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.title = "Settings"
+        
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundColor = UIColor.tinylogLightGray
+        title = "Settings"
 
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
 
         NotificationCenter.default.addObserver(
             self,
@@ -55,17 +56,14 @@ class SettingsTableViewController: UITableViewController,
     }
 
     @objc func updateFonts() {
-        self.navigationController?.navigationBar.setNeedsDisplay()
+        navigationController?.navigationBar.setNeedsDisplay()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
+    
     // swiftlint:disable cyclomatic_complexity
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
@@ -85,7 +83,7 @@ class SettingsTableViewController: UITableViewController,
                     frame: CGRect(
                         x: 0,
                         y: 0,
-                        width: self.view.frame.size.width,
+                        width: view.frame.size.width,
                         height: 20.0))
                 switchMode.addTarget(
                     self,
@@ -165,15 +163,14 @@ class SettingsTableViewController: UITableViewController,
                 })
             } else if value == "off" {
                 if (syncManager?.canSynchronize())! {
-                    syncManager?.disconnectFromSyncService(completion: { () -> Void in
-                    })
+                    syncManager?.disconnectFromSyncService(completion: { () -> Void in })
                 }
             }
         })
     }
 
     @objc func close(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
@@ -219,9 +216,7 @@ class SettingsTableViewController: UITableViewController,
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(
-            style: UITableViewCell.CellStyle.value1,
-            reuseIdentifier: settingsCellIdentifier)
+        let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: settingsCellIdentifier)
         configureCell(cell, indexPath: indexPath)
         return cell
     }
@@ -260,7 +255,7 @@ class SettingsTableViewController: UITableViewController,
                     mailer.navigationBar.titleTextAttributes = titleTextDict as? [NSAttributedString.Key: Any]
 
                     mailer.navigationBar.tintColor = UIColor.tinylogMainColor
-                    self.present(mailer, animated: true, completion: nil)
+                    present(mailer, animated: true, completion: nil)
                     mailer.viewControllers.last?.navigationItem.title = "Tinylog"
                     }
                 } else {
@@ -315,8 +310,6 @@ class SettingsTableViewController: UITableViewController,
         default:
             break
         }
-        self.dismiss(animated: true, completion: { () -> Void in
-
-        })
+        self.dismiss(animated: true, completion: nil)
     }
 }
