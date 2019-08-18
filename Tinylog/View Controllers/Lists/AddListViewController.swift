@@ -23,7 +23,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     var list: TLIList?
 
     init() {
-        super.init(style: UITableView.Style.grouped)
+        super.init(style: .grouped)
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -36,8 +36,9 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView.separatorColor = UIColor.tinylogTableViewLineColor
+        
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView.separatorColor = UIColor.tinylogTableViewLineColor
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Cancel",
@@ -63,19 +64,19 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
             if let list = list {
                 // swiftlint:disable force_unwrapping
                 self.menuColorsView!.currentColor = list.color
-                let index: Int = self.menuColorsView!.findIndexByColor(list.color!)
-                self.menuColorsView?.setSelectedIndex(index)
+                let index: Int = menuColorsView!.findIndexByColor(list.color!)
+                menuColorsView?.setSelectedIndex(index)
             }
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        self.name?.becomeFirstResponder()
+        name?.becomeFirstResponder()
     }
 
     @objc func cancel(_ button: UIButton) {
-        self.name?.resignFirstResponder()
-        self.dismiss(animated: true, completion: nil)
+        name?.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
     }
 
     @objc func save(_ button: UIButton) {
@@ -110,9 +111,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TextFieldCell = TextFieldCell(
-            style: UITableViewCell.CellStyle.default,
-            reuseIdentifier: "CellIdentifier")
+        let cell: TextFieldCell = TextFieldCell(style: .default, reuseIdentifier: "CellIdentifier")
         configureCell(cell, indexPath: indexPath)
         return cell
     }
@@ -147,8 +146,8 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
             list?.color = self.menuColorsView!.currentColor!
             // swiftlint:disable force_try
             try! managedObjectContext.save()
-            self.name?.resignFirstResponder()
-            self.dismiss(animated: true, completion: nil)
+            name?.resignFirstResponder()
+            dismiss(animated: true, completion: nil)
         }
     }
 
@@ -183,8 +182,8 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                 }
                 list.createdAt = Date()
                 try! managedObjectContext.save()
-                self.name?.resignFirstResponder()
-                self.dismiss(animated: true, completion: { () -> Void in
+                name?.resignFirstResponder()
+                dismiss(animated: true, completion: { () -> Void in
                     self.delegate?.onClose(self, list: list)
                     return
                 })

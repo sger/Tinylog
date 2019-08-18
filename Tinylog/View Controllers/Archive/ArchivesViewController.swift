@@ -23,15 +23,15 @@ class ArchivesViewController: CoreDataTableViewController,
         let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
         fetchRequest.predicate = NSPredicate(format: "archivedAt != nil")
-        self.frc = NSFetchedResultsController(
+        frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: managedObjectContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
-        self.frc?.delegate = self
+        frc?.delegate = self
 
         do {
-             try self.frc?.performFetch()
+             try frc?.performFetch()
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
@@ -91,11 +91,10 @@ class ArchivesViewController: CoreDataTableViewController,
             make.center.equalTo(view)
         }
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Close",
-            style: UIBarButtonItem.Style.plain,
-            target: self,
-            action: #selector(ArchivesViewController.close(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(ArchivesViewController.close(_:)))
 
         setEditing(false, animated: false)
 
@@ -132,7 +131,7 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     @objc func onChangeSize(_ notification: Notification) {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     @objc func appBecomeActive() {
@@ -142,13 +141,12 @@ class ArchivesViewController: CoreDataTableViewController,
     func startSync() {
         let syncManager: TLISyncManager = TLISyncManager.shared()
         if syncManager.canSynchronize() {
-            syncManager.synchronize { (_) -> Void in
-            }
+            syncManager.synchronize { (_) -> Void in }
         }
     }
 
     @objc func updateFonts() {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     @objc func syncActivityDidEndNotification(_ notification: Notification) {
@@ -156,7 +154,7 @@ class ArchivesViewController: CoreDataTableViewController,
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
 
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     @objc func syncActivityDidBeginNotification(_ notification: Notification) {
@@ -165,9 +163,10 @@ class ArchivesViewController: CoreDataTableViewController,
         }
     }
 
-    // MARK: Close
+    // MARK: - Close
+    
     @objc func close(_ button: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -199,9 +198,9 @@ class ArchivesViewController: CoreDataTableViewController,
             let results = try managedObjectContext.fetch(fetchRequest)
 
             if results.isEmpty {
-                self.emptyArchivesLabel.isHidden = false
+                emptyArchivesLabel.isHidden = false
             } else {
-                self.emptyArchivesLabel.isHidden = true
+                emptyArchivesLabel.isHidden = true
             }
         } catch let error as NSError {
             fatalError(error.localizedDescription)
@@ -244,7 +243,7 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     func listAtIndexPath(_ indexPath: IndexPath) -> TLIList? {
-        if let list = self.frc?.object(at: indexPath) as? TLIList {
+        if let list = frc?.object(at: indexPath) as? TLIList {
             return list
         }
         return nil
@@ -253,7 +252,7 @@ class ArchivesViewController: CoreDataTableViewController,
     // swiftlint:disable force_unwrapping
     // swiftlint:disable force_cast
     func updateList(_ list: TLIList, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedLists: [AnyObject] = (self.frc?.fetchedObjects)!
+        var fetchedLists: [AnyObject] = (frc?.fetchedObjects)!
 
         // Remove current list item
         fetchedLists = fetchedLists.filter { $0 as! TLIList != list }
@@ -261,7 +260,7 @@ class ArchivesViewController: CoreDataTableViewController,
         var sortedIndex = destinationIndexPath.row
 
         for sectionIndex in 0..<destinationIndexPath.section {
-            sortedIndex += (self.frc?.sections?[sectionIndex].numberOfObjects)!
+            sortedIndex += (frc?.sections?[sectionIndex].numberOfObjects)!
 
             if sectionIndex == sourceIndexPath.section {
                 sortedIndex -= 1
@@ -272,7 +271,7 @@ class ArchivesViewController: CoreDataTableViewController,
 
         for(index, list) in fetchedLists.enumerated() {
             let tmpList = list as! TLIList
-            tmpList.position = fetchedLists.count-index as NSNumber
+            tmpList.position = fetchedLists.count - index as NSNumber
         }
     }
 
@@ -293,11 +292,13 @@ class ArchivesViewController: CoreDataTableViewController,
         }
 
         // Disable fetched results controller
-        self.ignoreNextUpdates = true
+        ignoreNextUpdates = true
 
-        let list = self.listAtIndexPath(sourceIndexPath)!
+        let list = listAtIndexPath(sourceIndexPath)!
 
-        updateList(list, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
+        updateList(list,
+                   sourceIndexPath: sourceIndexPath,
+                   destinationIndexPath: destinationIndexPath)
 
         try! managedObjectContext.save()
     }
@@ -309,7 +310,7 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
+        let list: TLIList = frc?.object(at: indexPath) as! TLIList
         let listTableViewCell: ListTableViewCell = cell as! ListTableViewCell
         listTableViewCell.list = list
     }
@@ -323,7 +324,7 @@ class ArchivesViewController: CoreDataTableViewController,
             return
         }
 
-        let list: TLIList = self.frc?.object(at: indexPath) as! TLIList
+        let list: TLIList = frc?.object(at: indexPath) as! TLIList
 
         managedObjectContext.delete(list)
         try! managedObjectContext.save()
@@ -334,13 +335,13 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     func onClose(_ addListViewController: AddListViewController, list: TLIList) {
-        let indexPath = self.frc?.indexPath(forObject: list)
+        let indexPath = frc?.indexPath(forObject: list)
         self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
         let tasksViewController: TasksViewController = TasksViewController()
         tasksViewController.managedObjectContext = managedObjectContext
         tasksViewController.list = list
         tasksViewController.focusTextField = true
-        self.navigationController?.pushViewController(tasksViewController, animated: true)
+        navigationController?.pushViewController(tasksViewController, animated: true)
     }
 
     // MARK: UISearchBarDelegate
@@ -355,12 +356,11 @@ class ArchivesViewController: CoreDataTableViewController,
         resultsTableViewController?.frc = nil
     }
 
-    // MARK: UISearchControllerDelegate
+    // MARK: - UISearchControllerDelegate
 
     func presentSearchController(_ searchController: UISearchController) {}
 
-    func willPresentSearchController(_ searchController: UISearchController) {
-    }
+    func willPresentSearchController(_ searchController: UISearchController) {}
 
     func didPresentSearchController(_ searchController: UISearchController) {}
 

@@ -32,12 +32,12 @@ class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Text Size"
+        title = "Text Size"
 
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        view.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundColor = UIColor.tinylogLightGray
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -143,7 +143,7 @@ class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDel
         Environment.current.userDefaults.set(mode.isOn, forKey: EnvUserDefaults.systemFontSize)
 
         let indexPath = IndexPath(row: 1, section: 0)
-        let cell = self.tableView.cellForRow(at: indexPath)
+        let cell = tableView.cellForRow(at: indexPath)
 
         if value == "on" {
             cell?.alpha = 0.5
@@ -158,11 +158,11 @@ class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDel
                 rawValue: Notifications.fontDidChangeNotification),
                 object: nil)
 
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
     func close(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
