@@ -60,85 +60,46 @@ class SettingsFontPickerViewController: UITableViewController {
         let _onceToken = NSUUID().uuidString
 
         DispatchQueue.once(token: _onceToken) {
-            if #available(iOS 9, *) {
-                map = NSDictionary(objects: [
-                    "San Francisco",
-                    "Helvetica Neue",
-                    "Avenir",
-                    "Hoefler",
-                    "Courier",
-                    "Georgia",
-                    "Menlo",
-                    "Times New Roman",
-                    "Palatino",
-                    "Iowan Old Style"], forKeys: [
-                        FontKeys.kTLIFontSFDefaultsKey,
-                        FontKeys.kTLIFontHelveticaNeueDefaultsKey,
-                        FontKeys.kTLIFontAvenirDefaultsKey,
-                        FontKeys.kTLIFontHoeflerDefaultsKey,
-                        FontKeys.kTLIFontCourierDefaultsKey,
-                        FontKeys.kTLIFontGeorgiaDefaultsKey,
-                        FontKeys.kTLIFontMenloDefaultsKey,
-                        FontKeys.kTLIFontTimesNewRomanDefaultsKey,
-                        FontKeys.kTLIFontPalatinoDefaultsKey,
-                        FontKeys.kTLIFontIowanDefaultsKey])
-            } else {
-                map = NSDictionary(objects: [
-                    "Helvetica Neue",
-                    "Avenir",
-                    "Hoefler",
-                    "Courier",
-                    "Georgia",
-                    "Menlo",
-                    "Times New Roman",
-                    "Palatino",
-                    "Iowan Old Style"], forKeys: [
-                        FontKeys.kTLIFontHelveticaNeueDefaultsKey,
-                        FontKeys.kTLIFontAvenirDefaultsKey,
-                        FontKeys.kTLIFontHoeflerDefaultsKey,
-                        FontKeys.kTLIFontCourierDefaultsKey,
-                        FontKeys.kTLIFontGeorgiaDefaultsKey,
-                        FontKeys.kTLIFontMenloDefaultsKey,
-                        FontKeys.kTLIFontTimesNewRomanDefaultsKey,
-                        FontKeys.kTLIFontPalatinoDefaultsKey,
-                        FontKeys.kTLIFontIowanDefaultsKey])
-            }
-
+            map = NSDictionary(objects: [
+                "San Francisco",
+                "Helvetica Neue",
+                "Avenir",
+                "Hoefler",
+                "Courier",
+                "Georgia",
+                "Menlo",
+                "Times New Roman",
+                "Palatino",
+                "Iowan Old Style"], forKeys: [
+                    FontKeys.kTLIFontSFDefaultsKey,
+                    FontKeys.kTLIFontHelveticaNeueDefaultsKey,
+                    FontKeys.kTLIFontAvenirDefaultsKey,
+                    FontKeys.kTLIFontHoeflerDefaultsKey,
+                    FontKeys.kTLIFontCourierDefaultsKey,
+                    FontKeys.kTLIFontGeorgiaDefaultsKey,
+                    FontKeys.kTLIFontMenloDefaultsKey,
+                    FontKeys.kTLIFontTimesNewRomanDefaultsKey,
+                    FontKeys.kTLIFontPalatinoDefaultsKey,
+                    FontKeys.kTLIFontIowanDefaultsKey])
         }
 
         return map
     }
 
     func keys() -> NSArray? {
-
-        if #available(iOS 9, *) {
-            let arr = NSArray(objects:
-                FontKeys.kTLIFontSFDefaultsKey,
-                FontKeys.kTLIFontHelveticaNeueDefaultsKey,
-                FontKeys.kTLIFontAvenirDefaultsKey,
-                FontKeys.kTLIFontHoeflerDefaultsKey,
-                FontKeys.kTLIFontCourierDefaultsKey,
-                FontKeys.kTLIFontGeorgiaDefaultsKey,
-                FontKeys.kTLIFontMenloDefaultsKey,
-                FontKeys.kTLIFontTimesNewRomanDefaultsKey,
-                FontKeys.kTLIFontPalatinoDefaultsKey,
-                FontKeys.kTLIFontIowanDefaultsKey)
-            let sortedArray = arr.sortedArray(using: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
-            return sortedArray as NSArray
-        } else {
-            let arr = NSArray(objects:
-                FontKeys.kTLIFontHelveticaNeueDefaultsKey,
-                FontKeys.kTLIFontAvenirDefaultsKey,
-                FontKeys.kTLIFontHoeflerDefaultsKey,
-                FontKeys.kTLIFontCourierDefaultsKey,
-                FontKeys.kTLIFontGeorgiaDefaultsKey,
-                FontKeys.kTLIFontMenloDefaultsKey,
-                FontKeys.kTLIFontTimesNewRomanDefaultsKey,
-                FontKeys.kTLIFontPalatinoDefaultsKey,
-                FontKeys.kTLIFontIowanDefaultsKey)
-            let sortedArray = arr.sortedArray(using: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
-            return sortedArray as NSArray
-        }
+        let arr = NSArray(objects:
+            FontKeys.kTLIFontSFDefaultsKey,
+            FontKeys.kTLIFontHelveticaNeueDefaultsKey,
+            FontKeys.kTLIFontAvenirDefaultsKey,
+            FontKeys.kTLIFontHoeflerDefaultsKey,
+            FontKeys.kTLIFontCourierDefaultsKey,
+            FontKeys.kTLIFontGeorgiaDefaultsKey,
+            FontKeys.kTLIFontMenloDefaultsKey,
+            FontKeys.kTLIFontTimesNewRomanDefaultsKey,
+            FontKeys.kTLIFontPalatinoDefaultsKey,
+            FontKeys.kTLIFontIowanDefaultsKey)
+        let sortedArray = arr.sortedArray(using: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        return sortedArray as NSArray
     }
 
     static func selectedKey() -> NSString? {
@@ -175,9 +136,8 @@ class SettingsFontPickerViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: GroupedTableViewCell = GroupedTableViewCell(
-            style: UITableViewCell.CellStyle.default,
-            reuseIdentifier: "CellIdentifier")
+        let cell: GroupedTableViewCell = GroupedTableViewCell(style: .default,
+                                                              reuseIdentifier: "CellIdentifier")
         let key: NSString = self.keys()!.object(at: indexPath.row) as! NSString
         let selectedKey = SettingsFontPickerViewController.selectedKey()!
         cell.textLabel!.text = self.cellTextForKey(key: key) as String?
@@ -193,8 +153,7 @@ class SettingsFontPickerViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(
-            at: indexPath as IndexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+        tableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         currentIndexPath = indexPath as NSIndexPath
 

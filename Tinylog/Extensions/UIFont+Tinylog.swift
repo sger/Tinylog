@@ -52,19 +52,11 @@ let kTLIFontIowanKey: NSString = "Iowan"
 extension UIFont {
 
     class func mediumFontWithSize(_ size: CGFloat) -> UIFont {
-        if #available(iOS 9, *) {
-          return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.medium)
-        } else {
-          return UIFont(name: "HelveticaNeue-Medium", size: size)!
-        }
+        return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.medium)
     }
 
     class func regularFontWithSize(_ size: CGFloat) -> UIFont {
-        if #available(iOS 9, *) {
-          return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.regular)
-        } else {
-          return UIFont(name: "HelveticaNeue", size: size)!
-        }
+        return UIFont.systemFont(ofSize: size, weight: UIFont.Weight.regular)
     }
 
     class func tinylogFontMapForFontKey(_ key: NSString) -> NSDictionary? {
@@ -73,16 +65,6 @@ extension UIFont {
         let _onceToken = NSUUID().uuidString
 
         DispatchQueue.once(token: _onceToken) {
-
-            let defaultFont = NSDictionary(objects: [
-                kTLIRegularFontName,
-                kTLIItalicFontName,
-                kTLIBoldFontName,
-                kTLIBoldItalicFontName], forKeys: [
-                    kTLIFontRegularKey,
-                    kTLIFontItalicKey,
-                    kTLIFontBoldKey,
-                    kTLIFontBoldItalicKey])
 
             let sf = NSDictionary(objects: [
                 ".SFUIText-Regular",
@@ -184,8 +166,6 @@ extension UIFont {
                     kTLIFontBoldKey,
                     kTLIFontBoldItalicKey])
 
-            if #available(iOS 9, *) {
-
                 let defaultFontSF = NSDictionary(objects: [
                     kTLIRegularSFFontName,
                     kTLIItalicSFFontName,
@@ -219,29 +199,7 @@ extension UIFont {
                         kTLIFontTimesNewRomanKey,
                         kTLIFontPalatinoKey,
                         kTLIFontIowanKey])
-            } else {
-                fontDictionary = NSDictionary(objects: [
-                    defaultFont,
-                    helveticaNeue,
-                    avenir,
-                    hoefler,
-                    courier,
-                    georgia,
-                    menlo,
-                    timesNewRoman,
-                    palatino,
-                    iowan], forKeys: [
-                        kTLIFontHelveticaNeueKey,
-                        kTLIFontHelveticaNeueKey,
-                        kTLIFontAvenirKey,
-                        kTLIFontHoeflerKey,
-                        kTLIFontCourierKey,
-                        kTLIFontGeorgiaKey,
-                        kTLIFontMenloKey,
-                        kTLIFontTimesNewRomanKey,
-                        kTLIFontPalatinoKey,
-                        kTLIFontIowanKey])
-            }
+            
         }
 
         return fontDictionary!.object(forKey: key) as? NSDictionary
