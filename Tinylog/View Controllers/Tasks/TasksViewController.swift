@@ -36,7 +36,13 @@ class TasksViewController: CoreDataTableViewController,
 
     let kCellIdentifier = "TaskTableViewCell"
     var managedObjectContext: NSManagedObjectContext!
-    var list: TLIList?
+    var list: TLIList? {
+        didSet {
+            title = list?.title
+            configureFetch()
+            updateFooterInfoText(list!)
+        }
+    }
     var currentIndexPath: IndexPath?
     var focusTextField: Bool?
 
@@ -115,51 +121,51 @@ class TasksViewController: CoreDataTableViewController,
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    var managedObject: TLIList? {
-        willSet {
-
-            if newValue != nil {
-                self.noListSelected?.isHidden = true
-            } else {
-                self.noListSelected?.isHidden = false
-            }
-
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-            let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
-            fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-            fetchRequest.predicate  = NSPredicate(format: "list = %@ AND archivedAt = nil", newValue!)
-            fetchRequest.fetchBatchSize = 20
-            self.frc = NSFetchedResultsController(
-                fetchRequest: fetchRequest,
-                managedObjectContext: managedObjectContext,
-                sectionNameKeyPath: nil,
-                cacheName: nil)
-            self.frc?.delegate = self
-
-            do {
-                try self.frc?.performFetch()
-                self.tableView?.reloadData()
-                if self.checkForEmptyResults() {
-                    self.noTasksLabel?.isHidden = false
-                } else {
-                    self.noTasksLabel?.isHidden = true
-                }
-                self.tableView?.reloadData()
-                updateFooterInfoText(newValue!)
-            } catch let error as NSError {
-                fatalError(error.localizedDescription)
-            }
-        }
-        didSet {
-        }
-    }
+//    var managedObject: TLIList? {
+//        willSet {
+//
+//            if newValue != nil {
+//                self.noListSelected?.isHidden = true
+//            } else {
+//                self.noListSelected?.isHidden = false
+//            }
+//
+//            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
+//            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
+//            let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
+//            fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
+//            fetchRequest.predicate  = NSPredicate(format: "list = %@ AND archivedAt = nil", newValue!)
+//            fetchRequest.fetchBatchSize = 20
+//            self.frc = NSFetchedResultsController(
+//                fetchRequest: fetchRequest,
+//                managedObjectContext: managedObjectContext,
+//                sectionNameKeyPath: nil,
+//                cacheName: nil)
+//            self.frc?.delegate = self
+//
+//            do {
+//                try self.frc?.performFetch()
+//                self.tableView?.reloadData()
+//                if self.checkForEmptyResults() {
+//                    self.noTasksLabel?.isHidden = false
+//                } else {
+//                    self.noTasksLabel?.isHidden = true
+//                }
+//                self.tableView?.reloadData()
+//                updateFooterInfoText(newValue!)
+//            } catch let error as NSError {
+//                fatalError(error.localizedDescription)
+//            }
+//        }
+//        didSet {
+//        }
+//    }
 
     func configureFetch() {
 
-        if list == nil {
-            return
-        }
+//        if list == nil {
+//            return
+//        }
 
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
@@ -169,7 +175,7 @@ class TasksViewController: CoreDataTableViewController,
         fetchRequest.fetchBatchSize = 20
         self.frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: managedObjectContext,
+            managedObjectContext: self.managedObjectContext,
             sectionNameKeyPath: nil,
             cacheName: nil)
         self.frc?.delegate = self
@@ -231,16 +237,6 @@ class TasksViewController: CoreDataTableViewController,
             self,
             action: #selector(TasksViewController.displayArchive(_:)),
             for: UIControl.Event.touchDown)
-
-        let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-        if IS_IPAD {
-            self.title = managedObject?.title
-        } else {
-            self.title = list?.title
-            configureFetch()
-            updateFooterInfoText(list!)
-        }
 
         setEditing(false, animated: false)
 
@@ -335,16 +331,8 @@ class TasksViewController: CoreDataTableViewController,
             }
             self.tableView?.reloadData()
 
-            let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-            if IS_IPAD {
-                if let list = self.managedObject {
-                    updateFooterInfoText(list)
-                }
-            } else {
-                if let list = self.list {
-                    updateFooterInfoText(list)
-                }
+            if let list = self.list {
+                updateFooterInfoText(list)
             }
         }
     }
@@ -381,6 +369,7 @@ class TasksViewController: CoreDataTableViewController,
         }
         self.tableView?.reloadData()
 
+        // TODO
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
         if IS_IPAD {
@@ -396,15 +385,7 @@ class TasksViewController: CoreDataTableViewController,
     @objc func displayArchive(_ button: ArchiveButton) {
         let viewController: ArchiveTasksViewController = ArchiveTasksViewController()
         viewController.managedObjectContext = managedObjectContext
-
-        let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-        if IS_IPAD {
-            viewController.list = managedObject
-        } else {
-            viewController.list = list
-        }
-
+        viewController.list = list
         let nc: UINavigationController = UINavigationController(rootViewController: viewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
@@ -417,6 +398,8 @@ class TasksViewController: CoreDataTableViewController,
             self.addTaskView?.textField.becomeFirstResponder()
             focusTextField = false
         }
+        
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -654,14 +637,8 @@ class TasksViewController: CoreDataTableViewController,
             button.layer.add(animation, forKey: "bounceAnimation")
 
             try! managedObjectContext.save()
-
-            let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-            if IS_IPAD {
-                updateFooterInfoText(self.managedObject!)
-            } else {
-                updateFooterInfoText(self.list!)
-            }
+            
+            updateFooterInfoText(self.list!)
         }
     }
 
@@ -679,15 +656,7 @@ class TasksViewController: CoreDataTableViewController,
         do {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
             let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-
-            let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-            if IS_IPAD {
-                fetchRequest.predicate = NSPredicate(format: "list = %@", self.managedObject!)
-            } else {
-                fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
-            }
-
+            fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
             fetchRequest.sortDescriptors = [positionDescriptor]
             let results: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
 
@@ -695,11 +664,7 @@ class TasksViewController: CoreDataTableViewController,
                 forEntityName: "Task",
                 into: managedObjectContext) as? TLITask {
                 task.displayLongText = title as String
-                if IS_IPAD {
-                    task.list = self.managedObject!
-                } else {
-                    task.list = self.list!
-                }
+                task.list = self.list!
                 task.position = NSNumber(value: results.count + 1 as Int)
                 task.createdAt = Date()
                 task.checkBoxValue = "false"
@@ -712,11 +677,7 @@ class TasksViewController: CoreDataTableViewController,
                     self.noTasksLabel?.isHidden = true
                 }
                 self.tableView?.reloadData()
-                if IS_IPAD {
-                    updateFooterInfoText(self.managedObject!)
-                } else {
-                    updateFooterInfoText(self.list!)
-                }
+                updateFooterInfoText(self.list!)
             }
         } catch let error as NSError {
             fatalError(error.localizedDescription)
@@ -780,7 +741,7 @@ class TasksViewController: CoreDataTableViewController,
     }
 
     @objc func exportTasks(_ sender: UIButton) {
-        if self.managedObject != nil || self.list != nil {
+        if self.list != nil {
 
             do {
 
@@ -788,26 +749,13 @@ class TasksViewController: CoreDataTableViewController,
                 let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
                 let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
                 fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-
-                let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-                if IS_IPAD {
-                    fetchRequest.predicate = NSPredicate(format: "list = %@", self.managedObject!)
-                } else {
-                    fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
-                }
-
+                fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
                 fetchRequest.fetchBatchSize = 20
                 let tasks: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
 
                 var output: NSString = ""
                 var listTitle: NSString = ""
-
-                if IS_IPAD {
-                    listTitle = self.managedObject!.title! as NSString
-                } else {
-                    listTitle = self.list!.title! as NSString
-                }
+                listTitle = self.list!.title! as NSString
 
                 output = output.appending(NSString(format: "%@\n", listTitle) as String) as NSString
 
@@ -844,5 +792,11 @@ class TasksViewController: CoreDataTableViewController,
                 fatalError(error.localizedDescription)
             }
         }
+    }
+}
+
+extension TasksViewController: ListSelectionDelegate {
+    func listSelected(_ newList: TLIList) {
+        list = newList
     }
 }
