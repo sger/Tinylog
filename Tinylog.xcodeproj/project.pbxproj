@@ -450,13 +450,13 @@
 		5638FC6222744D8200CB4071 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5638FC7822744D8200CB4071 /* SplitViewController.swift */,
 				5638FC6322744D8200CB4071 /* Abstract */,
 				5638FC6522744D8200CB4071 /* Settings */,
 				5638FC6B22744D8200CB4071 /* Tasks */,
 				5638FC6E22744D8200CB4071 /* Archive */,
 				5638FC7122744D8200CB4071 /* Lists */,
 				5638FC7522744D8200CB4071 /* Setup */,
-				5638FC7722744D8200CB4071 /* iPad */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -515,14 +515,6 @@
 				5638FC7622744D8200CB4071 /* SetupViewController.swift */,
 			);
 			path = Setup;
-			sourceTree = "<group>";
-		};
-		5638FC7722744D8200CB4071 /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-				5638FC7822744D8200CB4071 /* SplitViewController.swift */,
-			);
-			path = iPad;
 			sourceTree = "<group>";
 		};
 		5638FC8822744ECF00CB4071 /* Helpers */ = {

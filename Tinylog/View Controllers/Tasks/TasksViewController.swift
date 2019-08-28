@@ -36,6 +36,7 @@ class TasksViewController: CoreDataTableViewController,
 
     let kCellIdentifier = "TaskTableViewCell"
     var managedObjectContext: NSManagedObjectContext!
+    
     var list: TLIList? {
         didSet {
             title = list?.title
@@ -43,6 +44,7 @@ class TasksViewController: CoreDataTableViewController,
             updateFooterInfoText(list!)
         }
     }
+    
     var currentIndexPath: IndexPath?
     var focusTextField: Bool?
 
@@ -121,52 +123,7 @@ class TasksViewController: CoreDataTableViewController,
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-//    var managedObject: TLIList? {
-//        willSet {
-//
-//            if newValue != nil {
-//                self.noListSelected?.isHidden = true
-//            } else {
-//                self.noListSelected?.isHidden = false
-//            }
-//
-//            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-//            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-//            let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
-//            fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-//            fetchRequest.predicate  = NSPredicate(format: "list = %@ AND archivedAt = nil", newValue!)
-//            fetchRequest.fetchBatchSize = 20
-//            self.frc = NSFetchedResultsController(
-//                fetchRequest: fetchRequest,
-//                managedObjectContext: managedObjectContext,
-//                sectionNameKeyPath: nil,
-//                cacheName: nil)
-//            self.frc?.delegate = self
-//
-//            do {
-//                try self.frc?.performFetch()
-//                self.tableView?.reloadData()
-//                if self.checkForEmptyResults() {
-//                    self.noTasksLabel?.isHidden = false
-//                } else {
-//                    self.noTasksLabel?.isHidden = true
-//                }
-//                self.tableView?.reloadData()
-//                updateFooterInfoText(newValue!)
-//            } catch let error as NSError {
-//                fatalError(error.localizedDescription)
-//            }
-//        }
-//        didSet {
-//        }
-//    }
-
     func configureFetch() {
-
-//        if list == nil {
-//            return
-//        }
-
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
@@ -369,7 +326,7 @@ class TasksViewController: CoreDataTableViewController,
         }
         self.tableView?.reloadData()
 
-        // TODO
+        // TODO remove this reference
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
         if IS_IPAD {
@@ -398,8 +355,6 @@ class TasksViewController: CoreDataTableViewController,
             self.addTaskView?.textField.becomeFirstResponder()
             focusTextField = false
         }
-        
-        
     }
 
     override func viewDidLayoutSubviews() {
@@ -795,8 +750,10 @@ class TasksViewController: CoreDataTableViewController,
     }
 }
 
-extension TasksViewController: ListSelectionDelegate {
-    func listSelected(_ newList: TLIList) {
+// MARK: - ListsViewControllerDelegate
+
+extension TasksViewController: ListsViewControllerDelegate {
+    func listsViewControllerDidListSelected(_ newList: TLIList) {
         list = newList
     }
 }

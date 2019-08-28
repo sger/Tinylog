@@ -11,15 +11,16 @@ import UIKit
 import CoreData
 import SnapKit
 
-protocol ListSelectionDelegate: class {
-    func listSelected(_ newList: TLIList)
+protocol ListsViewControllerDelegate: class {
+    func listsViewControllerDidListSelected(_ newList: TLIList)
 }
 
 final class ListsViewController: CoreDataTableViewController {
     
-    weak var delegate: ListSelectionDelegate?
+    weak var delegate: ListsViewControllerDelegate?
 
     var managedObjectContext: NSManagedObjectContext!
+    
     private var resultsViewController: ResultsViewController?
     fileprivate let reachability = ReachabilityManager.instance.reachability!
 
@@ -340,7 +341,7 @@ final class ListsViewController: CoreDataTableViewController {
         if let detailViewController = delegate as? TasksViewController,
             let detailNavigationController = detailViewController.navigationController {
             detailViewController.managedObjectContext = managedObjectContext
-            delegate?.listSelected(list)
+            delegate?.listsViewControllerDidListSelected(list)
             splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
         }
     }
@@ -533,7 +534,7 @@ extension ListsViewController: AddListViewControllerDelegate {
             let detailNavigationController = detailViewController.navigationController {
             detailViewController.managedObjectContext = managedObjectContext
             detailViewController.focusTextField = true
-            delegate?.listSelected(list)
+            delegate?.listsViewControllerDidListSelected(list)
             splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
         }
 
