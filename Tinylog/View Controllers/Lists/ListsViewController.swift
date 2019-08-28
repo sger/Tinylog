@@ -11,7 +11,13 @@ import UIKit
 import CoreData
 import SnapKit
 
+protocol ListSelectionDelegate: class {
+    func listSelected(_ newList: TLIList)
+}
+
 final class ListsViewController: CoreDataTableViewController {
+    
+    weak var delegate: ListSelectionDelegate?
 
     var managedObjectContext: NSManagedObjectContext!
     private var resultsViewController: ResultsViewController?
@@ -201,7 +207,7 @@ final class ListsViewController: CoreDataTableViewController {
     func displaySetup() {
         let setupViewController: SetupViewController = SetupViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        nc.modalPresentationStyle = .formSheet
         navigationController?.present(nc, animated: true, completion: nil)
     }
 
@@ -210,7 +216,7 @@ final class ListsViewController: CoreDataTableViewController {
     @objc func displaySettings(_ sender: UIButton) {
         let settingsViewController: SettingsTableViewController = SettingsTableViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: settingsViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        nc.modalPresentationStyle = .formSheet
         navigationController?.present(nc, animated: true, completion: nil)
     }
 
@@ -330,18 +336,12 @@ final class ListsViewController: CoreDataTableViewController {
         } else {
             list = resultsViewController?.frc?.object(at: indexPath) as! TLIList
         }
-
-        let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-        // swiftlint:disable line_length
-        if  IS_IPAD {
-            SplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
-            SplitViewController.sharedSplitViewController().listViewController?.managedObject = list
-            SplitViewController.sharedSplitViewController().listViewController?.title = list.title
-        } else {
-            let tasksViewController: TasksViewController = TasksViewController()
-            tasksViewController.managedObjectContext = managedObjectContext
-            tasksViewController.list = list
-            navigationController?.pushViewController(tasksViewController, animated: true)
+        
+        if let detailViewController = delegate as? TasksViewController,
+            let detailNavigationController = detailViewController.navigationController {
+            detailViewController.managedObjectContext = managedObjectContext
+            delegate?.listSelected(list)
+            splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
         }
     }
 
@@ -426,7 +426,7 @@ extension ListsViewController {
         addListViewController.mode = mode
         addListViewController.list = list
         let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        nc.modalPresentationStyle = .formSheet
         navigationController?.present(nc, animated: true, completion: nil)
     }
 }
@@ -528,18 +528,13 @@ extension ListsViewController: AddListViewControllerDelegate {
 
         let indexPath = frc?.indexPath(forObject: list)
         tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
-
-        let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-        if IS_IPAD {
-            SplitViewController.sharedSplitViewController().listViewController?.managedObjectContext = managedObjectContext
-            SplitViewController.sharedSplitViewController().listViewController?.managedObject = list
-        } else {
-            let tasksViewController: TasksViewController = TasksViewController()
-            tasksViewController.managedObjectContext = managedObjectContext
-            tasksViewController.list = list
-            tasksViewController.focusTextField = true
-            navigationController?.pushViewController(tasksViewController, animated: true)
+        
+        if let detailViewController = delegate as? TasksViewController,
+            let detailNavigationController = detailViewController.navigationController {
+            detailViewController.managedObjectContext = managedObjectContext
+            detailViewController.focusTextField = true
+            delegate?.listSelected(list)
+            splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
         }
 
         checkForLists()

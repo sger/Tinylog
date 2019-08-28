@@ -76,18 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
-
-        if  IS_IPAD {
-            let splitViewController = SplitViewController()
-            self.window?.rootViewController = splitViewController
-        } else {
-            let listsViewController: ListsViewController = ListsViewController()
-            listsViewController.managedObjectContext = coreDataManager.managedObjectContext//managedObjectContext
-            let nc: UINavigationController = UINavigationController(rootViewController: listsViewController)
-            self.window?.rootViewController = nc
-        }
-
+        let splitViewController = SplitViewController(managedObjectContext: coreDataManager.managedObjectContext)
+        self.window?.rootViewController = splitViewController
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
 
