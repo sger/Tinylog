@@ -43,13 +43,13 @@ final class AddListViewCoordinator: BaseCoordinator {
 
 extension AddListViewCoordinator: AddListViewControllerDelegate {
     
-    func addListViewControllerDismissed(_ viewController: AddListViewController) {
-        navigationController.dismiss(animated: true, completion: nil)
-    }
-    
-    func addListViewControllerDismissedWithList(_ viewController: AddListViewController, list: TLIList) {
+    func addListViewController(_ viewController: AddListViewController, didSucceedWithList list: TLIList) {
         navigationController.dismiss(animated: true) {
             self.delegate?.addListViewCoordinatorDismissed(self, list: list)
         }
+    }
+    
+    func addListViewControllerDismissed(_ viewController: AddListViewController) {
+        navigationController.dismiss(animated: true, completion: nil)
     }
 }

@@ -141,7 +141,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
             // swiftlint:disable force_try
             try! managedObjectContext.save()
             name?.resignFirstResponder()
-            delegate?.addListViewControllerDismissedWithList(self, list: list)
+            delegate?.addListViewController(self, didSucceedWithList: list)
         }
     }
     
@@ -192,7 +192,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                 list.createdAt = Date()
                 try! managedObjectContext.save()
                 name?.resignFirstResponder()
-                delegate?.addListViewControllerDismissedWithList(self, list: list)
+                delegate?.addListViewController(self, didSucceedWithList: list)
             }
         } catch let error as NSError {
             fatalError(error.localizedDescription)
