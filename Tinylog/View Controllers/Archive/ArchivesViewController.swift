@@ -11,7 +11,7 @@ import CoreData
 import Reachability
 
 class ArchivesViewController: CoreDataTableViewController,
-    UITextFieldDelegate, AddListViewControllerDelegate,
+    UITextFieldDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
     var managedObjectContext: NSManagedObjectContext!
@@ -334,16 +334,6 @@ class ArchivesViewController: CoreDataTableViewController,
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
-    func onClose(_ addListViewController: AddListViewController, list: TLIList) {
-        let indexPath = frc?.indexPath(forObject: list)
-        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
-        let tasksViewController: TasksViewController = TasksViewController()
-        tasksViewController.managedObjectContext = managedObjectContext
-        tasksViewController.list = list
-        tasksViewController.focusTextField = true
-        navigationController?.pushViewController(tasksViewController, animated: true)
-    }
-
     // MARK: UISearchBarDelegate
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -398,5 +388,20 @@ class ArchivesViewController: CoreDataTableViewController,
                 }
             }
         }
+    }
+}
+
+extension ArchivesViewController: AddListViewControllerDelegate {
+    func addListViewControllerDismissed(_ viewController: AddListViewController) {
+        
+    }
+    
+    func addListViewControllerDismissedWithList(_ viewController: AddListViewController, list: TLIList) {
+        let indexPath = frc?.indexPath(forObject: list)
+        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
+        let tasksViewController: TasksViewController = TasksViewController()
+        tasksViewController.managedObjectContext = managedObjectContext
+        tasksViewController.list = list
+        navigationController?.pushViewController(tasksViewController, animated: true)
     }
 }

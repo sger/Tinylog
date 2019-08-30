@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 final class AddListViewController: UITableViewController, UITextFieldDelegate {
 
@@ -15,19 +16,20 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         case edit
     }
 
-    var managedObjectContext: NSManagedObjectContext!
-    var name: UITextField?
-    var menuColorsView: MenuColorsView?
-    var delegate: AddListViewControllerDelegate?
-    var mode: Mode = .create
-    var list: TLIList?
+    private let managedObjectContext: NSManagedObjectContext
+    private let mode: Mode
+    private let list: TLIList?
+    
+    private var name: UITextField?
+    private var menuColorsView: MenuColorsView?
+    
+    weak var delegate: AddListViewControllerDelegate?
 
-    init() {
+    init(managedObjectContext: NSManagedObjectContext, list: TLIList?, mode: Mode) {
+        self.managedObjectContext = managedObjectContext
+        self.list = list
+        self.mode = mode
         super.init(style: .grouped)
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -40,20 +42,18 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         view.backgroundColor = UIColor.tinylogLightGray
         tableView.separatorColor = UIColor.tinylogTableViewLineColor
 
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Cancel",
-            style: UIBarButtonItem.Style.plain,
-            target: self,
-            action: #selector(AddListViewController.cancel(_:)))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Save",
-            style: UIBarButtonItem.Style.plain,
-            target: self,
-            action: #selector(AddListViewController.save(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
+                                                           style: UIBarButtonItem.Style.plain,
+                                                           target: self,
+                                                           action: #selector(AddListViewController.cancel(_:)))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
+                                                            style: UIBarButtonItem.Style.plain,
+                                                            target: self,
+                                                            action: #selector(AddListViewController.save(_:)))
 
-        menuColorsView = MenuColorsView(
-            frame: CGRect(x: 12.0, y: 200.0, width: self.view.frame.width, height: 51.0))
-        self.tableView.tableFooterView = menuColorsView
+        menuColorsView = MenuColorsView(frame: CGRect(x: 12.0, y: 200.0, width: view.frame.width, height: 51.0))
+        tableView.tableFooterView = menuColorsView
 
         if mode == .create {
             title = "Add List"
@@ -61,10 +61,11 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         } else if mode == .edit {
             title = "Edit List"
             view.accessibilityIdentifier = "EditList"
-            if let list = list {
+            if let list = list,
+                let color = list.color,
+                let index = menuColorsView?.findIndexByColor(color) {
                 // swiftlint:disable force_unwrapping
-                self.menuColorsView!.currentColor = list.color
-                let index: Int = menuColorsView!.findIndexByColor(list.color!)
+                menuColorsView?.currentColor = color
                 menuColorsView?.setSelectedIndex(index)
             }
         }
@@ -76,15 +77,11 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
 
     @objc func cancel(_ button: UIButton) {
         name?.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
+        delegate?.addListViewControllerDismissed(self)
     }
 
     @objc func save(_ button: UIButton) {
-        if mode == .create {
-            createList()
-        } else if mode == .edit {
-            saveList()
-        }
+        createOrEditList()
     }
 
     override func tableView(
@@ -93,8 +90,8 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         forRowAt indexPath: IndexPath) {
         if let textFieldCell: TextFieldCell = cell as? TextFieldCell {
             if indexPath.row == 0 {
-                if list != nil {
-                    textFieldCell.textField?.text = list?.title
+                if let list = list {
+                    textFieldCell.textField?.text = list.title
                 } else {
                     textFieldCell.textField?.text = ""
                 }
@@ -116,11 +113,11 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         return cell
     }
 
-    func configureCell(_ cell: TextFieldCell, indexPath: IndexPath) {
+    private func configureCell(_ cell: TextFieldCell, indexPath: IndexPath) {
         if indexPath.row == 0 {
             cell.textField?.placeholder = "Name"
-            cell.backgroundColor = UIColor.white
-            cell.textField?.returnKeyType = UIReturnKeyType.go
+            cell.backgroundColor = .white
+            cell.textField?.returnKeyType = .go
             cell.textField?.delegate = self
             name = cell.textField
             return
@@ -130,28 +127,42 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     // MARK: UITextFieldDelegate
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == self.name {
+        if textField == name {
+            createOrEditList()
+        }
+        return false
+    }
+
+    private func saveList() {
+        if let list = list {
+            list.title = name?.text
+            list.color = menuColorsView?.currentColor
+            
+            // swiftlint:disable force_try
+            try! managedObjectContext.save()
+            name?.resignFirstResponder()
+            delegate?.addListViewControllerDismissedWithList(self, list: list)
+        }
+    }
+    
+    private func createOrEditList() {
+        if let text = name?.text, text.isEmpty {
+            SVProgressHUD.show()
+            SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.dark)
+            SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor)
+            SVProgressHUD.setForegroundColor(UIColor.white)
+            SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0)!)
+            SVProgressHUD.showError(withStatus: "Please add a name to your list")
+        } else {
             if mode == .create {
                 createList()
             } else if mode == .edit {
                 saveList()
             }
         }
-        return false
     }
 
-    func saveList() {
-        if list != nil {
-            list?.title = self.name!.text
-            list?.color = self.menuColorsView!.currentColor!
-            // swiftlint:disable force_try
-            try! managedObjectContext.save()
-            name?.resignFirstResponder()
-            dismiss(animated: true, completion: nil)
-        }
-    }
-
-    func createList() {
+    private func createList() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         fetchRequest.sortDescriptors = [positionDescriptor]
@@ -169,24 +180,19 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                 }
             }
 
-            if let list: TLIList = NSEntityDescription.insertNewObject(
-                forEntityName: "List",
-                into: managedObjectContext) as? TLIList {
-                if let name = self.name {
+            if let list: TLIList = NSEntityDescription.insertNewObject(forEntityName: "List", into: managedObjectContext) as? TLIList {
+                if let name = name {
                     list.title = name.text
                 }
                 list.position = position + 1 as NSNumber
-                if let menuColorsView = self.menuColorsView,
+                if let menuColorsView = menuColorsView,
                     let currentColor = menuColorsView.currentColor {
                     list.color = currentColor
                 }
                 list.createdAt = Date()
                 try! managedObjectContext.save()
                 name?.resignFirstResponder()
-                dismiss(animated: true, completion: { () -> Void in
-                    self.delegate?.onClose(self, list: list)
-                    return
-                })
+                delegate?.addListViewControllerDismissedWithList(self, list: list)
             }
         } catch let error as NSError {
             fatalError(error.localizedDescription)

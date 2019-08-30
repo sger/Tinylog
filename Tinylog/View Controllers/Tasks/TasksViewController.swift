@@ -39,14 +39,15 @@ class TasksViewController: CoreDataTableViewController,
     
     var list: TLIList? {
         didSet {
-            title = list?.title
-            configureFetch()
-            updateFooterInfoText(list!)
+            if let list = list {
+                title = list.title
+                configureFetch()
+                updateFooterInfoText(list)
+            }
         }
     }
     
     var currentIndexPath: IndexPath?
-    var focusTextField: Bool?
 
     var tasksFooterView: TasksFooterView = {
         let tasksFooterView = TasksFooterView()
@@ -350,10 +351,11 @@ class TasksViewController: CoreDataTableViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if focusTextField != nil {
-            self.addTaskView?.textField.becomeFirstResponder()
-            focusTextField = false
+        
+        if let list = list {
+            if TLITask.numOfTasks(with: managedObjectContext, list) == 0 {
+                addTaskView?.textField.becomeFirstResponder()
+            }
         }
     }
 
@@ -747,13 +749,5 @@ class TasksViewController: CoreDataTableViewController,
                 fatalError(error.localizedDescription)
             }
         }
-    }
-}
-
-// MARK: - ListsViewControllerDelegate
-
-extension TasksViewController: ListsViewControllerDelegate {
-    func listsViewControllerDidListSelected(_ newList: TLIList) {
-        list = newList
     }
 }

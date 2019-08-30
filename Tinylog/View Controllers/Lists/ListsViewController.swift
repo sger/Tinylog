@@ -11,8 +11,12 @@ import UIKit
 import CoreData
 import SnapKit
 
-protocol ListsViewControllerDelegate: class {
-    func listsViewControllerDidListSelected(_ newList: TLIList)
+protocol ListsViewControllerDelegate: AnyObject {
+    func listsViewControllerDidTapList(_ viewController: ListsViewController, list: TLIList)
+    func listsViewControllerDidTapSettings(_ viewController: ListsViewController)
+    func listsViewControllerDidAddList(_ viewController: ListsViewController,
+                                       list: TLIList?,
+                                       selectedMode mode: AddListViewController.Mode)
 }
 
 final class ListsViewController: CoreDataTableViewController {
@@ -215,10 +219,7 @@ final class ListsViewController: CoreDataTableViewController {
     // MARK: Display Settings
 
     @objc func displaySettings(_ sender: UIButton) {
-        let settingsViewController: SettingsTableViewController = SettingsTableViewController()
-        let nc: UINavigationController = UINavigationController(rootViewController: settingsViewController)
-        nc.modalPresentationStyle = .formSheet
-        navigationController?.present(nc, animated: true, completion: nil)
+        delegate?.listsViewControllerDidTapSettings(self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -235,13 +236,16 @@ final class ListsViewController: CoreDataTableViewController {
 
         checkForLists()
 
-        let userDefaults = Environment.current.userDefaults
-
-        if userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
-            Utils.delay(0.1, closure: { () -> Void in
-                self.displaySetup()
-            })
-        } else if userDefaults.bool(forKey: EnvUserDefaults.syncMode) {
+//        let userDefaults = Environment.current.userDefaults
+//
+//        if userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
+//            Utils.delay(0.1, closure: { () -> Void in
+//                self.displaySetup()
+//            })
+//        } else if userDefaults.bool(forKey: EnvUserDefaults.syncMode) {
+//            startSync()
+//        }
+        if Environment.current.userDefaults.bool(forKey: EnvUserDefaults.syncMode) {
             startSync()
         }
 
@@ -338,12 +342,7 @@ final class ListsViewController: CoreDataTableViewController {
             list = resultsViewController?.frc?.object(at: indexPath) as! TLIList
         }
         
-        if let detailViewController = delegate as? TasksViewController,
-            let detailNavigationController = detailViewController.navigationController {
-            detailViewController.managedObjectContext = managedObjectContext
-            delegate?.listsViewControllerDidListSelected(list)
-            splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
-        }
+        delegate?.listsViewControllerDidTapList(self, list: list)
     }
 
     func tableView(_ tableView: UITableView,
@@ -417,19 +416,6 @@ extension ListsViewController {
             emptyListsLabel.isHidden = true
         }
     }
-
-    private func createAddListViewController(_ mode: AddListViewController.Mode,
-                                             managedObjectContext: NSManagedObjectContext,
-                                             list: TLIList? = nil) {
-        let addListViewController: AddListViewController = AddListViewController()
-        addListViewController.managedObjectContext = managedObjectContext
-        addListViewController.delegate = self
-        addListViewController.mode = mode
-        addListViewController.list = list
-        let nc: UINavigationController = UINavigationController(rootViewController: addListViewController)
-        nc.modalPresentationStyle = .formSheet
-        navigationController?.present(nc, animated: true, completion: nil)
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -451,7 +437,7 @@ extension ListsViewController {
             title: "Edit", handler: { _, indexpath in
 
                 let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
-                self.createAddListViewController(.edit, managedObjectContext: self.managedObjectContext, list: list)
+                self.delegate?.listsViewControllerDidAddList(self, list: list, selectedMode: .edit)
         })
 
         editRowAction.backgroundColor = UIColor.tinylogEditRowAction
@@ -523,30 +509,23 @@ extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, 
     }
 }
 
-extension ListsViewController: AddListViewControllerDelegate {
-
-    func onClose(_ addListViewController: AddListViewController, list: TLIList) {
-
-        let indexPath = frc?.indexPath(forObject: list)
-        tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
-        
-        if let detailViewController = delegate as? TasksViewController,
-            let detailNavigationController = detailViewController.navigationController {
-            detailViewController.managedObjectContext = managedObjectContext
-            detailViewController.focusTextField = true
-            delegate?.listsViewControllerDidListSelected(list)
-            splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
-        }
-
-        checkForLists()
-    }
-}
-
 // MARK: - ListsFooterViewDelegate
 
 extension ListsViewController: ListsFooterViewDelegate {
+    
+    func selectTableViewCell(with list: TLIList) {
+        guard let indexPath = frc?.indexPath(forObject: list) else {
+            print("error with index path")
+            return
+        }
+        
+        tableView?.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        
+        checkForLists()
+    }
+    
     func displayAddNewListVC(_ listsFooterView: ListsFooterView) {
-        createAddListViewController(.create, managedObjectContext: managedObjectContext)
+        delegate?.listsViewControllerDidAddList(self, list: nil, selectedMode: .create)
     }
     
     func displayArchivesVC(_ listsFooterView: ListsFooterView) {

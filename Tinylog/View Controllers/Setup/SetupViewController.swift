@@ -9,7 +9,13 @@
 import UIKit
 import SVProgressHUD
 
+protocol SetupViewControllerDelegate: AnyObject {
+    func setupViewControllerDismissed(_ viewController: SetupViewController)
+}
+
 final class SetupViewController: UIViewController {
+    
+    weak var delegate: SetupViewControllerDelegate?
 
     lazy var subtitleLabel: UILabel = {
         let subtitleLabel: UILabel = UILabel()
@@ -128,12 +134,12 @@ final class SetupViewController: UIViewController {
                 }
             }
         })
-        dismiss(animated: true, completion: nil)
+        delegate?.setupViewControllerDismissed(self)
     }
 
     @objc func disableiCloudAndDismiss(_ button: RoundedButton) {
         Environment.current.userDefaults.set(false, forKey: EnvUserDefaults.setupScreen)
         Environment.current.userDefaults.set(false, forKey: EnvUserDefaults.syncMode)
-        dismiss(animated: true, completion: nil)
+        delegate?.setupViewControllerDismissed(self)
     }
 }
