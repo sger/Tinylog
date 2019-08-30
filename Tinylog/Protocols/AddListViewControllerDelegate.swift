@@ -7,6 +7,6 @@
 //
 
 protocol AddListViewControllerDelegate: AnyObject {
+    func addListViewController(_ viewController: AddListViewController, didSucceedWithList list: TLIList)
     func addListViewControllerDismissed(_ viewController: AddListViewController)
-    func addListViewControllerDismissedWithList(_ viewController: AddListViewController, list: TLIList)
 }

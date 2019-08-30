@@ -392,16 +392,16 @@ class ArchivesViewController: CoreDataTableViewController,
 }
 
 extension ArchivesViewController: AddListViewControllerDelegate {
-    func addListViewControllerDismissed(_ viewController: AddListViewController) {
-        
-    }
-    
-    func addListViewControllerDismissedWithList(_ viewController: AddListViewController, list: TLIList) {
+    func addListViewController(_ viewController: AddListViewController, didSucceedWithList list: TLIList) {
         let indexPath = frc?.indexPath(forObject: list)
         self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
         let tasksViewController: TasksViewController = TasksViewController()
         tasksViewController.managedObjectContext = managedObjectContext
         tasksViewController.list = list
         navigationController?.pushViewController(tasksViewController, animated: true)
+    }
+    
+    func addListViewControllerDismissed(_ viewController: AddListViewController) {
+        
     }
 }
