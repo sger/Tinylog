@@ -6,6 +6,7 @@
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
 
-@objc protocol AddListViewControllerDelegate {
-    func onClose(_ addListViewController: AddListViewController, list: TLIList)
+protocol AddListViewControllerDelegate: AnyObject {
+    func addListViewControllerDismissed(_ viewController: AddListViewController)
+    func addListViewControllerDismissedWithList(_ viewController: AddListViewController, list: TLIList)
 }

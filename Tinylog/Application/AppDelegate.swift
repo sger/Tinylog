@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
     /// Access core data managed object context.
     let coreDataManager = CoreDataManager(model: "Tinylog")
+    
+    var applicationCoordinator: ApplicationCoordinator!
 
     /**
         Singleton of TLIAppDelegate
@@ -75,11 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
         FirebaseApp.configure()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-
-        let splitViewController = SplitViewController(managedObjectContext: coreDataManager.managedObjectContext)
-        self.window?.rootViewController = splitViewController
-        self.window?.backgroundColor = UIColor.white
-        self.window?.makeKeyAndVisible()
+            
+        applicationCoordinator = ApplicationCoordinator(window: window!, managedObjectContext: coreDataManager.managedObjectContext)
+        applicationCoordinator.start()
 
         // Change color cursor for UITextField
         UITextField.appearance().tintColor = UIColor.tinylogMainColor

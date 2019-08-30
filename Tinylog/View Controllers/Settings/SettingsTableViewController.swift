@@ -10,10 +10,16 @@ import UIKit
 import MessageUI
 import SVProgressHUD
 
+protocol SettingsTableViewControllerDelegate: AnyObject {
+    func settingsTableViewControllerDidTapButton()
+}
+
 class SettingsTableViewController: UITableViewController,
     MFMailComposeViewControllerDelegate,
     UIGestureRecognizerDelegate {
 
+    weak var delegate: SettingsTableViewControllerDelegate?
+    
     let settingsCellIdentifier = "SettingsCellIdentifier"
 
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
@@ -170,7 +176,7 @@ class SettingsTableViewController: UITableViewController,
     }
 
     @objc func close(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        delegate?.settingsTableViewControllerDidTapButton()
     }
 
     // MARK: - Table view data source
