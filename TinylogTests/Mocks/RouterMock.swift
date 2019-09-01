@@ -29,7 +29,12 @@ class RouterMock: Router {
     }
     
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
-        presentedViewController = viewController
+        if viewController is UINavigationController {
+            let nc = viewController as? UINavigationController
+            presentedViewController = nc?.viewControllers.first
+        } else {
+            presentedViewController = viewController
+        }
     }
     
     func dismiss(animated: Bool) {
@@ -37,9 +42,6 @@ class RouterMock: Router {
     }
     
     public func pop(animated: Bool) {
-//        let viewController = viewControllers.removeLast()
-//        performCompletion(for: viewController)
-        
         guard let first = viewControllers.first else { return }
         performCompletion(for: first)
         viewControllers = [first]
