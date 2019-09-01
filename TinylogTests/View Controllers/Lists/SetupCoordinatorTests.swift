@@ -26,8 +26,6 @@ class SetupCoordinatorTests: XCTestCase {
 
     func testCoordinator_whenStart_ResultIsTrue() {
         coordinator.start()
-        let navigationController = routerMock.presentedViewController as! UINavigationController
-        XCTAssertTrue(navigationController.viewControllers.first is SetupViewController)
-        XCTAssertTrue(navigationController.viewControllers.count == 1)
+        XCTAssertTrue(routerMock.presentedViewController is SetupViewController)
     }
 }
