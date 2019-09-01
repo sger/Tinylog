@@ -21,32 +21,12 @@ final class ApplicationCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        if Environment.current.userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
-            showSetup()
-        } else {
-            showSplitView()
-        }
+        showSplitView()
     }
     
     func showSplitView() {
         let coordinator = SplitViewCoordinator(window: window, managedObjectContext: managedObjectContext)
         add(coordinator)
         coordinator.start()
-    }
-    
-    func showSetup() {
-        let coordinator = SetupCoordinator(window: window, navigationController: navigationController)
-        coordinator.delegate = self
-        add(coordinator)
-        coordinator.start()
-    }
-}
-
-// MARK: - SetupCoordinatorDelegate
-
-extension ApplicationCoordinator: SetupCoordinatorDelegate {
-    func setupCoordinatorDidFinish(_ coordinator: Coordinator) {
-        remove(coordinator)
-        showSplitView()
     }
 }
