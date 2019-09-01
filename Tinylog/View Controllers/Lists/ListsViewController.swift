@@ -246,15 +246,6 @@ final class ListsViewController: CoreDataTableViewController {
 
         checkForLists()
 
-//        let userDefaults = Environment.current.userDefaults
-//
-//        if userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
-//            Utils.delay(0.1, closure: { () -> Void in
-//                self.displaySetup()
-//            })
-//        } else if userDefaults.bool(forKey: EnvUserDefaults.syncMode) {
-//            startSync()
-//        }
         if Environment.current.userDefaults.bool(forKey: EnvUserDefaults.syncMode) {
             startSync()
         }
