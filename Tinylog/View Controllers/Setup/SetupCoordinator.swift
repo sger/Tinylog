@@ -14,27 +14,28 @@ protocol SetupCoordinatorDelegate: AnyObject {
 
 final class SetupCoordinator: BaseCoordinator {
     
-    private let window: UIWindow
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
+    private let router: Router
     
     weak var delegate: SetupCoordinatorDelegate?
     
-    init(window: UIWindow, navigationController: UINavigationController) {
-        self.window = window
+    init(router: Router, navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.navigationController.isNavigationBarHidden = true
+        self.router = router
     }
     
     override func start() {
         let vc = SetupViewController()
         vc.delegate = self
-        window.rootViewController = vc
-        window.makeKeyAndVisible()
+        let nc = UINavigationController(rootViewController: vc)
+        nc.modalPresentationStyle = .fullScreen
+        router.present(nc, animated: true)
     }
 }
 
 extension SetupCoordinator: SetupViewControllerDelegate {
     func setupViewControllerDismissed(_ viewController: SetupViewController) {
         delegate?.setupCoordinatorDidFinish(self)
+        router.dismiss(animated: true)
     }
 }

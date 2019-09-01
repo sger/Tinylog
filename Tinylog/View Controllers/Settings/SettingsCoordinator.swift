@@ -29,18 +29,13 @@ final class SettingsCoordinator: BaseCoordinator {
         vc.delegate = self
         let nc = UINavigationController(rootViewController: vc)
         nc.modalPresentationStyle = .fullScreen
-//        navigationController.present(nc, animated: true, completion: nil)
         router.present(nc, animated: true)
-//        router.push(vc, animated: true)
     }
 }
 
 extension SettingsCoordinator: SettingsTableViewControllerDelegate {
     func settingsTableViewControllerDidTapButton() {
-        print("!!!!!!!!")
         delegate?.settingsCoordinatorDidFinish(self)
-//        navigationController.dismiss(animated: true, completion: nil)
         router.dismiss(animated: true)
-//        router.pop(animated: true)
     }
 }

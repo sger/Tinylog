@@ -41,9 +41,23 @@ final class SplitViewCoordinator: BaseCoordinator {
         window.rootViewController = splitViewController
         window.backgroundColor = UIColor.white
         window.makeKeyAndVisible()
+        
+        if Environment.current.userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                self?.showSetup()
+            }
+        }
     }
     
-    func showSettings() {
+    private func showSetup() {
+        let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
+        let coordinator = SetupCoordinator(router: navigationRouter, navigationController: rootNavigationController)
+        coordinator.delegate = self
+        add(coordinator)
+        coordinator.start()
+    }
+    
+    private func showSettings() {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
         let coordinator = SettingsCoordinator(router: navigationRouter, navigationController: rootNavigationController)
         coordinator.delegate = self
@@ -51,7 +65,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         coordinator.start()
     }
     
-    func showAddListView(_ list: TLIList?, mode: AddListViewController.Mode) {
+    private func showAddListView(_ list: TLIList?, mode: AddListViewController.Mode) {
         let coordinator = AddListViewCoordinator(navigationController: rootNavigationController,
                                                  managedObjectContext: managedObjectContext,
                                                  list: list,
@@ -61,7 +75,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         coordinator.start()
     }
     
-    func showArchives() {
+    private func showArchives() {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
         let coordinator = ArchivesCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext)
         coordinator.onDismissed = { [weak self, weak coordinator] in
@@ -72,7 +86,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         coordinator.start()
     }
     
-    func showDetailViewController(_ managedObjectContext: NSManagedObjectContext, list: TLIList) {
+    private func showDetailViewController(_ managedObjectContext: NSManagedObjectContext, list: TLIList) {
         tasksViewController.list = list
         splitViewController.showDetailViewController(tasksViewController, sender: nil)
     }
@@ -117,6 +131,15 @@ extension SplitViewCoordinator: ArchivesCoordinatorDelegate {
         remove(coordinator)
     }
 }
+
+// MARK: - SetupCoordinatorDelegate
+
+extension SplitViewCoordinator: SetupCoordinatorDelegate {
+    func setupCoordinatorDidFinish(_ coordinator: Coordinator) {
+        remove(coordinator)
+    }
+}
+
 
 extension SplitViewCoordinator: UISplitViewControllerDelegate {
     
