@@ -51,7 +51,7 @@ final class SplitViewCoordinator: BaseCoordinator {
     
     private func showSetup() {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
-        let coordinator = SetupCoordinator(router: navigationRouter, navigationController: rootNavigationController)
+        let coordinator = SetupCoordinator(router: navigationRouter)
         coordinator.delegate = self
         add(coordinator)
         coordinator.start()

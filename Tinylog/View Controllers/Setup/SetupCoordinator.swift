@@ -14,20 +14,18 @@ protocol SetupCoordinatorDelegate: AnyObject {
 
 final class SetupCoordinator: BaseCoordinator {
     
-    private let navigationController: UINavigationController
     private let router: Router
     
     weak var delegate: SetupCoordinatorDelegate?
     
-    init(router: Router, navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(router: Router) {
         self.router = router
     }
     
     override func start() {
-        let vc = SetupViewController()
-        vc.delegate = self
-        let nc = UINavigationController(rootViewController: vc)
+        let viewController = SetupViewController()
+        viewController.delegate = self
+        let nc = UINavigationController(rootViewController: viewController)
         nc.modalPresentationStyle = .fullScreen
         router.present(nc, animated: true)
     }
