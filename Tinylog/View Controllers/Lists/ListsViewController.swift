@@ -17,16 +17,17 @@ protocol ListsViewControllerDelegate: AnyObject {
     func listsViewControllerDidAddList(_ viewController: ListsViewController,
                                        list: TLIList?,
                                        selectedMode mode: AddListViewController.Mode)
+    
+    func listsViewControllerDidTapArchives(_ viewController: ListsViewController)
 }
 
 final class ListsViewController: CoreDataTableViewController {
     
     weak var delegate: ListsViewControllerDelegate?
 
-    var managedObjectContext: NSManagedObjectContext!
-    
-    private var resultsViewController: ResultsViewController?
+    fileprivate let managedObjectContext: NSManagedObjectContext
     fileprivate let reachability = ReachabilityManager.instance.reachability!
+    fileprivate var resultsViewController: ResultsViewController?
 
     var listsFooterView: ListsFooterView = {
         let listsFooterView = ListsFooterView()
@@ -41,7 +42,16 @@ final class ListsViewController: CoreDataTableViewController {
         noListsLabel.text = localizedString(key: "Empty_lists")
         return noListsLabel
     }()
-
+    
+    init(managedObjectContext: NSManagedObjectContext) {
+        self.managedObjectContext = managedObjectContext
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
@@ -102,10 +112,10 @@ final class ListsViewController: CoreDataTableViewController {
         settingsButton.accessibilityIdentifier = "settingsButton"
         settingsButton.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         settingsButton.setBackgroundImage(settingsImage, for: UIControl.State())
-        settingsButton.setBackgroundImage(settingsImage, for: UIControl.State.highlighted)
+        settingsButton.setBackgroundImage(settingsImage, for: .highlighted)
         settingsButton.addTarget(self,
-                                 action: #selector(ListsViewController.displaySettings(_:)),
-                                 for: UIControl.Event.touchDown)
+                                 action: #selector(self.displaySettings(_:)),
+                                 for: .touchDown)
 
         let settingsBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
         navigationItem.hidesBackButton = true
@@ -524,15 +534,11 @@ extension ListsViewController: ListsFooterViewDelegate {
         checkForLists()
     }
     
-    func displayAddNewListVC(_ listsFooterView: ListsFooterView) {
+    func listsFooterViewAddNewList(_ listsFooterView: ListsFooterView) {
         delegate?.listsViewControllerDidAddList(self, list: nil, selectedMode: .create)
     }
     
-    func displayArchivesVC(_ listsFooterView: ListsFooterView) {
-        let archiveViewController: ArchivesViewController = ArchivesViewController()
-        archiveViewController.managedObjectContext = managedObjectContext
-        let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        navigationController?.present(nc, animated: true, completion: nil)
+    func listsFooterViewDisplayArchives(_ listsFooterView: ListsFooterView) {
+        delegate?.listsViewControllerDidTapArchives(self)
     }
 }

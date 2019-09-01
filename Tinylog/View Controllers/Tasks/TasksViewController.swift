@@ -35,7 +35,7 @@ class TasksViewController: CoreDataTableViewController,
     EditTaskViewControllerDelegate {
 
     let kCellIdentifier = "TaskTableViewCell"
-    var managedObjectContext: NSManagedObjectContext!
+    fileprivate let managedObjectContext: NSManagedObjectContext
     
     var list: TLIList? {
         didSet {
@@ -115,13 +115,14 @@ class TasksViewController: CoreDataTableViewController,
         }
         return detailViewController.view.frame.size
     }
+    
+    init(managedObjectContext: NSManagedObjectContext) {
+        self.managedObjectContext = managedObjectContext
+        super.init(nibName: nil, bundle: nil)
+    }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
     func configureFetch() {

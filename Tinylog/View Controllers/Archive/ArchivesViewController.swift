@@ -10,13 +10,19 @@ import UIKit
 import CoreData
 import Reachability
 
+protocol ArchivesViewControllerDelegate: AnyObject {
+    func achivesViewViewControllerDidTapButton()
+}
+
 class ArchivesViewController: CoreDataTableViewController,
     UITextFieldDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
-    var managedObjectContext: NSManagedObjectContext!
+    var onTapCloseButton: (() -> Void)?
+    fileprivate let managedObjectContext: NSManagedObjectContext
     var resultsTableViewController: ResultsViewController?
-
+    weak var delegate: ArchivesViewControllerDelegate?
+    
     func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
@@ -51,6 +57,15 @@ class ArchivesViewController: CoreDataTableViewController,
         return noTasksLabel
     }()
 
+    init(managedObjectContext: NSManagedObjectContext) {
+        self.managedObjectContext = managedObjectContext
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -94,7 +109,7 @@ class ArchivesViewController: CoreDataTableViewController,
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close",
                                                             style: .plain,
                                                             target: self,
-                                                            action: #selector(ArchivesViewController.close(_:)))
+                                                            action: #selector(self.close(_:)))
 
         setEditing(false, animated: false)
 
@@ -166,7 +181,9 @@ class ArchivesViewController: CoreDataTableViewController,
     // MARK: - Close
     
     @objc func close(_ button: UIButton) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
+//        delegate?.achivesViewViewControllerDidTapButton()
+        onTapCloseButton?()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -388,20 +405,5 @@ class ArchivesViewController: CoreDataTableViewController,
                 }
             }
         }
-    }
-}
-
-extension ArchivesViewController: AddListViewControllerDelegate {
-    func addListViewController(_ viewController: AddListViewController, didSucceedWithList list: TLIList) {
-        let indexPath = frc?.indexPath(forObject: list)
-        self.tableView?.selectRow(at: indexPath!, animated: true, scrollPosition: UITableView.ScrollPosition.none)
-        let tasksViewController: TasksViewController = TasksViewController()
-        tasksViewController.managedObjectContext = managedObjectContext
-        tasksViewController.list = list
-        navigationController?.pushViewController(tasksViewController, animated: true)
-    }
-    
-    func addListViewControllerDismissed(_ viewController: AddListViewController) {
-        
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Spiros Gerokostas. All rights reserved.
 //
 
-protocol ListsFooterViewDelegate: class {
-    func displayAddNewListVC(_ listsFooterView: ListsFooterView)
-    func displayArchivesVC(_ listsFooterView: ListsFooterView)
+protocol ListsFooterViewDelegate: AnyObject {
+    func listsFooterViewAddNewList(_ listsFooterView: ListsFooterView)
+    func listsFooterViewDisplayArchives(_ listsFooterView: ListsFooterView)
 }

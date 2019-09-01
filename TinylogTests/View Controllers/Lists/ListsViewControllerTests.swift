@@ -42,9 +42,8 @@ class ListsViewControllerTests: XCTestCase {
 
         testWithEnvironment(language: .en, userDefaults: userDefaults, block: {
 
-            let vc = ListsViewController()
-            vc.managedObjectContext = coreDataManager.managedObjectContext
-
+            let vc = ListsViewController(managedObjectContext: coreDataManager.managedObjectContext)
+            
             assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
             assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneX(.portrait)))
         })

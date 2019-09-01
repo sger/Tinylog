@@ -108,10 +108,10 @@ final class ListsFooterView: UIView {
     // MARK: - Actions
     
     @objc func addNewList(_ sender: AddListButton) {
-        delegate?.displayAddNewListVC(self)
+        delegate?.listsFooterViewAddNewList(self)
     }
     
     @objc func displayArchive(_ button: ArchiveButton) {
-        delegate?.displayArchivesVC(self)
+        delegate?.listsFooterViewDisplayArchives(self)
     }
 }
