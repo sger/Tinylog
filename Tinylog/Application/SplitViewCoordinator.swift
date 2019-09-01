@@ -16,7 +16,7 @@ final class SplitViewCoordinator: BaseCoordinator {
     private let tasksViewController: TasksViewController
     private let splitViewController: UISplitViewController
     
-    var folderNavigationController: UINavigationController {
+    var rootNavigationController: UINavigationController {
         return splitViewController.viewControllers[0] as! UINavigationController
     }
     
@@ -24,9 +24,8 @@ final class SplitViewCoordinator: BaseCoordinator {
         self.window = window
         self.managedObjectContext = managedObjectContext
         self.splitViewController = UISplitViewController()
-        self.listsViewController = ListsViewController()
-        self.listsViewController.managedObjectContext = self.managedObjectContext
-        self.tasksViewController = TasksViewController()
+        self.listsViewController = ListsViewController(managedObjectContext: managedObjectContext)
+        self.tasksViewController = TasksViewController(managedObjectContext: managedObjectContext)
     }
     
     override func start() {
@@ -45,14 +44,15 @@ final class SplitViewCoordinator: BaseCoordinator {
     }
     
     func showSettings() {
-        let coordinator = SettingsCoordinator(navigationController: folderNavigationController)
+        let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
+        let coordinator = SettingsCoordinator(router: navigationRouter, navigationController: rootNavigationController)
         coordinator.delegate = self
         add(coordinator)
         coordinator.start()
     }
     
     func showAddListView(_ list: TLIList?, mode: AddListViewController.Mode) {
-        let coordinator = AddListViewCoordinator(navigationController: folderNavigationController,
+        let coordinator = AddListViewCoordinator(navigationController: rootNavigationController,
                                                  managedObjectContext: managedObjectContext,
                                                  list: list,
                                                  mode: mode)
@@ -61,8 +61,18 @@ final class SplitViewCoordinator: BaseCoordinator {
         coordinator.start()
     }
     
+    func showArchives() {
+        let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
+        let coordinator = ArchivesCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext)
+        coordinator.onDismissed = { [weak self, weak coordinator] in
+            self?.remove(coordinator)
+        }
+        coordinator.delegate = self
+        add(coordinator)
+        coordinator.start()
+    }
+    
     func showDetailViewController(_ managedObjectContext: NSManagedObjectContext, list: TLIList) {
-        tasksViewController.managedObjectContext = managedObjectContext
         tasksViewController.list = list
         splitViewController.showDetailViewController(tasksViewController, sender: nil)
     }
@@ -77,6 +87,10 @@ extension SplitViewCoordinator: AddListViewCoordinatorDelegate {
 }
 
 extension SplitViewCoordinator: ListsViewControllerDelegate {
+    func listsViewControllerDidTapArchives(_ viewController: ListsViewController) {
+        showArchives()
+    }
+    
     func listsViewControllerDidAddList(_ viewController: ListsViewController,
                                        list: TLIList?,
                                        selectedMode mode: AddListViewController.Mode) {
@@ -94,6 +108,12 @@ extension SplitViewCoordinator: ListsViewControllerDelegate {
 
 extension SplitViewCoordinator: SettingsCoordinatorDelegate {
     func settingsCoordinatorDidFinish(_ coordinator: Coordinator) {
+        remove(coordinator)
+    }
+}
+
+extension SplitViewCoordinator: ArchivesCoordinatorDelegate {
+    func archivesCoordinatorDidFinish(_ coordinator: Coordinator) {
         remove(coordinator)
     }
 }

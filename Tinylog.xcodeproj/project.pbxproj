@@ -16,6 +16,10 @@
 		5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */; };
 		5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */; };
 		56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataManager.swift */; };
+		561FC06C231ABC190059ADA8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC06B231ABC190059ADA8 /* Router.swift */; };
+		561FC06E231ABC410059ADA8 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC06D231ABC410059ADA8 /* NavigationRouter.swift */; };
+		561FC071231ACDCA0059ADA8 /* RouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC070231ACDCA0059ADA8 /* RouterMock.swift */; };
+		561FC073231ACE940059ADA8 /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC072231ACE940059ADA8 /* RouterTests.swift */; };
 		5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5628E8CD1E85898700AAFD20 /* Assets.xcassets */; };
 		5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */; };
 		562B1ECE22774CE2000EF38C /* HelpTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B1ECD22774CE2000EF38C /* HelpTableViewControllerTests.swift */; };
@@ -88,6 +92,7 @@
 		5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */; };
 		5638FCCB2274500A00CB4071 /* UIFont+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */; };
 		5638FCCF2274501700CB4071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCD2274501700CB4071 /* AppDelegate.swift */; };
+		5653C1D5231ADDD0003D1A19 /* ArchivesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653C1D4231ADDD0003D1A19 /* ArchivesCoordinator.swift */; };
 		565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */; };
 		5662CE9D2316E18A0069A50D /* AddListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5662CE9C2316E18A0069A50D /* AddListViewCoordinator.swift */; };
 		5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669ADED2274613400555E56 /* ListsViewControllerTests.swift */; };
@@ -141,6 +146,10 @@
 		5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Environment.swift"; sourceTree = "<group>"; };
 		5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTests.swift; sourceTree = "<group>"; };
 		56119AEC226F90EA00F8D798 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		561FC06B231ABC190059ADA8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		561FC06D231ABC410059ADA8 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
+		561FC070231ACDCA0059ADA8 /* RouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMock.swift; sourceTree = "<group>"; };
+		561FC072231ACE940059ADA8 /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
 		5628E8C31E85898700AAFD20 /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5628E8CD1E85898700AAFD20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5628E8D21E85898700AAFD20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -222,6 +231,7 @@
 		5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Tinylog.swift"; sourceTree = "<group>"; };
 		5638FCC42274500A00CB4071 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
 		5638FCCD2274501700CB4071 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5653C1D4231ADDD0003D1A19 /* ArchivesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesCoordinator.swift; sourceTree = "<group>"; };
 		565DA78C1E86999A00C6E60C /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
 		565DA78D1E86999A00C6E60C /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
 		565DA78E1E86999A00C6E60C /* Tinylog 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -315,6 +325,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		561FC06F231ACDB80059ADA8 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				561FC070231ACDCA0059ADA8 /* RouterMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		5628E8BA1E85898700AAFD20 = {
 			isa = PBXGroup;
 			children = (
@@ -365,6 +383,7 @@
 		5628E8DA1E85898700AAFD20 /* TinylogTests */ = {
 			isa = PBXGroup;
 			children = (
+				561FC06F231ACDB80059ADA8 /* Mocks */,
 				562E74FF2319593A00316E23 /* Stubs */,
 				562E74FB2319592400316E23 /* BaseCoordinatorTests.swift */,
 				56EFE834227D9F4A0056B072 /* Core Data */,
@@ -374,6 +393,7 @@
 				5628E8DD1E85898700AAFD20 /* Info.plist */,
 				5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */,
 				56892690226C767A00D952A6 /* FindColorByNameTests.swift */,
+				561FC072231ACE940059ADA8 /* RouterTests.swift */,
 			);
 			path = TinylogTests;
 			sourceTree = "<group>";
@@ -523,6 +543,7 @@
 			children = (
 				5638FC6F22744D8200CB4071 /* ArchiveTasksViewController.swift */,
 				5638FC7022744D8200CB4071 /* ArchivesViewController.swift */,
+				5653C1D4231ADDD0003D1A19 /* ArchivesCoordinator.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -569,6 +590,7 @@
 				5638FC9222744F4000CB4071 /* EditTaskViewControllerDelegate.swift */,
 				5601EADD2298527F00A57819 /* ReusableView.swift */,
 				56E4E6E3230868290085DBC4 /* ListsFooterViewDelegate.swift */,
+				561FC06B231ABC190059ADA8 /* Router.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -643,6 +665,7 @@
 				56B7B7DE227ECADB003BCAC3 /* Environment.swift */,
 				5638FCCD2274501700CB4071 /* AppDelegate.swift */,
 				56F746092316B037005A1D41 /* SplitViewCoordinator.swift */,
+				561FC06D231ABC410059ADA8 /* NavigationRouter.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1041,8 +1064,10 @@
 				5638FC6122744CDC00CB4071 /* AddTaskView.swift in Sources */,
 				56F746082316AF75005A1D41 /* ApplicationCoordinator.swift in Sources */,
 				5638FC8A22744ECF00CB4071 /* Utils.swift in Sources */,
+				561FC06E231ABC410059ADA8 /* NavigationRouter.swift in Sources */,
 				5638FC7B22744D8200CB4071 /* HelpTableViewController.swift in Sources */,
 				56E4E6E4230868290085DBC4 /* ListsFooterViewDelegate.swift in Sources */,
+				561FC06C231ABC190059ADA8 /* Router.swift in Sources */,
 				5638FC7F22744D8200CB4071 /* EditTaskViewController.swift in Sources */,
 				56F7460C2316B095005A1D41 /* SetupCoordinator.swift in Sources */,
 				5638FC8322744D8200CB4071 /* ResultsViewController.swift in Sources */,
@@ -1056,6 +1081,7 @@
 				5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */,
 				5638FC7C22744D8200CB4071 /* AboutViewController.swift in Sources */,
 				5638FCB022744F9F00CB4071 /* TLINotification.swift in Sources */,
+				5653C1D5231ADDD0003D1A19 /* ArchivesCoordinator.swift in Sources */,
 				5638FC9A22744F7C00CB4071 /* LocalizedString.swift in Sources */,
 				56F7460A2316B037005A1D41 /* SplitViewCoordinator.swift in Sources */,
 				5638FC8022744D8200CB4071 /* TasksViewController.swift in Sources */,
@@ -1080,6 +1106,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				561FC071231ACDCA0059ADA8 /* RouterMock.swift in Sources */,
 				5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */,
 				5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */,
 				56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */,
@@ -1089,6 +1116,7 @@
 				5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */,
 				5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */,
 				562B1ECE22774CE2000EF38C /* HelpTableViewControllerTests.swift in Sources */,
+				561FC073231ACE940059ADA8 /* RouterTests.swift in Sources */,
 				5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */,
 				5669ADF22274613500555E56 /* ListTests.swift in Sources */,
 				56052B512317A979003B79E7 /* TaskTests.swift in Sources */,
