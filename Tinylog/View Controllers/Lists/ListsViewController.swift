@@ -17,12 +17,12 @@ protocol ListsViewControllerDelegate: AnyObject {
     func listsViewControllerDidAddList(_ viewController: ListsViewController,
                                        list: TLIList?,
                                        selectedMode mode: AddListViewController.Mode)
-    
+
     func listsViewControllerDidTapArchives(_ viewController: ListsViewController)
 }
 
 final class ListsViewController: CoreDataTableViewController {
-    
+
     weak var delegate: ListsViewControllerDelegate?
 
     fileprivate let managedObjectContext: NSManagedObjectContext
@@ -42,16 +42,16 @@ final class ListsViewController: CoreDataTableViewController {
         noListsLabel.text = localizedString(key: "Empty_lists")
         return noListsLabel
     }()
-    
+
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
@@ -79,9 +79,9 @@ final class ListsViewController: CoreDataTableViewController {
 
         title = localizedString(key: "My_lists")
         view.accessibilityIdentifier = "MyLists"
-  
+
         setupNavigationBarProperties()
-        
+
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
@@ -105,7 +105,7 @@ final class ListsViewController: CoreDataTableViewController {
         addSearchController(with: "Search",
                             searchResultsUpdater: self,
                             searchResultsController: resultsViewController!)
-        
+
         resultsViewController?.tableView?.delegate = self
 
         let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
@@ -138,7 +138,7 @@ final class ListsViewController: CoreDataTableViewController {
 
         registerNotifications()
     }
-    
+
     deinit {
         unregisterNotifications()
     }
@@ -219,7 +219,7 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     // MARK: - Display Setup
-    
+
     func displaySetup() {
         let setupViewController: SetupViewController = SetupViewController()
         let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
@@ -343,7 +343,7 @@ final class ListsViewController: CoreDataTableViewController {
         } else {
             list = resultsViewController?.frc?.object(at: indexPath) as! TLIList
         }
-        
+
         delegate?.listsViewControllerDidTapList(self, list: list)
     }
 
@@ -514,22 +514,22 @@ extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, 
 // MARK: - ListsFooterViewDelegate
 
 extension ListsViewController: ListsFooterViewDelegate {
-    
+
     func selectTableViewCell(with list: TLIList) {
         guard let indexPath = frc?.indexPath(forObject: list) else {
             print("error with index path")
             return
         }
-        
+
         tableView?.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-        
+
         checkForLists()
     }
-    
+
     func listsFooterViewAddNewList(_ listsFooterView: ListsFooterView) {
         delegate?.listsViewControllerDidAddList(self, list: nil, selectedMode: .create)
     }
-    
+
     func listsFooterViewDisplayArchives(_ listsFooterView: ListsFooterView) {
         delegate?.listsViewControllerDidTapArchives(self)
     }

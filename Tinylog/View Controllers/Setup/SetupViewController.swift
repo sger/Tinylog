@@ -14,7 +14,7 @@ protocol SetupViewControllerDelegate: AnyObject {
 }
 
 final class SetupViewController: UIViewController {
-    
+
     weak var delegate: SetupViewControllerDelegate?
 
     lazy var subtitleLabel: UILabel = {

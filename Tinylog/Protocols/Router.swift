@@ -10,9 +10,9 @@ import UIKit
 
 public protocol Router: class {
     func present(_ viewController: UIViewController, animated: Bool)
-    func present(_ viewController: UIViewController, animated: Bool, completion: (()->Void)?)
+    func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
     func push(_ viewController: UIViewController, animated: Bool)
-    func push(_ viewController: UIViewController, animated: Bool, completion: (()->Void)?)
+    func push(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
     func dismiss(animated: Bool)
     func pop(animated: Bool)
 }
@@ -22,10 +22,9 @@ extension Router {
                         animated: Bool) {
         present(viewController, animated: animated, completion: nil)
     }
-    
+
     public func push(_ viewController: UIViewController,
                         animated: Bool) {
         push(viewController, animated: animated, completion: nil)
     }
 }
-

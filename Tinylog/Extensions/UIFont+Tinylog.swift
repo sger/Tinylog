@@ -199,7 +199,7 @@ extension UIFont {
                         kTLIFontTimesNewRomanKey,
                         kTLIFontPalatinoKey,
                         kTLIFontIowanKey])
-            
+
         }
 
         return fontDictionary!.object(forKey: key) as? NSDictionary

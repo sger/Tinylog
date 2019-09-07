@@ -35,7 +35,7 @@ extension UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "textColor")!]
         definesPresentationContext = true
     }
-    
+
     public func setupNavigationBarProperties() {
         navigationController?.navigationBar.barTintColor = UIColor(named: "mainColor")
         navigationController?.navigationBar.backgroundColor = UIColor(named: "mainColor")
@@ -44,7 +44,7 @@ extension UIViewController {
             textAttributes[NSAttributedString.Key.foregroundColor] = UIColor(named: "textColor")
             navigationController?.navigationBar.titleTextAttributes = textAttributes
         }
-        
+
         view.backgroundColor = UIColor(named: "mainColor")
     }
 }

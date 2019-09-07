@@ -19,10 +19,10 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     private let managedObjectContext: NSManagedObjectContext
     private let mode: Mode
     private let list: TLIList?
-    
+
     private var name: UITextField?
     private var menuColorsView: MenuColorsView?
-    
+
     weak var delegate: AddListViewControllerDelegate?
 
     init(managedObjectContext: NSManagedObjectContext, list: TLIList?, mode: Mode) {
@@ -38,9 +38,9 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupNavigationBarProperties()
-        
+
         tableView.backgroundColor = UIColor(named: "mainColor")
         tableView.separatorColor = UIColor(named: "tableViewSeparator")
 
@@ -48,7 +48,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                                                            style: UIBarButtonItem.Style.plain,
                                                            target: self,
                                                            action: #selector(AddListViewController.cancel(_:)))
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
                                                             style: UIBarButtonItem.Style.plain,
                                                             target: self,
@@ -139,14 +139,14 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         if let list = list {
             list.title = name?.text
             list.color = menuColorsView?.currentColor
-            
+
             // swiftlint:disable force_try
             try! managedObjectContext.save()
             name?.resignFirstResponder()
             delegate?.addListViewController(self, didSucceedWithList: list)
         }
     }
-    
+
     private func createOrEditList() {
         if let text = name?.text, text.isEmpty {
             SVProgressHUD.show()

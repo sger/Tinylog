@@ -124,9 +124,9 @@ class ArchiveTasksViewController: CoreDataTableViewController,
         configureFetch()
 
         self.title = "Archive"
-        
+
         setupNavigationBarProperties()
-        
+
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
     /// Access core data managed object context.
     let coreDataManager = CoreDataManager(model: "Tinylog")
-    
+
     var applicationCoordinator: ApplicationCoordinator!
 
     /**
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
         FirebaseApp.configure()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-            
+
         applicationCoordinator = ApplicationCoordinator(window: window!, managedObjectContext: coreDataManager.managedObjectContext)
         applicationCoordinator.start()
 

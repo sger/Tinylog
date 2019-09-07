@@ -13,15 +13,15 @@ protocol SetupCoordinatorDelegate: AnyObject {
 }
 
 final class SetupCoordinator: BaseCoordinator {
-    
+
     private let router: Router
-    
+
     weak var delegate: SetupCoordinatorDelegate?
-    
+
     init(router: Router) {
         self.router = router
     }
-    
+
     override func start() {
         let viewController = SetupViewController()
         viewController.delegate = self

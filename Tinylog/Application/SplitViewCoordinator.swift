@@ -9,17 +9,18 @@
 import CoreData
 
 final class SplitViewCoordinator: BaseCoordinator {
-    
+
     private let window: UIWindow
     private let managedObjectContext: NSManagedObjectContext
     private let listsViewController: ListsViewController
     private let tasksViewController: TasksViewController
     private let splitViewController: UISplitViewController
-    
+
+    // swiftlint:disable force_cast
     var rootNavigationController: UINavigationController {
         return splitViewController.viewControllers[0] as! UINavigationController
     }
-    
+
     init(window: UIWindow, managedObjectContext: NSManagedObjectContext) {
         self.window = window
         self.managedObjectContext = managedObjectContext
@@ -27,29 +28,29 @@ final class SplitViewCoordinator: BaseCoordinator {
         self.listsViewController = ListsViewController(managedObjectContext: managedObjectContext)
         self.tasksViewController = TasksViewController(managedObjectContext: managedObjectContext)
     }
-    
+
     override func start() {
-        
+
         let masterNC: UINavigationController = UINavigationController(rootViewController: listsViewController)
         let detailNC: UINavigationController = UINavigationController(rootViewController: tasksViewController)
-        
+
         listsViewController.delegate = self
-        
+
         splitViewController.viewControllers = [masterNC, detailNC]
         splitViewController.delegate = self
         splitViewController.preferredDisplayMode = .allVisible
-        
+
         window.rootViewController = splitViewController
         window.backgroundColor = UIColor(named: "mainColor")
         window.makeKeyAndVisible()
-        
+
         if Environment.current.userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
                 self?.showSetup()
             }
         }
     }
-    
+
     private func showSetup() {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
         let coordinator = SetupCoordinator(router: navigationRouter)
@@ -57,7 +58,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         add(coordinator)
         coordinator.start()
     }
-    
+
     private func showSettings() {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
         let coordinator = SettingsCoordinator(router: navigationRouter, navigationController: rootNavigationController)
@@ -65,7 +66,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         add(coordinator)
         coordinator.start()
     }
-    
+
     private func showAddListView(_ list: TLIList?, mode: AddListViewController.Mode) {
         let coordinator = AddListViewCoordinator(navigationController: rootNavigationController,
                                                  managedObjectContext: managedObjectContext,
@@ -75,7 +76,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         add(coordinator)
         coordinator.start()
     }
-    
+
     private func showArchives() {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
         let coordinator = ArchivesCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext)
@@ -86,7 +87,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         add(coordinator)
         coordinator.start()
     }
-    
+
     private func showDetailViewController(_ managedObjectContext: NSManagedObjectContext, list: TLIList) {
         tasksViewController.list = list
         splitViewController.showDetailViewController(tasksViewController, sender: nil)
@@ -105,17 +106,17 @@ extension SplitViewCoordinator: ListsViewControllerDelegate {
     func listsViewControllerDidTapArchives(_ viewController: ListsViewController) {
         showArchives()
     }
-    
+
     func listsViewControllerDidAddList(_ viewController: ListsViewController,
                                        list: TLIList?,
                                        selectedMode mode: AddListViewController.Mode) {
         showAddListView(list, mode: mode)
     }
-    
+
     func listsViewControllerDidTapSettings(_ viewController: ListsViewController) {
         showSettings()
     }
-    
+
     func listsViewControllerDidTapList(_ viewController: ListsViewController, list: TLIList) {
         showDetailViewController(managedObjectContext, list: list)
     }
@@ -141,16 +142,15 @@ extension SplitViewCoordinator: SetupCoordinatorDelegate {
     }
 }
 
-
 extension SplitViewCoordinator: UISplitViewControllerDelegate {
-    
+
     func splitViewController(
         _ svc: UISplitViewController,
         shouldHide vc: UIViewController,
         in orientation: UIInterfaceOrientation) -> Bool {
         return false
     }
-    
+
     func splitViewController(
         _ splitViewController: UISplitViewController,
         collapseSecondary secondaryViewController: UIViewController,
