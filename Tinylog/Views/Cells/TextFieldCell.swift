@@ -27,7 +27,7 @@ class TextFieldCell: UITableViewCell, UITextFieldDelegate, TextFieldCellDelegate
         textField?.adjustsFontSizeToFitWidth = true
         textField?.delegate = self
         textField?.font = UIFont.regularFontWithSize(17.0)
-        textField?.textColor = UIColor.tinylogTextColor
+        textField?.textColor = UIColor(named: "textColor")
         textField?.clearButtonEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: -20.0)
         self.contentView.addSubview(textField!)
     }
