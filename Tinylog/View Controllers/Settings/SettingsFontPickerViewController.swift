@@ -15,9 +15,17 @@ class SettingsFontPickerViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "Font"
-        view.backgroundColor = UIColor.tinylogLightGray
-        tableView?.backgroundColor = UIColor.tinylogLightGray
+        
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
+        tableView?.backgroundView = UIView()
+        tableView?.backgroundView?.backgroundColor = UIColor.clear
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        
         let selectedKey: NSString? = SettingsFontPickerViewController.selectedKey()!
 
         if selectedKey != nil {
@@ -138,11 +146,13 @@ class SettingsFontPickerViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: GroupedTableViewCell = GroupedTableViewCell(style: .default,
                                                               reuseIdentifier: "CellIdentifier")
+        cell.backgroundColor = UIColor(named: "mainColor")
         let key: NSString = self.keys()!.object(at: indexPath.row) as! NSString
         let selectedKey = SettingsFontPickerViewController.selectedKey()!
         cell.textLabel!.text = self.cellTextForKey(key: key) as String?
         cell.tintColor = UIColor.tinylogMainColor
-
+        cell.textLabel?.textColor = UIColor(named: "textColor")
+        
         if key as NSString == selectedKey {
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {

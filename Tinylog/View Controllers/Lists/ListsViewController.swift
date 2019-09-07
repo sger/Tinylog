@@ -79,9 +79,10 @@ final class ListsViewController: CoreDataTableViewController {
 
         title = localizedString(key: "My_lists")
         view.accessibilityIdentifier = "MyLists"
-
-        view.backgroundColor = UIColor.white
-        tableView?.backgroundColor = UIColor.white
+  
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
@@ -441,7 +442,7 @@ extension ListsViewController {
                 self.delegate?.listsViewControllerDidAddList(self, list: list, selectedMode: .edit)
         })
 
-        editRowAction.backgroundColor = UIColor.tinylogEditRowAction
+        editRowAction.backgroundColor = UIColor(named: "tableViewSelected")
         let archiveRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
             title: "Archive",

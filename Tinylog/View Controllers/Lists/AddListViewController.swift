@@ -39,8 +39,11 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.tinylogLightGray
-        tableView.separatorColor = UIColor.tinylogTableViewLineColor
+       
+        setupNavigationBarProperties()
+        
+        tableView.backgroundColor = UIColor(named: "mainColor")
+        tableView.separatorColor = UIColor(named: "tableViewSeparator")
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: UIBarButtonItem.Style.plain,
@@ -116,7 +119,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     private func configureCell(_ cell: TextFieldCell, indexPath: IndexPath) {
         if indexPath.row == 0 {
             cell.textField?.placeholder = "Name"
-            cell.backgroundColor = .white
+            cell.backgroundColor = UIColor(named: "mainColor")
             cell.textField?.returnKeyType = .go
             cell.textField?.delegate = self
             name = cell.textField

@@ -20,12 +20,12 @@ final class HelpTableViewCell: GenericTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = UIColor.tinylogLightGray
+        backgroundColor = UIColor(named: "mainColor")
 
         helpLabel.lineBreakMode = .byTruncatingTail
         helpLabel.numberOfLines = 0
         helpLabel.textAlignment = .left
-        helpLabel.textColor = UIColor.tinylogTextColor
+        helpLabel.textColor = UIColor(named: "textColor")
         contentView.addSubview(helpLabel)
 
         helpLabel.snp.makeConstraints { (maker) in
@@ -36,7 +36,7 @@ final class HelpTableViewCell: GenericTableViewCell {
         }
 
         let selectedBackgroundView = UIView(frame: frame)
-        selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
+        selectedBackgroundView.backgroundColor = UIColor(named: "tableViewSelected")
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         self.selectedBackgroundView = selectedBackgroundView
 

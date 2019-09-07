@@ -33,9 +33,15 @@ class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDel
         super.viewDidLoad()
 
         title = "Text Size"
+        
+        setupNavigationBarProperties()
 
-        view.backgroundColor = UIColor.tinylogLightGray
-        tableView?.backgroundColor = UIColor.tinylogLightGray
+        tableView?.backgroundColor = UIColor(named: "mainColor")
+        tableView?.backgroundView = UIView()
+        tableView?.backgroundView?.backgroundColor = UIColor.clear
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
@@ -59,12 +65,13 @@ class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDel
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
         cell.accessoryType = UITableViewCell.AccessoryType.none
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.backgroundColor = UIColor(named: "mainColor")
 
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Use System Size"
                 cell.textLabel?.font = UIFont.tinylogFontOfSize(17.0)
-                cell.textLabel?.textColor = UIColor.tinylogTextColor
+                cell.textLabel?.textColor = UIColor(named: "textColor")
 
                 let switchMode: UISwitch = UISwitch(
                     frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 20.0))
