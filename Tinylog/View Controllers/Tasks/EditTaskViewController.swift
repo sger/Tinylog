@@ -21,7 +21,7 @@ class EditTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Edit Task"
-        
+
         setupNavigationBarProperties()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(

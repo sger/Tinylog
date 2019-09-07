@@ -13,13 +13,13 @@ protocol AddListViewCoordinatorDelegate: AnyObject {
 }
 
 final class AddListViewCoordinator: BaseCoordinator {
-    
+
     weak var delegate: AddListViewCoordinatorDelegate?
     private let navigationController: UINavigationController
     private let managedObjectContext: NSManagedObjectContext
     private let list: TLIList?
     private let mode: AddListViewController.Mode
-    
+
     init(navigationController: UINavigationController,
          managedObjectContext: NSManagedObjectContext,
          list: TLIList? = nil,
@@ -29,7 +29,7 @@ final class AddListViewCoordinator: BaseCoordinator {
         self.list = list
         self.mode = mode
     }
-    
+
     override func start() {
         let addListViewController = AddListViewController(managedObjectContext: managedObjectContext,
                                                           list: list,
@@ -42,13 +42,13 @@ final class AddListViewCoordinator: BaseCoordinator {
 }
 
 extension AddListViewCoordinator: AddListViewControllerDelegate {
-    
+
     func addListViewController(_ viewController: AddListViewController, didSucceedWithList list: TLIList) {
         navigationController.dismiss(animated: true) {
             self.delegate?.addListViewCoordinatorDismissed(self, list: list)
         }
     }
-    
+
     func addListViewControllerDismissed(_ viewController: AddListViewController) {
         navigationController.dismiss(animated: true, completion: nil)
     }

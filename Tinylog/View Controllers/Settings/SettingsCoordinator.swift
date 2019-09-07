@@ -13,17 +13,17 @@ protocol SettingsCoordinatorDelegate: AnyObject {
 }
 
 final class SettingsCoordinator: BaseCoordinator {
-    
+
     private let navigationController: UINavigationController
     private let router: Router
-    
+
     weak var delegate: SettingsCoordinatorDelegate?
-    
+
     init(router: Router, navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.router = router
     }
-    
+
     override func start() {
         let vc = SettingsTableViewController()
         vc.delegate = self

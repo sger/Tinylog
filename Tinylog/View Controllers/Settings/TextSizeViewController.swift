@@ -33,7 +33,7 @@ class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDel
         super.viewDidLoad()
 
         title = "Text Size"
-        
+
         setupNavigationBarProperties()
 
         tableView?.backgroundColor = UIColor(named: "mainColor")

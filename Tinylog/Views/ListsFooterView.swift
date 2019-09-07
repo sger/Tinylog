@@ -13,7 +13,7 @@ final class ListsFooterView: UIView {
 
     private let footerView: UIView = UIView()
     let footerHeight: CGFloat = 60
-    
+
     weak var delegate: ListsFooterViewDelegate?
 
     private var infoLabel: UILabel = {
@@ -84,11 +84,11 @@ final class ListsFooterView: UIView {
         infoLabel.snp.makeConstraints { (make) in
             make.center.equalTo(self)
         }
-        
+
         addListButton.addTarget(self,
                                 action: #selector(addNewList(_:)),
                                 for: .touchDown)
-        
+
         archiveButton.addTarget(self,
                                 action: #selector(displayArchive(_:)),
                                 for: .touchDown)
@@ -104,13 +104,13 @@ final class ListsFooterView: UIView {
         infoLabel.text = str
         setNeedsUpdateConstraints()
     }
-    
+
     // MARK: - Actions
-    
+
     @objc func addNewList(_ sender: AddListButton) {
         delegate?.listsFooterViewAddNewList(self)
     }
-    
+
     @objc func displayArchive(_ button: ArchiveButton) {
         delegate?.listsFooterViewDisplayArchives(self)
     }

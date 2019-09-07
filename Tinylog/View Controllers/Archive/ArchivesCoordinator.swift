@@ -11,20 +11,20 @@ protocol ArchivesCoordinatorDelegate: AnyObject {
 }
 
 final class ArchivesCoordinator: BaseCoordinator {
-    
+
     private let router: Router
     private let managedObjectContext: NSManagedObjectContext
-    
+
     weak var delegate: ArchivesCoordinatorDelegate?
-    
+
     var onDismissed: (() -> Void)?
-    
+
     init(router: Router,
          managedObjectContext: NSManagedObjectContext) {
         self.router = router
         self.managedObjectContext = managedObjectContext
     }
-    
+
     override func start() {
         let archivesViewController = ArchivesViewController(managedObjectContext: managedObjectContext)
         archivesViewController.onTapCloseButton = { [weak self] in

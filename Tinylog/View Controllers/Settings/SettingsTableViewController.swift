@@ -19,7 +19,7 @@ class SettingsTableViewController: UITableViewController,
     UIGestureRecognizerDelegate {
 
     weak var delegate: SettingsTableViewControllerDelegate?
-    
+
     let settingsCellIdentifier = "SettingsCellIdentifier"
 
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
@@ -39,9 +39,9 @@ class SettingsTableViewController: UITableViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupNavigationBarProperties()
-        
+
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
@@ -53,8 +53,7 @@ class SettingsTableViewController: UITableViewController,
             style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(SettingsTableViewController.close(_:)))
-        
-        
+
         title = "Settings"
 
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -76,7 +75,7 @@ class SettingsTableViewController: UITableViewController,
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-    
+
     // swiftlint:disable cyclomatic_complexity
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
@@ -84,7 +83,7 @@ class SettingsTableViewController: UITableViewController,
         cell.textLabel?.textColor = UIColor(named: "textColor")
 
         cell.backgroundColor = UIColor(named: "mainColor")
-        
+
         let selectedBackgroundView = UIView(frame: cell.frame)
         selectedBackgroundView.backgroundColor = UIColor(named: "tableViewSelected")
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw

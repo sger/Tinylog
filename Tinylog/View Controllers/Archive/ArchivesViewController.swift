@@ -22,7 +22,7 @@ class ArchivesViewController: CoreDataTableViewController,
     fileprivate let managedObjectContext: NSManagedObjectContext
     var resultsTableViewController: ResultsViewController?
     weak var delegate: ArchivesViewControllerDelegate?
-    
+
     func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
@@ -61,11 +61,11 @@ class ArchivesViewController: CoreDataTableViewController,
         self.managedObjectContext = managedObjectContext
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,9 +73,9 @@ class ArchivesViewController: CoreDataTableViewController,
 
         title = localizedString(key: "My_archives")
         view.accessibilityIdentifier = "MyArchives"
-        
+
         setupNavigationBarProperties()
-        
+
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
@@ -180,7 +180,7 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     // MARK: - Close
-    
+
     @objc func close(_ button: UIButton) {
 //        dismiss(animated: true, completion: nil)
 //        delegate?.achivesViewViewControllerDidTapButton()

@@ -36,7 +36,7 @@ class TasksViewController: CoreDataTableViewController,
 
     let kCellIdentifier = "TaskTableViewCell"
     fileprivate let managedObjectContext: NSManagedObjectContext
-    
+
     var list: TLIList? {
         didSet {
             if let list = list {
@@ -46,7 +46,7 @@ class TasksViewController: CoreDataTableViewController,
             }
         }
     }
-    
+
     var currentIndexPath: IndexPath?
 
     var tasksFooterView: TasksFooterView = {
@@ -115,7 +115,7 @@ class TasksViewController: CoreDataTableViewController,
         }
         return detailViewController.view.frame.size
     }
-    
+
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
         super.init(nibName: nil, bundle: nil)
@@ -150,7 +150,7 @@ class TasksViewController: CoreDataTableViewController,
         super.viewDidLoad()
 
         setupNavigationBarProperties()
-        
+
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
@@ -353,7 +353,7 @@ class TasksViewController: CoreDataTableViewController,
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if let list = list {
             if TLITask.numOfTasks(with: managedObjectContext, list) == 0 {
                 addTaskView?.textField.becomeFirstResponder()
@@ -596,7 +596,7 @@ class TasksViewController: CoreDataTableViewController,
             button.layer.add(animation, forKey: "bounceAnimation")
 
             try! managedObjectContext.save()
-            
+
             updateFooterInfoText(self.list!)
         }
     }
