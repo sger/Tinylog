@@ -15,7 +15,7 @@ final class ResultsViewController: CoreDataTableViewController {
     lazy var noResultsLabel: UILabel = {
         let noResultsLabel: UILabel = UILabel()
         noResultsLabel.font = UIFont.tinylogFontOfSize(16.0)
-        noResultsLabel.textColor = UIColor.tinylogTextColor
+        noResultsLabel.textColor = UIColor(named: "textColor")
         noResultsLabel.textAlignment = NSTextAlignment.center
         noResultsLabel.text = localizedString(key: "No_results")
         return noResultsLabel
@@ -24,11 +24,11 @@ final class ResultsViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.white
-        tableView?.backgroundColor = UIColor.white
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
-        tableView?.backgroundColor = UIColor.tinylogLightGray
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
         tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellIdentifier)

@@ -39,7 +39,6 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
         setupNavigationBarProperties()
         
         tableView.backgroundColor = UIColor(named: "mainColor")

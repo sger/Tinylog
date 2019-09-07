@@ -31,13 +31,12 @@ extension UIViewController {
         searchController.searchBar.autocapitalizationType = .none
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.tinylogTextColor]
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "textColor")!]
         definesPresentationContext = true
     }
     
     public func setupNavigationBarProperties() {
-        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor(named: "mainColor")
         navigationController?.navigationBar.backgroundColor = UIColor(named: "mainColor")
 
