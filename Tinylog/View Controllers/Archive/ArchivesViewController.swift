@@ -74,8 +74,9 @@ class ArchivesViewController: CoreDataTableViewController,
         title = localizedString(key: "My_archives")
         view.accessibilityIdentifier = "MyArchives"
         
-        view.backgroundColor = UIColor.white
-        tableView?.backgroundColor = UIColor.white
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")

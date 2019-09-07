@@ -39,6 +39,14 @@ class SettingsTableViewController: UITableViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
+        tableView?.backgroundView = UIView()
+        tableView?.backgroundView?.backgroundColor = UIColor.clear
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Done",
@@ -46,8 +54,7 @@ class SettingsTableViewController: UITableViewController,
             target: self,
             action: #selector(SettingsTableViewController.close(_:)))
         
-        view.backgroundColor = UIColor.tinylogLightGray
-        tableView?.backgroundColor = UIColor.tinylogLightGray
+        
         title = "Settings"
 
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -74,10 +81,12 @@ class SettingsTableViewController: UITableViewController,
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
         cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         cell.textLabel?.font = UIFont.tinylogFontOfSize(17.0)
-        cell.textLabel?.textColor = UIColor.tinylogTextColor
+        cell.textLabel?.textColor = UIColor(named: "textColor")
 
+        cell.backgroundColor = UIColor(named: "mainColor")
+        
         let selectedBackgroundView = UIView(frame: cell.frame)
-        selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
+        selectedBackgroundView.backgroundColor = UIColor(named: "tableViewSelected")
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         cell.selectedBackgroundView = selectedBackgroundView
 

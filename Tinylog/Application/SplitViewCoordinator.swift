@@ -29,6 +29,7 @@ final class SplitViewCoordinator: BaseCoordinator {
     }
     
     override func start() {
+        
         let masterNC: UINavigationController = UINavigationController(rootViewController: listsViewController)
         let detailNC: UINavigationController = UINavigationController(rootViewController: tasksViewController)
         
@@ -39,7 +40,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         splitViewController.preferredDisplayMode = .allVisible
         
         window.rootViewController = splitViewController
-        window.backgroundColor = UIColor.white
+        window.backgroundColor = UIColor(named: "mainColor")
         window.makeKeyAndVisible()
         
         if Environment.current.userDefaults.bool(forKey: EnvUserDefaults.setupScreen) {

@@ -44,9 +44,10 @@ class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor.tinylogLightGray
-        tableView?.backgroundColor = UIColor.tinylogLightGray
+        
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
@@ -69,14 +70,6 @@ class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegat
 
     @objc func updateFonts() {
         self.navigationController?.navigationBar.setNeedsDisplay()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        tableView?.frame = CGRect(x: 0.0, y: 0.0,
-                                  width: view.frame.size.width,
-                                  height: view.frame.size.height)
     }
 
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {

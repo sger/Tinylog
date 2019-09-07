@@ -65,13 +65,13 @@ class TaskTableViewCell: GenericTableViewCell {
                 if boolValue {
                     checkBoxButton.checkMarkIcon!.isHidden = false
                     checkBoxButton.alpha = 0.5
-                    taskLabel.textColor = UIColor.lightGray
+                    taskLabel.alpha = 0.5
                     taskLabel.linkAttributes = [
                         kCTForegroundColorAttributeName as AnyHashable: UIColor.lightGray]
                 } else {
                     checkBoxButton.checkMarkIcon!.isHidden = true
                     checkBoxButton.alpha = 1.0
-                    taskLabel.textColor = UIColor.tinylogTextColor
+                    taskLabel.alpha = 1.0
                     taskLabel.linkAttributes = [
                         kCTForegroundColorAttributeName as AnyHashable: UIColor(
                             rgba: currentTask!.list!.color!)]
@@ -88,13 +88,13 @@ class TaskTableViewCell: GenericTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = UIColor.tinylogLightGray
+        backgroundColor = UIColor(named: "mainColor")
         selectionStyle = .none
 
         taskLabel.lineBreakMode = .byTruncatingTail
         taskLabel.numberOfLines = 0
         taskLabel.textAlignment = .left
-        taskLabel.textColor = UIColor.tinylogTextColor
+        taskLabel.textColor = UIColor(named: "textColor")
         contentView.addSubview(taskLabel)
 
         checkBoxButton.tableViewCell = self

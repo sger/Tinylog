@@ -124,34 +124,22 @@ class ArchiveTasksViewController: CoreDataTableViewController,
         configureFetch()
 
         self.title = "Archive"
+        
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.rowHeight = UITableView.automaticDimension
+        tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
+        tableView?.tableFooterView = UIView()
 
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Close",
             style: UIBarButtonItem.Style.plain,
             target: self,
             action: #selector(ArchiveTasksViewController.close(_:)))
-
-        self.view.backgroundColor = UIColor(
-            red: 250.0 / 255.0,
-            green: 250.0 / 255.0,
-            blue: 250.0 / 255.0,
-            alpha: 1.0)
-        self.tableView?.backgroundColor = UIColor(
-            red: 250.0 / 255.0,
-            green: 250.0 / 255.0,
-            blue: 250.0 / 255.0,
-            alpha: 1.0)
-        self.tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
-
-        self.tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-
-        self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
-        self.tableView?.frame = CGRect(
-            x: 0.0,
-            y: 0.0,
-            width: self.view.frame.size.width,
-            height: self.view.frame.size.height - 50.0)
 
         self.view.addSubview(self.noTasksLabel!)
 

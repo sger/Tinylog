@@ -13,11 +13,7 @@ class TasksFooterView: UIView {
 
     var borderLineView: UIView = {
         let borderLineView = UIView()
-        borderLineView.backgroundColor = UIColor(
-            red: 213.0 / 255.0,
-            green: 213.0 / 255.0,
-            blue: 213.0 / 255.0,
-            alpha: 1.0)
+        borderLineView.backgroundColor = UIColor(named: "tableViewSeparator")
         return borderLineView
     }()
 
@@ -26,8 +22,7 @@ class TasksFooterView: UIView {
     var infoLabel: UILabel = {
         let infoLabel = UILabel()
         infoLabel.font = UIFont.regularFontWithSize(14.0)
-        infoLabel.textColor = UIColor.tinylogTextColor
-        //infoLabel.verticalAlignment = TTTAttributedLabelVerticalAlignment.top
+        infoLabel.textColor = UIColor(named: "textColor")
         infoLabel.text = ""
         return infoLabel
     }()

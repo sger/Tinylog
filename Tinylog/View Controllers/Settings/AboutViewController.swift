@@ -36,8 +36,15 @@ class AboutViewController: GroupedTableViewController,
         super.viewDidLoad()
 
         title = "About"
-        view.backgroundColor = UIColor.tinylogLightGray
-        tableView?.backgroundColor = UIColor.tinylogLightGray
+        
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
+        tableView?.backgroundView = UIView()
+        tableView?.backgroundView?.backgroundColor = UIColor.clear
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
@@ -60,7 +67,8 @@ class AboutViewController: GroupedTableViewController,
 
     func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
         cell.textLabel?.font = UIFont.tinylogFontOfSize(17.0)
-        cell.textLabel?.textColor = UIColor.tinylogTextColor
+        cell.backgroundColor = UIColor(named: "mainColor")
+        cell.textLabel?.textColor = UIColor(named: "textColor")
         cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(15.0)
 
         let selectedBackgroundView = UIView(frame: cell.frame)

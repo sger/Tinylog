@@ -62,7 +62,7 @@ class TasksViewController: CoreDataTableViewController,
         addTransparentLayer.autoresizingMask = [
             UIView.AutoresizingMask.flexibleWidth,
             UIView.AutoresizingMask.flexibleBottomMargin]
-        addTransparentLayer.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
+        addTransparentLayer.backgroundColor = UIColor(named: "transparencyLayerColor")
         addTransparentLayer.alpha = 0.0
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
@@ -74,7 +74,7 @@ class TasksViewController: CoreDataTableViewController,
     lazy var noTasksLabel: UILabel? = {
         let noTasksLabel: UILabel = UILabel()
         noTasksLabel.font = UIFont.regularFontWithSize(18.0)
-        noTasksLabel.textColor = UIColor.tinylogTextColor
+        noTasksLabel.textColor = UIColor(named: "textColor")
         noTasksLabel.text = "Tap text field to create a new task."
         noTasksLabel.isHidden = true
         return noTasksLabel
@@ -83,7 +83,7 @@ class TasksViewController: CoreDataTableViewController,
     lazy var noListSelected: UILabel? = {
         let noListSelected: UILabel = UILabel()
         noListSelected.font = UIFont.regularFontWithSize(16.0)
-        noListSelected.textColor = UIColor.tinylogTextColor
+        noListSelected.textColor = UIColor(named: "textColor")
         noListSelected.textAlignment = NSTextAlignment.center
         noListSelected.text = "No List Selected"
         noListSelected.sizeToFit()
@@ -149,14 +149,15 @@ class TasksViewController: CoreDataTableViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.backgroundColor = UIColor.tinylogLightGray
-        self.tableView?.separatorColor = UIColor(named: "tableViewSeparator")
-        self.tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        self.tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        self.tableView?.rowHeight = UITableView.automaticDimension
-        self.tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
-        self.tableView?.tableFooterView = UIView()
+        setupNavigationBarProperties()
+        
+        tableView?.backgroundColor = UIColor(named: "mainColor")
+        tableView?.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.rowHeight = UITableView.automaticDimension
+        tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
+        tableView?.tableFooterView = UIView()
         tableView?.translatesAutoresizingMaskIntoConstraints = false
 
         tableView?.snp.makeConstraints({ (make) in

@@ -45,12 +45,12 @@ final class ListTableViewCell: GenericTableViewCell {
         self.list = nil
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = UIColor.white
+        backgroundColor = UIColor(named: "mainColor")
 
         listLabel.lineBreakMode = .byTruncatingTail
         listLabel.numberOfLines = 0
         listLabel.textAlignment = .left
-        listLabel.textColor = UIColor.tinylogTextColor
+        listLabel.textColor = UIColor(named: "textColor")
         contentView.addSubview(listLabel)
 
         totalTasksLabel.layer.cornerRadius = kRadius / 2.0
@@ -64,7 +64,7 @@ final class ListTableViewCell: GenericTableViewCell {
         contentView.addSubview(totalTasksLabel)
 
         let selectedBackgroundView = UIView(frame: frame)
-        selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
+        selectedBackgroundView.backgroundColor = UIColor(named: "tableViewSelected")
         selectedBackgroundView.contentMode = UIView.ContentMode.redraw
         self.selectedBackgroundView = selectedBackgroundView
 

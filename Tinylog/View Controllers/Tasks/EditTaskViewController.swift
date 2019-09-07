@@ -21,7 +21,8 @@ class EditTaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Edit Task"
-        view.backgroundColor = UIColor.white
+        
+        setupNavigationBarProperties()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Close",
@@ -42,7 +43,7 @@ class EditTaskViewController: UIViewController {
         textView?.bounces = true
         textView?.alwaysBounceVertical = true
         textView?.text = task?.displayLongText
-        textView?.textColor = UIColor.tinylogTextColor
+        textView?.textColor = UIColor(named: "textColor")
         textView?.font = UIFont.tinylogFontOfSize(17.0)
         view.addSubview(textView!)
 

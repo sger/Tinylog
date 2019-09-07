@@ -28,8 +28,8 @@ class CheckBoxButton: UIButton {
         circleView?.layer.cornerRadius = 30.0 / 2
         circleView?.layer.borderColor = UIColor.tinylogMainColor.cgColor
         circleView?.layer.borderWidth = 1.0
-        circleView?.layer.backgroundColor = UIColor.tinylogLightGray.cgColor
-        circleView?.backgroundColor = UIColor.tinylogLightGray
+        circleView?.layer.backgroundColor = UIColor(named: "mainColor")?.cgColor
+        circleView?.backgroundColor = UIColor(named: "mainColor")
         self.addSubview(circleView!)
 
         checkMarkIcon = UIImageView(image: UIImage(named: "check"))
