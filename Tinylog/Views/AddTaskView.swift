@@ -106,4 +106,10 @@ final class AddTaskView: UIView, UITextFieldDelegate {
 
         return false
     }
+    
+    func reset() {
+        textField.resignFirstResponder()
+        textField.text = nil
+        closeButton.isHidden = true
+    }
 }

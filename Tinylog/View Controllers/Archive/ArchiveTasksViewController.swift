@@ -8,31 +8,11 @@
 // swiftlint:disable force_cast
 import UIKit
 import TTTAttributedLabel
-// Consider refactoring the code to use the non-optional operators.
-private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// Consider refactoring the code to use the non-optional operators.
-private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 class ArchiveTasksViewController: CoreDataTableViewController,
     TTTAttributedLabelDelegate, EditTaskViewControllerDelegate {
 
+    var onTapCloseButton: (() -> Void)?
     let kCellIdentifier = "CellIdentifier"
     let kReminderCellIdentifier = "ReminderCellIdentifier"
     var managedObjectContext: NSManagedObjectContext!
@@ -413,26 +393,12 @@ class ArchiveTasksViewController: CoreDataTableViewController,
         }
     }
 
-    func tableView(_ tableView: UITableView,
-                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 52)!)
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell: TaskTableViewCell = tableView.dequeueReusableCell(
                 withIdentifier: kCellIdentifier) as! TaskTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
-
-            let height = isEstimatedRowHeightInCache(indexPath)
-            if height != nil {
-                let cellSize: CGSize = cell.systemLayoutSizeFitting(
-                    CGSize(width: self.view.frame.size.width, height: 0),
-                    withHorizontalFittingPriority: UILayoutPriority(rawValue: 1000),
-                    verticalFittingPriority: UILayoutPriority(rawValue: 52))
-                putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
-            }
             return cell
 
     }
@@ -466,43 +432,6 @@ class ArchiveTasksViewController: CoreDataTableViewController,
         let nc: UINavigationController = UINavigationController(rootViewController: editTaskViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)
-    }
-
-    func putEstimatedCellHeightToCache(_ indexPath: IndexPath, height: CGFloat) {
-        initEstimatedRowHeightCacheIfNeeded()
-        estimatedRowHeightCache?.setValue(height, forKey: NSString(format: "%ld", indexPath.row) as String)
-    }
-
-    func initEstimatedRowHeightCacheIfNeeded() {
-        if estimatedRowHeightCache == nil {
-            estimatedRowHeightCache = NSMutableDictionary()
-        }
-    }
-
-    func getEstimatedCellHeightFromCache(_ indexPath: IndexPath, defaultHeight: CGFloat) -> CGFloat? {
-        initEstimatedRowHeightCacheIfNeeded()
-
-        let height: CGFloat? = estimatedRowHeightCache!.value(
-            forKey: NSString(format: "%ld", indexPath.row) as String) as? CGFloat
-
-        if height != nil {
-            return height!
-        }
-
-        return defaultHeight
-    }
-
-    func isEstimatedRowHeightInCache(_ indexPath: IndexPath) -> Bool? {
-        let value = getEstimatedCellHeightFromCache(indexPath, defaultHeight: 0)
-        if value > 0 {
-            return true
-        }
-        return false
-    }
-
-    func tableViewReloadData() {
-        estimatedRowHeightCache = NSMutableDictionary()
-        self.tableView?.reloadData()
     }
 
     func onClose(_ editTaskViewController: EditTaskViewController, indexPath: IndexPath) {

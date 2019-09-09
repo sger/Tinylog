@@ -86,7 +86,7 @@ final class ListsViewController: CoreDataTableViewController {
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
-        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 22.0, bottom: 0, right: 0)
         tableView?.register(ListTableViewCell.self, forCellReuseIdentifier: ListTableViewCell.cellIdentifier)
         tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = 60
