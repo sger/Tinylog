@@ -29,20 +29,36 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
+protocol TasksViewControllerDelegate: AnyObject {
+    func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?)
+}
+
 class TasksViewController: CoreDataTableViewController,
     AddTaskViewDelegate,
     TTTAttributedLabelDelegate,
     EditTaskViewControllerDelegate {
 
+    weak var delegate: TasksViewControllerDelegate?
+    
     let kCellIdentifier = "TaskTableViewCell"
     fileprivate let managedObjectContext: NSManagedObjectContext
 
     var list: TLIList? {
         didSet {
+            
             if let list = list {
+                noListSelected?.isHidden = true
                 title = list.title
                 configureFetch()
+                
+                if self.checkForEmptyResults() {
+                    noTasksLabel?.isHidden = false
+                } else {
+                    noTasksLabel?.isHidden = true
+                }
                 updateFooterInfoText(list)
+            } else {
+                noListSelected?.isHidden = false
             }
         }
     }
@@ -141,6 +157,7 @@ class TasksViewController: CoreDataTableViewController,
 
         do {
             try self.frc?.performFetch()
+            tableView?.reloadData()
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
@@ -153,7 +170,7 @@ class TasksViewController: CoreDataTableViewController,
 
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
-        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        tableView?.separatorInset = UIEdgeInsets(top: 0, left: 22.0, bottom: 0, right: 0)
         tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
@@ -245,8 +262,8 @@ class TasksViewController: CoreDataTableViewController,
     }
 
     func updateFooterInfoText(_ list: TLIList) {
-        //Fetch all objects from list
-
+        
+        // Fetch all objects from list
         let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         fetchRequestTotal.sortDescriptors = [positionDescriptor]
@@ -343,12 +360,7 @@ class TasksViewController: CoreDataTableViewController,
     }
 
     @objc func displayArchive(_ button: ArchiveButton) {
-        let viewController: ArchiveTasksViewController = ArchiveTasksViewController()
-        viewController.managedObjectContext = managedObjectContext
-        viewController.list = list
-        let nc: UINavigationController = UINavigationController(rootViewController: viewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        delegate?.tasksViewControllerDidTapArchives(self, list: list)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -661,6 +673,11 @@ class TasksViewController: CoreDataTableViewController,
             animations: {
                 self.addTransparentLayer!.alpha = 0.0
             }, completion: nil)
+    }
+    
+    func resetAddTaskView() {
+        hideTransparentLayer()
+        addTaskView?.reset()
     }
 
     // MARK: TTTAttributedLabelDelegate

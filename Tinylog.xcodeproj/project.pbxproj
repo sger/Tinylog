@@ -93,6 +93,7 @@
 		5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */; };
 		5638FCCB2274500A00CB4071 /* UIFont+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */; };
 		5638FCCF2274501700CB4071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCD2274501700CB4071 /* AppDelegate.swift */; };
+		564661E523256779007BA4A1 /* ArchiveTasksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564661E423256779007BA4A1 /* ArchiveTasksCoordinator.swift */; };
 		5653C1D5231ADDD0003D1A19 /* ArchivesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653C1D4231ADDD0003D1A19 /* ArchivesCoordinator.swift */; };
 		565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */; };
 		5662CE9D2316E18A0069A50D /* AddListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5662CE9C2316E18A0069A50D /* AddListViewCoordinator.swift */; };
@@ -233,6 +234,7 @@
 		5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Tinylog.swift"; sourceTree = "<group>"; };
 		5638FCC42274500A00CB4071 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
 		5638FCCD2274501700CB4071 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		564661E423256779007BA4A1 /* ArchiveTasksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveTasksCoordinator.swift; sourceTree = "<group>"; };
 		5653C1D4231ADDD0003D1A19 /* ArchivesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesCoordinator.swift; sourceTree = "<group>"; };
 		565DA78C1E86999A00C6E60C /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
 		565DA78D1E86999A00C6E60C /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		5669ADEE2274613400555E56 /* ListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		566E6A8E226E4A340093783E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		566F21FE23261F30004C6681 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		5672FB5F22880AED008DD57E /* ArchivesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivesViewControllerTests.swift; sourceTree = "<group>"; };
 		56892690226C767A00D952A6 /* FindColorByNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindColorByNameTests.swift; sourceTree = "<group>"; };
 		568F7DFB1F2BA0DC00CFDDDD /* TinylogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -546,6 +549,7 @@
 				5638FC6F22744D8200CB4071 /* ArchiveTasksViewController.swift */,
 				5638FC7022744D8200CB4071 /* ArchivesViewController.swift */,
 				5653C1D4231ADDD0003D1A19 /* ArchivesCoordinator.swift */,
+				564661E423256779007BA4A1 /* ArchiveTasksCoordinator.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -604,6 +608,7 @@
 				5638FC9E22744F8800CB4071 /* TLIDeviceInfo.h */,
 				5638FC9F22744F8800CB4071 /* TLIDrawingUtils.m */,
 				5638FCA022744F8800CB4071 /* TLIDeviceInfo.m */,
+				566F21FE23261F30004C6681 /* Operators.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1093,6 +1098,7 @@
 				5638FCA122744F8800CB4071 /* TLIDrawingUtils.m in Sources */,
 				56F746072316AF75005A1D41 /* BaseCoordinator.swift in Sources */,
 				5638FCB122744F9F00CB4071 /* TLIList+CoreDataProperties.swift in Sources */,
+				564661E523256779007BA4A1 /* ArchiveTasksCoordinator.swift in Sources */,
 				5638FC7E22744D8200CB4071 /* TextSizeViewController.swift in Sources */,
 				5638FC4C22744CDC00CB4071 /* GroupedTableViewCell.swift in Sources */,
 				5638FCAE22744F9F00CB4071 /* TLIMention+CoreDataProperties.swift in Sources */,

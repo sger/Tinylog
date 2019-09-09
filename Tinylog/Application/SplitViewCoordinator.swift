@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import SVProgressHUD
 
 final class SplitViewCoordinator: BaseCoordinator {
 
@@ -33,8 +34,12 @@ final class SplitViewCoordinator: BaseCoordinator {
 
         let masterNC: UINavigationController = UINavigationController(rootViewController: listsViewController)
         let detailNC: UINavigationController = UINavigationController(rootViewController: tasksViewController)
+        
+        tasksViewController.navigationItem.leftItemsSupplementBackButton = true
+        tasksViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
 
         listsViewController.delegate = self
+        tasksViewController.delegate = self
 
         splitViewController.viewControllers = [masterNC, detailNC]
         splitViewController.delegate = self
@@ -83,14 +88,32 @@ final class SplitViewCoordinator: BaseCoordinator {
         coordinator.onDismissed = { [weak self, weak coordinator] in
             self?.remove(coordinator)
         }
-        coordinator.delegate = self
+        add(coordinator)
+        coordinator.start()
+    }
+    
+    private func showArchiveTasks(_ list: TLIList) {
+        let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
+        let coordinator = ArchiveTasksCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext, list: list)
+        coordinator.onDismissed = { [weak self, weak coordinator] in
+            self?.remove(coordinator)
+        }
         add(coordinator)
         coordinator.start()
     }
 
     private func showDetailViewController(_ managedObjectContext: NSManagedObjectContext, list: TLIList) {
         tasksViewController.list = list
-        splitViewController.showDetailViewController(tasksViewController, sender: nil)
+        
+        let isIPad = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
+
+        if isIPad {
+            tasksViewController.resetAddTaskView()
+        }
+        
+        if let navigationController = tasksViewController.navigationController {
+            splitViewController.showDetailViewController(navigationController, sender: nil)
+        }
     }
 }
 
@@ -122,14 +145,23 @@ extension SplitViewCoordinator: ListsViewControllerDelegate {
     }
 }
 
-extension SplitViewCoordinator: SettingsCoordinatorDelegate {
-    func settingsCoordinatorDidFinish(_ coordinator: Coordinator) {
-        remove(coordinator)
+extension SplitViewCoordinator: TasksViewControllerDelegate {
+    func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?) {
+        if let list = list {
+            showArchiveTasks(list)
+        } else {
+            SVProgressHUD.show()
+            SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.dark)
+            SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor)
+            SVProgressHUD.setForegroundColor(UIColor.white)
+            SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0)!)
+            SVProgressHUD.showError(withStatus: "Please select a list")
+        }
     }
 }
 
-extension SplitViewCoordinator: ArchivesCoordinatorDelegate {
-    func archivesCoordinatorDidFinish(_ coordinator: Coordinator) {
+extension SplitViewCoordinator: SettingsCoordinatorDelegate {
+    func settingsCoordinatorDidFinish(_ coordinator: Coordinator) {
         remove(coordinator)
     }
 }
@@ -141,6 +173,8 @@ extension SplitViewCoordinator: SetupCoordinatorDelegate {
         remove(coordinator)
     }
 }
+
+// MARK: - UISplitViewControllerDelegate
 
 extension SplitViewCoordinator: UISplitViewControllerDelegate {
 
