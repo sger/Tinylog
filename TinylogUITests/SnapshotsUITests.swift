@@ -31,7 +31,7 @@ class SnapshotsUITests: XCTestCase {
         }
 
         snapshot("02")
-        app/*@START_MENU_TOKEN@*/.buttons["addListButton"]/*[[".otherElements[\"MyLists\"]",".buttons[\"plus\"]",".buttons[\"addListButton\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["addListButton"].tap()
 
         snapshot("03")
         app.navigationBars["Add List"].buttons["Cancel"].tap()
