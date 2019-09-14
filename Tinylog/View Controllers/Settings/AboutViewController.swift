@@ -72,8 +72,8 @@ class AboutViewController: GroupedTableViewController,
         cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(15.0)
 
         let selectedBackgroundView = UIView(frame: cell.frame)
-        selectedBackgroundView.backgroundColor = UIColor.tinylogLighterGray
-        selectedBackgroundView.contentMode = UIView.ContentMode.redraw
+        selectedBackgroundView.backgroundColor = UIColor(named: "tableViewSelected")
+        selectedBackgroundView.contentMode = .redraw
         cell.selectedBackgroundView = selectedBackgroundView
 
         if indexPath.section == 0 {
@@ -100,7 +100,7 @@ class AboutViewController: GroupedTableViewController,
     // MARK: Actions
 
     func close(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
@@ -240,6 +240,6 @@ class AboutViewController: GroupedTableViewController,
         default:
             break
         }
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
