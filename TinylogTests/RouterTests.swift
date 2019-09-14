@@ -19,12 +19,21 @@ class RouterTests: XCTestCase {
     override func setUp() {
         super.setUp()
         coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
+        
+        let userDefaults = MockUserDefaults()
+        userDefaults.set(21.0, forKey: EnvUserDefaults.fontSize)
+        userDefaults.set(kTLIFontPalatinoKey, forKey: String(kTLIFontDefaultsKey))
+        
+        Environment.pushEnvironment(language: .en, userDefaults: userDefaults)
+        
         routerMock = RouterMock()
         listsViewController = ListsViewController(managedObjectContext: coreDataManager.managedObjectContext)
         tasksViewController = TasksViewController(managedObjectContext: coreDataManager.managedObjectContext)
     }
 
     override func tearDown() {
+        
+        Environment.popEnvironment()
         coreDataManager = nil
         routerMock = nil
         listsViewController = nil
