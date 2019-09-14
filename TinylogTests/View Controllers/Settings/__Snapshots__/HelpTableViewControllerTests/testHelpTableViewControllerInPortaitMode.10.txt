@@ -1,5 +1,9 @@
-<UITableView; frame = (0 0; 320 568); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {320, 1225.5}; adjustedContentInset: {44, 0, 0, 0}; dataSource: <_UIFilteredDataSource>>
-   | <UIView; frame = (0 -44; 320 568); autoresize = W+H; layer = <CALayer>>
+<UITableView; frame = (0 0; 320 568); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -20}; contentSize: {320, 1255}; adjustedContentInset: {20, 0, 0, 0}; dataSource: <_UIFilteredDataSource>>
+   | <UIView; frame = (0 -20; 320 568); autoresize = W+H; layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 805.5; 320 89.5); hidden = YES; autoresize = W; layer = <CALayer>>
+   |    | <UITableViewCellContentView; frame = (0 0; 320 89.5); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    | <UILabel; frame = (16 20; 294 49.5); text = 'Delete a list by swiping ...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    | <_UITableViewCellSeparatorView; frame = (16 89; 304 0.5); layer = <CALayer>>
    | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 716; 320 89.5); hidden = YES; autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 320 89.5); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 294 49.5); text = 'Edit a list by swiping to...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
@@ -8,7 +12,7 @@
    |    | <UITableViewCellContentView; frame = (0 0; 320 89.5); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 294 49.5); text = 'Archive a list by swiping...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 89; 304 0.5); layer = <CALayer>>
-   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 537; 320 89.5); hidden = YES; autoresize = W; layer = <CALayer>>
+   | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 537; 320 89.5); autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 320 89.5); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 294 49.5); text = 'Reorder lists and tasks b...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 89; 304 0.5); layer = <CALayer>>
@@ -36,7 +40,7 @@
    |    | <UITableViewCellContentView; frame = (0 0; 320 89.5); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 294 49.5); text = 'Create a new list by tapp...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 89; 304 0.5); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (3 518; 311 3); alpha = 0; autoresize = TM; layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (3 542; 311 3); alpha = 0; autoresize = TM; layer = <CALayer>>
    |    | <UIView; frame = (0 0; 311 3); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (314 3; 3 293); autoresize = LM; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
-   |    | <UIView; frame = (0 0; 3 293); layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (314 3; 3 314); autoresize = LM; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+   |    | <UIView; frame = (0 0; 3 314); layer = <CALayer>>
