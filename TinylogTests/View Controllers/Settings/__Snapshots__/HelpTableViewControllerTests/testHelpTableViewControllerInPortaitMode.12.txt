@@ -54,5 +54,5 @@
    |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
    | <_UIScrollViewScrollIndicator; frame = (3 728; 366 3); alpha = 0; autoresize = TM; layer = <CALayer>>
    |    | <UIView; frame = (0 0; 366 3); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (369 -40.5; 3 603.5); autoresize = LM; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
-   |    | <UIView; frame = (0 0; 3 603.5); layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (369 3; 3 365.5); autoresize = LM; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+   |    | <UIView; frame = (0 0; 3 365.5); layer = <CALayer>>

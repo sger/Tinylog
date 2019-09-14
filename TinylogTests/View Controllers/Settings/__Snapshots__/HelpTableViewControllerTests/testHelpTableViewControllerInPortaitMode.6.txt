@@ -1,5 +1,5 @@
-<UITableView; frame = (0 0; 1024 1366); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {1024, 1040}; adjustedContentInset: {44, 0, 0, 0}; dataSource: <_UIFilteredDataSource>>
-   | <UIView; frame = (0 -44; 1024 1366); autoresize = W+H; layer = <CALayer>>
+<UITableView; frame = (0 0; 1024 1366); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -20}; contentSize: {1024, 1040}; adjustedContentInset: {20, 0, 0, 0}; dataSource: <_UIFilteredDataSource>>
+   | <UIView; frame = (0 -20; 1024 1366); autoresize = W+H; layer = <CALayer>>
    | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 975; 1024 65); autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 1024 65); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 998 25); text = 'Thanks for choosing Tinyl...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
@@ -80,7 +80,7 @@
    | <_UITableViewCellSeparatorView; frame = (16 1949.5; 1008 0.5); autoresize = W; layer = <CALayer>>
    | <_UITableViewCellSeparatorView; frame = (16 2014.5; 1008 0.5); autoresize = W; layer = <CALayer>>
    | <_UITableViewCellSeparatorView; frame = (16 2079.5; 1008 0.5); autoresize = W; layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (3 1316; 1018 3); alpha = 0; autoresize = TM; layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (3 1340; 1018 3); alpha = 0; autoresize = TM; layer = <CALayer>>
    |    | <UIView; frame = (0 0; 1018 3); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (1018 365; 3 954); alpha = 0; autoresize = LM; layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (1018 389; 3 954); alpha = 0; autoresize = LM; layer = <CALayer>>
    |    | <UIView; frame = (0 0; 3 954); layer = <CALayer>>

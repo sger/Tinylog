@@ -1,5 +1,5 @@
-<UITableView; frame = (0 0; 1366 1024); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {1366, 1040}; adjustedContentInset: {44, 0, 0, 0}; dataSource: <_UIFilteredDataSource>>
-   | <UIView; frame = (0 -44; 1366 1024); autoresize = W+H; layer = <CALayer>>
+<UITableView; frame = (0 0; 1366 1024); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -20}; contentSize: {1366, 1040}; adjustedContentInset: {20, 0, 0, 0}; dataSource: <_UIFilteredDataSource>>
+   | <UIView; frame = (0 -20; 1366 1024); autoresize = W+H; layer = <CALayer>>
    | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 975; 1366 65); autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 1366 65); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 1340 25); text = 'Thanks for choosing Tinyl...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
@@ -64,7 +64,7 @@
    |    | <UITableViewCellContentView; frame = (0 0; 1366 65); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 1340 25); text = 'Create a new list by tapp...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 64.5; 1350 0.5); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (3 974; 1360 3); alpha = 0; autoresize = TM; layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (3 998; 1360 3); alpha = 0; autoresize = TM; layer = <CALayer>>
    |    | <UIView; frame = (0 0; 1360 3); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (1360 23; 3 954); alpha = 0; autoresize = LM; layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (1360 47; 3 954); alpha = 0; autoresize = LM; layer = <CALayer>>
    |    | <UIView; frame = (0 0; 3 954); layer = <CALayer>>

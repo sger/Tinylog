@@ -60,7 +60,7 @@
    |    | <UITableViewCellContentView; frame = (0 0; 414 89.5); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 388 49.5); text = 'Create a new list by tapp...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 89; 398 0.5); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (38 846; 338 3); alpha = 0; autoresize = TM; layer = <CALayer>>
-   |    | <UIView; frame = (0 0; 338 3); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (408 -6.5; 3 522.5); autoresize = LM; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
-   |    | <UIView; frame = (0 0; 3 522.5); layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (3 812; 405 3); alpha = 0; autoresize = TM; layer = <CALayer>>
+   |    | <UIView; frame = (0 0; 405 3); layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (408 3; 3 701); autoresize = LM; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+   |    | <UIView; frame = (0 0; 3 701); layer = <CALayer>>
