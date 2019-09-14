@@ -17,7 +17,7 @@ final class SetupViewController: UIViewController {
 
     weak var delegate: SetupViewControllerDelegate?
 
-    lazy var subtitleLabel: UILabel = {
+    private var subtitleLabel: UILabel = {
         let subtitleLabel: UILabel = UILabel()
         subtitleLabel.lineBreakMode = .byTruncatingTail
         subtitleLabel.numberOfLines = 1
@@ -28,7 +28,7 @@ final class SetupViewController: UIViewController {
         return subtitleLabel
     }()
 
-    lazy var descriptionLabel: UILabel = {
+    private var descriptionLabel: UILabel = {
         let descriptionLabel: UILabel = UILabel()
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.numberOfLines = 3
@@ -39,7 +39,7 @@ final class SetupViewController: UIViewController {
         return descriptionLabel
     }()
 
-    lazy var notNowButton: RoundedButton = {
+    private var notNowButton: RoundedButton = {
         let notNowButton = RoundedButton()
         notNowButton.accessibilityIdentifier = "notNowButton"
         notNowButton.setTitle(localizedString(key: "Later"), for: UIControl.State())
@@ -51,9 +51,9 @@ final class SetupViewController: UIViewController {
         return notNowButton
     }()
 
-    lazy var useiCloudButton: RoundedButton = {
+    private var useiCloudButton: RoundedButton = {
         let useiCloudButton = RoundedButton()
-        notNowButton.accessibilityIdentifier = "useiCloudButton"
+        useiCloudButton.accessibilityIdentifier = "useiCloudButton"
         useiCloudButton.setTitle(localizedString(key: "Use_iCloud"), for: UIControl.State())
         useiCloudButton.addTarget(
             self,
@@ -63,7 +63,7 @@ final class SetupViewController: UIViewController {
         return useiCloudButton
     }()
 
-    lazy var cloudImageView: UIImageView = {
+    private var cloudImageView: UIImageView = {
         let cloudImageView = UIImageView(image: UIImage(named: "cloud"))
         cloudImageView.translatesAutoresizingMaskIntoConstraints = false
         return cloudImageView
@@ -71,8 +71,9 @@ final class SetupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
-        self.view.backgroundColor = UIColor.tinylogLightGray
+        
+        navigationController?.isNavigationBarHidden = true
+        view.backgroundColor = UIColor(named: "setupBackgroundColor")
 
         cloudImageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview().offset(-90)
@@ -107,13 +108,13 @@ final class SetupViewController: UIViewController {
     }
 
     override func loadView() {
-        self.view = UIView()
-        self.view.addSubview(cloudImageView)
-        self.view.addSubview(notNowButton)
-        self.view.addSubview(useiCloudButton)
-        self.view.addSubview(subtitleLabel)
-        self.view.addSubview(descriptionLabel)
-        self.view.setNeedsUpdateConstraints()
+        view = UIView()
+        view.addSubview(cloudImageView)
+        view.addSubview(notNowButton)
+        view.addSubview(useiCloudButton)
+        view.addSubview(subtitleLabel)
+        view.addSubview(descriptionLabel)
+        view.setNeedsUpdateConstraints()
     }
 
     @objc func enableiCloudAndDismiss(_ button: RoundedButton) {
