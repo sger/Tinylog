@@ -85,7 +85,7 @@ final class SplitViewCoordinator: BaseCoordinator {
 
     private func showArchives() {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
-        let coordinator = ArchivesCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext)
+        let coordinator = ArchivedListsCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext)
         coordinator.delegate = self
         add(coordinator)
         coordinator.start()

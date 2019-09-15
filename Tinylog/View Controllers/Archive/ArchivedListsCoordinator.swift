@@ -1,5 +1,5 @@
 //
-//  ArchivesCoordinator.swift
+//  ArchivedListsCoordinator.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 31/08/2019.
@@ -10,7 +10,7 @@ protocol ArchivesCoordinatorDelegate: AnyObject {
     func archivesCoordinatorDidTapClose(_ coordinator: Coordinator)
 }
 
-final class ArchivesCoordinator: BaseCoordinator {
+final class ArchivedListsCoordinator: BaseCoordinator {
 
     private let router: Router
     private let managedObjectContext: NSManagedObjectContext
@@ -24,7 +24,7 @@ final class ArchivesCoordinator: BaseCoordinator {
     }
 
     override func start() {
-        let archivesViewController = ArchivesViewController(managedObjectContext: managedObjectContext)
+        let archivesViewController = ArchivedListsViewController(managedObjectContext: managedObjectContext)
         archivesViewController.delegate = self
         let nc = UINavigationController(rootViewController: archivesViewController)
         nc.modalPresentationStyle = .fullScreen
@@ -32,8 +32,8 @@ final class ArchivesCoordinator: BaseCoordinator {
     }
 }
 
-extension ArchivesCoordinator: ArchivesViewControllerDelegate {
-    func achivesViewViewControllerDidTapButton() {
+extension ArchivedListsCoordinator: ArchivedListsViewControllerDelegate {
+    func archivedListsViewControllerDidTapButton() {
         router.dismiss(animated: true, completion: nil)
         delegate?.archivesCoordinatorDidTapClose(self)
     }

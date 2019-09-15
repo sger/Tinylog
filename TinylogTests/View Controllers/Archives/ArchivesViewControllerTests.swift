@@ -44,7 +44,7 @@ class ArchivesViewControllerTests: XCTestCase {
         
         testWithEnvironment(language: .en, userDefaults: userDefaults, block: {
             
-            let vc = ArchivesViewController(managedObjectContext: coreDataManager.managedObjectContext)
+            let vc = ArchivedListsViewController(managedObjectContext: coreDataManager.managedObjectContext)
             
             assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
             assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneX(.portrait)))
