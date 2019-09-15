@@ -225,7 +225,7 @@ class ArchiveTasksViewController: CoreDataTableViewController,
     }
 
     func displayArchive(_ button: ArchiveButton) {
-        let archiveViewController: ArchivesViewController = ArchivesViewController(managedObjectContext: managedObjectContext)
+        let archiveViewController: ArchivedListsViewController = ArchivedListsViewController(managedObjectContext: managedObjectContext)
         let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.navigationController?.present(nc, animated: true, completion: nil)

@@ -1,5 +1,5 @@
 //
-//  ArchivesViewController.swift
+//  ArchivedListsViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -10,17 +10,17 @@ import UIKit
 import CoreData
 import Reachability
 
-protocol ArchivesViewControllerDelegate: AnyObject {
-    func achivesViewViewControllerDidTapButton()
+protocol ArchivedListsViewControllerDelegate: AnyObject {
+    func archivedListsViewControllerDidTapButton()
 }
 
-class ArchivesViewController: CoreDataTableViewController,
+class ArchivedListsViewController: CoreDataTableViewController,
     UITextFieldDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
     fileprivate let managedObjectContext: NSManagedObjectContext
     var resultsTableViewController: ResultsViewController?
-    weak var delegate: ArchivesViewControllerDelegate?
+    weak var delegate: ArchivedListsViewControllerDelegate?
 
     func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
@@ -108,32 +108,32 @@ class ArchivesViewController: CoreDataTableViewController,
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchivesViewController.syncActivityDidEndNotification(_:)),
+            selector: #selector(ArchivedListsViewController.syncActivityDidEndNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidEnd,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchivesViewController.syncActivityDidBeginNotification(_:)),
+            selector: #selector(ArchivedListsViewController.syncActivityDidBeginNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidBegin,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchivesViewController.updateFonts),
+            selector: #selector(ArchivedListsViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification),
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchivesViewController.appBecomeActive),
+            selector: #selector(ArchivedListsViewController.appBecomeActive),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchivesViewController.onChangeSize(_:)),
+            selector: #selector(ArchivedListsViewController.onChangeSize(_:)),
             name: UIContentSizeCategory.didChangeNotification,
             object: nil)
     }
@@ -174,7 +174,7 @@ class ArchivesViewController: CoreDataTableViewController,
     // MARK: - Close
 
     @objc func close(_ button: UIButton) {
-        delegate?.achivesViewViewControllerDidTapButton()
+        delegate?.archivedListsViewControllerDidTapButton()
     }
 
     override func viewDidAppear(_ animated: Bool) {
