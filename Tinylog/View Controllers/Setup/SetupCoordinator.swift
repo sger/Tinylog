@@ -34,6 +34,6 @@ final class SetupCoordinator: BaseCoordinator {
 extension SetupCoordinator: SetupViewControllerDelegate {
     func setupViewControllerDismissed(_ viewController: SetupViewController) {
         delegate?.setupCoordinatorDidFinish(self)
-        router.dismiss(animated: true)
+        router.dismiss(animated: true, completion: nil)
     }
 }

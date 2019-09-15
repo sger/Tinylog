@@ -33,7 +33,7 @@ final class ArchiveTasksCoordinator: BaseCoordinator {
         viewController.managedObjectContext = managedObjectContext
         viewController.list = list
         viewController.onTapCloseButton = { [weak self] in
-            self?.router.dismiss(animated: true)
+            self?.router.dismiss(animated: true, completion: nil)
             self?.onDismissed?()
         }
         

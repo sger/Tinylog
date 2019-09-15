@@ -45,8 +45,8 @@ extension NavigationRouter: Router {
         navigationController.present(viewController, animated: animated, completion: nil)
     }
 
-    public func dismiss(animated: Bool) {
-        navigationController.dismiss(animated: true, completion: nil)
+    public func dismiss(animated: Bool, completion: (() -> Void)?) {
+        navigationController.dismiss(animated: true, completion: completion)
     }
 
     private func performCompletion(for viewController: UIViewController) {

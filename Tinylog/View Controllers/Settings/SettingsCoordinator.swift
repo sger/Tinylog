@@ -36,6 +36,6 @@ final class SettingsCoordinator: BaseCoordinator {
 extension SettingsCoordinator: SettingsTableViewControllerDelegate {
     func settingsTableViewControllerDidTapButton() {
         delegate?.settingsCoordinatorDidFinish(self)
-        router.dismiss(animated: true)
+        router.dismiss(animated: true, completion: nil)
     }
 }

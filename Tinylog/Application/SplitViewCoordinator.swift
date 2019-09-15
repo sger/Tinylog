@@ -73,7 +73,8 @@ final class SplitViewCoordinator: BaseCoordinator {
     }
 
     private func showAddListView(_ list: TLIList?, mode: AddListViewController.Mode) {
-        let coordinator = AddListViewCoordinator(navigationController: rootNavigationController,
+        let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
+        let coordinator = AddListViewCoordinator(navigationController: navigationRouter,
                                                  managedObjectContext: managedObjectContext,
                                                  list: list,
                                                  mode: mode)
@@ -85,9 +86,7 @@ final class SplitViewCoordinator: BaseCoordinator {
     private func showArchives() {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
         let coordinator = ArchivesCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext)
-        coordinator.onDismissed = { [weak self, weak coordinator] in
-            self?.remove(coordinator)
-        }
+        coordinator.delegate = self
         add(coordinator)
         coordinator.start()
     }
@@ -121,6 +120,10 @@ extension SplitViewCoordinator: AddListViewCoordinatorDelegate {
     func addListViewCoordinatorDismissed(_ coordinator: Coordinator, list: TLIList) {
         listsViewController.selectTableViewCell(with: list)
         showDetailViewController(managedObjectContext, list: list)
+        remove(coordinator)
+    }
+    
+    func addListViewCoordinatorDidTapCancel(_ coordinator: Coordinator) {
         remove(coordinator)
     }
 }
@@ -170,6 +173,12 @@ extension SplitViewCoordinator: SettingsCoordinatorDelegate {
 
 extension SplitViewCoordinator: SetupCoordinatorDelegate {
     func setupCoordinatorDidFinish(_ coordinator: Coordinator) {
+        remove(coordinator)
+    }
+}
+
+extension SplitViewCoordinator: ArchivesCoordinatorDelegate {
+    func archivesCoordinatorDidTapClose(_ coordinator: Coordinator) {
         remove(coordinator)
     }
 }

@@ -10,21 +10,22 @@ import CoreData
 
 protocol AddListViewCoordinatorDelegate: AnyObject {
     func addListViewCoordinatorDismissed(_ coordinator: Coordinator, list: TLIList)
+    func addListViewCoordinatorDidTapCancel(_ coordinator: Coordinator)
 }
 
 final class AddListViewCoordinator: BaseCoordinator {
 
     weak var delegate: AddListViewCoordinatorDelegate?
-    private let navigationController: UINavigationController
+    private let router: Router
     private let managedObjectContext: NSManagedObjectContext
     private let list: TLIList?
     private let mode: AddListViewController.Mode
 
-    init(navigationController: UINavigationController,
+    init(navigationController: Router,
          managedObjectContext: NSManagedObjectContext,
          list: TLIList? = nil,
          mode: AddListViewController.Mode = .create) {
-        self.navigationController = navigationController
+        self.router = navigationController
         self.managedObjectContext = managedObjectContext
         self.list = list
         self.mode = mode
@@ -37,19 +38,20 @@ final class AddListViewCoordinator: BaseCoordinator {
         addListViewController.delegate = self
         let nc = UINavigationController(rootViewController: addListViewController)
         nc.modalPresentationStyle = .formSheet
-        navigationController.present(nc, animated: true, completion: nil)
+        router.present(nc, animated: true, completion: nil)
     }
 }
 
 extension AddListViewCoordinator: AddListViewControllerDelegate {
 
     func addListViewController(_ viewController: AddListViewController, didSucceedWithList list: TLIList) {
-        navigationController.dismiss(animated: true) {
+        router.dismiss(animated: true) {
             self.delegate?.addListViewCoordinatorDismissed(self, list: list)
         }
     }
 
     func addListViewControllerDismissed(_ viewController: AddListViewController) {
-        navigationController.dismiss(animated: true, completion: nil)
+        router.dismiss(animated: true, completion: nil)
+        delegate?.addListViewCoordinatorDidTapCancel(self)
     }
 }

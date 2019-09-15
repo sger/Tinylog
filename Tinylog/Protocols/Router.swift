@@ -13,7 +13,7 @@ public protocol Router: class {
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
     func push(_ viewController: UIViewController, animated: Bool)
     func push(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
-    func dismiss(animated: Bool)
+    func dismiss(animated: Bool, completion: (() -> Void)?)
     func pop(animated: Bool)
 }
 

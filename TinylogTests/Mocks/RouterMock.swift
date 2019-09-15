@@ -9,7 +9,7 @@
 @testable import Tinylog
 
 class RouterMock: Router {
-    
+  
     var viewControllers: [UIViewController] = []
     private var completions: [UIViewController: (() -> Void)] = [:]
     var presentedViewController: UIViewController?
@@ -37,7 +37,7 @@ class RouterMock: Router {
         }
     }
     
-    func dismiss(animated: Bool) {
+    func dismiss(animated: Bool, completion: (() -> Void)?) {
         presentedViewController = nil
     }
     
