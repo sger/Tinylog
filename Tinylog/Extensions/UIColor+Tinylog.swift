@@ -58,6 +58,10 @@ extension UIColor {
     public static var tinylogMainColor: UIColor {
         return UIColor(red: 43.0 / 255.0, green: 174.0 / 255.0, blue: 230.0 / 255.0, alpha: 1.0)
     }
+    
+    public static var tinylogDeleteRowAction: UIColor {
+        return UIColor(red: 254.0 / 255.0, green: 69.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0)
+    }
 
     public static var tinylogNumbersColor: UIColor {
         return UIColor(red: 76.0 / 255.0, green: 90.0 / 255.0, blue: 100.0 / 255.0, alpha: 1.0)

@@ -27,7 +27,7 @@ final class ArchivesCoordinator: BaseCoordinator {
         let archivesViewController = ArchivesViewController(managedObjectContext: managedObjectContext)
         archivesViewController.delegate = self
         let nc = UINavigationController(rootViewController: archivesViewController)
-        nc.modalPresentationStyle = .formSheet
+        nc.modalPresentationStyle = .fullScreen
         router.present(nc, animated: true, completion: nil)
     }
 }

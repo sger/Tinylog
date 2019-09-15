@@ -435,16 +435,17 @@ extension ListsViewController {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
         let editRowAction = UITableViewRowAction(
-            style: UITableViewRowAction.Style.default,
+            style: .default,
             title: "Edit", handler: { _, indexpath in
 
                 let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
                 self.delegate?.listsViewControllerDidAddList(self, list: list, selectedMode: .edit)
         })
 
-        editRowAction.backgroundColor = UIColor(named: "tableViewSelected")
+        editRowAction.backgroundColor = UIColor.tinylogEditRowAction
+        
         let archiveRowAction = UITableViewRowAction(
-            style: UITableViewRowAction.Style.default,
+            style: .default,
             title: "Archive",
             handler: {_, indexpath in
                 let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
