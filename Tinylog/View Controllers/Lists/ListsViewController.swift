@@ -36,7 +36,7 @@ final class ListsViewController: CoreDataTableViewController {
 
     var emptyListsLabel: UILabel = {
         let noListsLabel: UILabel = UILabel()
-        noListsLabel.font = UIFont.tinylogFontOfSize(16.0)
+        noListsLabel.font = UIFont.tinylogFontOfSize(18.0)
         noListsLabel.textColor = UIColor.tinylogTextColor
         noListsLabel.textAlignment = NSTextAlignment.center
         noListsLabel.text = localizedString(key: "Empty_lists")
