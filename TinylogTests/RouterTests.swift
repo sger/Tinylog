@@ -64,7 +64,7 @@ class RouterTests: XCTestCase {
     func testRouter_whenDismiss_returnsTrue() {
         routerMock.present(listsViewController, animated: true)
         XCTAssertTrue(routerMock.presentedViewController is ListsViewController)
-        routerMock.dismiss(animated: true)
+        routerMock.dismiss(animated: true, completion: nil)
         XCTAssertNil(routerMock.presentedViewController)
     }
 }

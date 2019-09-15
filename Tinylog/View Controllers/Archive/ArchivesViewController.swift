@@ -18,7 +18,6 @@ class ArchivesViewController: CoreDataTableViewController,
     UITextFieldDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 
-    var onTapCloseButton: (() -> Void)?
     fileprivate let managedObjectContext: NSManagedObjectContext
     var resultsTableViewController: ResultsViewController?
     weak var delegate: ArchivesViewControllerDelegate?
@@ -182,9 +181,7 @@ class ArchivesViewController: CoreDataTableViewController,
     // MARK: - Close
 
     @objc func close(_ button: UIButton) {
-//        dismiss(animated: true, completion: nil)
-//        delegate?.achivesViewViewControllerDidTapButton()
-        onTapCloseButton?()
+        delegate?.achivesViewViewControllerDidTapButton()
     }
 
     override func viewDidAppear(_ animated: Bool) {
