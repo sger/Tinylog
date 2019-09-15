@@ -1,5 +1,5 @@
 //
-//  ArchivesViewControllerTests.swift
+//  ArchivedListsViewControllerTests.swift
 //  TinylogTests
 //
 //  Created by Spiros Gerokostas on 12/05/2019.
@@ -11,7 +11,7 @@ import XCTest
 @testable import Tinylog
 import SnapshotTesting
 
-class ArchivesViewControllerTests: XCTestCase {
+class ArchivedListsViewControllerTests: XCTestCase {
     
     var coreDataManager: CoreDataManager!
     
@@ -26,7 +26,7 @@ class ArchivesViewControllerTests: XCTestCase {
         coreDataManager = nil
     }
     
-    func testArchivesViewController() {
+    func testArchivedListsViewController() {
         
         let list = NSEntityDescription.insertNewObject(
             forEntityName: "List",
@@ -46,8 +46,8 @@ class ArchivesViewControllerTests: XCTestCase {
             
             let vc = ArchivedListsViewController(managedObjectContext: coreDataManager.managedObjectContext)
             
-            assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
-            assertSnapshot(matching: vc, as: .recursiveDescription(on: .iPhoneX(.portrait)))
+            assertSnapshot(matching: vc, as: .image)
+            assertSnapshot(matching: vc, as: .recursiveDescription)
         })
     }
 }

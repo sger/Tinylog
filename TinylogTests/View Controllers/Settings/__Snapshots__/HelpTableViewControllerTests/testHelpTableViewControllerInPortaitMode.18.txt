@@ -1,5 +1,5 @@
-<UITableView; frame = (0 0; 375 667); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -20}; contentSize: {375, 1456}; adjustedContentInset: {20, 0, 0, 0}; dataSource: <_UIFilteredDataSource>>
-   | <UIView; frame = (0 -20; 375 667); autoresize = W+H; layer = <CALayer>>
+<UITableView; frame = (0 0; 375 667); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, -44}; contentSize: {375, 1456}; adjustedContentInset: {44, 0, 0, 0}; dataSource: <_UIFilteredDataSource>>
+   | <UIView; frame = (0 -44; 375 667); autoresize = W+H; layer = <CALayer>>
    | <Tinylog.HelpTableViewCell; baseClass = UITableViewCell; frame = (0 1042; 375 114); hidden = YES; autoresize = W; layer = <CALayer>>
    |    | <UITableViewCellContentView; frame = (0 0; 375 114); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 349 74); text = 'Wiederherstellen einer Li...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
@@ -44,7 +44,7 @@
    |    | <UITableViewCellContentView; frame = (0 0; 375 114); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
    |    |    | <UILabel; frame = (16 20; 349 74); text = 'Erstellen Sie eine neue L...'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
    |    | <_UITableViewCellSeparatorView; frame = (16 113.5; 359 0.5); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (3 641; 366 3); alpha = 0; autoresize = TM; layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (3 617; 366 3); alpha = 0; autoresize = TM; layer = <CALayer>>
    |    | <UIView; frame = (0 0; 366 3); layer = <CALayer>>
-   | <_UIScrollViewScrollIndicator; frame = (369 3; 3 289.5); autoresize = LM; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
-   |    | <UIView; frame = (0 0; 3 289.5); layer = <CALayer>>
+   | <_UIScrollViewScrollIndicator; frame = (369 3; 3 410); autoresize = LM; animations = { opacity=<CABasicAnimation>; }; layer = <CALayer>>
+   |    | <UIView; frame = (0 0; 3 410); layer = <CALayer>>
