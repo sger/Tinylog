@@ -1,5 +1,5 @@
 //
-//  ArchiveTasksViewController.swift
+//  ArchivedTasksViewController.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 18/10/15.
@@ -9,7 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 
-class ArchiveTasksViewController: CoreDataTableViewController,
+class ArchivedTasksViewController: CoreDataTableViewController,
     TTTAttributedLabelDelegate, EditTaskViewControllerDelegate {
 
     var onTapCloseButton: (() -> Void)?
@@ -119,38 +119,38 @@ class ArchiveTasksViewController: CoreDataTableViewController,
             title: "Close",
             style: UIBarButtonItem.Style.plain,
             target: self,
-            action: #selector(ArchiveTasksViewController.close(_:)))
+            action: #selector(ArchivedTasksViewController.close(_:)))
 
         self.view.addSubview(self.noTasksLabel!)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveTasksViewController.onChangeSize(_:)),
+            selector: #selector(ArchivedTasksViewController.onChangeSize(_:)),
             name: UIContentSizeCategory.didChangeNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveTasksViewController.deviceOrientationChanged),
+            selector: #selector(ArchivedTasksViewController.deviceOrientationChanged),
             name: UIDevice.orientationDidChangeNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveTasksViewController.syncActivityDidEndNotification(_:)),
+            selector: #selector(ArchivedTasksViewController.syncActivityDidEndNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidEnd, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveTasksViewController.syncActivityDidBeginNotification(_:)),
+            selector: #selector(ArchivedTasksViewController.syncActivityDidBeginNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidBegin, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveTasksViewController.appBecomeActive),
+            selector: #selector(ArchivedTasksViewController.appBecomeActive),
             name: UIApplication.didBecomeActiveNotification, object: nil)
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ArchiveTasksViewController.updateFonts),
+            selector: #selector(ArchivedTasksViewController.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification), object: nil)
     }

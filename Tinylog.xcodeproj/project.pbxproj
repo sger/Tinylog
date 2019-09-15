@@ -57,7 +57,7 @@
 		5638FC7E22744D8200CB4071 /* TextSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6A22744D8200CB4071 /* TextSizeViewController.swift */; };
 		5638FC7F22744D8200CB4071 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6C22744D8200CB4071 /* EditTaskViewController.swift */; };
 		5638FC8022744D8200CB4071 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6D22744D8200CB4071 /* TasksViewController.swift */; };
-		5638FC8122744D8200CB4071 /* ArchiveTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6F22744D8200CB4071 /* ArchiveTasksViewController.swift */; };
+		5638FC8122744D8200CB4071 /* ArchivedTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC6F22744D8200CB4071 /* ArchivedTasksViewController.swift */; };
 		5638FC8222744D8200CB4071 /* ArchivedListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7022744D8200CB4071 /* ArchivedListsViewController.swift */; };
 		5638FC8322744D8200CB4071 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7222744D8200CB4071 /* ResultsViewController.swift */; };
 		5638FC8422744D8200CB4071 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC7322744D8200CB4071 /* ListsViewController.swift */; };
@@ -93,7 +93,7 @@
 		5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC22274500A00CB4071 /* UIViewController+Tinylog.swift */; };
 		5638FCCB2274500A00CB4071 /* UIFont+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */; };
 		5638FCCF2274501700CB4071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCD2274501700CB4071 /* AppDelegate.swift */; };
-		564661E523256779007BA4A1 /* ArchiveTasksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564661E423256779007BA4A1 /* ArchiveTasksCoordinator.swift */; };
+		564661E523256779007BA4A1 /* ArchivedTasksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564661E423256779007BA4A1 /* ArchivedTasksCoordinator.swift */; };
 		5653C1D5231ADDD0003D1A19 /* ArchivedListsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653C1D4231ADDD0003D1A19 /* ArchivedListsCoordinator.swift */; };
 		565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */; };
 		5662CE9D2316E18A0069A50D /* AddListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5662CE9C2316E18A0069A50D /* AddListViewCoordinator.swift */; };
@@ -195,7 +195,7 @@
 		5638FC6A22744D8200CB4071 /* TextSizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSizeViewController.swift; sourceTree = "<group>"; };
 		5638FC6C22744D8200CB4071 /* EditTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
 		5638FC6D22744D8200CB4071 /* TasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
-		5638FC6F22744D8200CB4071 /* ArchiveTasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveTasksViewController.swift; sourceTree = "<group>"; };
+		5638FC6F22744D8200CB4071 /* ArchivedTasksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivedTasksViewController.swift; sourceTree = "<group>"; };
 		5638FC7022744D8200CB4071 /* ArchivedListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivedListsViewController.swift; sourceTree = "<group>"; };
 		5638FC7222744D8200CB4071 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		5638FC7322744D8200CB4071 /* ListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 		5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Tinylog.swift"; sourceTree = "<group>"; };
 		5638FCC42274500A00CB4071 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
 		5638FCCD2274501700CB4071 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		564661E423256779007BA4A1 /* ArchiveTasksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveTasksCoordinator.swift; sourceTree = "<group>"; };
+		564661E423256779007BA4A1 /* ArchivedTasksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedTasksCoordinator.swift; sourceTree = "<group>"; };
 		5653C1D4231ADDD0003D1A19 /* ArchivedListsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedListsCoordinator.swift; sourceTree = "<group>"; };
 		565DA78C1E86999A00C6E60C /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
 		565DA78D1E86999A00C6E60C /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -546,10 +546,10 @@
 		5638FC6E22744D8200CB4071 /* Archive */ = {
 			isa = PBXGroup;
 			children = (
-				5638FC6F22744D8200CB4071 /* ArchiveTasksViewController.swift */,
+				5638FC6F22744D8200CB4071 /* ArchivedTasksViewController.swift */,
 				5638FC7022744D8200CB4071 /* ArchivedListsViewController.swift */,
 				5653C1D4231ADDD0003D1A19 /* ArchivedListsCoordinator.swift */,
-				564661E423256779007BA4A1 /* ArchiveTasksCoordinator.swift */,
+				564661E423256779007BA4A1 /* ArchivedTasksCoordinator.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -1026,7 +1026,7 @@
 				5638FC8422744D8200CB4071 /* ListsViewController.swift in Sources */,
 				5638FC5B22744CDC00CB4071 /* StepSliderControl.m in Sources */,
 				5638FCA222744F8800CB4071 /* TLIDeviceInfo.m in Sources */,
-				5638FC8122744D8200CB4071 /* ArchiveTasksViewController.swift in Sources */,
+				5638FC8122744D8200CB4071 /* ArchivedTasksViewController.swift in Sources */,
 				5638FC5F22744CDC00CB4071 /* TasksFooterView.swift in Sources */,
 				56F746042316AF68005A1D41 /* Coordinator.swift in Sources */,
 				5638FCB222744F9F00CB4071 /* TLITag+CoreDataProperties.swift in Sources */,
@@ -1098,7 +1098,7 @@
 				5638FCA122744F8800CB4071 /* TLIDrawingUtils.m in Sources */,
 				56F746072316AF75005A1D41 /* BaseCoordinator.swift in Sources */,
 				5638FCB122744F9F00CB4071 /* TLIList+CoreDataProperties.swift in Sources */,
-				564661E523256779007BA4A1 /* ArchiveTasksCoordinator.swift in Sources */,
+				564661E523256779007BA4A1 /* ArchivedTasksCoordinator.swift in Sources */,
 				5638FC7E22744D8200CB4071 /* TextSizeViewController.swift in Sources */,
 				5638FC4C22744CDC00CB4071 /* GroupedTableViewCell.swift in Sources */,
 				5638FCAE22744F9F00CB4071 /* TLIMention+CoreDataProperties.swift in Sources */,

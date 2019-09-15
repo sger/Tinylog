@@ -93,7 +93,7 @@ final class SplitViewCoordinator: BaseCoordinator {
     
     private func showArchiveTasks(_ list: TLIList) {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
-        let coordinator = ArchiveTasksCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext, list: list)
+        let coordinator = ArchivedTasksCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext, list: list)
         coordinator.onDismissed = { [weak self, weak coordinator] in
             self?.remove(coordinator)
         }
