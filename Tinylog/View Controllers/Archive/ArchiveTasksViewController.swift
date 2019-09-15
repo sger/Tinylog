@@ -123,8 +123,6 @@ class ArchiveTasksViewController: CoreDataTableViewController,
 
         self.view.addSubview(self.noTasksLabel!)
 
-        setEditing(false, animated: false)
-
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(ArchiveTasksViewController.onChangeSize(_:)),
@@ -267,27 +265,6 @@ class ArchiveTasksViewController: CoreDataTableViewController,
             y: self.view.frame.size.height / 2.0 - 44.0 / 2.0,
             width: self.view.frame.size.width,
             height: 44.0)
-    }
-
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        if editing {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: "Done",
-                style: UIBarButtonItem.Style.plain,
-                target: self,
-                action: #selector(ArchiveTasksViewController.toggleEditMode(_:)))
-        } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: "Edit",
-                style: UIBarButtonItem.Style.plain,
-                target: self,
-                action: #selector(ArchiveTasksViewController.toggleEditMode(_:)))
-        }
-    }
-
-    @objc func toggleEditMode(_ sender: UIBarButtonItem) {
-        setEditing(!isEditing, animated: true)
     }
 
     func tableView(_ tableView: UITableView,

@@ -49,7 +49,7 @@ final class AddTaskView: UIView, UITextFieldDelegate {
 
         textField.snp.makeConstraints { (maker) in
             maker.top.equalToSuperview().inset(10.0)
-            maker.leading.equalToSuperview().inset(16.0)
+            maker.leading.equalToSuperview().inset(22.0)
             maker.trailing.equalToSuperview().inset(50.0)
             maker.bottom.equalToSuperview().inset(10.0)
         }
