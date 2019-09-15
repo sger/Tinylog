@@ -307,11 +307,7 @@ class ArchiveTasksViewController: CoreDataTableViewController,
                 self.setEditing(false, animated: true)
                 self.tableView?.reloadData()
         })
-        deleteRowAction.backgroundColor = UIColor(
-            red: 254.0 / 255.0,
-            green: 69.0 / 255.0,
-            blue: 101.0 / 255.0,
-            alpha: 1.0)
+        deleteRowAction.backgroundColor = UIColor.tinylogDeleteRowAction
 
         let restoreRowAction = UITableViewRowAction(
             style: UITableViewRowAction.Style.default,
