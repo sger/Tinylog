@@ -23,6 +23,7 @@ public class NavigationRouter: NSObject {
 }
 
 // MARK: - Router
+
 extension NavigationRouter: Router {
     public func pop(animated: Bool) {
         guard let rootViewController = rootViewController else {
@@ -68,8 +69,6 @@ extension NavigationRouter: UINavigationControllerDelegate {
 
         guard let dismissedViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
             !navigationController.viewControllers.contains(dismissedViewController) else { return }
-//        print("dismissedViewController \(dismissedViewController)")
-//        print("viewController \(viewController)")
         performCompletion(for: dismissedViewController)
     }
 }

@@ -43,17 +43,12 @@ class ArchivesViewController: CoreDataTableViewController,
     }
 
     lazy var emptyArchivesLabel: UILabel = {
-        let noTasksLabel: UILabel = UILabel()
-        noTasksLabel.font = UIFont.tinylogFontOfSize(16.0)
-        noTasksLabel.textColor = UIColor.tinylogTextColor
-        noTasksLabel.textAlignment = NSTextAlignment.center
-        noTasksLabel.text = "No Archives"
-        noTasksLabel.frame = CGRect(
-            x: self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0,
-            y: self.view.frame.size.height / 2.0 - 44.0 / 2.0,
-            width: self.view.frame.size.width,
-            height: 44.0)
-        return noTasksLabel
+        let noArchivesLabel = UILabel()
+        noArchivesLabel.font = UIFont.tinylogFontOfSize(18.0)
+        noArchivesLabel.textColor = UIColor.tinylogTextColor
+        noArchivesLabel.textAlignment = NSTextAlignment.center
+        noArchivesLabel.text = "No Archives"
+        return noArchivesLabel
     }()
 
     init(managedObjectContext: NSManagedObjectContext) {
@@ -110,8 +105,6 @@ class ArchivesViewController: CoreDataTableViewController,
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(self.close(_:)))
-
-        setEditing(false, animated: false)
 
         NotificationCenter.default.addObserver(
             self,
@@ -190,7 +183,6 @@ class ArchivesViewController: CoreDataTableViewController,
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        setEditing(false, animated: false)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -365,8 +357,7 @@ class ArchivesViewController: CoreDataTableViewController,
 
     func didPresentSearchController(_ searchController: UISearchController) {}
 
-    func willDismissSearchController(_ searchController: UISearchController) {
-    }
+    func willDismissSearchController(_ searchController: UISearchController) {}
 
     func didDismissSearchController(_ searchController: UISearchController) {
         let resultsController = searchController.searchResultsController as! ResultsViewController
