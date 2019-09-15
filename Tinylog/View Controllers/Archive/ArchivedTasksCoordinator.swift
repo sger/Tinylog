@@ -1,5 +1,5 @@
 //
-//  ArchiveTasksCoordinator.swift
+//  ArchivedTasksCoordinator.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 08/09/2019.
@@ -12,7 +12,7 @@ protocol ArchiveTasksCoordinatorDelegate: AnyObject {
     func archivesCoordinatorDidFinish(_ coordinator: Coordinator)
 }
 
-final class ArchiveTasksCoordinator: BaseCoordinator {
+final class ArchivedTasksCoordinator: BaseCoordinator {
 
     private let router: Router
     private let managedObjectContext: NSManagedObjectContext
@@ -29,7 +29,7 @@ final class ArchiveTasksCoordinator: BaseCoordinator {
     }
 
     override func start() {        
-        let viewController: ArchiveTasksViewController = ArchiveTasksViewController()
+        let viewController: ArchivedTasksViewController = ArchivedTasksViewController()
         viewController.managedObjectContext = managedObjectContext
         viewController.list = list
         viewController.onTapCloseButton = { [weak self] in
