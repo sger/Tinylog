@@ -38,7 +38,7 @@ final class ArchiveTasksCoordinator: BaseCoordinator {
         }
         
         let nc: UINavigationController = UINavigationController(rootViewController: viewController)
-        nc.modalPresentationStyle = .formSheet
+        nc.modalPresentationStyle = .fullScreen
         router.present(nc, animated: true, completion: nil)
     }
 }
