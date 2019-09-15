@@ -22,14 +22,12 @@ class HelpTableViewControllerTests: XCTestCase {
         let userDefaults = MockUserDefaults()
         userDefaults.set(21.0, forKey: EnvUserDefaults.fontSize)
         userDefaults.set(kTLIFontHelveticaNeueKey, forKey: String(kTLIFontDefaultsKey))
-        
-        combos(Language.languages, SnapshotTestingDevices.portrait).forEach { language, device in
-            testWithEnvironment(language: language, userDefaults: userDefaults, block: {
-                let vc = HelpTableViewController()
-                assertSnapshot(matching: vc, as: .image(on: device))
-                assertSnapshot(matching: vc, as: .recursiveDescription(on: device))
-            })
-        }
+                
+        testWithEnvironment(language: .en, userDefaults: userDefaults, block: {
+            let vc = HelpTableViewController()
+            assertSnapshot(matching: vc, as: .image)
+            assertSnapshot(matching: vc, as: .recursiveDescription)
+        })
     }
 
     func testHelpTableViewControllerInLandscapeMode() {
@@ -37,13 +35,11 @@ class HelpTableViewControllerTests: XCTestCase {
         let userDefaults = MockUserDefaults()
         userDefaults.set(21.0, forKey: EnvUserDefaults.fontSize)
         userDefaults.set(kTLIFontHelveticaNeueKey, forKey: String(kTLIFontDefaultsKey))
-        
-        combos(Language.languages, SnapshotTestingDevices.landscape).forEach { language, device in
-            testWithEnvironment(language: language, userDefaults: userDefaults, block: {
-                let vc = HelpTableViewController()
-                assertSnapshot(matching: vc, as: .image(on: device))
-                assertSnapshot(matching: vc, as: .recursiveDescription(on: device))
-            })
-        }
+                
+        testWithEnvironment(language: .en, userDefaults: userDefaults, block: {
+            let vc = HelpTableViewController()
+            assertSnapshot(matching: vc, as: .image)
+            assertSnapshot(matching: vc, as: .recursiveDescription)
+        })
     }
 }
