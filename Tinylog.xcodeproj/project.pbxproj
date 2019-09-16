@@ -95,8 +95,8 @@
 		5638FCCF2274501700CB4071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCD2274501700CB4071 /* AppDelegate.swift */; };
 		564661E523256779007BA4A1 /* ArchivedTasksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564661E423256779007BA4A1 /* ArchivedTasksCoordinator.swift */; };
 		5653C1D5231ADDD0003D1A19 /* ArchivedListsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653C1D4231ADDD0003D1A19 /* ArchivedListsCoordinator.swift */; };
-		565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */; };
 		5662CE9D2316E18A0069A50D /* AddListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5662CE9C2316E18A0069A50D /* AddListViewCoordinator.swift */; };
+		566536F6232FF2AD003F4C86 /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */; };
 		5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669ADED2274613400555E56 /* ListsViewControllerTests.swift */; };
 		5669ADF22274613500555E56 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669ADEE2274613400555E56 /* ListTests.swift */; };
 		566BAC071F6ADBD4005B0E4F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */; };
@@ -236,14 +236,13 @@
 		5638FCCD2274501700CB4071 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		564661E423256779007BA4A1 /* ArchivedTasksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedTasksCoordinator.swift; sourceTree = "<group>"; };
 		5653C1D4231ADDD0003D1A19 /* ArchivedListsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedListsCoordinator.swift; sourceTree = "<group>"; };
-		565DA78C1E86999A00C6E60C /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
-		565DA78D1E86999A00C6E60C /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
-		565DA78E1E86999A00C6E60C /* Tinylog 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 4.xcdatamodel"; sourceTree = "<group>"; };
-		565DA78F1E86999A00C6E60C /* Tinylog 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 5.xcdatamodel"; sourceTree = "<group>"; };
-		565DA7901E86999A00C6E60C /* Tinylog 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 6.xcdatamodel"; sourceTree = "<group>"; };
-		565DA7911E86999A00C6E60C /* Tinylog 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 7.xcdatamodel"; sourceTree = "<group>"; };
-		565DA7921E86999A00C6E60C /* Tinylog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tinylog.xcdatamodel; sourceTree = "<group>"; };
 		5662CE9C2316E18A0069A50D /* AddListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewCoordinator.swift; sourceTree = "<group>"; };
+		566536F0232FF2AD003F4C86 /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
+		566536F1232FF2AD003F4C86 /* Tinylog 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 4.xcdatamodel"; sourceTree = "<group>"; };
+		566536F2232FF2AD003F4C86 /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
+		566536F3232FF2AD003F4C86 /* Tinylog 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 6.xcdatamodel"; sourceTree = "<group>"; };
+		566536F4232FF2AD003F4C86 /* Tinylog 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 5.xcdatamodel"; sourceTree = "<group>"; };
+		566536F5232FF2AD003F4C86 /* Tinylog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tinylog.xcdatamodel; sourceTree = "<group>"; };
 		5669ADED2274613400555E56 /* ListsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsViewControllerTests.swift; sourceTree = "<group>"; };
 		5669ADEE2274613400555E56 /* ListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		566BAC061F6ADBD3005B0E4F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -375,7 +374,7 @@
 				5609F607226B4BA600F6AF0E /* Locales */,
 				566BAC051F6ADBD3005B0E4F /* Storyboards */,
 				56487F8F1F644E150080192C /* Configs */,
-				565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */,
+				566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */,
 				56B7AD931E858B81004BB429 /* Tinylog.entitlements */,
 				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
 				5628E8D21E85898700AAFD20 /* Info.plist */,
@@ -1054,13 +1053,13 @@
 				5638FC7922744D8200CB4071 /* GroupedTableViewController.swift in Sources */,
 				5638FC5A22744CDC00CB4071 /* ListsFooterView.swift in Sources */,
 				5638FCCF2274501700CB4071 /* AppDelegate.swift in Sources */,
-				565DA7931E86999A00C6E60C /* Tinylog.xcdatamodeld in Sources */,
 				5638FC7A22744D8200CB4071 /* SettingsTableViewController.swift in Sources */,
 				5638FC8222744D8200CB4071 /* ArchivedListsViewController.swift in Sources */,
 				5638FC5722744CDC00CB4071 /* CheckBoxButton.swift in Sources */,
 				56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */,
 				5638FC4E22744CDC00CB4071 /* TaskTableViewCell.swift in Sources */,
 				5638FC5522744CDC00CB4071 /* ArchiveButton.swift in Sources */,
+				566536F6232FF2AD003F4C86 /* Tinylog.xcdatamodeld in Sources */,
 				5638FC9B22744F7C00CB4071 /* Language.swift in Sources */,
 				5638FCC92274500A00CB4071 /* DispatchQueue+Tinylog.swift in Sources */,
 				5638FCB322744F9F00CB4071 /* TLITask.swift in Sources */,
@@ -1427,18 +1426,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		565DA78B1E86999A00C6E60C /* Tinylog.xcdatamodeld */ = {
+		566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				565DA78C1E86999A00C6E60C /* Tinylog 2.xcdatamodel */,
-				565DA78D1E86999A00C6E60C /* Tinylog 3.xcdatamodel */,
-				565DA78E1E86999A00C6E60C /* Tinylog 4.xcdatamodel */,
-				565DA78F1E86999A00C6E60C /* Tinylog 5.xcdatamodel */,
-				565DA7901E86999A00C6E60C /* Tinylog 6.xcdatamodel */,
-				565DA7911E86999A00C6E60C /* Tinylog 7.xcdatamodel */,
-				565DA7921E86999A00C6E60C /* Tinylog.xcdatamodel */,
+				566536F0232FF2AD003F4C86 /* Tinylog 2.xcdatamodel */,
+				566536F1232FF2AD003F4C86 /* Tinylog 4.xcdatamodel */,
+				566536F2232FF2AD003F4C86 /* Tinylog 3.xcdatamodel */,
+				566536F3232FF2AD003F4C86 /* Tinylog 6.xcdatamodel */,
+				566536F4232FF2AD003F4C86 /* Tinylog 5.xcdatamodel */,
+				566536F5232FF2AD003F4C86 /* Tinylog.xcdatamodel */,
 			);
-			currentVersion = 565DA7901E86999A00C6E60C /* Tinylog 6.xcdatamodel */;
+			currentVersion = 566536F3232FF2AD003F4C86 /* Tinylog 6.xcdatamodel */;
 			path = Tinylog.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
