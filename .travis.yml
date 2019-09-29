@@ -13,7 +13,6 @@ env:
 before_install:
   - gem install cocoapods
   - gem install xcpretty -N
-  - make clean
   - make bootstrap
   - make secrets
 

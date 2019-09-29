@@ -1,14 +1,14 @@
-<UIView; frame = (0 0; 375 667); autoresize = W+H; layer = <CALayer>>
-   | <UITableView; frame = (0 20; 375 647); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, 0}; contentSize: {375, 64}; adjustedContentInset: {0, 0, 0, 0}; dataSource: <Tinylog.ArchivedListsViewController>>
-   |    | <UIView; frame = (0 0; 375 647); autoresize = W+H; layer = <CALayer>>
-   |    | <Tinylog.ListTableViewCell; baseClass = UITableViewCell; frame = (0 0; 375 64); autoresize = W; layer = <CALayer>>
-   |    |    | <UITableViewCellContentView; frame = (0 0; 375 64); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
-   |    |    |    | <UILabel; frame = (22 20; 303 24); text = 'my list'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    |    |    | <UILabel; frame = (329 17; 30 30); text = '0'; clipsToBounds = YES; autoresize = W+H; userInteractionEnabled = NO; layer = <_UILabelLayer>>
-   |    |    | <_UITableViewCellSeparatorView; frame = (16 63.5; 359 0.5); layer = <CALayer>>
-   |    | <UIView; frame = (0 64; 375 0); layer = <CALayer>>
-   |    | <_UIScrollViewScrollIndicator; frame = (3 641; 369 3); alpha = 0; autoresize = TM; layer = <CALayer>>
-   |    |    | <UIView; frame = (0 0; 369 3); layer = <CALayer>>
-   |    | <_UIScrollViewScrollIndicator; frame = (369 586; 3 58); alpha = 0; autoresize = LM; layer = <CALayer>>
+<UIView; frame = (0 0; 414 896); autoresize = W+H; layer = <CALayer>>
+   | <UITableView; frame = (0 44; 414 852); clipsToBounds = YES; autoresize = W+H; gestureRecognizers = <NSArray>; layer = <CALayer>; contentOffset: {0, 0}; contentSize: {414, 64}; adjustedContentInset: {0, 0, 0, 0}; dataSource: <Tinylog.ArchivedListsViewController>>
+   |    | <UIView; frame = (0 0; 414 852); autoresize = W+H; layer = <CALayer>>
+   |    | <Tinylog.ListTableViewCell; baseClass = UITableViewCell; frame = (0 0; 414 64); autoresize = W; layer = <CALayer>>
+   |    |    | <UITableViewCellContentView; frame = (0 0; 414 64); clipsToBounds = YES; gestureRecognizers = <NSArray>; layer = <CALayer>>
+   |    |    |    | <UILabel; frame = (22 20; 342 24); text = 'my list'; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    |    |    | <UILabel; frame = (368 17; 30 30); text = '0'; clipsToBounds = YES; autoresize = W+H; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   |    |    | <_UITableViewCellSeparatorView; frame = (16 63.5; 398 0.5); layer = <CALayer>>
+   |    | <UIView; frame = (0 64; 414 0); layer = <CALayer>>
+   |    | <_UIScrollViewScrollIndicator; frame = (3 846; 408 3); alpha = 0; autoresize = TM; layer = <CALayer>>
+   |    |    | <UIView; frame = (0 0; 408 3); layer = <CALayer>>
+   |    | <_UIScrollViewScrollIndicator; frame = (408 791; 3 58); alpha = 0; autoresize = LM; layer = <CALayer>>
    |    |    | <UIView; frame = (0 0; 3 58); layer = <CALayer>>
-   | <UILabel; frame = (142.5 323.5; 90.5 20); text = 'No Archives'; hidden = YES; userInteractionEnabled = NO; layer = <_UILabelLayer>>
+   | <UILabel; frame = (162 438; 90.5 20); text = 'No Archives'; hidden = YES; userInteractionEnabled = NO; layer = <_UILabelLayer>>
