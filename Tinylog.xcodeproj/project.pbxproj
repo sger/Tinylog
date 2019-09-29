@@ -103,8 +103,6 @@
 		566E6A8F226E4A340093783E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 566E6A8E226E4A340093783E /* GoogleService-Info.plist */; };
 		5672FB6022880AED008DD57E /* ArchivedListsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5672FB5F22880AED008DD57E /* ArchivedListsViewControllerTests.swift */; };
 		56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56892690226C767A00D952A6 /* FindColorByNameTests.swift */; };
-		568F7E061F2BA12E00CFDDDD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */; };
-		568F7E081F2BA14300CFDDDD /* SnapshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */; };
 		56A2D93022F35D4C002BFF20 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A2D92F22F35D4C002BFF20 /* Secrets.swift */; };
 		56B7B7D9227EBCEE003BCAC3 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7D8227EBCEE003BCAC3 /* TLISyncManager.m */; };
 		56B7B7E0227ECADB003BCAC3 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7B7DE227ECADB003BCAC3 /* Environment.swift */; };
@@ -252,8 +250,6 @@
 		56892690226C767A00D952A6 /* FindColorByNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindColorByNameTests.swift; sourceTree = "<group>"; };
 		568F7DFB1F2BA0DC00CFDDDD /* TinylogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		568F7DFF1F2BA0DC00CFDDDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
-		568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotsUITests.swift; sourceTree = "<group>"; };
 		56A2D92F22F35D4C002BFF20 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		56B7AD8F1E858B25004BB429 /* Tinylog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tinylog-Bridging-Header.h"; sourceTree = "<group>"; };
 		56B7AD931E858B81004BB429 /* Tinylog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tinylog.entitlements; sourceTree = "<group>"; };
@@ -712,9 +708,7 @@
 		568F7DFC1F2BA0DC00CFDDDD /* TinylogUITests */ = {
 			isa = PBXGroup;
 			children = (
-				568F7E051F2BA12E00CFDDDD /* SnapshotHelper.swift */,
 				568F7DFF1F2BA0DC00CFDDDD /* Info.plist */,
-				568F7E071F2BA14300CFDDDD /* SnapshotsUITests.swift */,
 			);
 			path = TinylogUITests;
 			sourceTree = "<group>";
@@ -1137,8 +1131,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				568F7E061F2BA12E00CFDDDD /* SnapshotHelper.swift in Sources */,
-				568F7E081F2BA14300CFDDDD /* SnapshotsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
