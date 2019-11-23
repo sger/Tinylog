@@ -18,7 +18,7 @@ final class ListsFooterView: UIView {
 
     private var infoLabel: UILabel = {
         let infoLabel = UILabel()
-        infoLabel.font = UIFont.regularFontWithSize(13.0)
+        infoLabel.font = UIFont.regularFontWithSize(12.0)
         infoLabel.textColor = UIColor.tinylogTextColor
         infoLabel.textAlignment = NSTextAlignment.center
         infoLabel.text = ""
