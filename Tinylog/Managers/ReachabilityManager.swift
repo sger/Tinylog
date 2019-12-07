@@ -17,7 +17,12 @@ final class ReachabilityManager {
     var reachability: Reachability!
 
     private init() {
-        reachability = Reachability()
-        try! reachability.startNotifier()
+        reachability = try! Reachability()
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
     }
 }

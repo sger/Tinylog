@@ -181,7 +181,7 @@ final class ListsViewController: CoreDataTableViewController {
             if reachability.connection == .wifi || reachability.connection == .cellular {
                 self.listsFooterView.updateInfoLabel(NSString(format: "Last Updated %@",
                                                          dateFormatter.string(for: Date())!) as String)
-            } else if reachability.connection == .none {
+            } else if reachability.connection == .unavailable {
                 self.listsFooterView.updateInfoLabel("Offline")
             }
 
@@ -195,7 +195,7 @@ final class ListsViewController: CoreDataTableViewController {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
-            if reachability.connection == .none {
+            if reachability.connection == .unavailable {
                 self.listsFooterView.updateInfoLabel("Offline")
             } else {
                 self.listsFooterView.updateInfoLabel("Syncing...")
