@@ -71,7 +71,7 @@ final class SetupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = UIColor(named: "setupBackgroundColor")
 

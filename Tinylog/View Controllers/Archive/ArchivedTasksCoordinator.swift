@@ -28,7 +28,7 @@ final class ArchivedTasksCoordinator: BaseCoordinator {
         self.list = list
     }
 
-    override func start() {        
+    override func start() {
         let viewController: ArchivedTasksViewController = ArchivedTasksViewController()
         viewController.managedObjectContext = managedObjectContext
         viewController.list = list
@@ -36,10 +36,9 @@ final class ArchivedTasksCoordinator: BaseCoordinator {
             self?.router.dismiss(animated: true, completion: nil)
             self?.onDismissed?()
         }
-        
+
         let nc: UINavigationController = UINavigationController(rootViewController: viewController)
         nc.modalPresentationStyle = .fullScreen
         router.present(nc, animated: true, completion: nil)
     }
 }
-

@@ -39,18 +39,18 @@ class TasksViewController: CoreDataTableViewController,
     EditTaskViewControllerDelegate {
 
     weak var delegate: TasksViewControllerDelegate?
-    
+
     let kCellIdentifier = "TaskTableViewCell"
     fileprivate let managedObjectContext: NSManagedObjectContext
 
     var list: TLIList? {
         didSet {
-            
+
             if let list = list {
                 noListSelected?.isHidden = true
                 title = list.title
                 configureFetch()
-                
+
                 if self.checkForEmptyResults() {
                     noTasksLabel?.isHidden = false
                 } else {
@@ -262,7 +262,7 @@ class TasksViewController: CoreDataTableViewController,
     }
 
     func updateFooterInfoText(_ list: TLIList) {
-        
+
         // Fetch all objects from list
         let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
@@ -674,7 +674,7 @@ class TasksViewController: CoreDataTableViewController,
                 self.addTransparentLayer!.alpha = 0.0
             }, completion: nil)
     }
-    
+
     func resetAddTaskView() {
         hideTransparentLayer()
         addTaskView?.reset()
