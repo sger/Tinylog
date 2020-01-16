@@ -18,7 +18,7 @@ final class ReachabilityManager {
 
     private init() {
         reachability = try! Reachability()
-        
+
         do {
             try reachability.startNotifier()
         } catch {

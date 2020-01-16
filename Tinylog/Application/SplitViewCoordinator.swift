@@ -34,7 +34,7 @@ final class SplitViewCoordinator: BaseCoordinator {
 
         let masterNC: UINavigationController = UINavigationController(rootViewController: listsViewController)
         let detailNC: UINavigationController = UINavigationController(rootViewController: tasksViewController)
-        
+
         tasksViewController.navigationItem.leftItemsSupplementBackButton = true
         tasksViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
 
@@ -90,7 +90,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         add(coordinator)
         coordinator.start()
     }
-    
+
     private func showArchiveTasks(_ list: TLIList) {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
         let coordinator = ArchivedTasksCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext, list: list)
@@ -103,13 +103,13 @@ final class SplitViewCoordinator: BaseCoordinator {
 
     private func showDetailViewController(_ managedObjectContext: NSManagedObjectContext, list: TLIList) {
         tasksViewController.list = list
-        
+
         let isIPad = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
         if isIPad {
             tasksViewController.resetAddTaskView()
         }
-        
+
         if let navigationController = tasksViewController.navigationController {
             splitViewController.showDetailViewController(navigationController, sender: nil)
         }
@@ -122,7 +122,7 @@ extension SplitViewCoordinator: AddListViewCoordinatorDelegate {
         showDetailViewController(managedObjectContext, list: list)
         remove(coordinator)
     }
-    
+
     func addListViewCoordinatorDidTapCancel(_ coordinator: Coordinator) {
         remove(coordinator)
     }

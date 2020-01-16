@@ -14,7 +14,7 @@ final class ArchivedListsCoordinator: BaseCoordinator {
 
     private let router: Router
     private let managedObjectContext: NSManagedObjectContext
-    
+
     weak var delegate: ArchivesCoordinatorDelegate?
 
     init(router: Router,

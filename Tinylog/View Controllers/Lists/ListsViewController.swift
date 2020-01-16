@@ -443,7 +443,7 @@ extension ListsViewController {
         })
 
         editRowAction.backgroundColor = UIColor.tinylogEditRowAction
-        
+
         let archiveRowAction = UITableViewRowAction(
             style: .default,
             title: "Archive",
