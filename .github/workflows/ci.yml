@@ -38,12 +38,14 @@ jobs:
         uses: actions/checkout@master
       - name: Cache cocoapods
         uses: actions/cache@v2
+        id: cocoapods-cache
         with:
           path: Pods
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
       - name: Dependencies
+        if: steps.cocoapods-cache.outputs.cache-hit != 'true'
         run: |
           gem install cocoapods
           gem install xcpretty -N
