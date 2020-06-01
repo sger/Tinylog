@@ -12,7 +12,7 @@ import Ensembles
 import Firebase
 
 /// TLIAppDelegate Application Logic.
-@UIApplicationMain
+//@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembleDelegate {
 
     /// The instance of the UIWindow.
