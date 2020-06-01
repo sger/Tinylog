@@ -5,10 +5,6 @@ on:
       - ".github/workflows/swiftlint.yml"
       - ".swiftlint.yml"
       - "**/*.swift"
-    branches:
-      - develop
-      - master
-      - feature/*
 
 jobs:
   lint:
