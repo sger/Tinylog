@@ -52,7 +52,9 @@ jobs:
           make bootstrap
           make secrets
       - name: Cocoapods
-        run: pod install
+        run: |
+          pod install
+          make secrets
       - name: Select Xcode 11.5
         run: sudo xcode-select -s /Applications/Xcode_11.5.app
       - name: Run tests
