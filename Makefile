@@ -10,7 +10,7 @@ BRANCH ?= develop
 MASTER_BRANCH = $(RELEASE)-dist
 
 ifeq ($(PLATFORM), iOS)
-	DESTINATION ?= 'platform=iOS Simulator,name=iPhone 11,OS=13.4.1'
+	DESTINATION ?= 'platform=iOS Simulator,name=iPhone 11,OS=13.5'
 endif
 
 XCPRETTY :=
