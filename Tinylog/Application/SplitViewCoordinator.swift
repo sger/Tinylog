@@ -93,7 +93,9 @@ final class SplitViewCoordinator: BaseCoordinator {
 
     private func showArchiveTasks(_ list: TLIList) {
         let navigationRouter = NavigationRouter(navigationController: rootNavigationController)
-        let coordinator = ArchivedTasksCoordinator(router: navigationRouter, managedObjectContext: managedObjectContext, list: list)
+        let coordinator = ArchivedTasksCoordinator(router: navigationRouter,
+                                                   managedObjectContext: managedObjectContext,
+                                                   list: list)
         coordinator.onDismissed = { [weak self, weak coordinator] in
             self?.remove(coordinator)
         }
@@ -149,6 +151,7 @@ extension SplitViewCoordinator: ListsViewControllerDelegate {
 }
 
 extension SplitViewCoordinator: TasksViewControllerDelegate {
+    // swiftlint:disable force_unwrapping
     func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?) {
         if let list = list {
             showArchiveTasks(list)

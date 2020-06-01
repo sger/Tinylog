@@ -24,7 +24,7 @@ extension Router {
     }
 
     public func push(_ viewController: UIViewController,
-                        animated: Bool) {
+                     animated: Bool) {
         push(viewController, animated: animated, completion: nil)
     }
 }

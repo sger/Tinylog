@@ -225,10 +225,10 @@ class ArchivedTasksViewController: CoreDataTableViewController,
     }
 
     func displayArchive(_ button: ArchiveButton) {
-        let archiveViewController: ArchivedListsViewController = ArchivedListsViewController(managedObjectContext: managedObjectContext)
-        let nc: UINavigationController = UINavigationController(rootViewController: archiveViewController)
-        nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        let vc: ArchivedListsViewController = ArchivedListsViewController(managedObjectContext: managedObjectContext)
+        let nc: UINavigationController = UINavigationController(rootViewController: vc)
+        nc.modalPresentationStyle = .fullScreen
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 
     // MARK: Close
