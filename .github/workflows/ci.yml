@@ -5,14 +5,16 @@ on:
       - ".github/workflows/swiftlint.yml"
       - ".swiftlint.yml"
       - "**/*.swift"
+    branches:
+      - feature/*
   push:
     branches:
       - develop
-      - feature/*
       - master
 
 jobs:
   lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -64,7 +66,7 @@ jobs:
         env:
           destination: ${{ matrix.destination }}
   build:
-    needs: [lint, test]
+    needs: [Lint, Test]
     name: Build
     runs-on: macOS-latest
     strategy:
