@@ -2,9 +2,9 @@ name: CI
 on:
   pull_request:
     paths:
-      - '.github/workflows/swiftlint.yml'
-      - '.swiftlint.yml'
-      - '**/*.swift'
+      - ".github/workflows/swiftlint.yml"
+      - ".swiftlint.yml"
+      - "**/*.swift"
   push:
     branches:
       - develop
@@ -12,52 +12,20 @@ on:
       - master
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.0.1
-      - name: GitHub Action for SwiftLint with --strict
-        uses: norio-nomura/action-swiftlint@3.0.1
-        with:
-          args: --strict
-      - name: GitHub Action for SwiftLint (Only files changed in the PR)
-        uses: norio-nomura/action-swiftlint@3.1.0
-        env:
-          DIFF_BASE: ${{ github.base_ref }}
   test:
-    needs: lint
     name: Test
     runs-on: macOS-latest
     strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=13.5,name=iPhone 11']
+      matrix:
+        destination: ["platform=iOS Simulator,OS=13.5,name=iPhone 11"]
     steps:
       - name: Checkout
         uses: actions/checkout@master
       - name: Select Xcode 11.3
         run: sudo xcode-select -s /Applications/Xcode_11.5.app
       - name: Run tests
-        run:  |
+        run: |
           make test
           bash <(curl -s https://codecov.io/bash)
-        env: 
-         destination: ${{ matrix.destination }}
-  build:
-    needs: [lint, test]
-    name: Build
-    runs-on: macOS-latest
-    strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=13.5,name=iPhone 11']
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Select Xcode 11.3
-        run: sudo xcode-select -s /Applications/Xcode_11.5.app
-      - name: Build
-        run:  |
-          make build
-        env: 
-         destination: ${{ matrix.destination }}
+        env:
+          destination: ${{ matrix.destination }}
