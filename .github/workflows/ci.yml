@@ -6,11 +6,9 @@ on:
       - ".swiftlint.yml"
       - "**/*.swift"
     branches:
-      - feature/*
-  push:
-    branches:
       - develop
       - master
+      - feature/*
 
 jobs:
   lint:
