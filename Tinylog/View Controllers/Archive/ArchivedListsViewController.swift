@@ -59,7 +59,7 @@ class ArchivedListsViewController: CoreDataTableViewController,
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    // swiftlint:disable force_unwrapping
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -318,11 +318,14 @@ class ArchivedListsViewController: CoreDataTableViewController,
         listTableViewCell.list = list
     }
 
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: IndexPath) -> String! {
+    func tableView(_ tableView: UITableView,
+                   titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: IndexPath) -> String! {
         return "Delete"
     }
 
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commitEditingStyle editingStyle: UITableViewCell.EditingStyle,
+                   forRowAtIndexPath indexPath: IndexPath) {
         if editingStyle != UITableViewCell.EditingStyle.delete {
             return
         }

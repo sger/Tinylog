@@ -26,7 +26,6 @@ class HelpTableViewControllerTests: XCTestCase {
         testWithEnvironment(language: .en, userDefaults: userDefaults, block: {
             let vc = HelpTableViewController()
             assertSnapshot(matching: vc, as: .image)
-            assertSnapshot(matching: vc, as: .recursiveDescription)
         })
     }
 
@@ -39,7 +38,6 @@ class HelpTableViewControllerTests: XCTestCase {
         testWithEnvironment(language: .en, userDefaults: userDefaults, block: {
             let vc = HelpTableViewController()
             assertSnapshot(matching: vc, as: .image)
-            assertSnapshot(matching: vc, as: .recursiveDescription)
         })
     }
 }

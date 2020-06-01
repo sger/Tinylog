@@ -47,7 +47,6 @@ class ArchivedListsViewControllerTests: XCTestCase {
             let vc = ArchivedListsViewController(managedObjectContext: coreDataManager.managedObjectContext)
             
             assertSnapshot(matching: vc, as: .image)
-            assertSnapshot(matching: vc, as: .recursiveDescription)
         })
     }
 }
