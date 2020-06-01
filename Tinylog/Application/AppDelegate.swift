@@ -12,7 +12,7 @@ import Ensembles
 import Firebase
 
 /// TLIAppDelegate Application Logic.
-//@UIApplicationMain
+// swiftlint:disable force_unwrapping
 class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembleDelegate {
 
     /// The instance of the UIWindow.
@@ -78,7 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        applicationCoordinator = ApplicationCoordinator(window: window!, managedObjectContext: coreDataManager.managedObjectContext)
+        applicationCoordinator = ApplicationCoordinator(window: window!,
+                                                        managedObjectContext: coreDataManager.managedObjectContext)
         applicationCoordinator.start()
 
         // Change color cursor for UITextField

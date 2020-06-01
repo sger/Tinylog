@@ -102,7 +102,8 @@ extension TLIList {
         return TLIList.filter(with: [titlePredicate, colorPredicate], descriptors: [positionDescriptor, titleDescriptor])
     }
 
-    static func filter(with predicates: [NSPredicate], descriptors: [NSSortDescriptor]) -> NSFetchRequest<NSFetchRequestResult> {
+    static func filter(with predicates: [NSPredicate],
+                       descriptors: [NSSortDescriptor]) -> NSFetchRequest<NSFetchRequestResult> {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
         fetchRequest.sortDescriptors = descriptors
         fetchRequest.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
