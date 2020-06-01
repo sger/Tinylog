@@ -1,6 +1,6 @@
 Tinylog
 ===
-[![Build Status](https://travis-ci.org/sger/Tinylog.svg?branch=master)](https://travis-ci.org/sger/Tinylog)
+[![Build Status](https://travis-ci.org/sger/Tinylog.svg?branch=master)](https://travis-ci.org/sger/Tinylog) ![CI](https://github.com/sger/Tinylog/workflows/CI/badge.svg)
 
 Tinylog is a minimal TODO App for iOS (iPhone/iPad).
 
@@ -26,7 +26,7 @@ $ make test
 Requirements
 -----
 
-Tinylog requires Swift 3.0 and Xcode 8.0.
+Tinylog requires Swift 5.0 and Xcode 11.0.
 
 Author
 -----
