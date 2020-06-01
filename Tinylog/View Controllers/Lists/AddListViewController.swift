@@ -182,7 +182,8 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                 }
             }
 
-            if let list: TLIList = NSEntityDescription.insertNewObject(forEntityName: "List", into: managedObjectContext) as? TLIList {
+            if let list: TLIList = NSEntityDescription.insertNewObject(forEntityName: "List",
+                                                                       into: managedObjectContext) as? TLIList {
                 if let name = name {
                     list.title = name.text
                 }
