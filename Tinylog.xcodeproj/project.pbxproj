@@ -26,6 +26,7 @@
 		562B1ECE22774CE2000EF38C /* HelpTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B1ECD22774CE2000EF38C /* HelpTableViewControllerTests.swift */; };
 		562E74FD2319592400316E23 /* BaseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E74FB2319592400316E23 /* BaseCoordinatorTests.swift */; };
 		562E75012319593A00316E23 /* BaseCoordinatorStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E75002319593A00316E23 /* BaseCoordinatorStub.swift */; };
+		5632410D2486262A001E50AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5632410C2486262A001E50AF /* GoogleService-Info.plist */; };
 		563256822276124000DCB848 /* Devices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563256812276124000DCB848 /* Devices.swift */; };
 		5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */; };
 		5638FC4C22744CDC00CB4071 /* GroupedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */; };
@@ -161,6 +162,7 @@
 		562B1ECD22774CE2000EF38C /* HelpTableViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTableViewControllerTests.swift; sourceTree = "<group>"; };
 		562E74FB2319592400316E23 /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
 		562E75002319593A00316E23 /* BaseCoordinatorStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorStub.swift; sourceTree = "<group>"; };
+		5632410C2486262A001E50AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		563256812276124000DCB848 /* Devices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Devices.swift; sourceTree = "<group>"; };
 		5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewControllerTests.swift; sourceTree = "<group>"; };
 		5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedTableViewCell.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 		5628E8C51E85898700AAFD20 /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
+				5632410C2486262A001E50AF /* GoogleService-Info.plist */,
 				5638FCCC2274501700CB4071 /* Application */,
 				5638FCBC2274500A00CB4071 /* Extensions */,
 				5638FCBB22744FD900CB4071 /* Core Data */,
@@ -874,6 +877,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				566BAC071F6ADBD4005B0E4F /* Launch Screen.storyboard in Resources */,
+				5632410D2486262A001E50AF /* GoogleService-Info.plist in Resources */,
 				5609F649226B4DCB00F6AF0E /* Localizable.strings in Resources */,
 				5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */,
 			);
