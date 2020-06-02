@@ -7,7 +7,7 @@ env:
 
 jobs:
   job-danger:
-    name: Review, Lint, Verify
+    name: Danger
     runs-on: macOS-latest
     steps:
       - name: git checkout
