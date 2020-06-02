@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArchiveButton: UIButton {
+final class ArchiveButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

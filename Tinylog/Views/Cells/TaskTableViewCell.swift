@@ -9,7 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 
-class TaskTableViewCell: GenericTableViewCell {
+final class TaskTableViewCell: GenericTableViewCell {
 
     let kLabelHorizontalInsets: CGFloat = 60.0
     let kLabelVerticalInsets: CGFloat = 10.0

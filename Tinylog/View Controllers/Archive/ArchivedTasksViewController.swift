@@ -9,7 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 
-class ArchivedTasksViewController: CoreDataTableViewController,
+final class ArchivedTasksViewController: CoreDataTableViewController,
     TTTAttributedLabelDelegate, EditTaskViewControllerDelegate {
 
     var onTapCloseButton: (() -> Void)?

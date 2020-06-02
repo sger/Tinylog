@@ -8,7 +8,7 @@
 // swiftlint:disable force_cast
 import UIKit
 
-class MenuColorsView: UIView {
+final class MenuColorsView: UIView {
 
     var colors = ["#6a6de2", "#008efe", "#fe4565", "#ffa600", "#50de72", "#ffd401"]
     var buttonsContainer: UIView?
