@@ -8,7 +8,7 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class EditTaskViewController: UIViewController {
+final class EditTaskViewController: UIViewController {
 
     var indexPath: IndexPath?
     var task: TLITask?

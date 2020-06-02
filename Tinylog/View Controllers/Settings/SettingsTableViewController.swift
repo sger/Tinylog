@@ -14,7 +14,7 @@ protocol SettingsTableViewControllerDelegate: AnyObject {
     func settingsTableViewControllerDidTapButton()
 }
 
-class SettingsTableViewController: UITableViewController,
+final class SettingsTableViewController: UITableViewController,
     MFMailComposeViewControllerDelegate,
     UIGestureRecognizerDelegate {
 

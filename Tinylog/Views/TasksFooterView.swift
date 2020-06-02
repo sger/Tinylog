@@ -9,7 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 
-class TasksFooterView: UIView {
+final class TasksFooterView: UIView {
 
     var borderLineView: UIView = {
         let borderLineView = UIView()

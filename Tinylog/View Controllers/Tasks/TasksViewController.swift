@@ -33,7 +33,7 @@ protocol TasksViewControllerDelegate: AnyObject {
     func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?)
 }
 
-class TasksViewController: CoreDataTableViewController,
+final class TasksViewController: CoreDataTableViewController,
     AddTaskViewDelegate,
     TTTAttributedLabelDelegate,
     EditTaskViewControllerDelegate {

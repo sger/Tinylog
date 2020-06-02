@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDelegate {
+final class TextSizeViewController: GroupedTableViewController, UIGestureRecognizerDelegate {
     let textSizeCellIdentifier = "TextSizeCellIdentifier"
     let numbers = [13, 14, 15, 16, 17, 18, 19, 20, 21]
 
