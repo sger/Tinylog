@@ -8,7 +8,7 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class TextFieldCell: UITableViewCell, UITextFieldDelegate, TextFieldCellDelegate {
+final class TextFieldCell: UITableViewCell, UITextFieldDelegate, TextFieldCellDelegate {
 
     var textField: TLITextField?
     var indexPath: IndexPath?

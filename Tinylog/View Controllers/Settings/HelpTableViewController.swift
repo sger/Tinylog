@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegate {
+final class HelpTableViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     let helpCellIdentifier = "HelpTableViewCell"
     var data = [localizedString(key: "Help_instructions1"),
