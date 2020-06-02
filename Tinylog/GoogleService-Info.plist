@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>622704866197-1afo3mh3gqtngulqsl20ubr2u9hc7bmn.apps.googleusercontent.com</string>
+	<string>895199965812-ld1al4086ghbgecmgokavk7jgrhf6mee.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.622704866197-1afo3mh3gqtngulqsl20ubr2u9hc7bmn</string>
+	<string>com.googleusercontent.apps.895199965812-ld1al4086ghbgecmgokavk7jgrhf6mee</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD6zkZs0Rlrl8UjUAS2NFF37II2xlC2RP8</string>
+	<string>AIzaSyDqLxDx828oRfBDroIMw0N7F1hFf1rJbQo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>622704866197</string>
+	<string>895199965812</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.spirosgerokostas.Tinylog</string>
 	<key>PROJECT_ID</key>
-	<string>tinylog-13da8</string>
+	<string>tinylog-279107</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tinylog-13da8.appspot.com</string>
+	<string>tinylog-279107.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:622704866197:ios:ba815a9b463f25bb98fc9c</string>
+	<string>1:895199965812:ios:699ecb0b16ad8beb0a1721</string>
 	<key>DATABASE_URL</key>
-	<string>https://tinylog-13da8.firebaseio.com</string>
+	<string>https://tinylog-279107.firebaseio.com</string>
 </dict>
 </plist>

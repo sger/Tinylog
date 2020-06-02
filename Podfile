@@ -10,10 +10,11 @@ target 'Tinylog' do
 	pod 'SVProgressHUD'
 	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"
-  pod 'Firebase/Core'
   pod 'SwiftLint'
   pod 'SnapKit', '~> 5.0.0'
   pod 'ReachabilitySwift'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
 
   target 'TinylogTests' do
     inherit! :search_paths
