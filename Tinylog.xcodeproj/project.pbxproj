@@ -16,6 +16,7 @@
 		5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */; };
 		5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */; };
 		56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataManager.swift */; };
+		56152FA6248634A60096DC04 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56152FA5248634A50096DC04 /* GoogleService-Info.plist */; };
 		561FC06C231ABC190059ADA8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC06B231ABC190059ADA8 /* Router.swift */; };
 		561FC06E231ABC410059ADA8 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC06D231ABC410059ADA8 /* NavigationRouter.swift */; };
 		561FC071231ACDCA0059ADA8 /* RouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC070231ACDCA0059ADA8 /* RouterMock.swift */; };
@@ -26,7 +27,6 @@
 		562B1ECE22774CE2000EF38C /* HelpTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B1ECD22774CE2000EF38C /* HelpTableViewControllerTests.swift */; };
 		562E74FD2319592400316E23 /* BaseCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E74FB2319592400316E23 /* BaseCoordinatorTests.swift */; };
 		562E75012319593A00316E23 /* BaseCoordinatorStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562E75002319593A00316E23 /* BaseCoordinatorStub.swift */; };
-		5632410D2486262A001E50AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5632410C2486262A001E50AF /* GoogleService-Info.plist */; };
 		563256822276124000DCB848 /* Devices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563256812276124000DCB848 /* Devices.swift */; };
 		5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */; };
 		5638FC4C22744CDC00CB4071 /* GroupedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */; };
@@ -148,6 +148,7 @@
 		5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Environment.swift"; sourceTree = "<group>"; };
 		5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTests.swift; sourceTree = "<group>"; };
 		56119AEC226F90EA00F8D798 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		56152FA5248634A50096DC04 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		561FC06B231ABC190059ADA8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		561FC06D231ABC410059ADA8 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		561FC070231ACDCA0059ADA8 /* RouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMock.swift; sourceTree = "<group>"; };
@@ -162,7 +163,6 @@
 		562B1ECD22774CE2000EF38C /* HelpTableViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTableViewControllerTests.swift; sourceTree = "<group>"; };
 		562E74FB2319592400316E23 /* BaseCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorTests.swift; sourceTree = "<group>"; };
 		562E75002319593A00316E23 /* BaseCoordinatorStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorStub.swift; sourceTree = "<group>"; };
-		5632410C2486262A001E50AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		563256812276124000DCB848 /* Devices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Devices.swift; sourceTree = "<group>"; };
 		5638FC2D227443E600CB4071 /* SetupViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewControllerTests.swift; sourceTree = "<group>"; };
 		5638FC3122744CDC00CB4071 /* GroupedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedTableViewCell.swift; sourceTree = "<group>"; };
@@ -362,24 +362,24 @@
 		5628E8C51E85898700AAFD20 /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
-				5632410C2486262A001E50AF /* GoogleService-Info.plist */,
 				5638FCCC2274501700CB4071 /* Application */,
-				5638FCBC2274500A00CB4071 /* Extensions */,
+				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
+				56487F8F1F644E150080192C /* Configs */,
 				5638FCBB22744FD900CB4071 /* Core Data */,
-				5638FC9C22744F8800CB4071 /* Utils */,
-				5638FC8D22744F4000CB4071 /* Protocols */,
+				5638FCBC2274500A00CB4071 /* Extensions */,
+				56152FA5248634A50096DC04 /* GoogleService-Info.plist */,
 				5638FC8822744ECF00CB4071 /* Helpers */,
+				5628E8D21E85898700AAFD20 /* Info.plist */,
+				5609F607226B4BA600F6AF0E /* Locales */,
+				56119AEB226F90EA00F8D798 /* Managers */,
+				5638FC8D22744F4000CB4071 /* Protocols */,
+				566BAC051F6ADBD3005B0E4F /* Storyboards */,
+				56B7AD8F1E858B25004BB429 /* Tinylog-Bridging-Header.h */,
+				56B7AD931E858B81004BB429 /* Tinylog.entitlements */,
+				566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */,
+				5638FC9C22744F8800CB4071 /* Utils */,
 				5638FC6222744D8200CB4071 /* View Controllers */,
 				5638FC2F22744CDC00CB4071 /* Views */,
-				56119AEB226F90EA00F8D798 /* Managers */,
-				5609F607226B4BA600F6AF0E /* Locales */,
-				566BAC051F6ADBD3005B0E4F /* Storyboards */,
-				56487F8F1F644E150080192C /* Configs */,
-				566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */,
-				56B7AD931E858B81004BB429 /* Tinylog.entitlements */,
-				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
-				5628E8D21E85898700AAFD20 /* Info.plist */,
-				56B7AD8F1E858B25004BB429 /* Tinylog-Bridging-Header.h */,
 			);
 			path = Tinylog;
 			sourceTree = "<group>";
@@ -762,6 +762,7 @@
 				DDFA14B61268A7B4EA5B443B /* [CP] Embed Pods Frameworks */,
 				56C7749F1F4D7823008571E1 /* Build Number */,
 				56C774A01F4D78CA008571E1 /* Version Number */,
+				56152FA7248639670096DC04 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -877,7 +878,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				566BAC071F6ADBD4005B0E4F /* Launch Screen.storyboard in Resources */,
-				5632410D2486262A001E50AF /* GoogleService-Info.plist in Resources */,
+				56152FA6248634A60096DC04 /* GoogleService-Info.plist in Resources */,
 				5609F649226B4DCB00F6AF0E /* Localizable.strings in Resources */,
 				5628E8CE1E85898700AAFD20 /* Assets.xcassets in Resources */,
 			);
@@ -935,6 +936,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		56152FA7248639670096DC04 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		56C7749F1F4D7823008571E1 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1290,6 +1308,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Tinylog/Tinylog.entitlements;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = A22EW7MN8G;
 				INFOPLIST_FILE = Tinylog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
