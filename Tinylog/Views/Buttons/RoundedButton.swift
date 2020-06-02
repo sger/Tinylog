@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundedButton: UIButton {
+final class RoundedButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

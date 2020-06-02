@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CoreDataManager {
+final class CoreDataManager {
 
     private let model: String
     private let memory: Bool

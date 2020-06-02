@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddListButton: UIButton {
+final class AddListButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
