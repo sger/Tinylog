@@ -47,10 +47,12 @@ jobs:
           gem install xcpretty -N
           make bootstrap
           make secrets
+          make google-service
       - name: Cocoapods
         run: |
           pod install
           make secrets
+          make google-service
       - name: Select Xcode 11.5
         run: sudo xcode-select -s /Applications/Xcode_11.5.app
       - name: Run tests
@@ -84,10 +86,12 @@ jobs:
           gem install xcpretty -N
           make bootstrap
           make secrets
+          make google-service
       - name: Cocoapods
         run: |
           pod install
           make secrets
+          make google-service
       - name: Select Xcode 11.5
         run: sudo xcode-select -s /Applications/Xcode_11.5.app
       - name: Build
