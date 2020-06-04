@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class AboutViewController: GroupedTableViewController,
+final class AboutViewController: GroupedTableViewController,
     UIGestureRecognizerDelegate,
     MFMailComposeViewControllerDelegate {
     let aboutCellIdentifier = "AboutCellIdentifier"

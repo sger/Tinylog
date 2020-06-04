@@ -8,7 +8,7 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class CheckBoxButton: UIButton {
+final class CheckBoxButton: UIButton {
 
     var tableViewCell: UITableViewCell?
     var circleView: TouchableView?

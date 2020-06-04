@@ -9,7 +9,7 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class SettingsFontPickerViewController: UITableViewController {
+final class SettingsFontPickerViewController: UITableViewController {
 
     var currentIndexPath: NSIndexPath?
 

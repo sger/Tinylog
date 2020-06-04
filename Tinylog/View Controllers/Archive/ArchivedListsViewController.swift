@@ -14,7 +14,7 @@ protocol ArchivedListsViewControllerDelegate: AnyObject {
     func archivedListsViewControllerDidTapButton()
 }
 
-class ArchivedListsViewController: CoreDataTableViewController,
+final class ArchivedListsViewController: CoreDataTableViewController,
     UITextFieldDelegate,
     UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
 

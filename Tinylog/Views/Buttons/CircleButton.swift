@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CircleButton: UIButton {
+final class CircleButton: UIButton {
 
     var borderColor: UIColor?
     var borderSize: CGFloat?

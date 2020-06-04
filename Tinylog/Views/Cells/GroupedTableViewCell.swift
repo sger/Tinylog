@@ -8,7 +8,7 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 
-class GroupedTableViewCell: UITableViewCell {
+final class GroupedTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

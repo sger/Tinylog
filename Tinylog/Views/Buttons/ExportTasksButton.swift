@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExportTasksButton: UIButton {
+final class ExportTasksButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
