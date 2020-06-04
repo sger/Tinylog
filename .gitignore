@@ -70,3 +70,4 @@ fastlane/test_output
 
 # Ignore config files
 Tinylog/Configs
+Tinylog/GoogleService-Info.plist
