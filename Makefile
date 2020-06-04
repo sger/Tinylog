@@ -47,6 +47,10 @@ secrets:
 	&& cp -n Configs/Secrets.swift.example Tinylog/Configs/Secrets.swift \
 	|| true; \
 
+google-service:
+	cp -n Configs/GoogleService-Info.plist Tinylog/GoogleService-Info.plist \
+	|| true; \
+
 deploy:
 	@echo "Deploying $(BRANCH) to $(RELEASE) branch"
 
