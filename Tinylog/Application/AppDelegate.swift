@@ -19,16 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
     var window: UIWindow?
 
     /// Access core data managed object context.
-    let coreDataManager = CoreDataManager(model: "Tinylog")
+    private let coreDataManager = CoreDataManager(model: "Tinylog")
 
-    var applicationCoordinator: ApplicationCoordinator!
+    /// Instance of ApplicationCoordinator
+    private var applicationCoordinator: ApplicationCoordinator?
 
     /**
         Singleton of TLIAppDelegate
 
      - Returns: TLIAppDelegate instance.
      */
-    class func sharedAppDelegate() -> AppDelegate {
+    static func sharedAppDelegate() -> AppDelegate {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
         }
@@ -80,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 
         applicationCoordinator = ApplicationCoordinator(window: window!,
                                                         managedObjectContext: coreDataManager.managedObjectContext)
-        applicationCoordinator.start()
+        applicationCoordinator?.start()
 
         // Change color cursor for UITextField
         UITextField.appearance().tintColor = UIColor.tinylogMainColor
@@ -157,11 +158,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
 // MARK: Notifications
 
 extension AppDelegate {
-    fileprivate func registerNotifications() {
-    }
+    fileprivate func registerNotifications() {}
 
-    fileprivate func unregisterNotifications() {
-    }
+    fileprivate func unregisterNotifications() {}
 }
 
 // Helper function inserted by Swift 4.2 migrator.
