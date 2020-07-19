@@ -93,9 +93,12 @@ final class TasksViewController: CoreDataTableViewController,
         addTaskView.delegate = self
         return addTaskView
     }()
+    
+    private var viewModel: TasksViewModel?
 
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
+        viewModel = TasksViewModel(managedObjectContext: managedObjectContext)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -129,7 +132,7 @@ final class TasksViewController: CoreDataTableViewController,
         super.viewDidLoad()
 
         setupNavigationBarProperties()
-
+        
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 22.0, bottom: 0, right: 0)
@@ -643,56 +646,31 @@ final class TasksViewController: CoreDataTableViewController,
     }
 
     @objc func exportTasks(_ sender: UIButton) {
-        guard let list = list,
-            let title = list.title else {
+        guard let listTasks = viewModel?.getFormattedListTasks(with: list) else {
             return
         }
-        
-        do {
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-            let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
-            fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-            fetchRequest.predicate = NSPredicate(format: "list = %@", list)
-            fetchRequest.fetchBatchSize = 20
-            let tasks: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
+        let activityViewController: UIActivityViewController = UIActivityViewController(
+            activityItems: [listTasks], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [
+            .postToTwitter,
+            .postToFacebook,
+            .postToWeibo,
+            .copyToPasteboard,
+            .assignToContact,
+            .saveToCameraRoll,
+            .addToReadingList,
+            .postToFlickr,
+            .postToVimeo,
+            .postToTencentWeibo
+        ]
 
-            var outputString: String = ""
-            outputString = outputString.appending("\(title)\n")
-            
-            tasks.forEach { task in
-                guard let task = task as? TLITask,
-                    let displayLongText = task.displayLongText else {
-                    return
-                }
-                outputString = outputString.appending("- \(displayLongText)\n")
-            }
-            
-            let activityViewController: UIActivityViewController = UIActivityViewController(
-                activityItems: [outputString], applicationActivities: nil)
-            activityViewController.excludedActivityTypes = [
-                .postToTwitter,
-                .postToFacebook,
-                .postToWeibo,
-                .copyToPasteboard,
-                .assignToContact,
-                .saveToCameraRoll,
-                .addToReadingList,
-                .postToFlickr,
-                .postToVimeo,
-                .postToTencentWeibo
-            ]
+        activityViewController.modalPresentationStyle = .popover
+        activityViewController.popoverPresentationController?.sourceRect = sender.bounds
+        activityViewController.popoverPresentationController?.sourceView = sender
+        activityViewController.popoverPresentationController?.permittedArrowDirections = .any
 
-            activityViewController.modalPresentationStyle = .popover
-            activityViewController.popoverPresentationController?.sourceRect = sender.bounds
-            activityViewController.popoverPresentationController?.sourceView = sender
-            activityViewController.popoverPresentationController?.permittedArrowDirections = .any
-
-            navigationController?.present(activityViewController,
-                                          animated: true,
-                                          completion: nil)
-        } catch let error as NSError {
-            fatalError(error.localizedDescription)
-        }
+        navigationController?.present(activityViewController,
+                                      animated: true,
+                                      completion: nil)
     }
 }

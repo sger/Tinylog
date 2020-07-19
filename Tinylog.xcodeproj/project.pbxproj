@@ -112,6 +112,8 @@
 		56E178222484FA1400B8D86C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E178212484FA1400B8D86C /* main.swift */; };
 		56E178242484FA5D00B8D86C /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E178232484FA5D00B8D86C /* TestAppDelegate.swift */; };
 		56E4E6E4230868290085DBC4 /* ListsFooterViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E4E6E3230868290085DBC4 /* ListsFooterViewDelegate.swift */; };
+		56EDFE8F24C4B2BD0017F729 /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EDFE8E24C4B2BD0017F729 /* TasksViewModel.swift */; };
+		56EDFE9224C4B8610017F729 /* TasksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EDFE9124C4B8610017F729 /* TasksViewModelTests.swift */; };
 		56F746042316AF68005A1D41 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F746032316AF68005A1D41 /* Coordinator.swift */; };
 		56F746072316AF75005A1D41 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F746052316AF75005A1D41 /* BaseCoordinator.swift */; };
 		56F746082316AF75005A1D41 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F746062316AF75005A1D41 /* ApplicationCoordinator.swift */; };
@@ -279,6 +281,8 @@
 		56E178212484FA1400B8D86C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		56E178232484FA5D00B8D86C /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		56E4E6E3230868290085DBC4 /* ListsFooterViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsFooterViewDelegate.swift; sourceTree = "<group>"; };
+		56EDFE8E24C4B2BD0017F729 /* TasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
+		56EDFE9124C4B8610017F729 /* TasksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModelTests.swift; sourceTree = "<group>"; };
 		56F746032316AF68005A1D41 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		56F746052316AF75005A1D41 /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		56F746062316AF75005A1D41 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
@@ -380,12 +384,12 @@
 		5628E8C51E85898700AAFD20 /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
-				568FD1EF2489673800A9B8F9 /* GoogleService-Info.plist */,
 				5638FCCC2274501700CB4071 /* Application */,
 				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
 				56487F8F1F644E150080192C /* Configs */,
 				5638FCBB22744FD900CB4071 /* Core Data */,
 				5638FCBC2274500A00CB4071 /* Extensions */,
+				568FD1EF2489673800A9B8F9 /* GoogleService-Info.plist */,
 				5638FC8822744ECF00CB4071 /* Helpers */,
 				5628E8D21E85898700AAFD20 /* Info.plist */,
 				5609F607226B4BA600F6AF0E /* Locales */,
@@ -397,6 +401,7 @@
 				566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */,
 				5638FC9C22744F8800CB4071 /* Utils */,
 				5638FC6222744D8200CB4071 /* View Controllers */,
+				56EDFE8D24C4B2A80017F729 /* ViewModels */,
 				5638FC2F22744CDC00CB4071 /* Views */,
 			);
 			path = Tinylog;
@@ -405,18 +410,19 @@
 		5628E8DA1E85898700AAFD20 /* TinylogTests */ = {
 			isa = PBXGroup;
 			children = (
-				561FC06F231ACDB80059ADA8 /* Mocks */,
-				562E74FF2319593A00316E23 /* Stubs */,
 				562E74FB2319592400316E23 /* BaseCoordinatorTests.swift */,
 				56EFE834227D9F4A0056B072 /* Core Data */,
-				5638FC2C227443C800CB4071 /* View Controllers */,
-				5609F659226B54FC00F6AF0E /* Helpers */,
 				5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */,
+				56892690226C767A00D952A6 /* FindColorByNameTests.swift */,
+				5609F659226B54FC00F6AF0E /* Helpers */,
 				5628E8DD1E85898700AAFD20 /* Info.plist */,
 				5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */,
-				56892690226C767A00D952A6 /* FindColorByNameTests.swift */,
+				561FC06F231ACDB80059ADA8 /* Mocks */,
 				561FC072231ACE940059ADA8 /* RouterTests.swift */,
+				562E74FF2319593A00316E23 /* Stubs */,
 				56E178232484FA5D00B8D86C /* TestAppDelegate.swift */,
+				5638FC2C227443C800CB4071 /* View Controllers */,
+				56EDFE9024C4B8490017F729 /* ViewModels */,
 			);
 			path = TinylogTests;
 			sourceTree = "<group>";
@@ -735,6 +741,22 @@
 				568F7DFF1F2BA0DC00CFDDDD /* Info.plist */,
 			);
 			path = TinylogUITests;
+			sourceTree = "<group>";
+		};
+		56EDFE8D24C4B2A80017F729 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				56EDFE8E24C4B2BD0017F729 /* TasksViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		56EDFE9024C4B8490017F729 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				56EDFE9124C4B8610017F729 /* TasksViewModelTests.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		56EFE834227D9F4A0056B072 /* Core Data */ = {
@@ -1125,6 +1147,7 @@
 				5638FC5822744CDC00CB4071 /* AddListButton.swift in Sources */,
 				5638FCB622744F9F00CB4071 /* TLIMention.swift in Sources */,
 				5638FC4D22744CDC00CB4071 /* HelpTableViewCell.swift in Sources */,
+				56EDFE8F24C4B2BD0017F729 /* TasksViewModel.swift in Sources */,
 				5638FCCA2274500A00CB4071 /* UIViewController+Tinylog.swift in Sources */,
 				5638FC7C22744D8200CB4071 /* AboutViewController.swift in Sources */,
 				5638FCB022744F9F00CB4071 /* TLINotification.swift in Sources */,
@@ -1165,6 +1188,7 @@
 				5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */,
 				562B1ECE22774CE2000EF38C /* HelpTableViewControllerTests.swift in Sources */,
 				561FC073231ACE940059ADA8 /* RouterTests.swift in Sources */,
+				56EDFE9224C4B8610017F729 /* TasksViewModelTests.swift in Sources */,
 				5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */,
 				5669ADF22274613500555E56 /* ListTests.swift in Sources */,
 				56E178242484FA5D00B8D86C /* TestAppDelegate.swift in Sources */,
