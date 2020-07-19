@@ -634,65 +634,65 @@ final class TasksViewController: CoreDataTableViewController,
         editTaskViewController.delegate = self
         let nc: UINavigationController = UINavigationController(rootViewController: editTaskViewController)
         nc.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.navigationController?.present(nc, animated: true, completion: nil)
+        navigationController?.present(nc, animated: true, completion: nil)
     }
 
     func onClose(_ editTaskViewController: EditTaskViewController, indexPath: IndexPath) {
-        self.currentIndexPath = indexPath
-        self.tableView?.reloadData()
+        currentIndexPath = indexPath
+        tableView?.reloadData()
     }
 
     @objc func exportTasks(_ sender: UIButton) {
-        if self.list != nil {
+        guard let list = list,
+            let title = list.title else {
+            return
+        }
+        
+        do {
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
+            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
+            let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
+            fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
+            fetchRequest.predicate = NSPredicate(format: "list = %@", list)
+            fetchRequest.fetchBatchSize = 20
+            let tasks: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
 
-            do {
-
-                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-                let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-                let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
-                fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-                fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
-                fetchRequest.fetchBatchSize = 20
-                let tasks: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
-
-                var output: NSString = ""
-                var listTitle: NSString = ""
-                listTitle = self.list!.title! as NSString
-
-                output = output.appending(NSString(format: "%@\n", listTitle) as String) as NSString
-
-                for task in tasks {
-                    let taskItem: TLITask = task as! TLITask
-                    let displayLongText: NSString = NSString(format: "- %@\n", taskItem.displayLongText!)
-                    output = output.appending(displayLongText as String) as NSString
+            var outputString: String = ""
+            outputString = outputString.appending("\(title)\n")
+            
+            tasks.forEach { task in
+                guard let task = task as? TLITask,
+                    let displayLongText = task.displayLongText else {
+                    return
                 }
-
-                let activityViewController: UIActivityViewController = UIActivityViewController(
-                    activityItems: [output], applicationActivities: nil)
-                activityViewController.excludedActivityTypes = [
-                    UIActivity.ActivityType.postToTwitter,
-                    UIActivity.ActivityType.postToFacebook,
-                    UIActivity.ActivityType.postToWeibo,
-                    UIActivity.ActivityType.copyToPasteboard,
-                    UIActivity.ActivityType.assignToContact,
-                    UIActivity.ActivityType.saveToCameraRoll,
-                    UIActivity.ActivityType.addToReadingList,
-                    UIActivity.ActivityType.postToFlickr,
-                    UIActivity.ActivityType.postToVimeo,
-                    UIActivity.ActivityType.postToTencentWeibo
-                ]
-
-                activityViewController.modalPresentationStyle = UIModalPresentationStyle.popover
-                activityViewController.popoverPresentationController?.sourceRect = sender.bounds
-                activityViewController.popoverPresentationController?.sourceView = sender
-                activityViewController.popoverPresentationController?.permittedArrowDirections
-                    = UIPopoverArrowDirection.any
-
-                self.navigationController?.present(
-                    activityViewController, animated: true, completion: nil)
-            } catch let error as NSError {
-                fatalError(error.localizedDescription)
+                outputString = outputString.appending("- \(displayLongText)\n")
             }
+            
+            let activityViewController: UIActivityViewController = UIActivityViewController(
+                activityItems: [outputString], applicationActivities: nil)
+            activityViewController.excludedActivityTypes = [
+                .postToTwitter,
+                .postToFacebook,
+                .postToWeibo,
+                .copyToPasteboard,
+                .assignToContact,
+                .saveToCameraRoll,
+                .addToReadingList,
+                .postToFlickr,
+                .postToVimeo,
+                .postToTencentWeibo
+            ]
+
+            activityViewController.modalPresentationStyle = .popover
+            activityViewController.popoverPresentationController?.sourceRect = sender.bounds
+            activityViewController.popoverPresentationController?.sourceView = sender
+            activityViewController.popoverPresentationController?.permittedArrowDirections = .any
+
+            navigationController?.present(activityViewController,
+                                          animated: true,
+                                          completion: nil)
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
         }
     }
 }
