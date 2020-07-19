@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
                 syncManager.synchronize(completion: nil)
             }
 
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 

@@ -7,28 +7,33 @@
 //
 // swiftlint:disable force_unwrapping
 import UIKit
-import TTTAttributedLabel
+import Nantes
 
 final class TaskTableViewCell: GenericTableViewCell {
 
     let kLabelHorizontalInsets: CGFloat = 60.0
     let kLabelVerticalInsets: CGFloat = 10.0
-    let taskLabel: TTTAttributedLabel = TTTAttributedLabel(frame: CGRect.zero)
+    let taskLabel: NantesLabel = NantesLabel(frame: CGRect.zero)
 
     let checkBoxButton: CheckBoxButton = CheckBoxButton()
     var checkMarkIcon: UIImageView?
     var managedObjectContext: NSManagedObjectContext!
 
-    var currentTask: TLITask? {
+    var task: TLITask? {
         didSet {
-
+            guard let task = task,
+                let list = task.list,
+                let color = list.color else {
+                return
+            }
+            
             // Fetch all objects from list
 
             let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
             let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
             fetchRequestTotal.sortDescriptors = [positionDescriptor]
             fetchRequestTotal.predicate  = NSPredicate(
-                format: "archivedAt = nil AND list = %@", currentTask!.list!)
+                format: "archivedAt = nil AND list = %@", list)
             fetchRequestTotal.fetchBatchSize = 20
 
             do {
@@ -39,49 +44,43 @@ final class TaskTableViewCell: GenericTableViewCell {
                 fetchRequestCompleted.sortDescriptors = [positionDescriptor]
                 fetchRequestCompleted.predicate  = NSPredicate(
                     format: "archivedAt = nil AND completed = %@ AND list = %@",
-                    NSNumber(value: true as Bool), currentTask!.list!)
+                    NSNumber(value: true as Bool), list)
                 fetchRequestCompleted.fetchBatchSize = 20
                 let resultsCompleted: NSArray = try managedObjectContext.fetch(
                     fetchRequestCompleted) as NSArray
 
                 let total: Int = results.count - resultsCompleted.count
-                currentTask?.list!.total = total as NSNumber?
+                list.total = total as NSNumber?
 
-                checkBoxButton.circleView?.layer.borderColor = UIColor(
-                    rgba: currentTask!.list!.color!).cgColor
+                checkBoxButton.circleView?.layer.borderColor = UIColor(rgba: color).cgColor
                 checkBoxButton.checkMarkIcon?.image = checkBoxButton.checkMarkIcon?.image?.imageWithColor(
-                    UIColor(rgba: currentTask!.list!.color!))
+                    UIColor(rgba: color))
             } catch let error as NSError {
                 fatalError(error.localizedDescription)
             }
 
             updateFonts()
 
-            taskLabel.activeLinkAttributes = [
-                kCTForegroundColorAttributeName as AnyHashable: UIColor(
-                    rgba: currentTask!.list!.color!)]
+            taskLabel.activeLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: color)]
 
-            if let boolValue = currentTask?.completed?.boolValue {
+            if let boolValue = task.completed?.boolValue {
                 if boolValue {
                     checkBoxButton.checkMarkIcon!.isHidden = false
                     checkBoxButton.alpha = 0.5
                     taskLabel.alpha = 0.5
-                    taskLabel.linkAttributes = [
-                        kCTForegroundColorAttributeName as AnyHashable: UIColor.lightGray]
+                    taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
                 } else {
                     checkBoxButton.checkMarkIcon!.isHidden = true
                     checkBoxButton.alpha = 1.0
                     taskLabel.alpha = 1.0
-                    taskLabel.linkAttributes = [
-                        kCTForegroundColorAttributeName as AnyHashable: UIColor(
-                            rgba: currentTask!.list!.color!)]
+                    taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: color)]
                 }
             }
+            
+            taskLabel.text = task.displayLongText
 
-            updateAttributedText()
-
-            self.setNeedsUpdateConstraints()
-            self.updateConstraintsIfNeeded()
+            setNeedsUpdateConstraints()
+            updateConstraintsIfNeeded()
         }
     }
 
@@ -95,6 +94,7 @@ final class TaskTableViewCell: GenericTableViewCell {
         taskLabel.numberOfLines = 0
         taskLabel.textAlignment = .left
         taskLabel.textColor = UIColor(named: "textColor")
+        taskLabel.delegate = self
         contentView.addSubview(taskLabel)
 
         checkBoxButton.tableViewCell = self
@@ -122,37 +122,21 @@ final class TaskTableViewCell: GenericTableViewCell {
 
     override func updateFonts() {
         super.updateFonts()
-
         taskLabel.font = tinylogFont
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        self.contentView.setNeedsLayout()
-        self.contentView.layoutIfNeeded()
-
+        contentView.setNeedsLayout()
+        contentView.layoutIfNeeded()
         taskLabel.preferredMaxLayoutWidth = taskLabel.frame.width
     }
+}
 
-    func updateAttributedText() {
-        taskLabel.setText(currentTask?.displayLongText) {
-            (mutableAttributedString) -> NSMutableAttributedString? in
-            return mutableAttributedString
-        }
-        if let textTaskLabel = taskLabel.text, let total = textTaskLabel as? NSString {
-            let words: [String] = total.components(separatedBy: " ")
-            for word in words {
-                let character = word as NSString
-                if character.hasPrefix("http://") || character.hasPrefix("https://") {
-                    // swiftlint:disable legacy_constructor
-                    let value: NSString = character.substring(
-                        with: NSMakeRange(0, character.length)) as NSString
-                    let range: NSRange = total.range(of: character as String)
-                    let url: URL = URL(string: NSString(format: "%@", value) as String)!
-                    taskLabel.addLink(to: url, with: range)
-                }
-            }
-        }
+extension TaskTableViewCell: NantesLabelDelegate {
+    func attributedLabel(_ label: NantesLabel, didSelectLink link: URL) {
+        UIApplication.shared.open(link,
+                                  options: [:],
+                                  completionHandler: nil)
     }
 }

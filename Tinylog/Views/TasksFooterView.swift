@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TTTAttributedLabel
 
 final class TasksFooterView: UIView {
 
