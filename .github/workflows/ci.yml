@@ -45,25 +45,21 @@ jobs:
         with:
           path: Carthage
           key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
-      - name: Setup carthage
-        if: steps.carthage-cache.outputs.cache-hit != 'true'
+      - name: Dependencies
         run: |
           make carthage-bootstrap
-      - name: Install carthage dependencies
-        run: |
-          carthage update --platform iOS
-      - name: Setup cocoapods
-        if: steps.cocoapods-cache.outputs.cache-hit != 'true'
-        run: |
           gem install cocoapods
           gem install xcpretty -N
           make secrets
           make google-service
-      - name: Install cocoapods dependencies
+      - name: Setup carthage
+        if: steps.carthage-cache.outputs.cache-hit != 'true'
+        run: |
+          carthage bootstrap --platform iOS --cache-builds
+      - name: Setup cocoapods
+        if: steps.cocoapods-cache.outputs.cache-hit != 'true'
         run: |
           pod install
-          make secrets
-          make google-service
       - name: Run tests
         run: |
           make test
@@ -94,25 +90,21 @@ jobs:
         with:
           path: Carthage
           key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
-      - name: Setup carthage
-        if: steps.carthage-cache.outputs.cache-hit != 'true'
+      - name: Dependencies
         run: |
           make carthage-bootstrap
-      - name: Install carthage dependencies
-        run: |
-          carthage update --platform iOS
-      - name: Setup cocoapods
-        if: steps.cocoapods-cache.outputs.cache-hit != 'true'
-        run: |
           gem install cocoapods
           gem install xcpretty -N
           make secrets
           make google-service
-      - name: Install cocoapods dependencies
+      - name: Setup carthage
+        if: steps.carthage-cache.outputs.cache-hit != 'true'
+        run: |
+          carthage bootstrap --platform iOS --cache-builds
+      - name: Setup cocoapods
+        if: steps.cocoapods-cache.outputs.cache-hit != 'true'
         run: |
           pod install
-          make secrets
-          make google-service
       - name: Build
         run: |
           make build
