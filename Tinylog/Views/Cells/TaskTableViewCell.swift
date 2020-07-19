@@ -5,7 +5,7 @@
 //  Created by Spiros Gerokostas on 18/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
+
 import UIKit
 import Nantes
 
@@ -63,18 +63,16 @@ final class TaskTableViewCell: GenericTableViewCell {
 
             taskLabel.activeLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: color)]
 
-            if let boolValue = task.completed?.boolValue {
-                if boolValue {
-                    checkBoxButton.checkMarkIcon!.isHidden = false
-                    checkBoxButton.alpha = 0.5
-                    taskLabel.alpha = 0.5
-                    taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-                } else {
-                    checkBoxButton.checkMarkIcon!.isHidden = true
-                    checkBoxButton.alpha = 1.0
-                    taskLabel.alpha = 1.0
-                    taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: color)]
-                }
+            if let boolValue = task.completed?.boolValue, boolValue {
+                checkBoxButton.checkMarkIcon?.isHidden = false
+                checkBoxButton.alpha = 0.5
+                taskLabel.alpha = 0.5
+                taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+            } else {
+                checkBoxButton.checkMarkIcon?.isHidden = true
+                checkBoxButton.alpha = 1.0
+                taskLabel.alpha = 1.0
+                taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: color)]
             }
 
             taskLabel.text = task.displayLongText
