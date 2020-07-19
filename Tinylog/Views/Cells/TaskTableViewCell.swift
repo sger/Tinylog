@@ -26,7 +26,7 @@ final class TaskTableViewCell: GenericTableViewCell {
                 let color = list.color else {
                 return
             }
-            
+
             // Fetch all objects from list
 
             let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
@@ -76,7 +76,7 @@ final class TaskTableViewCell: GenericTableViewCell {
                     taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: color)]
                 }
             }
-            
+
             taskLabel.text = task.displayLongText
 
             setNeedsUpdateConstraints()
