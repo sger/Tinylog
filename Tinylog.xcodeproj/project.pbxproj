@@ -95,6 +95,8 @@
 		5638FCCF2274501700CB4071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5638FCCD2274501700CB4071 /* AppDelegate.swift */; };
 		564661E523256779007BA4A1 /* ArchivedTasksCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564661E423256779007BA4A1 /* ArchivedTasksCoordinator.swift */; };
 		5653C1D5231ADDD0003D1A19 /* ArchivedListsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653C1D4231ADDD0003D1A19 /* ArchivedListsCoordinator.swift */; };
+		5660343624C4122D0078097E /* Nantes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5660343524C4122D0078097E /* Nantes.framework */; };
+		5660343724C4122D0078097E /* Nantes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5660343524C4122D0078097E /* Nantes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5662CE9D2316E18A0069A50D /* AddListViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5662CE9C2316E18A0069A50D /* AddListViewCoordinator.swift */; };
 		566536F6232FF2AD003F4C86 /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */; };
 		5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5669ADED2274613400555E56 /* ListsViewControllerTests.swift */; };
@@ -135,6 +137,20 @@
 			remoteInfo = Tinylog;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5660343824C4122D0078097E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5660343724C4122D0078097E /* Nantes.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		034E13532B5D4A3280918EFF /* Pods-Tinylog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinylog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog.debug.xcconfig"; sourceTree = "<group>"; };
@@ -236,6 +252,7 @@
 		5638FCCD2274501700CB4071 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		564661E423256779007BA4A1 /* ArchivedTasksCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedTasksCoordinator.swift; sourceTree = "<group>"; };
 		5653C1D4231ADDD0003D1A19 /* ArchivedListsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedListsCoordinator.swift; sourceTree = "<group>"; };
+		5660343524C4122D0078097E /* Nantes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nantes.framework; path = Carthage/Build/iOS/Nantes.framework; sourceTree = "<group>"; };
 		5662CE9C2316E18A0069A50D /* AddListViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewCoordinator.swift; sourceTree = "<group>"; };
 		566536F0232FF2AD003F4C86 /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
 		566536F1232FF2AD003F4C86 /* Tinylog 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -280,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				185C99393E0FFB186A3B1DE4 /* Pods_Tinylog.framework in Frameworks */,
+				5660343624C4122D0078097E /* Nantes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +760,7 @@
 		FE50C0480D9EDAF6FAC193E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5660343524C4122D0078097E /* Nantes.framework */,
 				CCCB1EEBF9EAC162DF797006 /* Pods_Tinylog.framework */,
 				72FDB230F560367662A28D96 /* Pods_TinylogTests.framework */,
 			);
@@ -762,6 +781,8 @@
 				DDFA14B61268A7B4EA5B443B /* [CP] Embed Pods Frameworks */,
 				56C7749F1F4D7823008571E1 /* Build Number */,
 				56C774A01F4D78CA008571E1 /* Version Number */,
+				5660343824C4122D0078097E /* Embed Frameworks */,
+				5660343924C412430078097E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -936,6 +957,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5660343924C412430078097E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Nantes.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		56C7749F1F4D7823008571E1 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -996,7 +1035,6 @@
 				"${BUILT_PRODUCTS_DIR}/SGBackgroundView/SGBackgroundView.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1008,7 +1046,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGBackgroundView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1292,6 +1329,10 @@
 				CODE_SIGN_ENTITLEMENTS = Tinylog/Tinylog.entitlements;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = A22EW7MN8G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tinylog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1314,6 +1355,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = A22EW7MN8G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tinylog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

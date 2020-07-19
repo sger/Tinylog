@@ -33,11 +33,17 @@ bootstrap: dependencies
 	brew install swiftlint
 	brew link --overwrite swiftlint
 
-dependencies: cocoapods
+dependencies: carthage-bootstrap cocoapods
 
 cocoapods:
 	pod repo update
 	pod install
+
+carthage-bootstrap:
+	brew unlink carthage || true
+	brew install carthage
+	brew link --overwrite carthage
+	carthage update --platform iOS
 
 lint:
 	swiftlint lint --reporter json --strict

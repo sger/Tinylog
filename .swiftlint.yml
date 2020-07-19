@@ -27,3 +27,4 @@ excluded:
   - TinylogTests
   - TinylogUITests
   - vendor
+  - Carthage
