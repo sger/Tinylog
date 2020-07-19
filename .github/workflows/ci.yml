@@ -45,6 +45,8 @@ jobs:
         with:
           path: Carthage
           key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-
       - name: Dependencies
         run: |
           make carthage-bootstrap
@@ -90,6 +92,8 @@ jobs:
         with:
           path: Carthage
           key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-
       - name: Dependencies
         run: |
           make carthage-bootstrap
