@@ -42,7 +42,7 @@ cocoapods:
 carthage-bootstrap:
 	brew unlink carthage || true
 	brew install carthage
-	brew link carthage
+	brew link --overwrite carthage
 	carthage update --platform iOS
 
 lint:
