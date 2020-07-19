@@ -93,7 +93,7 @@ final class TasksViewController: CoreDataTableViewController,
         addTaskView.delegate = self
         return addTaskView
     }()
-    
+
     private var viewModel: TasksViewModel?
 
     init(managedObjectContext: NSManagedObjectContext) {
@@ -132,7 +132,7 @@ final class TasksViewController: CoreDataTableViewController,
         super.viewDidLoad()
 
         setupNavigationBarProperties()
-        
+
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 22.0, bottom: 0, right: 0)

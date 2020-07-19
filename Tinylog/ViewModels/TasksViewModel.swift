@@ -10,18 +10,18 @@ import Foundation
 import CoreData
 
 final class TasksViewModel {
-    
+
     private let managedObjectContext: NSManagedObjectContext
-    
+
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
     }
-    
+
     private func getListTasks(with list: TLIList?) -> [TLITask]? {
         guard let list = list else {
             return nil
         }
-        
+
         do {
             let fetchRequest: NSFetchRequest<TLITask> = NSFetchRequest(entityName: "Task")
             let positionDescriptor: NSSortDescriptor = NSSortDescriptor(key: "position", ascending: false)
@@ -35,14 +35,14 @@ final class TasksViewModel {
             fatalError(error.localizedDescription)
         }
     }
-    
+
     func getFormattedListTasks(with list: TLIList?) -> String? {
         guard let list = list,
             let title = list.title,
             let tasks = getListTasks(with: list) else {
             return nil
         }
-        
+
         var outputString: String = ""
         outputString = outputString.appending("\(title)\n")
 
