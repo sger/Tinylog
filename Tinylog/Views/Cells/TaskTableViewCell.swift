@@ -101,7 +101,7 @@ final class TaskTableViewCell: GenericTableViewCell {
         taskLabel.snp.makeConstraints { (maker) in
             maker.top.equalToSuperview().inset(20.0)
             maker.leading.equalToSuperview().inset(22.0)
-            maker.trailing.equalToSuperview().inset(50.0)
+            maker.trailing.equalToSuperview().inset(50.0).priority(999)
             maker.bottom.equalToSuperview().inset(20.0).priority(999)
         }
 
