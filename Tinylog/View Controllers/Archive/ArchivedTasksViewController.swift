@@ -7,10 +7,8 @@
 //
 // swiftlint:disable force_cast
 import UIKit
-import TTTAttributedLabel
 
-final class ArchivedTasksViewController: CoreDataTableViewController,
-    TTTAttributedLabelDelegate, EditTaskViewControllerDelegate {
+final class ArchivedTasksViewController: CoreDataTableViewController, EditTaskViewControllerDelegate {
 
     var onTapCloseButton: (() -> Void)?
     let kCellIdentifier = "CellIdentifier"
@@ -362,7 +360,7 @@ final class ArchivedTasksViewController: CoreDataTableViewController,
         if let task: TLITask = self.frc?.object(at: indexPath) as? TLITask,
             let taskTableViewCell: TaskTableViewCell = cell as? TaskTableViewCell {
             taskTableViewCell.managedObjectContext = managedObjectContext
-            taskTableViewCell.currentTask = task
+            taskTableViewCell.task = task
         }
     }
 
@@ -370,23 +368,9 @@ final class ArchivedTasksViewController: CoreDataTableViewController,
             let cell: TaskTableViewCell = tableView.dequeueReusableCell(
                 withIdentifier: kCellIdentifier) as! TaskTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
             return cell
 
-    }
-
-    // MARK: TTTAttributedLabelDelegate
-
-    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        if url.scheme == "http" {
-            let path: URL = URL(string: NSString(format: "http://%@", url.host!) as String)!
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(path, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(path)
-            }
-        }
     }
 
     override func viewWillTransition(

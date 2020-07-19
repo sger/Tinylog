@@ -7,7 +7,7 @@
 //
 // swiftlint:disable force_unwrapping
 import UIKit
-import TTTAttributedLabel
+
 // Consider refactoring the code to use the non-optional operators.
 private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -35,7 +35,6 @@ protocol TasksViewControllerDelegate: AnyObject {
 
 final class TasksViewController: CoreDataTableViewController,
     AddTaskViewDelegate,
-    TTTAttributedLabelDelegate,
     EditTaskViewControllerDelegate {
 
     weak var delegate: TasksViewControllerDelegate?
@@ -535,7 +534,7 @@ final class TasksViewController: CoreDataTableViewController,
         let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
         let taskTableViewCell: TaskTableViewCell = cell as! TaskTableViewCell
         taskTableViewCell.managedObjectContext = managedObjectContext
-        taskTableViewCell.currentTask = task
+        taskTableViewCell.task = task
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -558,7 +557,6 @@ final class TasksViewController: CoreDataTableViewController,
                 self,
                 action: #selector(TasksViewController.toggleComplete(_:)),
                 for: UIControl.Event.touchUpInside)
-            cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
 
             return cell
@@ -678,21 +676,6 @@ final class TasksViewController: CoreDataTableViewController,
     func resetAddTaskView() {
         hideTransparentLayer()
         addTaskView?.reset()
-    }
-
-    // MARK: TTTAttributedLabelDelegate
-
-    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        if url.scheme == "http" {
-            let path: URL = URL(string: NSString(format: "http://%@", url.host!) as String)!
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(path,
-                                          options: [:],
-                                          completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(path)
-            }
-        }
     }
 
     @objc func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
