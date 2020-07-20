@@ -16,7 +16,7 @@ final class ArchivedTasksViewController: CoreDataTableViewController {
 
     var onTapCloseButton: (() -> Void)?
 
-    private lazy var noTasksLabel: UILabel = {
+    private var noTasksLabel: UILabel = {
         let noTasksLabel: UILabel = UILabel()
         noTasksLabel.font = UIFont.tinylogFontOfSize(18.0)
         noTasksLabel.textColor = UIColor.tinylogTextColor
