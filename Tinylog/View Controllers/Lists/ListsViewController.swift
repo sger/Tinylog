@@ -437,8 +437,9 @@ extension ListsViewController {
         let editRowAction = UITableViewRowAction(
             style: .default,
             title: "Edit", handler: { _, indexpath in
-
-                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
+                guard let list: TLIList = self.frc?.object(at: indexpath) as? TLIList else {
+                    return
+                }
                 self.delegate?.listsViewControllerDidAddList(self, list: list, selectedMode: .edit)
         })
 
@@ -448,12 +449,14 @@ extension ListsViewController {
             style: .default,
             title: "Archive",
             handler: {_, indexpath in
-                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
+                guard let list: TLIList = self.frc?.object(at: indexpath) as? TLIList else {
+                    return
+                }
                 list.archivedAt = Date()
-                // swiftlint:disable force_try
-                try! self.managedObjectContext.save()
+                try? self.managedObjectContext.save()
                 self.checkForLists()
                 self.tableView?.reloadData()
+                self.setEditing(!self.isEditing, animated: true)
         })
 
         archiveRowAction.backgroundColor = UIColor.tinylogMainColor
