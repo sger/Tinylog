@@ -5,8 +5,7 @@
 //  Created by Spiros Gerokostas on 17/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_cast
-// swiftlint:disable force_unwrapping
+
 import UIKit
 import CoreData
 import SnapKit
@@ -25,16 +24,17 @@ final class ListsViewController: CoreDataTableViewController {
 
     weak var delegate: ListsViewControllerDelegate?
 
-    fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let reachability = ReachabilityManager.instance.reachability!
-    fileprivate var resultsViewController: ResultsViewController?
+    private let managedObjectContext: NSManagedObjectContext
+    // swiftlint:disable force_unwrapping
+    private let reachability = ReachabilityManager.instance.reachability!
+    private var resultsViewController: ResultsViewController?
 
-    var listsFooterView: ListsFooterView = {
+    private var listsFooterView: ListsFooterView = {
         let listsFooterView = ListsFooterView()
         return listsFooterView
     }()
 
-    var emptyListsLabel: UILabel = {
+    private var emptyListsLabel: UILabel = {
         let noListsLabel: UILabel = UILabel()
         noListsLabel.font = UIFont.tinylogFontOfSize(18.0)
         noListsLabel.textColor = UIColor.tinylogTextColor
@@ -104,16 +104,15 @@ final class ListsViewController: CoreDataTableViewController {
 
         addSearchController(with: "Search",
                             searchResultsUpdater: self,
-                            searchResultsController: resultsViewController!)
+                            searchResultsController: resultsViewController)
 
         resultsViewController?.tableView?.delegate = self
 
-        let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
         let settingsButton: UIButton = UIButton(type: .custom)
         settingsButton.accessibilityIdentifier = "settingsButton"
         settingsButton.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
-        settingsButton.setBackgroundImage(settingsImage, for: UIControl.State())
-        settingsButton.setBackgroundImage(settingsImage, for: .highlighted)
+        settingsButton.setBackgroundImage(UIImage(named: "740-gear-toolbar"), for: .selected)
+        settingsButton.setBackgroundImage(UIImage(named: "740-gear-toolbar"), for: .highlighted)
         settingsButton.addTarget(self,
                                  action: #selector(self.displaySettings(_:)),
                                  for: .touchDown)
@@ -179,10 +178,9 @@ final class ListsViewController: CoreDataTableViewController {
             dateFormatter.timeStyle = DateFormatter.Style.short
 
             if reachability.connection == .wifi || reachability.connection == .cellular {
-                self.listsFooterView.updateInfoLabel(NSString(format: "Last Updated %@",
-                                                         dateFormatter.string(for: Date())!) as String)
+                listsFooterView.updateInfoLabel("Last Updated \(dateFormatter.string(from: Date()))")
             } else if reachability.connection == .unavailable {
-                self.listsFooterView.updateInfoLabel("Offline")
+                listsFooterView.updateInfoLabel("Offline")
             }
 
             checkForLists()
@@ -196,9 +194,9 @@ final class ListsViewController: CoreDataTableViewController {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
             if reachability.connection == .unavailable {
-                self.listsFooterView.updateInfoLabel("Offline")
+                listsFooterView.updateInfoLabel("Offline")
             } else {
-                self.listsFooterView.updateInfoLabel("Syncing...")
+                listsFooterView.updateInfoLabel("Syncing...")
             }
         }
     }
@@ -251,9 +249,11 @@ final class ListsViewController: CoreDataTableViewController {
             startSync()
         }
 
-        if tableView!.indexPathForSelectedRow != nil {
-            tableView?.deselectRow(at: tableView!.indexPathForSelectedRow!, animated: animated)
+        guard let indexPath = tableView?.indexPathForSelectedRow else {
+            return
         }
+
+        tableView?.deselectRow(at: indexPath, animated: animated)
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -276,20 +276,28 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     func listAtIndexPath(_ indexPath: IndexPath) -> TLIList? {
-        let list = frc?.object(at: indexPath) as! TLIList?
+        guard let list = frc?.object(at: indexPath) as? TLIList else {
+            return nil
+        }
         return list
     }
 
     func updateList(_ list: TLIList, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedLists: [AnyObject] = (frc?.fetchedObjects as [AnyObject]?)!
+        guard let fetchedObjects = frc?.fetchedObjects else {
+            return
+        }
+        var fetchedLists: [AnyObject] = fetchedObjects
 
         // Remove current list item
-        fetchedLists = fetchedLists.filter { $0 as! TLIList != list }
+        fetchedLists = fetchedLists.filter { $0 as? TLIList != list }
 
         var sortedIndex = destinationIndexPath.row
 
         for sectionIndex in 0..<destinationIndexPath.section {
-            sortedIndex += (frc?.sections?[sectionIndex].numberOfObjects)!
+            guard let numberOfObjects = frc?.sections?[sectionIndex].numberOfObjects else {
+                return
+            }
+            sortedIndex += numberOfObjects
 
             if sectionIndex == sourceIndexPath.section {
                 sortedIndex -= 1
@@ -299,7 +307,9 @@ final class ListsViewController: CoreDataTableViewController {
         fetchedLists.insert(list, at: sortedIndex)
 
         for(index, list) in fetchedLists.enumerated() {
-            let tmpList = list as! TLIList
+            guard let tmpList = list as? TLIList else {
+                return
+            }
             tmpList.position = fetchedLists.count - index as NSNumber
         }
     }
@@ -315,11 +325,15 @@ final class ListsViewController: CoreDataTableViewController {
 
         ignoreNextUpdates = true
 
-        let list = listAtIndexPath(sourceIndexPath)!
+        guard let list = listAtIndexPath(sourceIndexPath) else {
+            return
+        }
 
-        updateList(list, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
+        updateList(list,
+                   sourceIndexPath: sourceIndexPath,
+                   destinationIndexPath: destinationIndexPath)
 
-        try! managedObjectContext.save()
+        try? managedObjectContext.save()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -336,12 +350,16 @@ final class ListsViewController: CoreDataTableViewController {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var list: TLIList
+        var fetchedList: TLIList?
 
         if tableView == self.tableView {
-            list = frc?.object(at: indexPath) as! TLIList
+            fetchedList = frc?.object(at: indexPath) as? TLIList
         } else {
-            list = resultsViewController?.frc?.object(at: indexPath) as! TLIList
+            fetchedList = resultsViewController?.frc?.object(at: indexPath) as? TLIList
+        }
+
+        guard let list = fetchedList else {
+            return
         }
 
         delegate?.listsViewControllerDidTapList(self, list: list)
@@ -359,11 +377,13 @@ final class ListsViewController: CoreDataTableViewController {
             return
         }
 
-        let list: TLIList = frc?.object(at: indexPath) as! TLIList
+        guard let list: TLIList = frc?.object(at: indexPath) as? TLIList else {
+            return
+        }
 
         managedObjectContext.delete(list)
 
-        try! managedObjectContext.save()
+        try? managedObjectContext.save()
     }
 
     func performBackgroundUpdates(_ completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
@@ -376,28 +396,28 @@ extension ListsViewController {
     private func registerNotifications() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ListsViewController.syncActivityDidEndNotification(_:)),
+            selector: #selector(self.syncActivityDidEndNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidEnd,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ListsViewController.syncActivityDidBeginNotification(_:)),
+            selector: #selector(self.syncActivityDidBeginNotification(_:)),
             name: NSNotification.Name.IDMSyncActivityDidBegin,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ListsViewController.updateFonts),
+            selector: #selector(self.updateFonts),
             name: NSNotification.Name(
                 rawValue: Notifications.fontDidChangeNotification),
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ListsViewController.appBecomeActive),
+            selector: #selector(self.appBecomeActive),
             name: UIApplication.didBecomeActiveNotification,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(ListsViewController.onChangeSize(_:)),
+            selector: #selector(self.onChangeSize(_:)),
             name: UIContentSizeCategory.didChangeNotification,
             object: nil)
     }
@@ -478,35 +498,34 @@ extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, 
         resultsViewController?.frc = nil
     }
 
-    // MARK: UISearchControllerDelegate
+    // MARK: - UISearchControllerDelegate
 
     func didDismissSearchController(_ searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as! ResultsViewController
-        resultsController.frc?.delegate = nil
-        resultsController.frc = nil
+        let resultsController = searchController.searchResultsController as? ResultsViewController
+        resultsController?.frc?.delegate = nil
+        resultsController?.frc = nil
     }
 
     // MARK: UISearchResultsUpdating
 
     func updateSearchResults(for searchController: UISearchController) {
-
         if let text = searchController.searchBar.text {
             if !text.isEmpty {
                 let lowercasedText = text.lowercased()
                 let color = Utils.findColorByName(lowercasedText)
-                let resultsController = searchController.searchResultsController as! ResultsViewController
+                let resultsController = searchController.searchResultsController as? ResultsViewController
                 let fetchRequest = TLIList.filterLists(with: lowercasedText, color: color)
 
-                resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                resultsController?.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: managedObjectContext,
                                                                    sectionNameKeyPath: nil,
                                                                    cacheName: nil)
-                resultsController.frc?.delegate = self
+                resultsController?.frc?.delegate = self
 
                 do {
-                    try resultsController.frc?.performFetch()
-                    resultsController.tableView?.reloadData()
-                    resultsController.showNoResults()
+                    try resultsController?.frc?.performFetch()
+                    resultsController?.tableView?.reloadData()
+                    resultsController?.showNoResults()
                 } catch let error as NSError {
                     fatalError(error.localizedDescription)
                 }
