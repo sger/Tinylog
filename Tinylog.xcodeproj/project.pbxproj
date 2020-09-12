@@ -362,12 +362,12 @@
 		5628E8C51E85898700AAFD20 /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
-				568FD1EF2489673800A9B8F9 /* GoogleService-Info.plist */,
 				5638FCCC2274501700CB4071 /* Application */,
 				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
 				56487F8F1F644E150080192C /* Configs */,
 				5638FCBB22744FD900CB4071 /* Core Data */,
 				5638FCBC2274500A00CB4071 /* Extensions */,
+				568FD1EF2489673800A9B8F9 /* GoogleService-Info.plist */,
 				5638FC8822744ECF00CB4071 /* Helpers */,
 				5628E8D21E85898700AAFD20 /* Info.plist */,
 				5609F607226B4BA600F6AF0E /* Locales */,

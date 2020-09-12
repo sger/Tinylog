@@ -5,9 +5,10 @@
 //  Created by Spiros Gerokostas on 17/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
+
 import UIKit
 import SVProgressHUD
+import SnapKit
 
 protocol SetupViewControllerDelegate: AnyObject {
     func setupViewControllerDismissed(_ viewController: SetupViewController)
@@ -74,6 +75,12 @@ final class SetupViewController: UIViewController {
 
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = UIColor(named: "setupBackgroundColor")
+        
+        view.addSubview(cloudImageView)
+        view.addSubview(notNowButton)
+        view.addSubview(useiCloudButton)
+        view.addSubview(subtitleLabel)
+        view.addSubview(descriptionLabel)
 
         cloudImageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview().offset(-90)
@@ -105,16 +112,6 @@ final class SetupViewController: UIViewController {
             make.left.equalTo(notNowButton.snp.right)
             make.bottom.equalToSuperview()
         }
-    }
-
-    override func loadView() {
-        view = UIView()
-        view.addSubview(cloudImageView)
-        view.addSubview(notNowButton)
-        view.addSubview(useiCloudButton)
-        view.addSubview(subtitleLabel)
-        view.addSubview(descriptionLabel)
-        view.setNeedsUpdateConstraints()
     }
 
     @objc func enableiCloudAndDismiss(_ button: RoundedButton) {
