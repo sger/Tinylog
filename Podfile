@@ -1,4 +1,4 @@
-platform :ios, '11.0'
+platform :ios, '12.0'
 
 target 'Tinylog' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -19,15 +19,7 @@ target 'Tinylog' do
   target 'TinylogTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'SnapshotTesting', '~> 1.5'
+    pod 'SnapshotTesting', '~> 1.8.1'
   end
 
-end
-
-post_install do |pi|
-  pi.pods_project.targets.each do |t|
-    t.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
-    end
-  end
 end

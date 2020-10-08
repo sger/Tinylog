@@ -16,7 +16,6 @@ class ListsViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-//        record = true
         coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
     }
 
