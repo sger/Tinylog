@@ -22,6 +22,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
 
     private var name: UITextField?
     private var menuColorsView: MenuColorsView?
+    private var selectedColor: String = ""
 
     weak var delegate: AddListViewControllerDelegate?
 
@@ -41,6 +42,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
 
         setupNavigationBarProperties()
 
+        tableView.isScrollEnabled = false
         tableView.backgroundColor = UIColor(named: "mainColor")
         tableView.separatorColor = UIColor(named: "tableViewSeparator")
 
@@ -54,7 +56,8 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                                                             target: self,
                                                             action: #selector(AddListViewController.save(_:)))
 
-        menuColorsView = MenuColorsView(frame: CGRect(x: 12.0, y: 200.0, width: view.frame.width, height: 51.0))
+        menuColorsView = MenuColorsView(frame: CGRect(x: 12.0, y: 0.0, width: view.frame.width, height: 51.0))
+        menuColorsView?.delegate = self
         tableView.tableFooterView = menuColorsView
 
         if mode == .create {
@@ -63,13 +66,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         } else if mode == .edit {
             title = "Edit List"
             view.accessibilityIdentifier = "EditList"
-            if let list = list,
-                let color = list.color,
-                let index = menuColorsView?.findIndexByColor(color) {
-                // swiftlint:disable force_unwrapping
-                menuColorsView?.currentColor = color
-                menuColorsView?.setSelectedIndex(index)
-            }
+            menuColorsView?.configure(with: list)
         }
     }
 
@@ -138,10 +135,9 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     private func saveList() {
         if let list = list {
             list.title = name?.text
-            list.color = menuColorsView?.currentColor
+            list.color = selectedColor
 
-            // swiftlint:disable force_try
-            try! managedObjectContext.save()
+            try? managedObjectContext.save()
             name?.resignFirstResponder()
             delegate?.addListViewController(self, didSucceedWithList: list)
         }
@@ -153,7 +149,9 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
             SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.dark)
             SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor)
             SVProgressHUD.setForegroundColor(UIColor.white)
-            SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0)!)
+            if let font = UIFont(name: "HelveticaNeue", size: 14.0) {
+                SVProgressHUD.setFont(font)
+            }
             SVProgressHUD.showError(withStatus: "Please add a name to your list")
         } else {
             if mode == .create {
@@ -188,10 +186,8 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                     list.title = name.text
                 }
                 list.position = position + 1 as NSNumber
-                if let menuColorsView = menuColorsView,
-                    let currentColor = menuColorsView.currentColor {
-                    list.color = currentColor
-                }
+                list.color = selectedColor
+
                 list.createdAt = Date()
                 try! managedObjectContext.save()
                 name?.resignFirstResponder()
@@ -200,5 +196,14 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
+    }
+}
+
+extension AddListViewController: MenuColorsViewDelegate {
+    func menuColorsViewDidSelectColor(_ view: MenuColorsView, selectedColor color: String?) {
+        guard let color = color else {
+            return
+        }
+        selectedColor = color
     }
 }

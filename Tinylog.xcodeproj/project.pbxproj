@@ -16,6 +16,8 @@
 		5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */; };
 		5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */; };
 		56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataManager.swift */; };
+		561D10A32532F2E9009D2BB4 /* MenuColorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D10A22532F2E9009D2BB4 /* MenuColorsViewModel.swift */; };
+		561D10A92532F5E6009D2BB4 /* MenuColorsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D10A82532F5E6009D2BB4 /* MenuColorsViewModelTests.swift */; };
 		561FC06C231ABC190059ADA8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC06B231ABC190059ADA8 /* Router.swift */; };
 		561FC06E231ABC410059ADA8 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC06D231ABC410059ADA8 /* NavigationRouter.swift */; };
 		561FC071231ACDCA0059ADA8 /* RouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC070231ACDCA0059ADA8 /* RouterMock.swift */; };
@@ -148,6 +150,8 @@
 		5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Environment.swift"; sourceTree = "<group>"; };
 		5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTests.swift; sourceTree = "<group>"; };
 		56119AEC226F90EA00F8D798 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		561D10A22532F2E9009D2BB4 /* MenuColorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuColorsViewModel.swift; sourceTree = "<group>"; };
+		561D10A82532F5E6009D2BB4 /* MenuColorsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuColorsViewModelTests.swift; sourceTree = "<group>"; };
 		561FC06B231ABC190059ADA8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		561FC06D231ABC410059ADA8 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		561FC070231ACDCA0059ADA8 /* RouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMock.swift; sourceTree = "<group>"; };
@@ -329,6 +333,22 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		561D10A12532F2D5009D2BB4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				561D10A22532F2E9009D2BB4 /* MenuColorsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		561D10A72532F5C7009D2BB4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				561D10A82532F5E6009D2BB4 /* MenuColorsViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		561FC06F231ACDB80059ADA8 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +382,7 @@
 		5628E8C51E85898700AAFD20 /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
+				561D10A12532F2D5009D2BB4 /* ViewModels */,
 				5638FCCC2274501700CB4071 /* Application */,
 				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
 				56487F8F1F644E150080192C /* Configs */,
@@ -387,6 +408,7 @@
 		5628E8DA1E85898700AAFD20 /* TinylogTests */ = {
 			isa = PBXGroup;
 			children = (
+				561D10A72532F5C7009D2BB4 /* ViewModels */,
 				561FC06F231ACDB80059ADA8 /* Mocks */,
 				562E74FF2319593A00316E23 /* Stubs */,
 				562E74FB2319592400316E23 /* BaseCoordinatorTests.swift */,
@@ -1062,6 +1084,7 @@
 				56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */,
 				5638FC4E22744CDC00CB4071 /* TaskTableViewCell.swift in Sources */,
 				5638FC5522744CDC00CB4071 /* ArchiveButton.swift in Sources */,
+				561D10A32532F2E9009D2BB4 /* MenuColorsViewModel.swift in Sources */,
 				566536F6232FF2AD003F4C86 /* Tinylog.xcdatamodeld in Sources */,
 				5638FC9B22744F7C00CB4071 /* Language.swift in Sources */,
 				5638FCC92274500A00CB4071 /* DispatchQueue+Tinylog.swift in Sources */,
@@ -1124,6 +1147,7 @@
 				5672FB6022880AED008DD57E /* ArchivedListsViewControllerTests.swift in Sources */,
 				562E75012319593A00316E23 /* BaseCoordinatorStub.swift in Sources */,
 				563256822276124000DCB848 /* Devices.swift in Sources */,
+				561D10A92532F5E6009D2BB4 /* MenuColorsViewModelTests.swift in Sources */,
 				5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */,
 				5669ADF12274613500555E56 /* ListsViewControllerTests.swift in Sources */,
 				562B1ECE22774CE2000EF38C /* HelpTableViewControllerTests.swift in Sources */,
