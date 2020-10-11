@@ -7,27 +7,88 @@
 //
 
 import XCTest
+@testable import Tinylog
 
 class MenuColorsViewModelTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    private var coreDataManager: CoreDataManager?
+    
+    override func setUp() {
+        super.setUp()
+        coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
+        super.tearDown()
+        coreDataManager = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testViewModelColorIndex_whenColorIsNotNil_returnsFirstIndex() throws {
+        let coreDataManager = try XCTUnwrap(self.coreDataManager)
+        
+        let list = NSEntityDescription.insertNewObject(forEntityName: "List",
+                                                       into: coreDataManager.managedObjectContext) as? TLIList
+        list?.color = "#6a6de2"
+        try? coreDataManager.managedObjectContext.save()
+        
+        var viewModel = MenuColorsViewModel()
+        viewModel.configure(list: list)
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        XCTAssertEqual(viewModel.index, 0)
     }
+    
+    func testViewModelColorIndex_whenColorIsNotNil_returnsSecondIndex() throws {
+        let coreDataManager = try XCTUnwrap(self.coreDataManager)
+        
+        let list = NSEntityDescription.insertNewObject(forEntityName: "List",
+                                                       into: coreDataManager.managedObjectContext) as? TLIList
+        list?.color = "#008efe"
+        try? coreDataManager.managedObjectContext.save()
+        
+        var viewModel = MenuColorsViewModel()
+        viewModel.configure(list: list)
 
+        XCTAssertEqual(viewModel.index, 1)
+    }
+    
+    func testViewModelColorIndex_whenColorIsNotNil_returnsThirdIndex() throws {
+        let coreDataManager = try XCTUnwrap(self.coreDataManager)
+        
+        let list = NSEntityDescription.insertNewObject(forEntityName: "List",
+                                                       into: coreDataManager.managedObjectContext) as? TLIList
+        list?.color = "#fe4565"
+        try? coreDataManager.managedObjectContext.save()
+        
+        var viewModel = MenuColorsViewModel()
+        viewModel.configure(list: list)
+
+        XCTAssertEqual(viewModel.index, 2)
+    }
+    
+    func testViewModelColorIndex_whenColorIsNotNil_returnsFourthIndex() throws {
+        let coreDataManager = try XCTUnwrap(self.coreDataManager)
+        
+        let list = NSEntityDescription.insertNewObject(forEntityName: "List",
+                                                       into: coreDataManager.managedObjectContext) as? TLIList
+        list?.color = "#ffa600"
+        try? coreDataManager.managedObjectContext.save()
+        
+        var viewModel = MenuColorsViewModel()
+        viewModel.configure(list: list)
+
+        XCTAssertEqual(viewModel.index, 3)
+    }
+    
+    func testViewModelColorIndex_whenColorIsNil_returnsZeroIndex() throws {
+        let coreDataManager = try XCTUnwrap(self.coreDataManager)
+        
+        let list = NSEntityDescription.insertNewObject(forEntityName: "List",
+                                                       into: coreDataManager.managedObjectContext) as? TLIList
+        try? coreDataManager.managedObjectContext.save()
+        
+        var viewModel = MenuColorsViewModel()
+        viewModel.configure(list: list)
+
+        XCTAssertEqual(viewModel.index, 0)
+    }
 }
