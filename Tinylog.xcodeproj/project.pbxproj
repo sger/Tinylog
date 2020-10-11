@@ -18,6 +18,7 @@
 		56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataManager.swift */; };
 		561D10A32532F2E9009D2BB4 /* MenuColorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D10A22532F2E9009D2BB4 /* MenuColorsViewModel.swift */; };
 		561D10A92532F5E6009D2BB4 /* MenuColorsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D10A82532F5E6009D2BB4 /* MenuColorsViewModelTests.swift */; };
+		561D10B1253303F1009D2BB4 /* Array+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D10B0253303F1009D2BB4 /* Array+Tinylog.swift */; };
 		561FC06C231ABC190059ADA8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC06B231ABC190059ADA8 /* Router.swift */; };
 		561FC06E231ABC410059ADA8 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC06D231ABC410059ADA8 /* NavigationRouter.swift */; };
 		561FC071231ACDCA0059ADA8 /* RouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561FC070231ACDCA0059ADA8 /* RouterMock.swift */; };
@@ -152,6 +153,7 @@
 		56119AEC226F90EA00F8D798 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		561D10A22532F2E9009D2BB4 /* MenuColorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuColorsViewModel.swift; sourceTree = "<group>"; };
 		561D10A82532F5E6009D2BB4 /* MenuColorsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuColorsViewModelTests.swift; sourceTree = "<group>"; };
+		561D10B0253303F1009D2BB4 /* Array+Tinylog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Tinylog.swift"; sourceTree = "<group>"; };
 		561FC06B231ABC190059ADA8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		561FC06D231ABC410059ADA8 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		561FC070231ACDCA0059ADA8 /* RouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMock.swift; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 				5638FCC32274500A00CB4071 /* UIFont+Tinylog.swift */,
 				5638FCC42274500A00CB4071 /* NSDate+Utilities.h */,
 				5601EADF229852FE00A57819 /* UITableView+Tinylog.swift */,
+				561D10B0253303F1009D2BB4 /* Array+Tinylog.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1092,6 +1095,7 @@
 				5638FC5322744CDC00CB4071 /* ExportTasksButton.swift in Sources */,
 				5638FCCB2274500A00CB4071 /* UIFont+Tinylog.swift in Sources */,
 				5638FCC62274500A00CB4071 /* UIColor+Tinylog.swift in Sources */,
+				561D10B1253303F1009D2BB4 /* Array+Tinylog.swift in Sources */,
 				5638FC6022744CDC00CB4071 /* KeyboardBar.swift in Sources */,
 				5638FC8622744D8200CB4071 /* SetupViewController.swift in Sources */,
 				5638FC6122744CDC00CB4071 /* AddTaskView.swift in Sources */,

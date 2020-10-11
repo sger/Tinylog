@@ -26,11 +26,3 @@ struct MenuColorsViewModel {
         colors.indexes(of: color).first ?? 0
     }
 }
-
-extension Array where Element: Equatable {
-    func indexes(of element: Element) -> [Int] {
-        enumerated()
-        .filter { element == $0.element }
-        .map { $0.offset }
-    }
-}
