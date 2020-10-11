@@ -202,7 +202,10 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                 if let name = name {
                     list.title = name.text
                 }
-                list.position = position + 1 as NSNumber
+                list.position = NSNumber(value: position + 1)
+                if selectedColor.isEmpty {
+                    selectedColor = "#6a6de2"
+                }
                 list.color = selectedColor
 
                 list.createdAt = Date()
