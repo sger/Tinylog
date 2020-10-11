@@ -9,6 +9,8 @@
 import UIKit
 
 final class TextFieldCell: UITableViewCell, UITextFieldDelegate, TextFieldCellDelegate {
+    
+    static let cellIdentifier = "TextFieldCell"
 
     var textField: TLITextField?
     var indexPath: IndexPath?

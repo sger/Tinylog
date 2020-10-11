@@ -41,29 +41,44 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         setupNavigationBarProperties()
-
+        setupUITableView()
+        setupNavigationItem()
+        setupMenuColorsView()
+        setupViewMode()
+    }
+    
+    private func setupUITableView() {
         tableView.isScrollEnabled = false
         tableView.backgroundColor = UIColor(named: "mainColor")
         tableView.separatorColor = UIColor(named: "tableViewSeparator")
-
+        tableView.register(TextFieldCell.self,
+                           forCellReuseIdentifier: TextFieldCell.cellIdentifier)
+    }
+    
+    private func setupNavigationItem() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
-                                                           style: UIBarButtonItem.Style.plain,
+                                                           style: .plain,
                                                            target: self,
                                                            action: #selector(AddListViewController.cancel(_:)))
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
-                                                            style: UIBarButtonItem.Style.plain,
+                                                            style: .plain,
                                                             target: self,
                                                             action: #selector(AddListViewController.save(_:)))
-
+    }
+    
+    private func setupMenuColorsView() {
         menuColorsView = MenuColorsView(frame: CGRect(x: 12.0, y: 0.0, width: view.frame.width, height: 51.0))
         menuColorsView?.delegate = self
         tableView.tableFooterView = menuColorsView
-
-        if mode == .create {
+    }
+    
+    private func setupViewMode() {
+        switch mode {
+        case .create:
             title = "Add List"
             view.accessibilityIdentifier = "AddList"
-        } else if mode == .edit {
+        case .edit:
             title = "Edit List"
             view.accessibilityIdentifier = "EditList"
             menuColorsView?.configure(with: list)
@@ -71,6 +86,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         name?.becomeFirstResponder()
     }
 
@@ -99,20 +115,20 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        44.0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TextFieldCell = TextFieldCell(style: .default, reuseIdentifier: "CellIdentifier")
-        configureCell(cell, indexPath: indexPath)
+        let cell: TextFieldCell = tableView.dequeue(for: indexPath)
+        configureCell(cell, atIndexPath: indexPath)
         return cell
     }
-
-    private func configureCell(_ cell: TextFieldCell, indexPath: IndexPath) {
+    
+    private func configureCell(_ cell: TextFieldCell, atIndexPath indexPath: IndexPath) {
         if indexPath.row == 0 {
             cell.textField?.placeholder = "Name"
             cell.backgroundColor = UIColor(named: "mainColor")
@@ -154,9 +170,10 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
             }
             SVProgressHUD.showError(withStatus: "Please add a name to your list")
         } else {
-            if mode == .create {
+            switch mode {
+            case .create:
                 createList()
-            } else if mode == .edit {
+            case .edit:
                 saveList()
             }
         }
@@ -189,7 +206,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                 list.color = selectedColor
 
                 list.createdAt = Date()
-                try! managedObjectContext.save()
+                try? managedObjectContext.save()
                 name?.resignFirstResponder()
                 delegate?.addListViewController(self, didSucceedWithList: list)
             }
@@ -198,6 +215,8 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         }
     }
 }
+
+// MARK: - MenuColorsViewDelegate
 
 extension AddListViewController: MenuColorsViewDelegate {
     func menuColorsViewDidSelectColor(_ view: MenuColorsView, selectedColor color: String?) {
