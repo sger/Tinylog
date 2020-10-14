@@ -46,7 +46,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         setupMenuColorsView()
         setupViewMode()
     }
-    
+
     private func setupUITableView() {
         tableView.isScrollEnabled = false
         tableView.backgroundColor = UIColor(named: "mainColor")
@@ -54,7 +54,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         tableView.register(TextFieldCell.self,
                            forCellReuseIdentifier: TextFieldCell.cellIdentifier)
     }
-    
+
     private func setupNavigationItem() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
                                                            style: .plain,
@@ -66,13 +66,13 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                                                             target: self,
                                                             action: #selector(AddListViewController.save(_:)))
     }
-    
+
     private func setupMenuColorsView() {
         menuColorsView = MenuColorsView(frame: CGRect(x: 12.0, y: 0.0, width: view.frame.width, height: 51.0))
         menuColorsView?.delegate = self
         tableView.tableFooterView = menuColorsView
     }
-    
+
     private func setupViewMode() {
         switch mode {
         case .create:
@@ -121,13 +121,13 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         44.0
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TextFieldCell = tableView.dequeue(for: indexPath)
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
-    
+
     private func configureCell(_ cell: TextFieldCell, atIndexPath indexPath: IndexPath) {
         if indexPath.row == 0 {
             cell.textField?.placeholder = "Name"
