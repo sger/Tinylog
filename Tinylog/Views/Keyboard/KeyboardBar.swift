@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KeyboardBar: UIView, UIInputViewAudioFeedback {
+final class KeyboardBar: UIView, UIInputViewAudioFeedback {
 
     var keyInputView: UIKeyInput?
     let buttonHashTag: UIButton = UIButton()
@@ -20,17 +20,16 @@ class KeyboardBar: UIView, UIInputViewAudioFeedback {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
-        self.backgroundColor = UIColor.tinylogNavigationBarDayColor
-        // swiftlint:disable force_unwrapping
-        buttonHashTag.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 20.0)
+        autoresizingMask = UIView.AutoresizingMask.flexibleWidth
+        backgroundColor = UIColor.tinylogNavigationBarDayColor
+        buttonHashTag.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 20.0)
         buttonHashTag.setTitleColor(UIColor.tinylogMainColor, for: UIControl.State())
         buttonHashTag.setTitle("#", for: UIControl.State())
         buttonHashTag.addTarget(
             self,
             action: #selector(KeyboardBar.buttonHashTagPressed(_:)),
             for: UIControl.Event.touchUpInside)
-        self.addSubview(buttonHashTag)
+        addSubview(buttonHashTag)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -39,8 +38,14 @@ class KeyboardBar: UIView, UIInputViewAudioFeedback {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        buttonHashTag.frame = CGRect(x: 20.0, y: 1.0, width: 20.0, height: self.bounds.size.height - 1.0)
-        buttonMention.frame = CGRect(x: 60.0, y: 1.0, width: 20.0, height: self.bounds.size.height - 1.0)
+        buttonHashTag.frame = CGRect(x: 20.0,
+                                     y: 1.0,
+                                     width: 20.0,
+                                     height: bounds.size.height - 1.0)
+        buttonMention.frame = CGRect(x: 60.0,
+                                     y: 1.0,
+                                     width: 20.0,
+                                     height: bounds.size.height - 1.0)
     }
 
     @objc func buttonHashTagPressed(_ button: UIButton) {

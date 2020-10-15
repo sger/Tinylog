@@ -22,6 +22,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
 
     private var name: UITextField?
     private var menuColorsView: MenuColorsView?
+    private var selectedColor: String = ""
 
     weak var delegate: AddListViewControllerDelegate?
 
@@ -40,40 +41,52 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         setupNavigationBarProperties()
+        setupUITableView()
+        setupNavigationItem()
+        setupMenuColorsView()
+        setupViewMode()
+    }
 
+    private func setupUITableView() {
+        tableView.isScrollEnabled = false
         tableView.backgroundColor = UIColor(named: "mainColor")
         tableView.separatorColor = UIColor(named: "tableViewSeparator")
+        tableView.register(TextFieldCell.self,
+                           forCellReuseIdentifier: TextFieldCell.cellIdentifier)
+    }
 
+    private func setupNavigationItem() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel",
-                                                           style: UIBarButtonItem.Style.plain,
+                                                           style: .plain,
                                                            target: self,
                                                            action: #selector(AddListViewController.cancel(_:)))
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
-                                                            style: UIBarButtonItem.Style.plain,
+                                                            style: .plain,
                                                             target: self,
                                                             action: #selector(AddListViewController.save(_:)))
+    }
 
-        menuColorsView = MenuColorsView(frame: CGRect(x: 12.0, y: 200.0, width: view.frame.width, height: 51.0))
+    private func setupMenuColorsView() {
+        menuColorsView = MenuColorsView(frame: CGRect(x: 12.0, y: 0.0, width: view.frame.width, height: 51.0))
+        menuColorsView?.delegate = self
         tableView.tableFooterView = menuColorsView
+    }
 
-        if mode == .create {
+    private func setupViewMode() {
+        switch mode {
+        case .create:
             title = "Add List"
             view.accessibilityIdentifier = "AddList"
-        } else if mode == .edit {
+        case .edit:
             title = "Edit List"
             view.accessibilityIdentifier = "EditList"
-            if let list = list,
-                let color = list.color,
-                let index = menuColorsView?.findIndexByColor(color) {
-                // swiftlint:disable force_unwrapping
-                menuColorsView?.currentColor = color
-                menuColorsView?.setSelectedIndex(index)
-            }
+            menuColorsView?.configure(with: list)
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         name?.becomeFirstResponder()
     }
 
@@ -102,20 +115,20 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        44.0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TextFieldCell = TextFieldCell(style: .default, reuseIdentifier: "CellIdentifier")
-        configureCell(cell, indexPath: indexPath)
+        let cell: TextFieldCell = tableView.dequeue(for: indexPath)
+        configureCell(cell, atIndexPath: indexPath)
         return cell
     }
 
-    private func configureCell(_ cell: TextFieldCell, indexPath: IndexPath) {
+    private func configureCell(_ cell: TextFieldCell, atIndexPath indexPath: IndexPath) {
         if indexPath.row == 0 {
             cell.textField?.placeholder = "Name"
             cell.backgroundColor = UIColor(named: "mainColor")
@@ -138,10 +151,9 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
     private func saveList() {
         if let list = list {
             list.title = name?.text
-            list.color = menuColorsView?.currentColor
+            list.color = selectedColor
 
-            // swiftlint:disable force_try
-            try! managedObjectContext.save()
+            try? managedObjectContext.save()
             name?.resignFirstResponder()
             delegate?.addListViewController(self, didSucceedWithList: list)
         }
@@ -153,12 +165,15 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
             SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.dark)
             SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor)
             SVProgressHUD.setForegroundColor(UIColor.white)
-            SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0)!)
+            if let font = UIFont(name: "HelveticaNeue", size: 14.0) {
+                SVProgressHUD.setFont(font)
+            }
             SVProgressHUD.showError(withStatus: "Please add a name to your list")
         } else {
-            if mode == .create {
+            switch mode {
+            case .create:
                 createList()
-            } else if mode == .edit {
+            case .edit:
                 saveList()
             }
         }
@@ -187,18 +202,30 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
                 if let name = name {
                     list.title = name.text
                 }
-                list.position = position + 1 as NSNumber
-                if let menuColorsView = menuColorsView,
-                    let currentColor = menuColorsView.currentColor {
-                    list.color = currentColor
+                list.position = NSNumber(value: position + 1)
+                if selectedColor.isEmpty {
+                    selectedColor = "#6a6de2"
                 }
+                list.color = selectedColor
+
                 list.createdAt = Date()
-                try! managedObjectContext.save()
+                try? managedObjectContext.save()
                 name?.resignFirstResponder()
                 delegate?.addListViewController(self, didSucceedWithList: list)
             }
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
+    }
+}
+
+// MARK: - MenuColorsViewDelegate
+
+extension AddListViewController: MenuColorsViewDelegate {
+    func menuColorsViewDidSelectColor(_ view: MenuColorsView, selectedColor color: String?) {
+        guard let color = color else {
+            return
+        }
+        selectedColor = color
     }
 }

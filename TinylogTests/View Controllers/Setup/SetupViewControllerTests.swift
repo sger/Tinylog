@@ -14,7 +14,6 @@ class SetupViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-//        record = true
     }
     
     func testSetupViewControllerInPortaitMode() {

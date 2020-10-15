@@ -75,7 +75,7 @@ final class SetupViewController: UIViewController {
 
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = UIColor(named: "setupBackgroundColor")
-        
+
         view.addSubview(cloudImageView)
         view.addSubview(notNowButton)
         view.addSubview(useiCloudButton)
@@ -126,7 +126,9 @@ final class SetupViewController: UIViewController {
                     SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.dark)
                     SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor)
                     SVProgressHUD.setForegroundColor(UIColor.white)
-                    SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0)!)
+                    if let font = UIFont(name: "HelveticaNeue", size: 14.0) {
+                        SVProgressHUD.setFont(font)
+                    }
                     SVProgressHUD.showError(
                         withStatus: localizedString(key: "Not_logged_in"))
                 }
