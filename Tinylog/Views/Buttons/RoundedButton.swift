@@ -16,9 +16,10 @@ final class RoundedButton: UIButton {
     }
 
     func setup() {
-        self.setTitleColor(UIColor.white, for: UIControl.State())
-        self.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
-        self.titleLabel?.font = UIFont.mediumFontWithSize(17.0)
+        setTitleColor(UIColor.white, for: UIControl.State())
+        contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
+        titleLabel?.font = UIFont.mediumFontWithSize(17.0)
+        layer.cornerRadius = 8
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -26,7 +27,7 @@ final class RoundedButton: UIButton {
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        let area: CGRect = self.bounds.insetBy(dx: -20, dy: -20)
+        let area: CGRect = bounds.insetBy(dx: -20, dy: -20)
         return area.contains(point)
     }
 }

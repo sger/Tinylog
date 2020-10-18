@@ -17,6 +17,7 @@ protocol SetupViewControllerDelegate: AnyObject {
 final class SetupViewController: UIViewController {
 
     weak var delegate: SetupViewControllerDelegate?
+    private let container: UIView = UIView()
 
     private var subtitleLabel: UILabel = {
         let subtitleLabel: UILabel = UILabel()
@@ -43,7 +44,7 @@ final class SetupViewController: UIViewController {
     private var notNowButton: RoundedButton = {
         let notNowButton = RoundedButton()
         notNowButton.accessibilityIdentifier = "notNowButton"
-        notNowButton.setTitle(localizedString(key: "Later"), for: UIControl.State())
+        notNowButton.setTitle(localizedString(key: "Later"), for: .normal)
         notNowButton.backgroundColor = UIColor.tinylogTextColor
         notNowButton.addTarget(
             self,
@@ -55,7 +56,7 @@ final class SetupViewController: UIViewController {
     private var useiCloudButton: RoundedButton = {
         let useiCloudButton = RoundedButton()
         useiCloudButton.accessibilityIdentifier = "useiCloudButton"
-        useiCloudButton.setTitle(localizedString(key: "Use_iCloud"), for: UIControl.State())
+        useiCloudButton.setTitle(localizedString(key: "Use_iCloud"), for: .normal)
         useiCloudButton.addTarget(
             self,
             action: #selector(SetupViewController.enableiCloudAndDismiss(_:)),
@@ -76,41 +77,50 @@ final class SetupViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = UIColor(named: "setupBackgroundColor")
 
-        view.addSubview(cloudImageView)
+        view.addSubview(container)
         view.addSubview(notNowButton)
         view.addSubview(useiCloudButton)
-        view.addSubview(subtitleLabel)
-        view.addSubview(descriptionLabel)
+
+        container.addSubview(cloudImageView)
+        container.addSubview(subtitleLabel)
+        container.addSubview(descriptionLabel)
+        setupConstraints()
+    }
+
+    private func setupConstraints() {
+        container.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(notNowButton.snp.top)
+        }
 
         cloudImageView.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview().offset(-90)
             make.centerX.equalToSuperview()
+            make.bottom.equalTo(subtitleLabel.snp.top).inset(-10)
         }
 
         subtitleLabel.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().inset(20.0)
-            make.right.equalToSuperview().inset(20.0)
-            make.top.equalTo(cloudImageView.snp.bottom).offset(20.0)
+            make.center.equalToSuperview().inset(20.0)
         }
 
         descriptionLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(20.0)
             make.right.equalToSuperview().inset(20.0)
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(20.0)
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(5)
         }
 
         notNowButton.snp.makeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.5)
-            make.height.equalTo(60.0)
-            make.left.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.width.equalToSuperview().inset(20)
+            make.height.equalTo(50.0)
+            make.left.equalToSuperview().inset(20.0)
+            make.bottom.equalTo(useiCloudButton.snp.top).inset(-16)
         }
 
         useiCloudButton.snp.makeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.5)
-            make.height.equalTo(60.0)
-            make.left.equalTo(notNowButton.snp.right)
-            make.bottom.equalToSuperview()
+            make.width.equalToSuperview().inset(20)
+            make.height.equalTo(50.0)
+            make.left.equalToSuperview().inset(20.0)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
         }
     }
 
