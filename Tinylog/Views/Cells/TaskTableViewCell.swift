@@ -19,8 +19,14 @@ final class TaskTableViewCell: GenericTableViewCell {
     let checkBoxButton: CheckBoxButton = CheckBoxButton()
     var managedObjectContext: NSManagedObjectContext!
 
-    var currentTask: TLITask? {
+    var task: TLITask? {
         didSet {
+            
+            guard let task = task,
+                  let list = task.list,
+                  let color = list.color else {
+                return
+            }
 
             // Fetch all objects from list
 
@@ -28,7 +34,7 @@ final class TaskTableViewCell: GenericTableViewCell {
             let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
             fetchRequestTotal.sortDescriptors = [positionDescriptor]
             fetchRequestTotal.predicate  = NSPredicate(
-                format: "archivedAt = nil AND list = %@", currentTask!.list!)
+                format: "archivedAt = nil AND list = %@", list)
             fetchRequestTotal.fetchBatchSize = 20
 
             do {
@@ -39,27 +45,27 @@ final class TaskTableViewCell: GenericTableViewCell {
                 fetchRequestCompleted.sortDescriptors = [positionDescriptor]
                 fetchRequestCompleted.predicate  = NSPredicate(
                     format: "archivedAt = nil AND completed = %@ AND list = %@",
-                    NSNumber(value: true as Bool), currentTask!.list!)
+                    NSNumber(value: true as Bool), list)
                 fetchRequestCompleted.fetchBatchSize = 20
                 let resultsCompleted: NSArray = try managedObjectContext.fetch(
                     fetchRequestCompleted) as NSArray
 
                 let total: Int = results.count - resultsCompleted.count
-                currentTask?.list!.total = total as NSNumber?
+                list.total = total as NSNumber?
 
-                checkBoxButton.circleView?.layer.borderColor = UIColor(
-                    rgba: currentTask!.list!.color!).cgColor
+                checkBoxButton.circleView?.layer.borderColor = UIColor(rgba: color).cgColor
+                
                 checkBoxButton.checkMarkIcon?.image = checkBoxButton.checkMarkIcon?.image?.imageWithColor(
-                    UIColor(rgba: currentTask!.list!.color!))
+                    UIColor(rgba: color))
             } catch let error as NSError {
                 fatalError(error.localizedDescription)
             }
 
             updateFonts()
 
-            taskLabel.activeLinkAttributes = [.foregroundColor: UIColor(rgba: (currentTask?.list?.color)!)]
+            taskLabel.activeLinkAttributes = [.foregroundColor: UIColor(rgba: color)]
 
-            if let boolValue = currentTask?.completed?.boolValue {
+            if let boolValue = task.completed?.boolValue {
                 if boolValue {
                     checkBoxButton.checkMarkIcon!.isHidden = false
                     checkBoxButton.alpha = 0.5
@@ -69,11 +75,11 @@ final class TaskTableViewCell: GenericTableViewCell {
                     checkBoxButton.checkMarkIcon!.isHidden = true
                     checkBoxButton.alpha = 1.0
                     taskLabel.alpha = 1.0
-                    taskLabel.linkAttributes = [.foregroundColor: UIColor(rgba: (currentTask?.list?.color)!)]
+                    taskLabel.linkAttributes = [.foregroundColor: UIColor(rgba: color)]
                 }
             }
 
-            taskLabel.text = currentTask?.displayLongText
+            taskLabel.text = task.displayLongText
 
             setNeedsUpdateConstraints()
             updateConstraintsIfNeeded()

@@ -534,7 +534,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
         let taskTableViewCell: TaskTableViewCell = cell as! TaskTableViewCell
         taskTableViewCell.managedObjectContext = managedObjectContext
-        taskTableViewCell.currentTask = task
+        taskTableViewCell.task = task
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
