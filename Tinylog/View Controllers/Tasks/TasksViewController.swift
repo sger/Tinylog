@@ -17,8 +17,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
     weak var delegate: TasksViewControllerDelegate?
 
-    let kCellIdentifier = "TaskTableViewCell"
-    fileprivate let managedObjectContext: NSManagedObjectContext
+    private let managedObjectContext: NSManagedObjectContext
 
     var list: TLIList? {
         didSet {
@@ -40,17 +39,17 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
     }
 
-    var currentIndexPath: IndexPath?
+    private var currentIndexPath: IndexPath?
 
-    var tasksFooterView: TasksFooterView = {
+    private var tasksFooterView: TasksFooterView = {
         let tasksFooterView = TasksFooterView()
         return tasksFooterView
     }()
 
-    var orientation: String = "portrait"
-    var enableDidSelectRowAtIndexPath = true
+    private var orientation: String = "portrait"
+    private var enableDidSelectRowAtIndexPath = true
 
-    lazy var addTransparentLayer: UIView? = {
+    private lazy var addTransparentLayer: UIView? = {
         let addTransparentLayer: UIView = UIView()
         addTransparentLayer.autoresizingMask = [
             UIView.AutoresizingMask.flexibleWidth,
@@ -64,7 +63,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return addTransparentLayer
     }()
 
-    lazy var noTasksLabel: UILabel? = {
+    private lazy var noTasksLabel: UILabel? = {
         let noTasksLabel: UILabel = UILabel()
         noTasksLabel.font = UIFont.regularFontWithSize(18.0)
         noTasksLabel.textColor = UIColor(named: "textColor")
@@ -73,7 +72,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return noTasksLabel
     }()
 
-    lazy var noListSelected: UILabel? = {
+    private lazy var noListSelected: UILabel? = {
         let noListSelected: UILabel = UILabel()
         noListSelected.font = UIFont.regularFontWithSize(16.0)
         noListSelected.textColor = UIColor(named: "textColor")
@@ -84,7 +83,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return noListSelected
     }()
 
-    lazy var addTaskView: AddTaskView? = {
+    private lazy var addTaskView: AddTaskView? = {
         let header: AddTaskView = AddTaskView(
             frame: CGRect(
                 x: 0.0,
@@ -108,7 +107,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureFetch() {
+    private func configureFetch() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
@@ -138,7 +137,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 22.0, bottom: 0, right: 0)
-        tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: "TaskTableViewCell")
         tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
         tableView?.tableFooterView = UIView()
@@ -212,15 +211,15 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
             object: nil)
     }
 
-    @objc func updateFonts() {
+    @objc private func updateFonts() {
         self.tableView?.reloadData()
     }
 
-    @objc func appBecomeActive() {
+    @objc private func appBecomeActive() {
         startSync()
     }
 
-    func startSync() {
+    private func startSync() {
         let syncManager: TLISyncManager = TLISyncManager.shared()
         if syncManager.canSynchronize() {
             syncManager.synchronize { (_) -> Void in
@@ -228,7 +227,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
     }
 
-    func updateFooterInfoText(_ list: TLIList) {
+    private func updateFooterInfoText(_ list: TLIList) {
 
         // Fetch all objects from list
         let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
@@ -265,7 +264,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
     }
 
-    @objc func syncActivityDidEndNotification(_ notification: Notification) {
+    @objc private func syncActivityDidEndNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.checkForEmptyResults() {
@@ -281,7 +280,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
     }
 
-    @objc func syncActivityDidBeginNotification(_ notification: Notification) {
+    @objc private func syncActivityDidBeginNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             if self.checkForEmptyResults() {
@@ -521,15 +520,12 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TaskTableViewCell = tableView.dequeue(for: indexPath)
-            cell.checkBoxButton.addTarget(
-                self,
-                action: #selector(TasksViewController.toggleComplete(_:)),
-                for: UIControl.Event.touchUpInside)
-            cell.taskLabel.delegate = self
-            configureCell(cell, atIndexPath: indexPath)
-
-            return cell
-
+        cell.checkBoxButton.addTarget(self,
+                                      action: #selector(TasksViewController.toggleComplete(_:)),
+                                      for: UIControl.Event.touchUpInside)
+        cell.taskLabel.delegate = self
+        configureCell(cell, atIndexPath: indexPath)
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
