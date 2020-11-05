@@ -7,14 +7,12 @@
 //
 // swiftlint:disable force_unwrapping
 import UIKit
-import TTTAttributedLabel
 import Nantes
 
 final class TaskTableViewCell: GenericTableViewCell {
 
     let kLabelHorizontalInsets: CGFloat = 60.0
     let kLabelVerticalInsets: CGFloat = 10.0
-//    let taskLabel: TTTAttributedLabel = TTTAttributedLabel(frame: CGRect.zero)
     let taskLabel: NantesLabel = NantesLabel(frame: .zero)
     
     let checkBoxButton: CheckBoxButton = CheckBoxButton()
@@ -60,25 +58,17 @@ final class TaskTableViewCell: GenericTableViewCell {
             updateFonts()
 
             taskLabel.activeLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: (currentTask?.list?.color)!)]
-//            taskLabel.activeLinkAttributes = [
-//                kCTForegroundColorAttributeName as AnyHashable: UIColor(
-//                    rgba: currentTask!.list!.color!)]
 
             if let boolValue = currentTask?.completed?.boolValue {
                 if boolValue {
                     checkBoxButton.checkMarkIcon!.isHidden = false
                     checkBoxButton.alpha = 0.5
                     taskLabel.alpha = 0.5
-//                    taskLabel.linkAttributes = [
-//                        kCTForegroundColorAttributeName as AnyHashable: UIColor.lightGray]
-                        taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+                    taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
                 } else {
                     checkBoxButton.checkMarkIcon!.isHidden = true
                     checkBoxButton.alpha = 1.0
                     taskLabel.alpha = 1.0
-//                    taskLabel.linkAttributes = [
-//                        kCTForegroundColorAttributeName as AnyHashable: UIColor(
-//                            rgba: currentTask!.list!.color!)]
                     taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: (currentTask?.list?.color)!)]
                 }
             }
@@ -142,23 +132,5 @@ final class TaskTableViewCell: GenericTableViewCell {
 
     func updateAttributedText() {
         taskLabel.text = currentTask?.displayLongText
-//        taskLabel.setText(currentTask?.displayLongText) {
-//            (mutableAttributedString) -> NSMutableAttributedString? in
-//            return mutableAttributedString
-//        }
-//        if let textTaskLabel = taskLabel.text, let total = textTaskLabel as? NSString {
-//            let words: [String] = total.components(separatedBy: " ")
-//            for word in words {
-//                let character = word as NSString
-//                if character.hasPrefix("http://") || character.hasPrefix("https://") {
-//                    // swiftlint:disable legacy_constructor
-//                    let value: NSString = character.substring(
-//                        with: NSMakeRange(0, character.length)) as NSString
-//                    let range: NSRange = total.range(of: character as String)
-//                    let url: URL = URL(string: NSString(format: "%@", value) as String)!
-//                    taskLabel.addLink(to: url, with: range)
-//                }
-//            }
-//        }
     }
 }
