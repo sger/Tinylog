@@ -35,10 +35,6 @@ extension TLITask {
         }
     }
 
-    static func numOfTasks(with context: NSManagedObjectContext, _ list: TLIList) -> Int {
-        return TLITask.fetchTasks(with: context, list).count
-    }
-
     static func fetchCompletedTasks(with context: NSManagedObjectContext, _ list: TLIList) -> [TLITask] {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
             entityName: "Task")
@@ -46,7 +42,7 @@ extension TLITask {
         fetchRequest.sortDescriptors = [positionDescriptor]
         fetchRequest.predicate = NSPredicate(
             format: "archivedAt = nil AND completed = %@ AND list = %@",
-            NSNumber(value: false as Bool), list)
+            NSNumber(value: true as Bool), list)
         fetchRequest.fetchBatchSize = 20
 
         do {
@@ -55,8 +51,12 @@ extension TLITask {
             fatalError(error.localizedDescription)
         }
     }
+    
+    static func numberOfTasks(with context: NSManagedObjectContext, list: TLIList) -> Int {
+        TLITask.fetchTasks(with: context, list).count
+    }
 
-    static func numOfCompletedTasks(with context: NSManagedObjectContext, _ list: TLIList) -> Int {
-        return TLITask.fetchCompletedTasks(with: context, list).count
+    static func numberOfCompletedTasks(with context: NSManagedObjectContext, list: TLIList) -> Int {
+        TLITask.fetchCompletedTasks(with: context, list).count
     }
 }

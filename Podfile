@@ -6,7 +6,6 @@ target 'Tinylog' do
   inhibit_all_warnings!
 
   # Pods for Tinylog
-  pod 'TTTAttributedLabel'
 	pod 'SVProgressHUD'
 	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"

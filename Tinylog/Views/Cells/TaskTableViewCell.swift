@@ -5,7 +5,7 @@
 //  Created by Spiros Gerokostas on 18/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
+
 import UIKit
 import Nantes
 
@@ -14,69 +14,45 @@ final class TaskTableViewCell: GenericTableViewCell {
     private let kLabelHorizontalInsets: CGFloat = 60.0
     private let kLabelVerticalInsets: CGFloat = 10.0
     private var checkMarkIcon: UIImageView?
-    
+
     let taskLabel: NantesLabel = NantesLabel(frame: .zero)
     let checkBoxButton: CheckBoxButton = CheckBoxButton()
     var managedObjectContext: NSManagedObjectContext!
 
     var task: TLITask? {
         didSet {
-            
             guard let task = task,
                   let list = task.list,
                   let color = list.color else {
                 return
             }
 
-            // Fetch all objects from list
+            let numberOfTasks = TLITask.numberOfTasks(with: managedObjectContext,
+                                                      list: list)
+            let numberOfCompletedTasks = TLITask.numberOfCompletedTasks(with: managedObjectContext,
+                                                                        list: list)
+            let totalTasks = numberOfTasks - numberOfCompletedTasks
 
-            let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-            fetchRequestTotal.sortDescriptors = [positionDescriptor]
-            fetchRequestTotal.predicate  = NSPredicate(
-                format: "archivedAt = nil AND list = %@", list)
-            fetchRequestTotal.fetchBatchSize = 20
+            list.total = totalTasks as NSNumber
 
-            do {
-                let results: NSArray = try managedObjectContext.fetch(fetchRequestTotal) as NSArray
-
-                let fetchRequestCompleted: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
-                    entityName: "Task")
-                fetchRequestCompleted.sortDescriptors = [positionDescriptor]
-                fetchRequestCompleted.predicate  = NSPredicate(
-                    format: "archivedAt = nil AND completed = %@ AND list = %@",
-                    NSNumber(value: true as Bool), list)
-                fetchRequestCompleted.fetchBatchSize = 20
-                let resultsCompleted: NSArray = try managedObjectContext.fetch(
-                    fetchRequestCompleted) as NSArray
-
-                let total: Int = results.count - resultsCompleted.count
-                list.total = total as NSNumber?
-
-                checkBoxButton.circleView?.layer.borderColor = UIColor(rgba: color).cgColor
-                
-                checkBoxButton.checkMarkIcon?.image = checkBoxButton.checkMarkIcon?.image?.imageWithColor(
-                    UIColor(rgba: color))
-            } catch let error as NSError {
-                fatalError(error.localizedDescription)
-            }
+            checkBoxButton.circleView?.layer.borderColor = UIColor(rgba: color).cgColor
+            checkBoxButton.checkMarkIcon?.image = checkBoxButton.checkMarkIcon?.image?.imageWithColor(
+                UIColor(rgba: color))
 
             updateFonts()
 
             taskLabel.activeLinkAttributes = [.foregroundColor: UIColor(rgba: color)]
-
-            if let boolValue = task.completed?.boolValue {
-                if boolValue {
-                    checkBoxButton.checkMarkIcon!.isHidden = false
-                    checkBoxButton.alpha = 0.5
-                    taskLabel.alpha = 0.5
-                    taskLabel.linkAttributes = [.foregroundColor: UIColor.lightGray]
-                } else {
-                    checkBoxButton.checkMarkIcon!.isHidden = true
-                    checkBoxButton.alpha = 1.0
-                    taskLabel.alpha = 1.0
-                    taskLabel.linkAttributes = [.foregroundColor: UIColor(rgba: color)]
-                }
+            
+            if let boolValue = task.completed?.boolValue, boolValue {
+                checkBoxButton.checkMarkIcon?.isHidden = false
+                checkBoxButton.alpha = 0.5
+                taskLabel.alpha = 0.5
+                taskLabel.linkAttributes = [.foregroundColor: UIColor.lightGray]
+            } else {
+                checkBoxButton.checkMarkIcon?.isHidden = true
+                checkBoxButton.alpha = 1.0
+                taskLabel.alpha = 1.0
+                taskLabel.linkAttributes = [.foregroundColor: UIColor(rgba: color)]
             }
 
             taskLabel.text = task.displayLongText

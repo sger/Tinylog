@@ -384,7 +384,6 @@
 		5628E8C51E85898700AAFD20 /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
-				561D10A12532F2D5009D2BB4 /* ViewModels */,
 				5638FCCC2274501700CB4071 /* Application */,
 				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
 				56487F8F1F644E150080192C /* Configs */,
@@ -402,6 +401,7 @@
 				566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */,
 				5638FC9C22744F8800CB4071 /* Utils */,
 				5638FC6222744D8200CB4071 /* View Controllers */,
+				561D10A12532F2D5009D2BB4 /* ViewModels */,
 				5638FC2F22744CDC00CB4071 /* Views */,
 			);
 			path = Tinylog;
@@ -1027,7 +1027,6 @@
 				"${BUILT_PRODUCTS_DIR}/SGBackgroundView/SGBackgroundView.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1045,7 +1044,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGBackgroundView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,6 @@
 //
 // swiftlint:disable force_unwrapping
 import UIKit
-import TTTAttributedLabel
 import Nantes
 
 // Consider refactoring the code to use the non-optional operators.
@@ -366,7 +365,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         super.viewDidAppear(animated)
 
         if let list = list {
-            if TLITask.numOfTasks(with: managedObjectContext, list) == 0 {
+            if TLITask.numberOfTasks(with: managedObjectContext, list: list) == 0 {
                 addTaskView?.textField.becomeFirstResponder()
             }
         }
@@ -613,7 +612,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     // MARK: AddTaskViewDelegate
-    
+
     func addTaskViewDidBeginEditing(_ addTaskView: AddTaskView) {
         displayTransparentLayer()
     }

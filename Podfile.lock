@@ -81,7 +81,6 @@ PODS:
   - SnapshotTesting (1.8.2)
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.40.3)
-  - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - Ensembles (~> 1.0)
@@ -94,7 +93,6 @@ DEPENDENCIES:
   - SnapshotTesting (~> 1.8.1)
   - SVProgressHUD
   - SwiftLint
-  - TTTAttributedLabel
 
 SPEC REPOS:
   trunk:
@@ -117,7 +115,6 @@ SPEC REPOS:
     - SnapshotTesting
     - SVProgressHUD
     - SwiftLint
-    - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Ensembles: 6f04632bf2aa35cc69f8ffbc259396afe2f0501e
@@ -139,8 +136,7 @@ SPEC CHECKSUMS:
   SnapshotTesting: 38947050d13960d57a4a9c166fcf51bca7d56970
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
-  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 742fe96493149f4e1dc750f2e6e7ee08430157fe
+PODFILE CHECKSUM: 684dbd3fac1d0e8c47a6cd902b19c1c5d8eb6f0a
 
 COCOAPODS: 1.10.0
