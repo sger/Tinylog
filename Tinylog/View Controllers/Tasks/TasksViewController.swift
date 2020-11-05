@@ -5,30 +5,9 @@
 //  Created by Spiros Gerokostas on 18/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
+
 import UIKit
 import Nantes
-
-// Consider refactoring the code to use the non-optional operators.
-private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-// Consider refactoring the code to use the non-optional operators.
-private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
 
 protocol TasksViewControllerDelegate: AnyObject {
     func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?)
@@ -119,16 +98,6 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         header.delegate = self
         return header
     }()
-
-    func getDetailViewSize() -> CGSize {
-        var detailViewController: UIViewController
-        if self.splitViewController?.viewControllers.count > 1 {
-            detailViewController = (self.splitViewController?.viewControllers[1])!
-        } else {
-            detailViewController = (self.splitViewController?.viewControllers[0])!
-        }
-        return detailViewController.view.frame.size
-    }
 
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
