@@ -8,6 +8,8 @@
 // swiftlint:disable force_unwrapping
 import UIKit
 import TTTAttributedLabel
+import Nantes
+
 // Consider refactoring the code to use the non-optional operators.
 private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -33,10 +35,7 @@ protocol TasksViewControllerDelegate: AnyObject {
     func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?)
 }
 
-final class TasksViewController: CoreDataTableViewController,
-    AddTaskViewDelegate,
-    TTTAttributedLabelDelegate,
-    EditTaskViewControllerDelegate {
+final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegate, EditTaskViewControllerDelegate {
 
     weak var delegate: TasksViewControllerDelegate?
 
@@ -614,6 +613,7 @@ final class TasksViewController: CoreDataTableViewController,
     }
 
     // MARK: AddTaskViewDelegate
+    
     func addTaskViewDidBeginEditing(_ addTaskView: AddTaskView) {
         displayTransparentLayer()
     }
@@ -678,21 +678,6 @@ final class TasksViewController: CoreDataTableViewController,
     func resetAddTaskView() {
         hideTransparentLayer()
         addTaskView?.reset()
-    }
-
-    // MARK: TTTAttributedLabelDelegate
-
-    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        if url.scheme == "http" {
-            let path: URL = URL(string: NSString(format: "http://%@", url.host!) as String)!
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(path,
-                                          options: [:],
-                                          completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(path)
-            }
-        }
     }
 
     @objc func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
@@ -768,5 +753,13 @@ final class TasksViewController: CoreDataTableViewController,
                 fatalError(error.localizedDescription)
             }
         }
+    }
+}
+
+extension TasksViewController: NantesLabelDelegate {
+    func attributedLabel(_ label: NantesLabel, didSelectLink link: URL) {
+        UIApplication.shared.open(link,
+                                  options: [:],
+                                  completionHandler: nil)
     }
 }

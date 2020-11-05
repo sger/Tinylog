@@ -15,6 +15,7 @@ target 'Tinylog' do
   pod 'ReachabilitySwift'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'Nantes'
 
   target 'TinylogTests' do
     inherit! :search_paths

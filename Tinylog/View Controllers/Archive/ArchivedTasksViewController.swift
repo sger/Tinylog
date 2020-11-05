@@ -370,7 +370,7 @@ final class ArchivedTasksViewController: CoreDataTableViewController,
             let cell: TaskTableViewCell = tableView.dequeueReusableCell(
                 withIdentifier: kCellIdentifier) as! TaskTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
-            cell.taskLabel.delegate = self
+//            cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
             return cell
 
