@@ -11,12 +11,12 @@ import Nantes
 
 final class TaskTableViewCell: GenericTableViewCell {
 
-    let kLabelHorizontalInsets: CGFloat = 60.0
-    let kLabelVerticalInsets: CGFloat = 10.0
-    let taskLabel: NantesLabel = NantesLabel(frame: .zero)
+    private let kLabelHorizontalInsets: CGFloat = 60.0
+    private let kLabelVerticalInsets: CGFloat = 10.0
+    private var checkMarkIcon: UIImageView?
     
+    let taskLabel: NantesLabel = NantesLabel(frame: .zero)
     let checkBoxButton: CheckBoxButton = CheckBoxButton()
-    var checkMarkIcon: UIImageView?
     var managedObjectContext: NSManagedObjectContext!
 
     var currentTask: TLITask? {
