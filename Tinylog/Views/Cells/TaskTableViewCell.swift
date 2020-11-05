@@ -57,26 +57,26 @@ final class TaskTableViewCell: GenericTableViewCell {
 
             updateFonts()
 
-            taskLabel.activeLinkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: (currentTask?.list?.color)!)]
+            taskLabel.activeLinkAttributes = [.foregroundColor: UIColor(rgba: (currentTask?.list?.color)!)]
 
             if let boolValue = currentTask?.completed?.boolValue {
                 if boolValue {
                     checkBoxButton.checkMarkIcon!.isHidden = false
                     checkBoxButton.alpha = 0.5
                     taskLabel.alpha = 0.5
-                    taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+                    taskLabel.linkAttributes = [.foregroundColor: UIColor.lightGray]
                 } else {
                     checkBoxButton.checkMarkIcon!.isHidden = true
                     checkBoxButton.alpha = 1.0
                     taskLabel.alpha = 1.0
-                    taskLabel.linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor(rgba: (currentTask?.list?.color)!)]
+                    taskLabel.linkAttributes = [.foregroundColor: UIColor(rgba: (currentTask?.list?.color)!)]
                 }
             }
 
-            updateAttributedText()
+            taskLabel.text = currentTask?.displayLongText
 
-            self.setNeedsUpdateConstraints()
-            self.updateConstraintsIfNeeded()
+            setNeedsUpdateConstraints()
+            updateConstraintsIfNeeded()
         }
     }
 
@@ -117,20 +117,13 @@ final class TaskTableViewCell: GenericTableViewCell {
 
     override func updateFonts() {
         super.updateFonts()
-
         taskLabel.font = tinylogFont
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        self.contentView.setNeedsLayout()
-        self.contentView.layoutIfNeeded()
-
+        contentView.setNeedsLayout()
+        contentView.layoutIfNeeded()
         taskLabel.preferredMaxLayoutWidth = taskLabel.frame.width
-    }
-
-    func updateAttributedText() {
-        taskLabel.text = currentTask?.displayLongText
     }
 }
