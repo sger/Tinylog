@@ -23,18 +23,18 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         didSet {
 
             if let list = list {
-                noListSelected?.isHidden = true
+                noListSelected.isHidden = true
                 title = list.title
                 configureFetch()
 
                 if self.checkForEmptyResults() {
-                    noTasksLabel?.isHidden = false
+                    noTasksLabel.isHidden = false
                 } else {
-                    noTasksLabel?.isHidden = true
+                    noTasksLabel.isHidden = true
                 }
                 updateFooterInfoText(list)
             } else {
-                noListSelected?.isHidden = false
+                noListSelected.isHidden = false
             }
         }
     }
@@ -49,7 +49,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     private var orientation: String = "portrait"
     private var enableDidSelectRowAtIndexPath = true
 
-    private lazy var addTransparentLayer: UIView? = {
+    private lazy var addTransparentLayer: UIView = {
         let addTransparentLayer: UIView = UIView()
         addTransparentLayer.autoresizingMask = [
             UIView.AutoresizingMask.flexibleWidth,
@@ -63,7 +63,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return addTransparentLayer
     }()
 
-    private lazy var noTasksLabel: UILabel? = {
+    private lazy var noTasksLabel: UILabel = {
         let noTasksLabel: UILabel = UILabel()
         noTasksLabel.font = UIFont.regularFontWithSize(18.0)
         noTasksLabel.textColor = UIColor(named: "textColor")
@@ -72,7 +72,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return noTasksLabel
     }()
 
-    private lazy var noListSelected: UILabel? = {
+    private lazy var noListSelected: UILabel = {
         let noListSelected: UILabel = UILabel()
         noListSelected.font = UIFont.regularFontWithSize(16.0)
         noListSelected.textColor = UIColor(named: "textColor")
@@ -83,7 +83,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return noListSelected
     }()
 
-    private lazy var addTaskView: AddTaskView? = {
+    private lazy var addTaskView: AddTaskView = {
         let header: AddTaskView = AddTaskView(
             frame: CGRect(
                 x: 0.0,
@@ -157,15 +157,15 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
             make.height.equalTo(60.0)
         }
 
-        noListSelected?.snp.makeConstraints({ (make) in
+        noListSelected.snp.makeConstraints({ (make) in
             make.center.equalToSuperview()
         })
 
-        noTasksLabel?.snp.makeConstraints({ (make) in
+        noTasksLabel.snp.makeConstraints({ (make) in
             make.center.equalToSuperview()
         })
 
-        addTransparentLayer?.snp.makeConstraints({ (make) in
+        addTransparentLayer.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(AddTaskView.height)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-60)
             make.left.equalTo(view)
@@ -268,9 +268,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.checkForEmptyResults() {
-                self.noTasksLabel?.isHidden = false
+                self.noTasksLabel.isHidden = false
             } else {
-                self.noTasksLabel?.isHidden = true
+                self.noTasksLabel.isHidden = true
             }
             self.tableView?.reloadData()
 
@@ -284,9 +284,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             if self.checkForEmptyResults() {
-                self.noTasksLabel?.isHidden = false
+                self.noTasksLabel.isHidden = false
             } else {
-                self.noTasksLabel?.isHidden = true
+                self.noTasksLabel.isHidden = true
             }
             self.tableView?.reloadData()
         }
@@ -295,10 +295,10 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     override func loadView() {
         super.loadView()
 
-        view.addSubview(noListSelected!)
-        view.addSubview(noTasksLabel!)
+        view.addSubview(noListSelected)
+        view.addSubview(noTasksLabel)
         view.addSubview(tasksFooterView)
-        view.addSubview(addTransparentLayer!)
+        view.addSubview(addTransparentLayer)
 
         view.setNeedsUpdateConstraints()
     }
@@ -306,9 +306,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.checkForEmptyResults() {
-            self.noTasksLabel?.isHidden = false
+            self.noTasksLabel.isHidden = false
         } else {
-            self.noTasksLabel?.isHidden = true
+            self.noTasksLabel.isHidden = true
         }
         self.tableView?.reloadData()
 
@@ -316,7 +316,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
         if IS_IPAD {
-            self.noListSelected?.isHidden = false
+            noListSelected.isHidden = false
         }
     }
 
@@ -334,7 +334,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
         if let list = list {
             if TLITask.numberOfTasks(with: managedObjectContext, list: list) == 0 {
-                addTaskView?.textField.becomeFirstResponder()
+                addTaskView.textField.becomeFirstResponder()
             }
         }
     }
@@ -423,9 +423,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                         try self.managedObjectContext.save()
                         self.setEditing(false, animated: true)
                         if self.checkForEmptyResults() {
-                            self.noTasksLabel?.isHidden = false
+                            self.noTasksLabel.isHidden = false
                         } else {
-                            self.noTasksLabel?.isHidden = true
+                            self.noTasksLabel.isHidden = true
                         }
                         self.tableView?.reloadData()
                     } catch let error as NSError {
@@ -607,9 +607,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                 // swiftlint:disable force_try
                 try! managedObjectContext.save()
                 if self.checkForEmptyResults() {
-                    self.noTasksLabel?.isHidden = false
+                    self.noTasksLabel.isHidden = false
                 } else {
-                    self.noTasksLabel?.isHidden = true
+                    self.noTasksLabel.isHidden = true
                 }
                 self.tableView?.reloadData()
                 updateFooterInfoText(self.list!)
@@ -619,37 +619,38 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
     }
 
-    func displayTransparentLayer() {
+    private func displayTransparentLayer() {
         self.tableView?.isScrollEnabled = false
-        let addTransparentLayer: UIView = self.addTransparentLayer!
+        let addTransparentLayer: UIView = self.addTransparentLayer
         UIView.animate(withDuration: 0.3, delay: 0.0,
             options: .allowUserInteraction, animations: {
                 addTransparentLayer.alpha = 1.0
             }, completion: nil)
     }
 
-    func hideTransparentLayer() {
+    private func hideTransparentLayer() {
         self.tableView?.isScrollEnabled = true
         UIView.animate(
             withDuration: 0.3,
             delay: 0,
             options: UIView.AnimationOptions.allowUserInteraction,
             animations: {
-                self.addTransparentLayer!.alpha = 0.0
+                self.addTransparentLayer.alpha = 0.0
             }, completion: nil)
     }
 
     func resetAddTaskView() {
         hideTransparentLayer()
-        addTaskView?.reset()
+        addTaskView.reset()
     }
 
-    @objc func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
-        self.addTaskView?.textField.resignFirstResponder()
+    @objc private func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
+        addTaskView.textField.resignFirstResponder()
     }
 
     // MARK: Edit Task
-    func editTask(_ task: TLITask, indexPath: IndexPath) {
+    
+    private func editTask(_ task: TLITask, indexPath: IndexPath) {
         let editTaskViewController: EditTaskViewController = EditTaskViewController()
         editTaskViewController.managedObjectContext = managedObjectContext
         editTaskViewController.task = task
@@ -665,7 +666,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         self.tableView?.reloadData()
     }
 
-    @objc func exportTasks(_ sender: UIButton) {
+    @objc private func exportTasks(_ sender: UIButton) {
         if self.list != nil {
 
             do {

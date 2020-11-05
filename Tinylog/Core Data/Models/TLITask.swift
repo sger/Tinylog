@@ -51,7 +51,7 @@ extension TLITask {
             fatalError(error.localizedDescription)
         }
     }
-    
+
     static func numberOfTasks(with context: NSManagedObjectContext, list: TLIList) -> Int {
         TLITask.fetchTasks(with: context, list).count
     }

@@ -42,7 +42,7 @@ final class TaskTableViewCell: GenericTableViewCell {
             updateFonts()
 
             taskLabel.activeLinkAttributes = [.foregroundColor: UIColor(rgba: color)]
-            
+
             if let boolValue = task.completed?.boolValue, boolValue {
                 checkBoxButton.checkMarkIcon?.isHidden = false
                 checkBoxButton.alpha = 0.5
