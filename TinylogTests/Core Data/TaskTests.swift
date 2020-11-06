@@ -11,40 +11,44 @@ import XCTest
 
 class TaskTests: XCTestCase {
 
-    var coreDataManager: CoreDataManager!
+    private var coreDataContext: CoreDataContext?
     
     override func setUp() {
         super.setUp()
-        coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
+        coreDataContext = CoreDataContext(model: "Tinylog", memory: true)
     }
     
     override func tearDown() {
-        coreDataManager = nil
+        coreDataContext = nil
         super.tearDown()
     }
 
-    func teskTask_whenTasksAdded_numberOfTotalTasks() {
+    func testTask_whenTasksAdded_shouldReturnNumberOfTotalUnarchivedTasks() throws {
+        
+        let coreDataContext = try XCTUnwrap(self.coreDataContext)
         
         let list = NSEntityDescription.insertNewObject(forEntityName: "List",
-                                                       into: coreDataManager.managedObjectContext) as? TLIList
+                                                       into: coreDataContext.managedObjectContext) as? TLIList
         list?.title = "firstList"
         list?.color = "red"
-        try! coreDataManager.managedObjectContext.save()
+        try? coreDataContext.managedObjectContext.save()
         
         
         let firstTask = NSEntityDescription.insertNewObject(forEntityName: "Task",
-                                                            into: coreDataManager.managedObjectContext) as? TLITask
+                                                            into: coreDataContext.managedObjectContext) as? TLITask
         firstTask?.displayLongText = "firstList"
         firstTask?.list = list
         
         let secondTask = NSEntityDescription.insertNewObject(forEntityName: "Task",
-                                                             into: coreDataManager.managedObjectContext) as? TLITask
+                                                             into: coreDataContext.managedObjectContext) as? TLITask
         secondTask?.displayLongText = "secondList"
         secondTask?.list = list
         
-        try! coreDataManager.managedObjectContext.save()
+        try? coreDataContext.managedObjectContext.save()
         
-        let num = TLITask.numOfTasks(with: coreDataManager.managedObjectContext, list!)
+        let tmpList = try XCTUnwrap(list)
+        
+        let num = TLITask.numberOfUnarchivedTasks(with: coreDataContext.managedObjectContext, list: tmpList)
         
         XCTAssertEqual(num, 2)
     }

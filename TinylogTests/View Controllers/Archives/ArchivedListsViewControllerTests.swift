@@ -13,12 +13,12 @@ import SnapshotTesting
 
 class ArchivedListsViewControllerTests: XCTestCase {
     
-    var coreDataManager: CoreDataManager!
+    var coreDataManager: CoreDataContext!
     
     override func setUp() {
         super.setUp()
 //        isRecording = true
-        coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
+        coreDataManager = CoreDataContext(model: "Tinylog", memory: true)
     }
     
     override func tearDown() {

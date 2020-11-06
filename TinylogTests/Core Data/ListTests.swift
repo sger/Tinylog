@@ -11,11 +11,11 @@ import XCTest
 
 class ListTests: XCTestCase {
 
-    var coreDataManager: CoreDataManager!
+    var coreDataManager: CoreDataContext!
 
     override func setUp() {
         super.setUp()
-        coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
+        coreDataManager = CoreDataContext(model: "Tinylog", memory: true)
     }
 
     override func tearDown() {

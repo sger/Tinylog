@@ -1,5 +1,5 @@
 //
-//  CoreDataManager.swift
+//  CoreDataContext.swift
 //  Tinylog
 //
 //  Created by Spiros Gerokostas on 19/04/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class CoreDataManager {
+final class CoreDataContext {
 
     private let model: String
     private let memory: Bool

@@ -11,11 +11,11 @@ import XCTest
 
 class MenuColorsViewModelTests: XCTestCase {
     
-    private var coreDataManager: CoreDataManager?
+    private var coreDataManager: CoreDataContext?
     
     override func setUp() {
         super.setUp()
-        coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
+        coreDataManager = CoreDataContext(model: "Tinylog", memory: true)
     }
 
     override func tearDown() {
