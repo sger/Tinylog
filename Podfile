@@ -7,7 +7,6 @@ target 'Tinylog' do
 
   # Pods for Tinylog
 	pod 'SVProgressHUD'
-	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"
   pod 'SwiftLint'
   pod 'SnapKit', '~> 5.0.0'

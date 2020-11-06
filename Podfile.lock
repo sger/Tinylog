@@ -76,7 +76,6 @@ PODS:
   - Nantes (0.1.1)
   - PromisesObjC (1.2.11)
   - ReachabilitySwift (5.0.0)
-  - SGBackgroundView (1.3)
   - SnapKit (5.0.1)
   - SnapshotTesting (1.8.2)
   - SVProgressHUD (2.2.5)
@@ -88,7 +87,6 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - Nantes
   - ReachabilitySwift
-  - SGBackgroundView
   - SnapKit (~> 5.0.0)
   - SnapshotTesting (~> 1.8.1)
   - SVProgressHUD
@@ -110,7 +108,6 @@ SPEC REPOS:
     - Nantes
     - PromisesObjC
     - ReachabilitySwift
-    - SGBackgroundView
     - SnapKit
     - SnapshotTesting
     - SVProgressHUD
@@ -131,12 +128,11 @@ SPEC CHECKSUMS:
   Nantes: e11fbe0b6214de8c09cc8b763dbf61f70fbbf885
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  SGBackgroundView: 3dbf380b9a54eeedfb6176ad750055d7d47e84eb
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SnapshotTesting: 38947050d13960d57a4a9c166fcf51bca7d56970
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
 
-PODFILE CHECKSUM: 684dbd3fac1d0e8c47a6cd902b19c1c5d8eb6f0a
+PODFILE CHECKSUM: a1f6b0dda98bf2cc4a418d74570ed7658095f037
 
 COCOAPODS: 1.10.0
