@@ -18,24 +18,26 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     weak var delegate: TasksViewControllerDelegate?
 
     private let managedObjectContext: NSManagedObjectContext
+    
+    private var viewModel: TasksViewModel?
 
     var list: TLIList? {
         didSet {
-
-            if let list = list {
-                noListSelected.isHidden = true
-                title = list.title
-                configureFetch()
-
-                if self.checkForEmptyResults() {
-                    noTasksLabel.isHidden = false
-                } else {
-                    noTasksLabel.isHidden = true
-                }
-                updateFooterInfoText(list)
-            } else {
+            guard let list = list else {
                 noListSelected.isHidden = false
+                return
             }
+
+            noListSelected.isHidden = true
+            title = list.title
+            configureFetch()
+
+            if checkForEmptyResults() {
+                noTasksLabel.isHidden = false
+            } else {
+                noTasksLabel.isHidden = true
+            }
+            updateFooterInfoText(list)
         }
     }
 
@@ -108,11 +110,14 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     private func configureFetch() {
+        guard let list = list else {
+            return
+        }
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
         fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-        fetchRequest.predicate  = NSPredicate(format: "list = %@ AND archivedAt = nil", self.list!)
+        fetchRequest.predicate  = NSPredicate(format: "list = %@ AND archivedAt = nil", list)
         fetchRequest.fetchBatchSize = 20
         self.frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -133,6 +138,8 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         super.viewDidLoad()
 
         setupNavigationBarProperties()
+        
+        viewModel = TasksViewModel(managedObjectContext: managedObjectContext)
 
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
@@ -333,7 +340,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         super.viewDidAppear(animated)
 
         if let list = list {
-            if TLITask.numberOfTasks(with: managedObjectContext, list: list) == 0 {
+            if TLITask.numberOfUnarchivedTasks(with: managedObjectContext, list: list) == 0 {
                 addTaskView.textField.becomeFirstResponder()
             }
         }
@@ -421,13 +428,14 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                         let total: Int = results.count - resultsCompleted.count
                         task.list!.total = total as NSNumber?
                         try self.managedObjectContext.save()
-                        self.setEditing(false, animated: true)
+                        
                         if self.checkForEmptyResults() {
                             self.noTasksLabel.isHidden = false
                         } else {
                             self.noTasksLabel.isHidden = true
                         }
                         self.tableView?.reloadData()
+                        self.setEditing(false, animated: true)
                     } catch let error as NSError {
                         fatalError(error.localizedDescription)
                     }
@@ -649,7 +657,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     // MARK: Edit Task
-    
+
     private func editTask(_ task: TLITask, indexPath: IndexPath) {
         let editTaskViewController: EditTaskViewController = EditTaskViewController()
         editTaskViewController.managedObjectContext = managedObjectContext
@@ -667,57 +675,37 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     @objc private func exportTasks(_ sender: UIButton) {
-        if self.list != nil {
-
-            do {
-
-                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-                let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-                let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
-                fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-                fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
-                fetchRequest.fetchBatchSize = 20
-                let tasks: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
-
-                var output: NSString = ""
-                var listTitle: NSString = ""
-                listTitle = self.list!.title! as NSString
-
-                output = output.appending(NSString(format: "%@\n", listTitle) as String) as NSString
-
-                for task in tasks {
-                    let taskItem: TLITask = task as! TLITask
-                    let displayLongText: NSString = NSString(format: "- %@\n", taskItem.displayLongText!)
-                    output = output.appending(displayLongText as String) as NSString
-                }
-
-                let activityViewController: UIActivityViewController = UIActivityViewController(
-                    activityItems: [output], applicationActivities: nil)
-                activityViewController.excludedActivityTypes = [
-                    UIActivity.ActivityType.postToTwitter,
-                    UIActivity.ActivityType.postToFacebook,
-                    UIActivity.ActivityType.postToWeibo,
-                    UIActivity.ActivityType.copyToPasteboard,
-                    UIActivity.ActivityType.assignToContact,
-                    UIActivity.ActivityType.saveToCameraRoll,
-                    UIActivity.ActivityType.addToReadingList,
-                    UIActivity.ActivityType.postToFlickr,
-                    UIActivity.ActivityType.postToVimeo,
-                    UIActivity.ActivityType.postToTencentWeibo
-                ]
-
-                activityViewController.modalPresentationStyle = UIModalPresentationStyle.popover
-                activityViewController.popoverPresentationController?.sourceRect = sender.bounds
-                activityViewController.popoverPresentationController?.sourceView = sender
-                activityViewController.popoverPresentationController?.permittedArrowDirections
-                    = UIPopoverArrowDirection.any
-
-                self.navigationController?.present(
-                    activityViewController, animated: true, completion: nil)
-            } catch let error as NSError {
-                fatalError(error.localizedDescription)
-            }
+        guard let list = list,
+              let tasks = viewModel?.exportUnarchivedTasks(with: list) else {
+            return
         }
+        
+        print(tasks)
+        
+        let activityViewController: UIActivityViewController = UIActivityViewController(
+            activityItems: [tasks], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [
+            .postToTwitter,
+            .postToFacebook,
+            .postToWeibo,
+            .copyToPasteboard,
+            .assignToContact,
+            .saveToCameraRoll,
+            .addToReadingList,
+            .postToFlickr,
+            .postToVimeo,
+            .postToTencentWeibo
+        ]
+
+        activityViewController.modalPresentationStyle = .popover
+        activityViewController.popoverPresentationController?.sourceRect = sender.bounds
+        activityViewController.popoverPresentationController?.sourceView = sender
+        activityViewController.popoverPresentationController?.permittedArrowDirections
+            = UIPopoverArrowDirection.any
+
+        navigationController?.present(activityViewController,
+                                      animated: true,
+                                      completion: nil)
     }
 }
 

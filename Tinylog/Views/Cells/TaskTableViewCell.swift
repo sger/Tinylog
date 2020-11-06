@@ -27,9 +27,9 @@ final class TaskTableViewCell: GenericTableViewCell {
                 return
             }
 
-            let numberOfTasks = TLITask.numberOfTasks(with: managedObjectContext,
+            let numberOfTasks = TLITask.numberOfUnarchivedTasks(with: managedObjectContext,
                                                       list: list)
-            let numberOfCompletedTasks = TLITask.numberOfCompletedTasks(with: managedObjectContext,
+            let numberOfCompletedTasks = TLITask.numberOfUnarchivedCompletedTasks(with: managedObjectContext,
                                                                         list: list)
             let totalTasks = numberOfTasks - numberOfCompletedTasks
 
