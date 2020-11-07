@@ -48,8 +48,6 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return tasksFooterView
     }()
 
-    private var enableDidSelectRowAtIndexPath = true
-
     private lazy var addTransparentLayer: UIView = {
         let addTransparentLayer: UIView = UIView()
         addTransparentLayer.autoresizingMask = [
@@ -85,16 +83,10 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }()
 
     private lazy var addTaskView: AddTaskView = {
-        let header: AddTaskView = AddTaskView(
-            frame: CGRect(
-                x: 0.0,
-                y: 0.0,
-                width: self.tableView!.bounds.size.width,
-                height: AddTaskView.height))
-        header.closeButton.addTarget(
-            self,
-            action: #selector(TasksViewController.transparentLayerTapped(_:)),
-            for: UIControl.Event.touchDown)
+        let header = AddTaskView()
+        header.closeButton.addTarget(self,
+                                     action: #selector(TasksViewController.transparentLayerTapped(_:)),
+                                     for: UIControl.Event.touchDown)
         header.delegate = self
         return header
     }()
@@ -484,17 +476,11 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if enableDidSelectRowAtIndexPath {
-            return addTaskView
-        }
-        return nil
+        addTaskView
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if enableDidSelectRowAtIndexPath {
-            return AddTaskView.height
-        }
-        return 0
+        AddTaskView.height
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -508,13 +494,10 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if enableDidSelectRowAtIndexPath {
+        let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
 
-            let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
-
-            DispatchQueue.main.async {
-                self.editTask(task, indexPath: indexPath)
-            }
+        DispatchQueue.main.async {
+            self.editTask(task, indexPath: indexPath)
         }
     }
 
@@ -522,40 +505,38 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         guard let list = list else {
             return
         }
-        if enableDidSelectRowAtIndexPath {
+        
+        let button: CheckBoxButton = button as CheckBoxButton
+        let indexPath: IndexPath? = self.tableView?.indexPath(for: button.tableViewCell!)!
 
-            let button: CheckBoxButton = button as CheckBoxButton
-            let indexPath: IndexPath? = self.tableView?.indexPath(for: button.tableViewCell!)!
-
-            if !(indexPath != nil) {
-                return
-            }
-
-            let task: TLITask = self.frc?.object(at: indexPath!) as! TLITask
-
-            if task.completed?.boolValue == true {
-                task.completed = NSNumber(value: false as Bool)
-                task.checkBoxValue = "false"
-                task.completedAt = nil
-            } else {
-                task.completed = NSNumber(value: true as Bool)
-                task.checkBoxValue = "true"
-                task.completedAt = Date()
-            }
-
-            task.updatedAt = Date()
-
-            let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
-            animation.fromValue = NSNumber(value: 1.4 as Float)
-            animation.toValue = NSNumber(value: 1.0 as Float)
-            animation.duration = 0.2
-            animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 1.3, 1, 1)
-            button.layer.add(animation, forKey: "bounceAnimation")
-
-            try? managedObjectContext.save()
-
-            updateFooterInfoText(list)
+        if !(indexPath != nil) {
+            return
         }
+
+        let task: TLITask = self.frc?.object(at: indexPath!) as! TLITask
+
+        if task.completed?.boolValue == true {
+            task.completed = NSNumber(value: false as Bool)
+            task.checkBoxValue = "false"
+            task.completedAt = nil
+        } else {
+            task.completed = NSNumber(value: true as Bool)
+            task.checkBoxValue = "true"
+            task.completedAt = Date()
+        }
+
+        task.updatedAt = Date()
+
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = NSNumber(value: 1.4 as Float)
+        animation.toValue = NSNumber(value: 1.0 as Float)
+        animation.duration = 0.2
+        animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 1.3, 1, 1)
+        button.layer.add(animation, forKey: "bounceAnimation")
+
+        try? managedObjectContext.save()
+
+        updateFooterInfoText(list)
     }
 
     // MARK: AddTaskViewDelegate
