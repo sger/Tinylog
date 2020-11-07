@@ -8,7 +8,7 @@
 
 import UIKit
 import Nantes
-
+// swiftlint:disable force_unwrapping
 protocol TasksViewControllerDelegate: AnyObject {
     func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?)
 }
@@ -18,7 +18,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     weak var delegate: TasksViewControllerDelegate?
 
     private let managedObjectContext: NSManagedObjectContext
-    
+
     private var viewModel: TasksViewModel?
 
     var list: TLIList? {
@@ -48,7 +48,6 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return tasksFooterView
     }()
 
-    private var orientation: String = "portrait"
     private var enableDidSelectRowAtIndexPath = true
 
     private lazy var addTransparentLayer: UIView = {
@@ -138,7 +137,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         super.viewDidLoad()
 
         setupNavigationBarProperties()
-        
+
         viewModel = TasksViewModel(managedObjectContext: managedObjectContext)
 
         tableView?.backgroundColor = UIColor(named: "mainColor")
@@ -346,35 +345,6 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if UIDevice.current.orientation.isLandscape {
-            self.orientation = "landscape"
-        }
-        if UIDevice.current.orientation.isPortrait {
-            self.orientation = "portrait"
-        }
-    }
-
-    override func viewWillTransition(
-        to size: CGSize,
-        with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        // Code here will execute before the rotation begins.
-        // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
-        coordinator.animate(alongsideTransition: { (_) -> Void in
-            // Place code here to perform animations during the rotation.
-            // You can pass nil for this closure if not necessary.
-            }, completion: { (_) -> Void in
-                self.tableView?.reloadData()
-                self.view.setNeedsUpdateConstraints()
-        })
-    }
-
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
@@ -428,7 +398,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                         let total: Int = results.count - resultsCompleted.count
                         task.list!.total = total as NSNumber?
                         try self.managedObjectContext.save()
-                        
+
                         if self.checkForEmptyResults() {
                             self.noTasksLabel.isHidden = false
                         } else {
@@ -446,11 +416,11 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
 
     func taskAtIndexPath(_ indexPath: IndexPath) -> TLITask? {
@@ -459,6 +429,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
         return nil
     }
+
     // swiftlint:disable force_cast
     func updateTask(_ task: TLITask, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
         var fetchedTasks: [AnyObject] = (self.frc?.fetchedObjects)!
@@ -514,7 +485,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if enableDidSelectRowAtIndexPath {
-            return self.addTaskView
+            return addTaskView
         }
         return nil
     }
@@ -548,10 +519,13 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     @objc func toggleComplete(_ button: CheckBoxButton) {
+        guard let list = list else {
+            return
+        }
         if enableDidSelectRowAtIndexPath {
 
             let button: CheckBoxButton = button as CheckBoxButton
-            let indexPath: IndexPath?  = self.tableView?.indexPath(for: button.tableViewCell!)!
+            let indexPath: IndexPath? = self.tableView?.indexPath(for: button.tableViewCell!)!
 
             if !(indexPath != nil) {
                 return
@@ -559,7 +533,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
             let task: TLITask = self.frc?.object(at: indexPath!) as! TLITask
 
-            if task.completed!.boolValue {
+            if task.completed?.boolValue == true {
                 task.completed = NSNumber(value: false as Bool)
                 task.checkBoxValue = "false"
                 task.completedAt = nil
@@ -578,9 +552,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
             animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 1.3, 1, 1)
             button.layer.add(animation, forKey: "bounceAnimation")
 
-            try! managedObjectContext.save()
+            try? managedObjectContext.save()
 
-            updateFooterInfoText(self.list!)
+            updateFooterInfoText(list)
         }
     }
 
@@ -595,11 +569,14 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     func addTaskView(_ addTaskView: AddTaskView, title: String) {
+        guard let list = list else {
+            return
+        }
 
         do {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
             let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-            fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
+            fetchRequest.predicate = NSPredicate(format: "list = %@", list)
             fetchRequest.sortDescriptors = [positionDescriptor]
             let results: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
 
@@ -607,20 +584,20 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                 forEntityName: "Task",
                 into: managedObjectContext) as? TLITask {
                 task.displayLongText = title as String
-                task.list = self.list!
+                task.list = list
                 task.position = NSNumber(value: results.count + 1 as Int)
                 task.createdAt = Date()
                 task.checkBoxValue = "false"
                 task.completed = false
-                // swiftlint:disable force_try
-                try! managedObjectContext.save()
+
+                try? managedObjectContext.save()
                 if self.checkForEmptyResults() {
                     self.noTasksLabel.isHidden = false
                 } else {
                     self.noTasksLabel.isHidden = true
                 }
                 self.tableView?.reloadData()
-                updateFooterInfoText(self.list!)
+                updateFooterInfoText(list)
             }
         } catch let error as NSError {
             fatalError(error.localizedDescription)
@@ -679,9 +656,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
               let tasks = viewModel?.exportUnarchivedTasks(with: list) else {
             return
         }
-        
-        print(tasks)
-        
+
         let activityViewController: UIActivityViewController = UIActivityViewController(
             activityItems: [tasks], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [
