@@ -117,7 +117,7 @@ final class TaskTableViewCell: GenericTableViewCell {
         contentView.layoutIfNeeded()
         taskLabel.preferredMaxLayoutWidth = taskLabel.frame.width
     }
-    
+
     @objc func toggleComplete(_ button: CheckBoxButton) {
         if task?.completed?.boolValue == true {
             task?.completed = NSNumber(value: false)
@@ -126,22 +126,22 @@ final class TaskTableViewCell: GenericTableViewCell {
             task?.completed = NSNumber(value: true)
             task?.completedAt = Date()
         }
-        
+
         task?.updatedAt = Date()
-        
+
         let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
         animation.fromValue = NSNumber(value: 1.4)
         animation.toValue = NSNumber(value: 1.0)
         animation.duration = 0.2
         animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 1.3, 1, 1)
         button.layer.add(animation, forKey: "bounceAnimation")
-        
+
         try? managedObjectContext.save()
-        
+
         guard let list = task?.list else {
             return
         }
-        
+
         delegate?.taskTableViewCellDidTapCheckBoxButton(self, list: list)
     }
 }

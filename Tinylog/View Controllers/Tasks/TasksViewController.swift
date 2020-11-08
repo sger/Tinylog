@@ -359,43 +359,45 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
             style: UITableViewRowAction.Style.default,
             title: "Archive",
             handler: {_, indexpath in
-                if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
-                    task.archivedAt = Date()
-                    // Update counter list
-                    // Fetch all objects from list
-                    let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
-                        entityName: "Task")
-                    let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-                    fetchRequestTotal.sortDescriptors = [positionDescriptor]
-                    fetchRequestTotal.predicate  = NSPredicate(
-                        format: "archivedAt = nil AND list = %@", task.list!)
-                    fetchRequestTotal.fetchBatchSize = 20
-                    do {
-                        let results: NSArray = try self.managedObjectContext.fetch(fetchRequestTotal)
-                            as NSArray
-                        let fetchRequestCompleted: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
-                            entityName: "Task")
-                        fetchRequestCompleted.sortDescriptors = [positionDescriptor]
-                        fetchRequestCompleted.predicate  = NSPredicate(
-                            format: "archivedAt = nil AND completed = %@ AND list = %@",
-                            NSNumber(value: true as Bool), task.list!)
-                        fetchRequestCompleted.fetchBatchSize = 20
-                        let resultsCompleted: NSArray = try self.managedObjectContext.fetch(
-                            fetchRequestCompleted) as NSArray
-                        let total: Int = results.count - resultsCompleted.count
-                        task.list!.total = total as NSNumber?
-                        try self.managedObjectContext.save()
+                guard let task: TLITask = self.frc?.object(at: indexpath) as? TLITask,
+                      let list = task.list else {
+                    return
+                }
 
-                        if self.checkForEmptyResults() {
-                            self.noTasksLabel.isHidden = false
-                        } else {
-                            self.noTasksLabel.isHidden = true
-                        }
-                        self.tableView?.reloadData()
-                        self.setEditing(false, animated: true)
-                    } catch let error as NSError {
-                        fatalError(error.localizedDescription)
+                task.archivedAt = Date()
+
+                let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
+                    entityName: "Task")
+                let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
+                fetchRequestTotal.sortDescriptors = [positionDescriptor]
+                fetchRequestTotal.predicate  = NSPredicate(
+                    format: "archivedAt = nil AND list = %@", list)
+                fetchRequestTotal.fetchBatchSize = 20
+                do {
+                    let results: NSArray = try self.managedObjectContext.fetch(fetchRequestTotal)
+                        as NSArray
+                    let fetchRequestCompleted: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
+                        entityName: "Task")
+                    fetchRequestCompleted.sortDescriptors = [positionDescriptor]
+                    fetchRequestCompleted.predicate  = NSPredicate(
+                        format: "archivedAt = nil AND completed = %@ AND list = %@",
+                        NSNumber(value: true), list)
+                    fetchRequestCompleted.fetchBatchSize = 20
+                    let resultsCompleted: NSArray = try self.managedObjectContext.fetch(
+                        fetchRequestCompleted) as NSArray
+                    let total: Int = results.count - resultsCompleted.count
+                    list.total = total as NSNumber?
+                    try self.managedObjectContext.save()
+
+                    if self.checkForEmptyResults() {
+                        self.noTasksLabel.isHidden = false
+                    } else {
+                        self.noTasksLabel.isHidden = true
                     }
+                    self.tableView?.reloadData()
+                    self.setEditing(false, animated: true)
+                } catch let error as NSError {
+                    fatalError(error.localizedDescription)
                 }
         })
         archiveRowAction.backgroundColor = UIColor.tinylogMainColor
@@ -543,7 +545,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
     private func showTransparentLayer() {
         tableView?.isScrollEnabled = false
-                
+
         UIView.animate(withDuration: 0.3,
                        delay: 0.0,
                        options: .allowUserInteraction,
@@ -554,7 +556,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
     private func hideTransparentLayer() {
         tableView?.isScrollEnabled = true
-        
+
         UIView.animate(withDuration: 0.3,
                        delay: 0,
                        options: .allowUserInteraction,
