@@ -207,7 +207,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     @objc private func updateFonts() {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     @objc private func appBecomeActive() {
@@ -223,8 +223,6 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     private func updateFooterInfoText(_ list: TLIList) {
-
-        // Fetch all objects from list
         let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         fetchRequestTotal.sortDescriptors = [positionDescriptor]
@@ -239,7 +237,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
             fetchRequestCompleted.sortDescriptors = [positionDescriptor]
             fetchRequestCompleted.predicate  = NSPredicate(
                 format: "archivedAt = nil AND completed = %@ AND list = %@",
-                NSNumber(value: false as Bool), list)
+                NSNumber(value: false), list)
             fetchRequestCompleted.fetchBatchSize = 20
             let resultsCompleted: NSArray = try managedObjectContext.fetch(fetchRequestCompleted) as NSArray
 
@@ -300,10 +298,10 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.checkForEmptyResults() {
-            self.noTasksLabel.isHidden = false
+        if checkForEmptyResults() {
+            noTasksLabel.isHidden = false
         } else {
-            self.noTasksLabel.isHidden = true
+            noTasksLabel.isHidden = true
         }
         self.tableView?.reloadData()
 
@@ -337,13 +335,13 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Done",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(TasksViewController.toggleEditMode(_:)))
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Edit",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
