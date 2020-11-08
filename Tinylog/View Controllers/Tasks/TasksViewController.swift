@@ -486,7 +486,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
+        guard let task: TLITask = self.frc?.object(at: indexPath) as? TLITask else {
+            return
+        }
 
         DispatchQueue.main.async {
             self.editTask(task, indexPath: indexPath)
