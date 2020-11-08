@@ -8,7 +8,7 @@
 
 import UIKit
 import Nantes
-/// swiftlint:disable force_unwrapping
+
 protocol TasksViewControllerDelegate: AnyObject {
     func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?)
 }
