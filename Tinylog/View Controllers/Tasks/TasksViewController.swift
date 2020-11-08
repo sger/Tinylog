@@ -420,28 +420,36 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     // swiftlint:disable force_cast
-    func updateTask(_ task: TLITask, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedTasks: [AnyObject] = (self.frc?.fetchedObjects)!
-
-        // Remove current list item
-
-        fetchedTasks = fetchedTasks.filter { $0 as! TLITask != task }
-
+    func updateTasks(_ task: TLITask?,
+                     sourceIndexPath: IndexPath,
+                     destinationIndexPath: IndexPath) {
+        guard let task = task else {
+            return
+        }
+        
+        guard var fetchedTasks: [TLITask] = frc?.fetchedObjects as? [TLITask] else {
+            return
+        }
+        
+        fetchedTasks = fetchedTasks.filter { $0 != task }
+        
         var sortedIndex = destinationIndexPath.row
-
+        
         for sectionIndex in 0..<destinationIndexPath.section {
-            sortedIndex += (self.frc?.sections?[sectionIndex].numberOfObjects)!
+            guard let numberOfObjects = frc?.sections?[sectionIndex].numberOfObjects else {
+                return
+            }
+            sortedIndex += numberOfObjects
 
             if sectionIndex == sourceIndexPath.section {
                 sortedIndex -= 1
             }
         }
-
+        
         fetchedTasks.insert(task, at: sortedIndex)
-
+        
         for(index, task) in fetchedTasks.enumerated() {
-            let tmpTask = task as! TLITask
-            tmpTask.position = fetchedTasks.count-index as NSNumber
+            task.position = fetchedTasks.count - index as NSNumber
         }
     }
 
@@ -455,10 +463,16 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         // Disable fetched results controller
 
         self.ignoreNextUpdates = true
-        let task = self.taskAtIndexPath(sourceIndexPath)!
-        updateTask(task, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
-        // swiftlint:disable force_try
-        try! managedObjectContext.save()
+        
+        guard let task = taskAtIndexPath(sourceIndexPath) else {
+            return
+        }
+        
+        updateTasks(task,
+                    sourceIndexPath: sourceIndexPath,
+                    destinationIndexPath: destinationIndexPath)
+       
+        try? managedObjectContext.save()
     }
 
     @objc func onChangeSize(_ notification: Notification) {
