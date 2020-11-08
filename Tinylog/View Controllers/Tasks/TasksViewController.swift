@@ -485,10 +485,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TaskTableViewCell = tableView.dequeue(for: indexPath)
-        cell.checkBoxButton.addTarget(self,
-                                      action: #selector(TasksViewController.toggleComplete(_:)),
-                                      for: UIControl.Event.touchUpInside)
-        cell.taskLabel.delegate = self
+        cell.delegate = self
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -499,44 +496,6 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         DispatchQueue.main.async {
             self.editTask(task, indexPath: indexPath)
         }
-    }
-
-    @objc func toggleComplete(_ button: CheckBoxButton) {
-        guard let list = list else {
-            return
-        }
-        
-        let button: CheckBoxButton = button as CheckBoxButton
-        let indexPath: IndexPath? = self.tableView?.indexPath(for: button.tableViewCell!)!
-
-        if !(indexPath != nil) {
-            return
-        }
-
-        let task: TLITask = self.frc?.object(at: indexPath!) as! TLITask
-
-        if task.completed?.boolValue == true {
-            task.completed = NSNumber(value: false as Bool)
-            task.checkBoxValue = "false"
-            task.completedAt = nil
-        } else {
-            task.completed = NSNumber(value: true as Bool)
-            task.checkBoxValue = "true"
-            task.completedAt = Date()
-        }
-
-        task.updatedAt = Date()
-
-        let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
-        animation.fromValue = NSNumber(value: 1.4 as Float)
-        animation.toValue = NSNumber(value: 1.0 as Float)
-        animation.duration = 0.2
-        animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 1.3, 1, 1)
-        button.layer.add(animation, forKey: "bounceAnimation")
-
-        try? managedObjectContext.save()
-
-        updateFooterInfoText(list)
     }
 
     // MARK: AddTaskViewDelegate
@@ -665,10 +624,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 }
 
-extension TasksViewController: NantesLabelDelegate {
-    func attributedLabel(_ label: NantesLabel, didSelectLink link: URL) {
-        UIApplication.shared.open(link,
-                                  options: [:],
-                                  completionHandler: nil)
+extension TasksViewController: TaskTableViewCellDelegate {
+    func taskTableViewCellDidTapCheckBoxButton(_ cell: TaskTableViewCell,
+                                               list: TLIList) {
+        updateFooterInfoText(list)
     }
 }

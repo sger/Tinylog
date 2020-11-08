@@ -9,6 +9,11 @@
 import UIKit
 import Nantes
 
+protocol TaskTableViewCellDelegate: AnyObject {
+    func taskTableViewCellDidTapCheckBoxButton(_ cell: TaskTableViewCell,
+                                               list: TLIList)
+}
+
 final class TaskTableViewCell: GenericTableViewCell {
 
     private let kLabelHorizontalInsets: CGFloat = 60.0
@@ -18,6 +23,7 @@ final class TaskTableViewCell: GenericTableViewCell {
     let taskLabel: NantesLabel = NantesLabel(frame: .zero)
     let checkBoxButton: CheckBoxButton = CheckBoxButton()
     var managedObjectContext: NSManagedObjectContext!
+    weak var delegate: TaskTableViewCellDelegate?
 
     var task: TLITask? {
         didSet {
@@ -38,6 +44,8 @@ final class TaskTableViewCell: GenericTableViewCell {
             checkBoxButton.circleView?.layer.borderColor = UIColor(rgba: color).cgColor
             checkBoxButton.checkMarkIcon?.image = checkBoxButton.checkMarkIcon?.image?.imageWithColor(
                 UIColor(rgba: color))
+            checkBoxButton.addTarget(self, action: #selector(toggleComplete(_:)),
+                                     for: .touchUpInside)
 
             updateFonts()
 
@@ -69,6 +77,7 @@ final class TaskTableViewCell: GenericTableViewCell {
         selectionStyle = .none
 
         taskLabel.lineBreakMode = .byTruncatingTail
+        taskLabel.delegate = self
         taskLabel.numberOfLines = 0
         taskLabel.textAlignment = .left
         taskLabel.textColor = UIColor(named: "textColor")
@@ -107,5 +116,40 @@ final class TaskTableViewCell: GenericTableViewCell {
         contentView.setNeedsLayout()
         contentView.layoutIfNeeded()
         taskLabel.preferredMaxLayoutWidth = taskLabel.frame.width
+    }
+    
+    @objc func toggleComplete(_ button: CheckBoxButton) {
+        if task?.completed?.boolValue == true {
+            task?.completed = NSNumber(value: false)
+            task?.completedAt = nil
+        } else {
+            task?.completed = NSNumber(value: true)
+            task?.completedAt = Date()
+        }
+        
+        task?.updatedAt = Date()
+        
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = NSNumber(value: 1.4)
+        animation.toValue = NSNumber(value: 1.0)
+        animation.duration = 0.2
+        animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 1.3, 1, 1)
+        button.layer.add(animation, forKey: "bounceAnimation")
+        
+        try? managedObjectContext.save()
+        
+        guard let list = task?.list else {
+            return
+        }
+        
+        delegate?.taskTableViewCellDidTapCheckBoxButton(self, list: list)
+    }
+}
+
+extension TaskTableViewCell: NantesLabelDelegate {
+    func attributedLabel(_ label: NantesLabel, didSelectLink link: URL) {
+        UIApplication.shared.open(link,
+                                  options: [:],
+                                  completionHandler: nil)
     }
 }
