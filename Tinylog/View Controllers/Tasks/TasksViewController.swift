@@ -498,7 +498,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     // MARK: AddTaskViewDelegate
 
     func addTaskViewDidBeginEditing(_ addTaskView: AddTaskView) {
-        displayTransparentLayer()
+        showTransparentLayer()
     }
 
     func addTaskViewDidEndEditing(_ addTaskView: AddTaskView) {
@@ -541,24 +541,26 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
     }
 
-    private func displayTransparentLayer() {
-        self.tableView?.isScrollEnabled = false
-        let addTransparentLayer: UIView = self.addTransparentLayer
-        UIView.animate(withDuration: 0.3, delay: 0.0,
-            options: .allowUserInteraction, animations: {
-                addTransparentLayer.alpha = 1.0
-            }, completion: nil)
+    private func showTransparentLayer() {
+        tableView?.isScrollEnabled = false
+                
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.0,
+                       options: .allowUserInteraction,
+                       animations: {
+                        self.addTransparentLayer.alpha = 1.0
+                       }, completion: nil)
     }
 
     private func hideTransparentLayer() {
-        self.tableView?.isScrollEnabled = true
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            options: UIView.AnimationOptions.allowUserInteraction,
-            animations: {
-                self.addTransparentLayer.alpha = 0.0
-            }, completion: nil)
+        tableView?.isScrollEnabled = true
+        
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .allowUserInteraction,
+                       animations: {
+                        self.addTransparentLayer.alpha = 0.0
+                       }, completion: nil)
     }
 
     func resetAddTaskView() {
