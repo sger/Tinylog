@@ -8,7 +8,7 @@
 
 import UIKit
 import Nantes
-// swiftlint:disable force_unwrapping
+/// swiftlint:disable force_unwrapping
 protocol TasksViewControllerDelegate: AnyObject {
     func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?)
 }
@@ -413,28 +413,27 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
     }
 
     func taskAtIndexPath(_ indexPath: IndexPath) -> TLITask? {
-        if let task = self.frc?.object(at: indexPath) as? TLITask {
-            return task
+        guard let task = frc?.object(at: indexPath) as? TLITask else {
+            return nil
         }
-        return nil
+        return task
     }
 
-    // swiftlint:disable force_cast
     func updateTasks(_ task: TLITask?,
                      sourceIndexPath: IndexPath,
                      destinationIndexPath: IndexPath) {
         guard let task = task else {
             return
         }
-        
+
         guard var fetchedTasks: [TLITask] = frc?.fetchedObjects as? [TLITask] else {
             return
         }
-        
+
         fetchedTasks = fetchedTasks.filter { $0 != task }
-        
+
         var sortedIndex = destinationIndexPath.row
-        
+
         for sectionIndex in 0..<destinationIndexPath.section {
             guard let numberOfObjects = frc?.sections?[sectionIndex].numberOfObjects else {
                 return
@@ -445,9 +444,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                 sortedIndex -= 1
             }
         }
-        
+
         fetchedTasks.insert(task, at: sortedIndex)
-        
+
         for(index, task) in fetchedTasks.enumerated() {
             task.position = fetchedTasks.count - index as NSNumber
         }
@@ -463,25 +462,27 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         // Disable fetched results controller
 
         self.ignoreNextUpdates = true
-        
+
         guard let task = taskAtIndexPath(sourceIndexPath) else {
             return
         }
-        
+
         updateTasks(task,
                     sourceIndexPath: sourceIndexPath,
                     destinationIndexPath: destinationIndexPath)
-       
+
         try? managedObjectContext.save()
     }
 
     @objc func onChangeSize(_ notification: Notification) {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
-        let taskTableViewCell: TaskTableViewCell = cell as! TaskTableViewCell
+        guard let task: TLITask = self.frc?.object(at: indexPath) as? TLITask,
+              let taskTableViewCell = cell as? TaskTableViewCell else {
+            return
+        }
         taskTableViewCell.managedObjectContext = managedObjectContext
         taskTableViewCell.task = task
     }
