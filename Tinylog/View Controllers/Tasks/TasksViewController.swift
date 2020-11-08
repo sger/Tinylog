@@ -45,25 +45,22 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         return tasksFooterView
     }()
 
-    private lazy var addTransparentLayer: UIView = {
-        let addTransparentLayer: UIView = UIView()
-        addTransparentLayer.autoresizingMask = [
-            UIView.AutoresizingMask.flexibleWidth,
-            UIView.AutoresizingMask.flexibleBottomMargin]
-        addTransparentLayer.backgroundColor = UIColor(named: "transparencyLayerColor")
-        addTransparentLayer.alpha = 0.0
+    private lazy var transparentLayer: UIView = {
+        let transparentLayer: UIView = UIView()
+        transparentLayer.backgroundColor = UIColor(named: "transparencyLayerColor")
+        transparentLayer.alpha = 0.0
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(TasksViewController.transparentLayerTapped(_:)))
-        addTransparentLayer.addGestureRecognizer(tapGestureRecognizer)
-        return addTransparentLayer
+        transparentLayer.addGestureRecognizer(tapGestureRecognizer)
+        return transparentLayer
     }()
 
     private lazy var noTasksLabel: UILabel = {
         let noTasksLabel: UILabel = UILabel()
         noTasksLabel.font = UIFont.regularFontWithSize(18.0)
         noTasksLabel.textColor = UIColor(named: "textColor")
-        noTasksLabel.text = "Tap text field to create a new task."
+        noTasksLabel.text = localizedString(key: "Create_task")
         noTasksLabel.isHidden = true
         return noTasksLabel
     }()
@@ -73,7 +70,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         noListSelected.font = UIFont.regularFontWithSize(16.0)
         noListSelected.textColor = UIColor(named: "textColor")
         noListSelected.textAlignment = NSTextAlignment.center
-        noListSelected.text = "No List Selected"
+        noListSelected.text = localizedString(key: "No_list_selected")
         noListSelected.sizeToFit()
         noListSelected.isHidden = true
         return noListSelected
@@ -160,7 +157,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
             make.center.equalToSuperview()
         })
 
-        addTransparentLayer.snp.makeConstraints({ (make) in
+        transparentLayer.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(AddTaskView.height)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-60)
             make.left.equalTo(view)
@@ -226,7 +223,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         fetchRequestTotal.sortDescriptors = [positionDescriptor]
-        fetchRequestTotal.predicate  = NSPredicate(format: "archivedAt = nil AND list = %@", list)
+        fetchRequestTotal.predicate = NSPredicate(format: "archivedAt = nil AND list = %@", list)
         fetchRequestTotal.fetchBatchSize = 20
 
         do {
@@ -244,12 +241,14 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
             let total: Int = results.count - resultsCompleted.count
 
             if total == results.count {
-                tasksFooterView.updateInfoLabel("All tasks completed")
+                tasksFooterView.updateInfoLabel(localizedString(key: "All_tasks_completed"))
             } else {
-                if total > 1 {
-                    tasksFooterView.updateInfoLabel("\(total) completed tasks")
+                if total == 0 {
+                    tasksFooterView.updateInfoLabel(localizedString(key: "All_tasks_uncompleted"))
+                } else if total > 1 {
+                    tasksFooterView.updateInfoLabel(String(format: localizedString(key: "Completed_tasks"), String(total)))
                 } else {
-                    tasksFooterView.updateInfoLabel("\(total) completed task")
+                    tasksFooterView.updateInfoLabel(String(format: localizedString(key: "Completed_task"), String(total)))
                 }
             }
         } catch let error as NSError {
@@ -291,7 +290,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         view.addSubview(noListSelected)
         view.addSubview(noTasksLabel)
         view.addSubview(tasksFooterView)
-        view.addSubview(addTransparentLayer)
+        view.addSubview(transparentLayer)
 
         view.setNeedsUpdateConstraints()
     }
@@ -303,9 +302,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         } else {
             noTasksLabel.isHidden = true
         }
-        self.tableView?.reloadData()
+        
+        tableView?.reloadData()
 
-        // TODO remove this reference
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
         if IS_IPAD {
@@ -541,7 +540,6 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                 task.list = list
                 task.position = NSNumber(value: results.count + 1 as Int)
                 task.createdAt = Date()
-                task.checkBoxValue = "false"
                 task.completed = false
 
                 try? managedObjectContext.save()
@@ -565,7 +563,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                        delay: 0.0,
                        options: .allowUserInteraction,
                        animations: {
-                        self.addTransparentLayer.alpha = 1.0
+                        self.transparentLayer.alpha = 1.0
                        }, completion: nil)
     }
 
@@ -576,7 +574,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
                        delay: 0,
                        options: .allowUserInteraction,
                        animations: {
-                        self.addTransparentLayer.alpha = 0.0
+                        self.transparentLayer.alpha = 0.0
                        }, completion: nil)
     }
 
