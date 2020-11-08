@@ -41,7 +41,7 @@ extension TLITask {
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
         fetchRequest.sortDescriptors = [positionDescriptor]
         fetchRequest.predicate = NSPredicate(format: "archivedAt = nil AND completed = %@ AND list = %@",
-                                             NSNumber(value: true as Bool), list)
+                                             NSNumber(value: true), list)
         fetchRequest.fetchBatchSize = 20
 
         do {
