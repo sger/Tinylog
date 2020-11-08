@@ -17,10 +17,6 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
 
     weak var delegate: TasksViewControllerDelegate?
 
-    private let managedObjectContext: NSManagedObjectContext
-
-    private var viewModel: TasksViewModel?
-
     var list: TLIList? {
         didSet {
             guard let list = list else {
@@ -41,7 +37,8 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         }
     }
 
-    private var currentIndexPath: IndexPath?
+    private let managedObjectContext: NSManagedObjectContext
+    private var viewModel: TasksViewModel?
 
     private var tasksFooterView: TasksFooterView = {
         let tasksFooterView = TasksFooterView()
@@ -586,9 +583,9 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 
-    func onClose(_ editTaskViewController: EditTaskViewController, indexPath: IndexPath) {
-        self.currentIndexPath = indexPath
-        self.tableView?.reloadData()
+    func onClose(_ editTaskViewController: EditTaskViewController,
+                 indexPath: IndexPath) {
+        tableView?.reloadData()
     }
 
     @objc private func exportTasks(_ sender: UIButton) {
