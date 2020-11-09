@@ -302,7 +302,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         } else {
             noTasksLabel.isHidden = true
         }
-        
+
         tableView?.reloadData()
 
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
