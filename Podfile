@@ -6,15 +6,14 @@ target 'Tinylog' do
   inhibit_all_warnings!
 
   # Pods for Tinylog
-  pod 'TTTAttributedLabel'
 	pod 'SVProgressHUD'
-	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"
   pod 'SwiftLint'
   pod 'SnapKit', '~> 5.0.0'
   pod 'ReachabilitySwift'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'Nantes'
 
   target 'TinylogTests' do
     inherit! :search_paths

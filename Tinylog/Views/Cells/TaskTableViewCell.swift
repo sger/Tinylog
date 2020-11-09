@@ -5,83 +5,68 @@
 //  Created by Spiros Gerokostas on 18/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
+
 import UIKit
-import TTTAttributedLabel
+import Nantes
+
+protocol TaskTableViewCellDelegate: AnyObject {
+    func taskTableViewCellDidTapCheckBoxButton(_ cell: TaskTableViewCell,
+                                               list: TLIList)
+}
 
 final class TaskTableViewCell: GenericTableViewCell {
 
-    let kLabelHorizontalInsets: CGFloat = 60.0
-    let kLabelVerticalInsets: CGFloat = 10.0
-    let taskLabel: TTTAttributedLabel = TTTAttributedLabel(frame: CGRect.zero)
+    private let kLabelHorizontalInsets: CGFloat = 60.0
+    private let kLabelVerticalInsets: CGFloat = 10.0
+    private var checkMarkIcon: UIImageView?
 
+    let taskLabel: NantesLabel = NantesLabel(frame: .zero)
     let checkBoxButton: CheckBoxButton = CheckBoxButton()
-    var checkMarkIcon: UIImageView?
     var managedObjectContext: NSManagedObjectContext!
+    weak var delegate: TaskTableViewCellDelegate?
 
-    var currentTask: TLITask? {
+    var task: TLITask? {
         didSet {
-
-            // Fetch all objects from list
-
-            let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-            fetchRequestTotal.sortDescriptors = [positionDescriptor]
-            fetchRequestTotal.predicate  = NSPredicate(
-                format: "archivedAt = nil AND list = %@", currentTask!.list!)
-            fetchRequestTotal.fetchBatchSize = 20
-
-            do {
-                let results: NSArray = try managedObjectContext.fetch(fetchRequestTotal) as NSArray
-
-                let fetchRequestCompleted: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
-                    entityName: "Task")
-                fetchRequestCompleted.sortDescriptors = [positionDescriptor]
-                fetchRequestCompleted.predicate  = NSPredicate(
-                    format: "archivedAt = nil AND completed = %@ AND list = %@",
-                    NSNumber(value: true as Bool), currentTask!.list!)
-                fetchRequestCompleted.fetchBatchSize = 20
-                let resultsCompleted: NSArray = try managedObjectContext.fetch(
-                    fetchRequestCompleted) as NSArray
-
-                let total: Int = results.count - resultsCompleted.count
-                currentTask?.list!.total = total as NSNumber?
-
-                checkBoxButton.circleView?.layer.borderColor = UIColor(
-                    rgba: currentTask!.list!.color!).cgColor
-                checkBoxButton.checkMarkIcon?.image = checkBoxButton.checkMarkIcon?.image?.imageWithColor(
-                    UIColor(rgba: currentTask!.list!.color!))
-            } catch let error as NSError {
-                fatalError(error.localizedDescription)
+            guard let task = task,
+                  let list = task.list,
+                  let color = list.color else {
+                return
             }
+
+            let numberOfTasks = TLITask.numberOfUnarchivedTasks(with: managedObjectContext,
+                                                      list: list)
+            let numberOfCompletedTasks = TLITask.numberOfUnarchivedCompletedTasks(with: managedObjectContext,
+                                                                        list: list)
+            let totalTasks = numberOfTasks - numberOfCompletedTasks
+
+            list.total = totalTasks as NSNumber
+
+            checkBoxButton.circleView?.layer.borderColor = UIColor(rgba: color).cgColor
+            checkBoxButton.checkMarkIcon?.image = checkBoxButton.checkMarkIcon?.image?.imageWithColor(
+                UIColor(rgba: color))
+            checkBoxButton.addTarget(self, action: #selector(toggleComplete(_:)),
+                                     for: .touchUpInside)
 
             updateFonts()
 
-            taskLabel.activeLinkAttributes = [
-                kCTForegroundColorAttributeName as AnyHashable: UIColor(
-                    rgba: currentTask!.list!.color!)]
+            taskLabel.activeLinkAttributes = [.foregroundColor: UIColor(rgba: color)]
 
-            if let boolValue = currentTask?.completed?.boolValue {
-                if boolValue {
-                    checkBoxButton.checkMarkIcon!.isHidden = false
-                    checkBoxButton.alpha = 0.5
-                    taskLabel.alpha = 0.5
-                    taskLabel.linkAttributes = [
-                        kCTForegroundColorAttributeName as AnyHashable: UIColor.lightGray]
-                } else {
-                    checkBoxButton.checkMarkIcon!.isHidden = true
-                    checkBoxButton.alpha = 1.0
-                    taskLabel.alpha = 1.0
-                    taskLabel.linkAttributes = [
-                        kCTForegroundColorAttributeName as AnyHashable: UIColor(
-                            rgba: currentTask!.list!.color!)]
-                }
+            if let boolValue = task.completed?.boolValue, boolValue {
+                checkBoxButton.checkMarkIcon?.isHidden = false
+                checkBoxButton.alpha = 0.5
+                taskLabel.alpha = 0.5
+                taskLabel.linkAttributes = [.foregroundColor: UIColor.lightGray]
+            } else {
+                checkBoxButton.checkMarkIcon?.isHidden = true
+                checkBoxButton.alpha = 1.0
+                taskLabel.alpha = 1.0
+                taskLabel.linkAttributes = [.foregroundColor: UIColor(rgba: color)]
             }
 
-            updateAttributedText()
+            taskLabel.text = task.displayLongText
 
-            self.setNeedsUpdateConstraints()
-            self.updateConstraintsIfNeeded()
+            setNeedsUpdateConstraints()
+            updateConstraintsIfNeeded()
         }
     }
 
@@ -92,6 +77,7 @@ final class TaskTableViewCell: GenericTableViewCell {
         selectionStyle = .none
 
         taskLabel.lineBreakMode = .byTruncatingTail
+        taskLabel.delegate = self
         taskLabel.numberOfLines = 0
         taskLabel.textAlignment = .left
         taskLabel.textColor = UIColor(named: "textColor")
@@ -122,37 +108,48 @@ final class TaskTableViewCell: GenericTableViewCell {
 
     override func updateFonts() {
         super.updateFonts()
-
         taskLabel.font = tinylogFont
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        self.contentView.setNeedsLayout()
-        self.contentView.layoutIfNeeded()
-
+        contentView.setNeedsLayout()
+        contentView.layoutIfNeeded()
         taskLabel.preferredMaxLayoutWidth = taskLabel.frame.width
     }
 
-    func updateAttributedText() {
-        taskLabel.setText(currentTask?.displayLongText) {
-            (mutableAttributedString) -> NSMutableAttributedString? in
-            return mutableAttributedString
+    @objc func toggleComplete(_ button: CheckBoxButton) {
+        if task?.completed?.boolValue == true {
+            task?.completed = NSNumber(value: false)
+            task?.completedAt = nil
+        } else {
+            task?.completed = NSNumber(value: true)
+            task?.completedAt = Date()
         }
-        if let textTaskLabel = taskLabel.text, let total = textTaskLabel as? NSString {
-            let words: [String] = total.components(separatedBy: " ")
-            for word in words {
-                let character = word as NSString
-                if character.hasPrefix("http://") || character.hasPrefix("https://") {
-                    // swiftlint:disable legacy_constructor
-                    let value: NSString = character.substring(
-                        with: NSMakeRange(0, character.length)) as NSString
-                    let range: NSRange = total.range(of: character as String)
-                    let url: URL = URL(string: NSString(format: "%@", value) as String)!
-                    taskLabel.addLink(to: url, with: range)
-                }
-            }
+
+        task?.updatedAt = Date()
+
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fromValue = NSNumber(value: 1.4)
+        animation.toValue = NSNumber(value: 1.0)
+        animation.duration = 0.2
+        animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 1.3, 1, 1)
+        button.layer.add(animation, forKey: "bounceAnimation")
+
+        try? managedObjectContext.save()
+
+        guard let list = task?.list else {
+            return
         }
+
+        delegate?.taskTableViewCellDidTapCheckBoxButton(self, list: list)
+    }
+}
+
+extension TaskTableViewCell: NantesLabelDelegate {
+    func attributedLabel(_ label: NantesLabel, didSelectLink link: URL) {
+        UIApplication.shared.open(link,
+                                  options: [:],
+                                  completionHandler: nil)
     }
 }

@@ -15,7 +15,9 @@
 		5609F649226B4DCB00F6AF0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5609F647226B4DCB00F6AF0E /* Localizable.strings */; };
 		5609F65B226B552300F6AF0E /* XCTestCase+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */; };
 		5609F65D226B56A900F6AF0E /* LocalizedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */; };
-		56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataManager.swift */; };
+		560ABE9B2554749F008EEA8C /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560ABE9A2554749F008EEA8C /* TasksViewModel.swift */; };
+		56119AED226F90EA00F8D798 /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56119AEC226F90EA00F8D798 /* CoreDataContext.swift */; };
+		56131E572557009A00C62ACE /* TasksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56131E562557009A00C62ACE /* TasksViewModelTests.swift */; };
 		561D10A32532F2E9009D2BB4 /* MenuColorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D10A22532F2E9009D2BB4 /* MenuColorsViewModel.swift */; };
 		561D10A92532F5E6009D2BB4 /* MenuColorsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D10A82532F5E6009D2BB4 /* MenuColorsViewModelTests.swift */; };
 		561D10B1253303F1009D2BB4 /* Array+Tinylog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561D10B0253303F1009D2BB4 /* Array+Tinylog.swift */; };
@@ -150,7 +152,9 @@
 		5609F64A226B4E0200F6AF0E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5609F65A226B552300F6AF0E /* XCTestCase+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Environment.swift"; sourceTree = "<group>"; };
 		5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringTests.swift; sourceTree = "<group>"; };
-		56119AEC226F90EA00F8D798 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		560ABE9A2554749F008EEA8C /* TasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
+		56119AEC226F90EA00F8D798 /* CoreDataContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataContext.swift; sourceTree = "<group>"; };
+		56131E562557009A00C62ACE /* TasksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModelTests.swift; sourceTree = "<group>"; };
 		561D10A22532F2E9009D2BB4 /* MenuColorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuColorsViewModel.swift; sourceTree = "<group>"; };
 		561D10A82532F5E6009D2BB4 /* MenuColorsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuColorsViewModelTests.swift; sourceTree = "<group>"; };
 		561D10B0253303F1009D2BB4 /* Array+Tinylog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Tinylog.swift"; sourceTree = "<group>"; };
@@ -324,20 +328,37 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		560ABE9925547490008EEA8C /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				560ABE9A2554749F008EEA8C /* TasksViewModel.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
 		56119AEB226F90EA00F8D798 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				56B7B7D7227EBCEE003BCAC3 /* TLISyncManager.h */,
 				56B7B7D8227EBCEE003BCAC3 /* TLISyncManager.m */,
-				56119AEC226F90EA00F8D798 /* CoreDataManager.swift */,
+				56119AEC226F90EA00F8D798 /* CoreDataContext.swift */,
 				5606BF852288690C00AD0F5B /* ReachabilityManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		56131E552557008800C62ACE /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				56131E562557009A00C62ACE /* TasksViewModelTests.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
 		561D10A12532F2D5009D2BB4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				560ABE9925547490008EEA8C /* Tasks */,
 				561D10A22532F2E9009D2BB4 /* MenuColorsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -346,6 +367,7 @@
 		561D10A72532F5C7009D2BB4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				56131E552557008800C62ACE /* Tasks */,
 				561D10A82532F5E6009D2BB4 /* MenuColorsViewModelTests.swift */,
 			);
 			path = ViewModels;
@@ -384,7 +406,6 @@
 		5628E8C51E85898700AAFD20 /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
-				561D10A12532F2D5009D2BB4 /* ViewModels */,
 				5638FCCC2274501700CB4071 /* Application */,
 				5628E8CD1E85898700AAFD20 /* Assets.xcassets */,
 				56487F8F1F644E150080192C /* Configs */,
@@ -402,6 +423,7 @@
 				566536EF232FF2AD003F4C86 /* Tinylog.xcdatamodeld */,
 				5638FC9C22744F8800CB4071 /* Utils */,
 				5638FC6222744D8200CB4071 /* View Controllers */,
+				561D10A12532F2D5009D2BB4 /* ViewModels */,
 				5638FC2F22744CDC00CB4071 /* Views */,
 			);
 			path = Tinylog;
@@ -410,19 +432,19 @@
 		5628E8DA1E85898700AAFD20 /* TinylogTests */ = {
 			isa = PBXGroup;
 			children = (
-				561D10A72532F5C7009D2BB4 /* ViewModels */,
-				561FC06F231ACDB80059ADA8 /* Mocks */,
-				562E74FF2319593A00316E23 /* Stubs */,
 				562E74FB2319592400316E23 /* BaseCoordinatorTests.swift */,
 				56EFE834227D9F4A0056B072 /* Core Data */,
-				5638FC2C227443C800CB4071 /* View Controllers */,
-				5609F659226B54FC00F6AF0E /* Helpers */,
 				5628E8DB1E85898700AAFD20 /* EnvironmentTests.swift */,
+				56892690226C767A00D952A6 /* FindColorByNameTests.swift */,
+				5609F659226B54FC00F6AF0E /* Helpers */,
 				5628E8DD1E85898700AAFD20 /* Info.plist */,
 				5609F65C226B56A900F6AF0E /* LocalizedStringTests.swift */,
-				56892690226C767A00D952A6 /* FindColorByNameTests.swift */,
+				561FC06F231ACDB80059ADA8 /* Mocks */,
 				561FC072231ACE940059ADA8 /* RouterTests.swift */,
+				562E74FF2319593A00316E23 /* Stubs */,
 				56E178232484FA5D00B8D86C /* TestAppDelegate.swift */,
+				5638FC2C227443C800CB4071 /* View Controllers */,
+				561D10A72532F5C7009D2BB4 /* ViewModels */,
 			);
 			path = TinylogTests;
 			sourceTree = "<group>";
@@ -1021,12 +1043,11 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Nantes/Nantes.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SGBackgroundView/SGBackgroundView.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1038,12 +1059,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nantes.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SGBackgroundView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1094,7 +1114,7 @@
 				5638FC7A22744D8200CB4071 /* SettingsTableViewController.swift in Sources */,
 				5638FC8222744D8200CB4071 /* ArchivedListsViewController.swift in Sources */,
 				5638FC5722744CDC00CB4071 /* CheckBoxButton.swift in Sources */,
-				56119AED226F90EA00F8D798 /* CoreDataManager.swift in Sources */,
+				56119AED226F90EA00F8D798 /* CoreDataContext.swift in Sources */,
 				5638FC4E22744CDC00CB4071 /* TaskTableViewCell.swift in Sources */,
 				5638FC5522744CDC00CB4071 /* ArchiveButton.swift in Sources */,
 				561D10A32532F2E9009D2BB4 /* MenuColorsViewModel.swift in Sources */,
@@ -1107,6 +1127,7 @@
 				5638FCC62274500A00CB4071 /* UIColor+Tinylog.swift in Sources */,
 				561D10B1253303F1009D2BB4 /* Array+Tinylog.swift in Sources */,
 				5638FC6022744CDC00CB4071 /* KeyboardBar.swift in Sources */,
+				560ABE9B2554749F008EEA8C /* TasksViewModel.swift in Sources */,
 				5638FC8622744D8200CB4071 /* SetupViewController.swift in Sources */,
 				5638FC6122744CDC00CB4071 /* AddTaskView.swift in Sources */,
 				56F746082316AF75005A1D41 /* ApplicationCoordinator.swift in Sources */,
@@ -1155,6 +1176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				561FC071231ACDCA0059ADA8 /* RouterMock.swift in Sources */,
+				56131E572557009A00C62ACE /* TasksViewModelTests.swift in Sources */,
 				5628E8DC1E85898700AAFD20 /* EnvironmentTests.swift in Sources */,
 				5638FC2E227443E600CB4071 /* SetupViewControllerTests.swift in Sources */,
 				56892691226C767A00D952A6 /* FindColorByNameTests.swift in Sources */,

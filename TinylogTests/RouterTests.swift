@@ -11,14 +11,14 @@ import XCTest
 
 class RouterTests: XCTestCase {
     
-    private var coreDataManager: CoreDataManager!
+    private var coreDataManager: CoreDataContext!
     private var routerMock: RouterMock!
     private var listsViewController: ListsViewController!
     private var tasksViewController: TasksViewController!
 
     override func setUp() {
         super.setUp()
-        coreDataManager = CoreDataManager(model: "Tinylog", memory: true)
+        coreDataManager = CoreDataContext(model: "Tinylog", memory: true)
         
         let userDefaults = MockUserDefaults()
         userDefaults.set(21.0, forKey: EnvUserDefaults.fontSize)

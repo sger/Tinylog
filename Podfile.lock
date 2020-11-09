@@ -73,26 +73,24 @@ PODS:
     - nanopb/encode (= 2.30906.0)
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
+  - Nantes (0.1.1)
   - PromisesObjC (1.2.11)
   - ReachabilitySwift (5.0.0)
-  - SGBackgroundView (1.3)
   - SnapKit (5.0.1)
   - SnapshotTesting (1.8.2)
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.40.3)
-  - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - Ensembles (~> 1.0)
   - Firebase/Analytics
   - Firebase/Crashlytics
+  - Nantes
   - ReachabilitySwift
-  - SGBackgroundView
   - SnapKit (~> 5.0.0)
   - SnapshotTesting (~> 1.8.1)
   - SVProgressHUD
   - SwiftLint
-  - TTTAttributedLabel
 
 SPEC REPOS:
   trunk:
@@ -107,14 +105,13 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - nanopb
+    - Nantes
     - PromisesObjC
     - ReachabilitySwift
-    - SGBackgroundView
     - SnapKit
     - SnapshotTesting
     - SVProgressHUD
     - SwiftLint
-    - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Ensembles: 6f04632bf2aa35cc69f8ffbc259396afe2f0501e
@@ -128,15 +125,14 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 6ce8004a961db1b905740d7be106c61ba7e89c21
   GoogleUtilities: ffb2f4159f2c897c6e8992bd7fbcdef8a300589c
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
+  Nantes: e11fbe0b6214de8c09cc8b763dbf61f70fbbf885
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  SGBackgroundView: 3dbf380b9a54eeedfb6176ad750055d7d47e84eb
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SnapshotTesting: 38947050d13960d57a4a9c166fcf51bca7d56970
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
-  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: f895f287551917ae24d029ce8f74405a11e7a3d9
+PODFILE CHECKSUM: a1f6b0dda98bf2cc4a418d74570ed7658095f037
 
 COCOAPODS: 1.10.0

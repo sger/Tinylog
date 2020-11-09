@@ -5,132 +5,85 @@
 //  Created by Spiros Gerokostas on 18/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_unwrapping
+
 import UIKit
-import TTTAttributedLabel
-// Consider refactoring the code to use the non-optional operators.
-private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-// Consider refactoring the code to use the non-optional operators.
-private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
+import Nantes
 
 protocol TasksViewControllerDelegate: AnyObject {
     func tasksViewControllerDidTapArchives(_ viewController: TasksViewController, list: TLIList?)
 }
 
-final class TasksViewController: CoreDataTableViewController,
-    AddTaskViewDelegate,
-    TTTAttributedLabelDelegate,
-    EditTaskViewControllerDelegate {
+final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegate, EditTaskViewControllerDelegate {
 
     weak var delegate: TasksViewControllerDelegate?
 
-    let kCellIdentifier = "TaskTableViewCell"
-    fileprivate let managedObjectContext: NSManagedObjectContext
-
     var list: TLIList? {
         didSet {
-
-            if let list = list {
-                noListSelected?.isHidden = true
-                title = list.title
-                configureFetch()
-
-                if self.checkForEmptyResults() {
-                    noTasksLabel?.isHidden = false
-                } else {
-                    noTasksLabel?.isHidden = true
-                }
-                updateFooterInfoText(list)
-            } else {
-                noListSelected?.isHidden = false
+            guard let list = list else {
+                noListSelected.isHidden = false
+                return
             }
+
+            noListSelected.isHidden = true
+            title = list.title
+            configureFetch()
+
+            if checkForEmptyResults() {
+                noTasksLabel.isHidden = false
+            } else {
+                noTasksLabel.isHidden = true
+            }
+            updateFooterInfoText(list)
         }
     }
 
-    var currentIndexPath: IndexPath?
+    private let managedObjectContext: NSManagedObjectContext
+    private var viewModel: TasksViewModel?
 
-    var tasksFooterView: TasksFooterView = {
+    private var tasksFooterView: TasksFooterView = {
         let tasksFooterView = TasksFooterView()
         return tasksFooterView
     }()
 
-    var orientation: String = "portrait"
-    var enableDidSelectRowAtIndexPath = true
-
-    lazy var addTransparentLayer: UIView? = {
-        let addTransparentLayer: UIView = UIView()
-        addTransparentLayer.autoresizingMask = [
-            UIView.AutoresizingMask.flexibleWidth,
-            UIView.AutoresizingMask.flexibleBottomMargin]
-        addTransparentLayer.backgroundColor = UIColor(named: "transparencyLayerColor")
-        addTransparentLayer.alpha = 0.0
+    private lazy var transparentLayer: UIView = {
+        let transparentLayer: UIView = UIView()
+        transparentLayer.backgroundColor = UIColor(named: "transparencyLayerColor")
+        transparentLayer.alpha = 0.0
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(TasksViewController.transparentLayerTapped(_:)))
-        addTransparentLayer.addGestureRecognizer(tapGestureRecognizer)
-        return addTransparentLayer
+        transparentLayer.addGestureRecognizer(tapGestureRecognizer)
+        return transparentLayer
     }()
 
-    lazy var noTasksLabel: UILabel? = {
+    private lazy var noTasksLabel: UILabel = {
         let noTasksLabel: UILabel = UILabel()
         noTasksLabel.font = UIFont.regularFontWithSize(18.0)
         noTasksLabel.textColor = UIColor(named: "textColor")
-        noTasksLabel.text = "Tap text field to create a new task."
+        noTasksLabel.text = localizedString(key: "Create_task")
         noTasksLabel.isHidden = true
         return noTasksLabel
     }()
 
-    lazy var noListSelected: UILabel? = {
+    private lazy var noListSelected: UILabel = {
         let noListSelected: UILabel = UILabel()
         noListSelected.font = UIFont.regularFontWithSize(16.0)
         noListSelected.textColor = UIColor(named: "textColor")
         noListSelected.textAlignment = NSTextAlignment.center
-        noListSelected.text = "No List Selected"
+        noListSelected.text = localizedString(key: "No_list_selected")
         noListSelected.sizeToFit()
         noListSelected.isHidden = true
         return noListSelected
     }()
 
-    lazy var addTaskView: AddTaskView? = {
-        let header: AddTaskView = AddTaskView(
-            frame: CGRect(
-                x: 0.0,
-                y: 0.0,
-                width: self.tableView!.bounds.size.width,
-                height: AddTaskView.height))
-        header.closeButton.addTarget(
-            self,
-            action: #selector(TasksViewController.transparentLayerTapped(_:)),
-            for: UIControl.Event.touchDown)
+    private lazy var addTaskView: AddTaskView = {
+        let header = AddTaskView()
+        header.closeButton.addTarget(self,
+                                     action: #selector(TasksViewController.transparentLayerTapped(_:)),
+                                     for: UIControl.Event.touchDown)
         header.delegate = self
         return header
     }()
-
-    func getDetailViewSize() -> CGSize {
-        var detailViewController: UIViewController
-        if self.splitViewController?.viewControllers.count > 1 {
-            detailViewController = (self.splitViewController?.viewControllers[1])!
-        } else {
-            detailViewController = (self.splitViewController?.viewControllers[0])!
-        }
-        return detailViewController.view.frame.size
-    }
 
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
@@ -141,12 +94,15 @@ final class TasksViewController: CoreDataTableViewController,
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureFetch() {
+    private func configureFetch() {
+        guard let list = list else {
+            return
+        }
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
         fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-        fetchRequest.predicate  = NSPredicate(format: "list = %@ AND archivedAt = nil", self.list!)
+        fetchRequest.predicate  = NSPredicate(format: "list = %@ AND archivedAt = nil", list)
         fetchRequest.fetchBatchSize = 20
         self.frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -168,10 +124,12 @@ final class TasksViewController: CoreDataTableViewController,
 
         setupNavigationBarProperties()
 
+        viewModel = TasksViewModel(managedObjectContext: managedObjectContext)
+
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.separatorColor = UIColor(named: "tableViewSeparator")
         tableView?.separatorInset = UIEdgeInsets(top: 0, left: 22.0, bottom: 0, right: 0)
-        tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        tableView?.register(TaskTableViewCell.self, forCellReuseIdentifier: "TaskTableViewCell")
         tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = GenericTableViewCell.cellHeight
         tableView?.tableFooterView = UIView()
@@ -191,15 +149,15 @@ final class TasksViewController: CoreDataTableViewController,
             make.height.equalTo(60.0)
         }
 
-        noListSelected?.snp.makeConstraints({ (make) in
+        noListSelected.snp.makeConstraints({ (make) in
             make.center.equalToSuperview()
         })
 
-        noTasksLabel?.snp.makeConstraints({ (make) in
+        noTasksLabel.snp.makeConstraints({ (make) in
             make.center.equalToSuperview()
         })
 
-        addTransparentLayer?.snp.makeConstraints({ (make) in
+        transparentLayer.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(AddTaskView.height)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-60)
             make.left.equalTo(view)
@@ -245,15 +203,15 @@ final class TasksViewController: CoreDataTableViewController,
             object: nil)
     }
 
-    @objc func updateFonts() {
-        self.tableView?.reloadData()
+    @objc private func updateFonts() {
+        tableView?.reloadData()
     }
 
-    @objc func appBecomeActive() {
+    @objc private func appBecomeActive() {
         startSync()
     }
 
-    func startSync() {
+    private func startSync() {
         let syncManager: TLISyncManager = TLISyncManager.shared()
         if syncManager.canSynchronize() {
             syncManager.synchronize { (_) -> Void in
@@ -261,13 +219,11 @@ final class TasksViewController: CoreDataTableViewController,
         }
     }
 
-    func updateFooterInfoText(_ list: TLIList) {
-
-        // Fetch all objects from list
+    private func updateFooterInfoText(_ list: TLIList) {
         let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         fetchRequestTotal.sortDescriptors = [positionDescriptor]
-        fetchRequestTotal.predicate  = NSPredicate(format: "archivedAt = nil AND list = %@", list)
+        fetchRequestTotal.predicate = NSPredicate(format: "archivedAt = nil AND list = %@", list)
         fetchRequestTotal.fetchBatchSize = 20
 
         do {
@@ -278,19 +234,21 @@ final class TasksViewController: CoreDataTableViewController,
             fetchRequestCompleted.sortDescriptors = [positionDescriptor]
             fetchRequestCompleted.predicate  = NSPredicate(
                 format: "archivedAt = nil AND completed = %@ AND list = %@",
-                NSNumber(value: false as Bool), list)
+                NSNumber(value: false), list)
             fetchRequestCompleted.fetchBatchSize = 20
             let resultsCompleted: NSArray = try managedObjectContext.fetch(fetchRequestCompleted) as NSArray
 
             let total: Int = results.count - resultsCompleted.count
 
             if total == results.count {
-                tasksFooterView.updateInfoLabel("All tasks completed")
+                tasksFooterView.updateInfoLabel(localizedString(key: "All_tasks_completed"))
             } else {
-                if total > 1 {
-                    tasksFooterView.updateInfoLabel("\(total) completed tasks")
+                if total == 0 {
+                    tasksFooterView.updateInfoLabel(localizedString(key: "All_tasks_uncompleted"))
+                } else if total > 1 {
+                    tasksFooterView.updateInfoLabel(String(format: localizedString(key: "Completed_tasks"), String(total)))
                 } else {
-                    tasksFooterView.updateInfoLabel("\(total) completed task")
+                    tasksFooterView.updateInfoLabel(String(format: localizedString(key: "Completed_task"), String(total)))
                 }
             }
         } catch let error as NSError {
@@ -298,13 +256,13 @@ final class TasksViewController: CoreDataTableViewController,
         }
     }
 
-    @objc func syncActivityDidEndNotification(_ notification: Notification) {
+    @objc private func syncActivityDidEndNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.checkForEmptyResults() {
-                self.noTasksLabel?.isHidden = false
+                self.noTasksLabel.isHidden = false
             } else {
-                self.noTasksLabel?.isHidden = true
+                self.noTasksLabel.isHidden = true
             }
             self.tableView?.reloadData()
 
@@ -314,13 +272,13 @@ final class TasksViewController: CoreDataTableViewController,
         }
     }
 
-    @objc func syncActivityDidBeginNotification(_ notification: Notification) {
+    @objc private func syncActivityDidBeginNotification(_ notification: Notification) {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             if self.checkForEmptyResults() {
-                self.noTasksLabel?.isHidden = false
+                self.noTasksLabel.isHidden = false
             } else {
-                self.noTasksLabel?.isHidden = true
+                self.noTasksLabel.isHidden = true
             }
             self.tableView?.reloadData()
         }
@@ -329,28 +287,28 @@ final class TasksViewController: CoreDataTableViewController,
     override func loadView() {
         super.loadView()
 
-        view.addSubview(noListSelected!)
-        view.addSubview(noTasksLabel!)
+        view.addSubview(noListSelected)
+        view.addSubview(noTasksLabel)
         view.addSubview(tasksFooterView)
-        view.addSubview(addTransparentLayer!)
+        view.addSubview(transparentLayer)
 
         view.setNeedsUpdateConstraints()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.checkForEmptyResults() {
-            self.noTasksLabel?.isHidden = false
+        if checkForEmptyResults() {
+            noTasksLabel.isHidden = false
         } else {
-            self.noTasksLabel?.isHidden = true
+            noTasksLabel.isHidden = true
         }
-        self.tableView?.reloadData()
 
-        // TODO remove this reference
+        tableView?.reloadData()
+
         let IS_IPAD = (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
 
         if IS_IPAD {
-            self.noListSelected?.isHidden = false
+            noListSelected.isHidden = false
         }
     }
 
@@ -367,51 +325,22 @@ final class TasksViewController: CoreDataTableViewController,
         super.viewDidAppear(animated)
 
         if let list = list {
-            if TLITask.numOfTasks(with: managedObjectContext, list) == 0 {
-                addTaskView?.textField.becomeFirstResponder()
+            if TLITask.numberOfUnarchivedTasks(with: managedObjectContext, list: list) == 0 {
+                addTaskView.textField.becomeFirstResponder()
             }
         }
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if UIDevice.current.orientation.isLandscape {
-            self.orientation = "landscape"
-        }
-        if UIDevice.current.orientation.isPortrait {
-            self.orientation = "portrait"
-        }
-    }
-
-    override func viewWillTransition(
-        to size: CGSize,
-        with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        // Code here will execute before the rotation begins.
-        // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
-        coordinator.animate(alongsideTransition: { (_) -> Void in
-            // Place code here to perform animations during the rotation.
-            // You can pass nil for this closure if not necessary.
-            }, completion: { (_) -> Void in
-                self.tableView?.reloadData()
-                self.view.setNeedsUpdateConstraints()
-        })
     }
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Done",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(TasksViewController.toggleEditMode(_:)))
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
                 title: "Edit",
                 style: UIBarButtonItem.Style.plain,
                 target: self,
@@ -429,42 +358,45 @@ final class TasksViewController: CoreDataTableViewController,
             style: UITableViewRowAction.Style.default,
             title: "Archive",
             handler: {_, indexpath in
-                if let task: TLITask = self.frc?.object(at: indexpath) as? TLITask {
-                    task.archivedAt = Date()
-                    // Update counter list
-                    // Fetch all objects from list
-                    let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
+                guard let task: TLITask = self.frc?.object(at: indexpath) as? TLITask,
+                      let list = task.list else {
+                    return
+                }
+
+                task.archivedAt = Date()
+
+                let fetchRequestTotal: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
+                    entityName: "Task")
+                let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
+                fetchRequestTotal.sortDescriptors = [positionDescriptor]
+                fetchRequestTotal.predicate  = NSPredicate(
+                    format: "archivedAt = nil AND list = %@", list)
+                fetchRequestTotal.fetchBatchSize = 20
+                do {
+                    let results: NSArray = try self.managedObjectContext.fetch(fetchRequestTotal)
+                        as NSArray
+                    let fetchRequestCompleted: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
                         entityName: "Task")
-                    let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-                    fetchRequestTotal.sortDescriptors = [positionDescriptor]
-                    fetchRequestTotal.predicate  = NSPredicate(
-                        format: "archivedAt = nil AND list = %@", task.list!)
-                    fetchRequestTotal.fetchBatchSize = 20
-                    do {
-                        let results: NSArray = try self.managedObjectContext.fetch(fetchRequestTotal)
-                            as NSArray
-                        let fetchRequestCompleted: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
-                            entityName: "Task")
-                        fetchRequestCompleted.sortDescriptors = [positionDescriptor]
-                        fetchRequestCompleted.predicate  = NSPredicate(
-                            format: "archivedAt = nil AND completed = %@ AND list = %@",
-                            NSNumber(value: true as Bool), task.list!)
-                        fetchRequestCompleted.fetchBatchSize = 20
-                        let resultsCompleted: NSArray = try self.managedObjectContext.fetch(
-                            fetchRequestCompleted) as NSArray
-                        let total: Int = results.count - resultsCompleted.count
-                        task.list!.total = total as NSNumber?
-                        try self.managedObjectContext.save()
-                        self.setEditing(false, animated: true)
-                        if self.checkForEmptyResults() {
-                            self.noTasksLabel?.isHidden = false
-                        } else {
-                            self.noTasksLabel?.isHidden = true
-                        }
-                        self.tableView?.reloadData()
-                    } catch let error as NSError {
-                        fatalError(error.localizedDescription)
+                    fetchRequestCompleted.sortDescriptors = [positionDescriptor]
+                    fetchRequestCompleted.predicate  = NSPredicate(
+                        format: "archivedAt = nil AND completed = %@ AND list = %@",
+                        NSNumber(value: true), list)
+                    fetchRequestCompleted.fetchBatchSize = 20
+                    let resultsCompleted: NSArray = try self.managedObjectContext.fetch(
+                        fetchRequestCompleted) as NSArray
+                    let total: Int = results.count - resultsCompleted.count
+                    list.total = total as NSNumber?
+                    try self.managedObjectContext.save()
+
+                    if self.checkForEmptyResults() {
+                        self.noTasksLabel.isHidden = false
+                    } else {
+                        self.noTasksLabel.isHidden = true
                     }
+                    self.tableView?.reloadData()
+                    self.setEditing(false, animated: true)
+                } catch let error as NSError {
+                    fatalError(error.localizedDescription)
                 }
         })
         archiveRowAction.backgroundColor = UIColor.tinylogMainColor
@@ -472,31 +404,40 @@ final class TasksViewController: CoreDataTableViewController,
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
 
     func taskAtIndexPath(_ indexPath: IndexPath) -> TLITask? {
-        if let task = self.frc?.object(at: indexPath) as? TLITask {
-            return task
+        guard let task = frc?.object(at: indexPath) as? TLITask else {
+            return nil
         }
-        return nil
+        return task
     }
-    // swiftlint:disable force_cast
-    func updateTask(_ task: TLITask, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedTasks: [AnyObject] = (self.frc?.fetchedObjects)!
 
-        // Remove current list item
+    func updateTasks(_ task: TLITask?,
+                     sourceIndexPath: IndexPath,
+                     destinationIndexPath: IndexPath) {
+        guard let task = task else {
+            return
+        }
 
-        fetchedTasks = fetchedTasks.filter { $0 as! TLITask != task }
+        guard var fetchedTasks: [TLITask] = frc?.fetchedObjects as? [TLITask] else {
+            return
+        }
+
+        fetchedTasks = fetchedTasks.filter { $0 != task }
 
         var sortedIndex = destinationIndexPath.row
 
         for sectionIndex in 0..<destinationIndexPath.section {
-            sortedIndex += (self.frc?.sections?[sectionIndex].numberOfObjects)!
+            guard let numberOfObjects = frc?.sections?[sectionIndex].numberOfObjects else {
+                return
+            }
+            sortedIndex += numberOfObjects
 
             if sectionIndex == sourceIndexPath.section {
                 sortedIndex -= 1
@@ -506,8 +447,7 @@ final class TasksViewController: CoreDataTableViewController,
         fetchedTasks.insert(task, at: sortedIndex)
 
         for(index, task) in fetchedTasks.enumerated() {
-            let tmpTask = task as! TLITask
-            tmpTask.position = fetchedTasks.count-index as NSNumber
+            task.position = fetchedTasks.count - index as NSNumber
         }
     }
 
@@ -521,101 +461,60 @@ final class TasksViewController: CoreDataTableViewController,
         // Disable fetched results controller
 
         self.ignoreNextUpdates = true
-        let task = self.taskAtIndexPath(sourceIndexPath)!
-        updateTask(task, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
-        // swiftlint:disable force_try
-        try! managedObjectContext.save()
+
+        guard let task = taskAtIndexPath(sourceIndexPath) else {
+            return
+        }
+
+        updateTasks(task,
+                    sourceIndexPath: sourceIndexPath,
+                    destinationIndexPath: destinationIndexPath)
+
+        try? managedObjectContext.save()
     }
 
     @objc func onChangeSize(_ notification: Notification) {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
-        let taskTableViewCell: TaskTableViewCell = cell as! TaskTableViewCell
+        guard let task: TLITask = self.frc?.object(at: indexPath) as? TLITask,
+              let taskTableViewCell = cell as? TaskTableViewCell else {
+            return
+        }
         taskTableViewCell.managedObjectContext = managedObjectContext
-        taskTableViewCell.currentTask = task
+        taskTableViewCell.task = task
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if enableDidSelectRowAtIndexPath {
-            return self.addTaskView
-        }
-        return nil
+        addTaskView
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if enableDidSelectRowAtIndexPath {
-            return AddTaskView.height
-        }
-        return 0
+        AddTaskView.height
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TaskTableViewCell = tableView.dequeue(for: indexPath)
-            cell.checkBoxButton.addTarget(
-                self,
-                action: #selector(TasksViewController.toggleComplete(_:)),
-                for: UIControl.Event.touchUpInside)
-            cell.taskLabel.delegate = self
-            configureCell(cell, atIndexPath: indexPath)
-
-            return cell
-
+        cell.delegate = self
+        configureCell(cell, atIndexPath: indexPath)
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if enableDidSelectRowAtIndexPath {
-
-            let task: TLITask = self.frc?.object(at: indexPath) as! TLITask
-
-            DispatchQueue.main.async {
-                self.editTask(task, indexPath: indexPath)
-            }
+        guard let task: TLITask = self.frc?.object(at: indexPath) as? TLITask else {
+            return
         }
-    }
 
-    @objc func toggleComplete(_ button: CheckBoxButton) {
-        if enableDidSelectRowAtIndexPath {
-
-            let button: CheckBoxButton = button as CheckBoxButton
-            let indexPath: IndexPath?  = self.tableView?.indexPath(for: button.tableViewCell!)!
-
-            if !(indexPath != nil) {
-                return
-            }
-
-            let task: TLITask = self.frc?.object(at: indexPath!) as! TLITask
-
-            if task.completed!.boolValue {
-                task.completed = NSNumber(value: false as Bool)
-                task.checkBoxValue = "false"
-                task.completedAt = nil
-            } else {
-                task.completed = NSNumber(value: true as Bool)
-                task.checkBoxValue = "true"
-                task.completedAt = Date()
-            }
-
-            task.updatedAt = Date()
-
-            let animation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
-            animation.fromValue = NSNumber(value: 1.4 as Float)
-            animation.toValue = NSNumber(value: 1.0 as Float)
-            animation.duration = 0.2
-            animation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 1.3, 1, 1)
-            button.layer.add(animation, forKey: "bounceAnimation")
-
-            try! managedObjectContext.save()
-
-            updateFooterInfoText(self.list!)
+        DispatchQueue.main.async {
+            self.editTask(task, indexPath: indexPath)
         }
     }
 
     // MARK: AddTaskViewDelegate
+
     func addTaskViewDidBeginEditing(_ addTaskView: AddTaskView) {
-        displayTransparentLayer()
+        showTransparentLayer()
     }
 
     func addTaskViewDidEndEditing(_ addTaskView: AddTaskView) {
@@ -623,11 +522,14 @@ final class TasksViewController: CoreDataTableViewController,
     }
 
     func addTaskView(_ addTaskView: AddTaskView, title: String) {
+        guard let list = list else {
+            return
+        }
 
         do {
             let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
             let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-            fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
+            fetchRequest.predicate = NSPredicate(format: "list = %@", list)
             fetchRequest.sortDescriptors = [positionDescriptor]
             let results: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
 
@@ -635,72 +537,59 @@ final class TasksViewController: CoreDataTableViewController,
                 forEntityName: "Task",
                 into: managedObjectContext) as? TLITask {
                 task.displayLongText = title as String
-                task.list = self.list!
+                task.list = list
                 task.position = NSNumber(value: results.count + 1 as Int)
                 task.createdAt = Date()
-                task.checkBoxValue = "false"
                 task.completed = false
-                // swiftlint:disable force_try
-                try! managedObjectContext.save()
+
+                try? managedObjectContext.save()
                 if self.checkForEmptyResults() {
-                    self.noTasksLabel?.isHidden = false
+                    self.noTasksLabel.isHidden = false
                 } else {
-                    self.noTasksLabel?.isHidden = true
+                    self.noTasksLabel.isHidden = true
                 }
                 self.tableView?.reloadData()
-                updateFooterInfoText(self.list!)
+                updateFooterInfoText(list)
             }
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
     }
 
-    func displayTransparentLayer() {
-        self.tableView?.isScrollEnabled = false
-        let addTransparentLayer: UIView = self.addTransparentLayer!
-        UIView.animate(withDuration: 0.3, delay: 0.0,
-            options: .allowUserInteraction, animations: {
-                addTransparentLayer.alpha = 1.0
-            }, completion: nil)
+    private func showTransparentLayer() {
+        tableView?.isScrollEnabled = false
+
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.0,
+                       options: .allowUserInteraction,
+                       animations: {
+                        self.transparentLayer.alpha = 1.0
+                       }, completion: nil)
     }
 
-    func hideTransparentLayer() {
-        self.tableView?.isScrollEnabled = true
-        UIView.animate(
-            withDuration: 0.3,
-            delay: 0,
-            options: UIView.AnimationOptions.allowUserInteraction,
-            animations: {
-                self.addTransparentLayer!.alpha = 0.0
-            }, completion: nil)
+    private func hideTransparentLayer() {
+        tableView?.isScrollEnabled = true
+
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .allowUserInteraction,
+                       animations: {
+                        self.transparentLayer.alpha = 0.0
+                       }, completion: nil)
     }
 
     func resetAddTaskView() {
         hideTransparentLayer()
-        addTaskView?.reset()
+        addTaskView.reset()
     }
 
-    // MARK: TTTAttributedLabelDelegate
-
-    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
-        if url.scheme == "http" {
-            let path: URL = URL(string: NSString(format: "http://%@", url.host!) as String)!
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(path,
-                                          options: [:],
-                                          completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(path)
-            }
-        }
-    }
-
-    @objc func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
-        self.addTaskView?.textField.resignFirstResponder()
+    @objc private func transparentLayerTapped(_ gesture: UITapGestureRecognizer) {
+        addTaskView.textField.resignFirstResponder()
     }
 
     // MARK: Edit Task
-    func editTask(_ task: TLITask, indexPath: IndexPath) {
+
+    private func editTask(_ task: TLITask, indexPath: IndexPath) {
         let editTaskViewController: EditTaskViewController = EditTaskViewController()
         editTaskViewController.managedObjectContext = managedObjectContext
         editTaskViewController.task = task
@@ -711,62 +600,47 @@ final class TasksViewController: CoreDataTableViewController,
         self.navigationController?.present(nc, animated: true, completion: nil)
     }
 
-    func onClose(_ editTaskViewController: EditTaskViewController, indexPath: IndexPath) {
-        self.currentIndexPath = indexPath
-        self.tableView?.reloadData()
+    func onClose(_ editTaskViewController: EditTaskViewController,
+                 indexPath: IndexPath) {
+        tableView?.reloadData()
     }
 
-    @objc func exportTasks(_ sender: UIButton) {
-        if self.list != nil {
-
-            do {
-
-                let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-                let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-                let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
-                fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
-                fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
-                fetchRequest.fetchBatchSize = 20
-                let tasks: NSArray = try managedObjectContext.fetch(fetchRequest) as NSArray
-
-                var output: NSString = ""
-                var listTitle: NSString = ""
-                listTitle = self.list!.title! as NSString
-
-                output = output.appending(NSString(format: "%@\n", listTitle) as String) as NSString
-
-                for task in tasks {
-                    let taskItem: TLITask = task as! TLITask
-                    let displayLongText: NSString = NSString(format: "- %@\n", taskItem.displayLongText!)
-                    output = output.appending(displayLongText as String) as NSString
-                }
-
-                let activityViewController: UIActivityViewController = UIActivityViewController(
-                    activityItems: [output], applicationActivities: nil)
-                activityViewController.excludedActivityTypes = [
-                    UIActivity.ActivityType.postToTwitter,
-                    UIActivity.ActivityType.postToFacebook,
-                    UIActivity.ActivityType.postToWeibo,
-                    UIActivity.ActivityType.copyToPasteboard,
-                    UIActivity.ActivityType.assignToContact,
-                    UIActivity.ActivityType.saveToCameraRoll,
-                    UIActivity.ActivityType.addToReadingList,
-                    UIActivity.ActivityType.postToFlickr,
-                    UIActivity.ActivityType.postToVimeo,
-                    UIActivity.ActivityType.postToTencentWeibo
-                ]
-
-                activityViewController.modalPresentationStyle = UIModalPresentationStyle.popover
-                activityViewController.popoverPresentationController?.sourceRect = sender.bounds
-                activityViewController.popoverPresentationController?.sourceView = sender
-                activityViewController.popoverPresentationController?.permittedArrowDirections
-                    = UIPopoverArrowDirection.any
-
-                self.navigationController?.present(
-                    activityViewController, animated: true, completion: nil)
-            } catch let error as NSError {
-                fatalError(error.localizedDescription)
-            }
+    @objc private func exportTasks(_ sender: UIButton) {
+        guard let list = list,
+              let tasks = viewModel?.exportUnarchivedTasks(with: list) else {
+            return
         }
+
+        let activityViewController: UIActivityViewController = UIActivityViewController(
+            activityItems: [tasks], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [
+            .postToTwitter,
+            .postToFacebook,
+            .postToWeibo,
+            .copyToPasteboard,
+            .assignToContact,
+            .saveToCameraRoll,
+            .addToReadingList,
+            .postToFlickr,
+            .postToVimeo,
+            .postToTencentWeibo
+        ]
+
+        activityViewController.modalPresentationStyle = .popover
+        activityViewController.popoverPresentationController?.sourceRect = sender.bounds
+        activityViewController.popoverPresentationController?.sourceView = sender
+        activityViewController.popoverPresentationController?.permittedArrowDirections
+            = UIPopoverArrowDirection.any
+
+        navigationController?.present(activityViewController,
+                                      animated: true,
+                                      completion: nil)
+    }
+}
+
+extension TasksViewController: TaskTableViewCellDelegate {
+    func taskTableViewCellDidTapCheckBoxButton(_ cell: TaskTableViewCell,
+                                               list: TLIList) {
+        updateFooterInfoText(list)
     }
 }

@@ -11,6 +11,14 @@
 "Update_lists" = "Last Updated %@";
 "Empty_lists" = "Tap + icon to create a new list.";
 
+// TasksViewController
+"Create_task" = "Tap text field to create a new task.";
+"No_list_selected" = "No list selected";
+"All_tasks_completed" = "All tasks completed";
+"All_tasks_uncompleted" = "All tasks uncompleted";
+"Completed_tasks" = "%@ completed tasks";
+"Completed_task" = "%@ completed task";
+
 // SetupViewController
 "Sync" = "iCloud for Tinylog";
 "Sync_description" = "iCloud keeps your lists up to date on your iPhone and iPad.";
@@ -41,4 +49,8 @@
 "No_results" = "No Results";
 
 "My_archives" = "My Archives";
+
+"Done" = "Done";
+"Edit" = "Edit";
+"Archive" = "Archive";
 

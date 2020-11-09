@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembl
     var window: UIWindow?
 
     /// Access core data managed object context.
-    private let coreDataManager = CoreDataManager(model: "Tinylog")
+    private let coreDataManager = CoreDataContext(model: "Tinylog")
 
     /// Instance of ApplicationCoordinator
     private var applicationCoordinator: ApplicationCoordinator?

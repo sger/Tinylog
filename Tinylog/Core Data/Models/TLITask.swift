@@ -21,7 +21,7 @@ class TLITask: NSManagedObject {
 }
 
 extension TLITask {
-    static func fetchTasks(with context: NSManagedObjectContext, _ list: TLIList) -> [TLITask] {
+    static func fetchUnarchivedTasks(with context: NSManagedObjectContext, _ list: TLIList) -> [TLITask] {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
         fetchRequest.sortDescriptors = [positionDescriptor]
@@ -35,18 +35,13 @@ extension TLITask {
         }
     }
 
-    static func numOfTasks(with context: NSManagedObjectContext, _ list: TLIList) -> Int {
-        return TLITask.fetchTasks(with: context, list).count
-    }
-
-    static func fetchCompletedTasks(with context: NSManagedObjectContext, _ list: TLIList) -> [TLITask] {
+    static func fetchUnarchivedCompletedTasks(with context: NSManagedObjectContext, _ list: TLIList) -> [TLITask] {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(
             entityName: "Task")
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
         fetchRequest.sortDescriptors = [positionDescriptor]
-        fetchRequest.predicate = NSPredicate(
-            format: "archivedAt = nil AND completed = %@ AND list = %@",
-            NSNumber(value: false as Bool), list)
+        fetchRequest.predicate = NSPredicate(format: "archivedAt = nil AND completed = %@ AND list = %@",
+                                             NSNumber(value: true), list)
         fetchRequest.fetchBatchSize = 20
 
         do {
@@ -56,7 +51,11 @@ extension TLITask {
         }
     }
 
-    static func numOfCompletedTasks(with context: NSManagedObjectContext, _ list: TLIList) -> Int {
-        return TLITask.fetchCompletedTasks(with: context, list).count
+    static func numberOfUnarchivedTasks(with context: NSManagedObjectContext, list: TLIList) -> Int {
+        TLITask.fetchUnarchivedTasks(with: context, list).count
+    }
+
+    static func numberOfUnarchivedCompletedTasks(with context: NSManagedObjectContext, list: TLIList) -> Int {
+        TLITask.fetchUnarchivedCompletedTasks(with: context, list).count
     }
 }

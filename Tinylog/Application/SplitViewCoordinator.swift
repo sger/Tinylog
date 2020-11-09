@@ -32,7 +32,7 @@ final class SplitViewCoordinator: BaseCoordinator {
 
     override func start() {
 
-        let masterNC: UINavigationController = UINavigationController(rootViewController: listsViewController)
+        let listsNC: UINavigationController = UINavigationController(rootViewController: listsViewController)
         let detailNC: UINavigationController = UINavigationController(rootViewController: tasksViewController)
 
         tasksViewController.navigationItem.leftItemsSupplementBackButton = true
@@ -41,7 +41,7 @@ final class SplitViewCoordinator: BaseCoordinator {
         listsViewController.delegate = self
         tasksViewController.delegate = self
 
-        splitViewController.viewControllers = [masterNC, detailNC]
+        splitViewController.viewControllers = [listsNC, detailNC]
         splitViewController.delegate = self
         splitViewController.preferredDisplayMode = .allVisible
 
