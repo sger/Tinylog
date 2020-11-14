@@ -23,7 +23,7 @@ extension UIViewController {
 
     public func addSearchController(with placeHolder: String,
                                     searchResultsUpdater: UISearchResultsUpdating,
-                                    searchResultsController: UIViewController) {
+                                    searchResultsController: UIViewController? = nil) {
         let searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.searchResultsUpdater = searchResultsUpdater
         searchController.obscuresBackgroundDuringPresentation = false

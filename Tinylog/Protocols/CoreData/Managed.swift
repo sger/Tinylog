@@ -29,7 +29,7 @@ extension Managed {
         fetchRequest.predicate = predicate
         return fetchRequest
     }
-    
+
     static func fetchRequest(with sortDescriptors: [NSSortDescriptor]? = nil,
                              predicate: NSPredicate? = nil) -> NSFetchRequest<Self> {
         let fetchRequest = NSFetchRequest<Self>(entityName: entityName)
@@ -93,4 +93,3 @@ extension NSManagedObjectContext {
         return obj
     }
 }
-

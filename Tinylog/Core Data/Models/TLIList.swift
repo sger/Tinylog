@@ -94,6 +94,16 @@ extension TLIList {
         }
     }
 
+    static func predicate(for searchText: String, color: String) -> NSCompoundPredicate? {
+        if !searchText.isEmpty {
+            let titlePredicate = NSPredicate(format: "title CONTAINS[cd] %@ AND archivedAt = nil", searchText)
+            let colorPredicate = NSPredicate(format: "color CONTAINS[cd] %@ AND archivedAt = nil", color)
+            return NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, colorPredicate])
+        } else {
+            return nil
+        }
+    }
+
     static func filterLists(with text: String, color: String) -> NSFetchRequest<NSFetchRequestResult> {
         let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
         let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
@@ -116,5 +126,18 @@ extension TLIList {
         let titlePredicate = NSPredicate(format: "title CONTAINS[cd] %@ AND archivedAt != nil", text)
         let colorPredicate = NSPredicate(format: "color CONTAINS[cd] %@ AND archivedAt != nil", color)
         return TLIList.filter(with: [titlePredicate, colorPredicate], descriptors: [positionDescriptor, titleDescriptor])
+    }
+}
+
+extension TLIList: Managed {
+
+    static var defaultSortDescriptors: [NSSortDescriptor] {
+        let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
+        let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
+        return [positionDescriptor, titleDescriptor]
+    }
+
+    static var defaultPredicate: NSPredicate {
+        NSPredicate(format: "archivedAt = nil")
     }
 }

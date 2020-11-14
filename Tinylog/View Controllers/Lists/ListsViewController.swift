@@ -5,8 +5,7 @@
 //  Created by Spiros Gerokostas on 17/10/15.
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
-// swiftlint:disable force_cast
-// swiftlint:disable force_unwrapping
+
 import UIKit
 import CoreData
 import SnapKit
@@ -21,20 +20,24 @@ protocol ListsViewControllerDelegate: AnyObject {
     func listsViewControllerDidTapArchives(_ viewController: ListsViewController)
 }
 
-final class ListsViewController: CoreDataTableViewController {
+final class ListsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     weak var delegate: ListsViewControllerDelegate?
 
-    fileprivate let managedObjectContext: NSManagedObjectContext
-    fileprivate let reachability = ReachabilityManager.instance.reachability!
-    fileprivate var resultsViewController: ResultsViewController?
+    private let managedObjectContext: NSManagedObjectContext
+    // swiftlint:disable force_unwrapping
+    private let reachability = ReachabilityManager.instance.reachability!
+    private var isFetchedResultsControllerUpdating: Bool = false
+    private var tableView: UITableView?
+    private var frc: NSFetchedResultsController<TLIList>?
+    private let searchController = UISearchController(searchResultsController: nil)
 
-    var listsFooterView: ListsFooterView = {
+    private var listsFooterView: ListsFooterView = {
         let listsFooterView = ListsFooterView()
         return listsFooterView
     }()
 
-    var emptyListsLabel: UILabel = {
+    private var emptyListsLabel: UILabel = {
         let noListsLabel: UILabel = UILabel()
         noListsLabel.font = UIFont.tinylogFontOfSize(18.0)
         noListsLabel.textColor = UIColor.tinylogTextColor
@@ -43,8 +46,20 @@ final class ListsViewController: CoreDataTableViewController {
         return noListsLabel
     }()
 
+    private var noResultsLabel: UILabel = {
+        let noResultsLabel: UILabel = UILabel()
+        noResultsLabel.font = UIFont.tinylogFontOfSize(16.0)
+        noResultsLabel.textColor = UIColor(named: "textColor")
+        noResultsLabel.textAlignment = NSTextAlignment.center
+        noResultsLabel.text = localizedString(key: "No_results")
+        noResultsLabel.isHidden = true
+        return noResultsLabel
+    }()
+
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
+        tableView = UITableView(frame: .zero, style: .plain)
+        tableView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -52,21 +67,18 @@ final class ListsViewController: CoreDataTableViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configureFetch() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "List")
-        let positionDescriptor = NSSortDescriptor(key: "position", ascending: false)
-        let titleDescriptor  = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [positionDescriptor, titleDescriptor]
-        fetchRequest.predicate = NSPredicate(format: "archivedAt = nil")
-        self.frc = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: self.managedObjectContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil)
-        self.frc?.delegate = self
+    private func configureFetchRequest() {
+        let fetchRequest = TLIList.sortedFetchRequest(with: TLIList.defaultPredicate)
+        fetchRequest.fetchBatchSize = 20
+        fetchRequest.returnsObjectsAsFaults = false
+        frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                         managedObjectContext: managedObjectContext,
+                                         sectionNameKeyPath: nil,
+                                         cacheName: nil)
+        frc?.delegate = self
 
         do {
-            try self.frc?.performFetch()
+            try frc?.performFetch()
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }
@@ -75,13 +87,60 @@ final class ListsViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureFetch()
-
         title = localizedString(key: "My_lists")
         view.accessibilityIdentifier = "MyLists"
 
+        configureFetchRequest()
         setupNavigationBarProperties()
+        setupUITableView()
+        addSearchController(with: localizedString(key: "Search"), searchResultsUpdater: self)
+        setupListsFooterView()
 
+        let settingsButton: UIButton = UIButton(type: .custom)
+        settingsButton.accessibilityIdentifier = "settingsButton"
+        settingsButton.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        settingsButton.setBackgroundImage(UIImage(named: "740-gear-toolbar"), for: .normal)
+        settingsButton.setBackgroundImage(UIImage(named: "740-gear-toolbar"), for: .highlighted)
+        settingsButton.addTarget(self,
+                                 action: #selector(self.displaySettings(_:)),
+                                 for: .touchDown)
+
+        let settingsBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = settingsBarButtonItem
+
+        emptyListsLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(view)
+        }
+
+        noResultsLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+
+        setEditing(false, animated: false)
+
+        registerNotifications()
+    }
+
+    deinit {
+        unregisterNotifications()
+    }
+
+    override func loadView() {
+        super.loadView()
+        guard let tableView = tableView else {
+            return
+        }
+        view.addSubview(tableView)
+        view.addSubview(emptyListsLabel)
+        view.addSubview(noResultsLabel)
+        view.addSubview(listsFooterView)
+        view.setNeedsUpdateConstraints()
+    }
+
+    private func setupUITableView() {
+        tableView?.dataSource = self
+        tableView?.delegate = self
         tableView?.backgroundColor = UIColor(named: "mainColor")
         tableView?.backgroundView = UIView()
         tableView?.backgroundView?.backgroundColor = UIColor.clear
@@ -99,29 +158,9 @@ final class ListsViewController: CoreDataTableViewController {
             make.left.equalTo(view)
             make.right.equalTo(view)
         })
+    }
 
-        resultsViewController = ResultsViewController()
-
-        addSearchController(with: "Search",
-                            searchResultsUpdater: self,
-                            searchResultsController: resultsViewController!)
-
-        resultsViewController?.tableView?.delegate = self
-
-        let settingsImage: UIImage = UIImage(named: "740-gear-toolbar")!
-        let settingsButton: UIButton = UIButton(type: .custom)
-        settingsButton.accessibilityIdentifier = "settingsButton"
-        settingsButton.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
-        settingsButton.setBackgroundImage(settingsImage, for: UIControl.State())
-        settingsButton.setBackgroundImage(settingsImage, for: .highlighted)
-        settingsButton.addTarget(self,
-                                 action: #selector(self.displaySettings(_:)),
-                                 for: .touchDown)
-
-        let settingsBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = settingsBarButtonItem
-
+    private func setupListsFooterView() {
         listsFooterView.delegate = self
         listsFooterView.snp.makeConstraints { (make) in
             make.left.equalTo(view)
@@ -133,21 +172,6 @@ final class ListsViewController: CoreDataTableViewController {
         emptyListsLabel.snp.makeConstraints { (make) in
             make.center.equalTo(view)
         }
-
-        setEditing(false, animated: false)
-
-        registerNotifications()
-    }
-
-    deinit {
-        unregisterNotifications()
-    }
-
-    override func loadView() {
-        super.loadView()
-        view.addSubview(emptyListsLabel)
-        view.addSubview(listsFooterView)
-        view.setNeedsUpdateConstraints()
     }
 
     @objc func onChangeSize(_ notification: Notification) {
@@ -161,7 +185,7 @@ final class ListsViewController: CoreDataTableViewController {
     func startSync() {
         let syncManager: TLISyncManager = TLISyncManager.shared()
         if syncManager.canSynchronize() {
-            syncManager.synchronize { (_) -> Void in }
+            syncManager.synchronize { _ -> Void in }
         }
     }
 
@@ -173,20 +197,20 @@ final class ListsViewController: CoreDataTableViewController {
         if TLISyncManager.shared().canSynchronize() {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
 
-            let dateFormatter = DateFormatter()
-            dateFormatter.formatterBehavior = DateFormatter.Behavior.behavior10_4
-            dateFormatter.dateStyle = DateFormatter.Style.short
-            dateFormatter.timeStyle = DateFormatter.Style.short
-
-            if reachability.connection == .wifi || reachability.connection == .cellular {
-                self.listsFooterView.updateInfoLabel(NSString(format: "Last Updated %@",
-                                                         dateFormatter.string(for: Date())!) as String)
-            } else if reachability.connection == .unavailable {
-                self.listsFooterView.updateInfoLabel("Offline")
+            switch reachability.connection {
+            case .wifi, .cellular:
+                let dateFormatter = DateFormatter()
+                dateFormatter.formatterBehavior = .behavior10_4
+                dateFormatter.dateStyle = .short
+                dateFormatter.timeStyle = .short
+                if let dateValue = dateFormatter.string(for: Date()) {
+                    listsFooterView.updateInfoLabel("Last Updated \(dateValue)")
+                }
+            case .unavailable, .none:
+                listsFooterView.updateInfoLabel("Offline")
             }
 
             checkForLists()
-
             tableView?.reloadData()
         }
     }
@@ -196,26 +220,11 @@ final class ListsViewController: CoreDataTableViewController {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
             if reachability.connection == .unavailable {
-                self.listsFooterView.updateInfoLabel("Offline")
+                listsFooterView.updateInfoLabel("Offline")
             } else {
-                self.listsFooterView.updateInfoLabel("Syncing...")
+                listsFooterView.updateInfoLabel("Syncing...")
             }
         }
-    }
-
-    override func viewWillTransition(
-        to size: CGSize,
-        with coordinator: UIViewControllerTransitionCoordinator) {
-            super.viewWillTransition(to: size, with: coordinator)
-            // Code here will execute before the rotation begins.
-            // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
-            coordinator.animate(alongsideTransition: { (_) -> Void in
-                // Place code here to perform animations during the rotation.
-                // You can pass nil for this closure if not necessary.
-            }, completion: { (_) -> Void in
-                self.tableView?.reloadData()
-                self.view.setNeedsUpdateConstraints()
-            })
     }
 
     // MARK: - Display Setup
@@ -246,13 +255,10 @@ final class ListsViewController: CoreDataTableViewController {
         super.viewWillAppear(animated)
 
         checkForLists()
+        deselectTableViewCell(animated)
 
         if Environment.current.userDefaults.bool(forKey: EnvUserDefaults.syncMode) {
             startSync()
-        }
-
-        if tableView!.indexPathForSelectedRow != nil {
-            tableView?.deselectRow(at: tableView!.indexPathForSelectedRow!, animated: animated)
         }
     }
 
@@ -269,27 +275,41 @@ final class ListsViewController: CoreDataTableViewController {
                                                                 target: self,
                                                                 action: #selector(ListsViewController.toggleEditMode(_:)))
         }
+        tableView?.setEditing(editing, animated: animated)
     }
 
     @objc func toggleEditMode(_ sender: UIBarButtonItem) {
         setEditing(!isEditing, animated: true)
     }
 
-    func listAtIndexPath(_ indexPath: IndexPath) -> TLIList? {
-        let list = frc?.object(at: indexPath) as! TLIList?
-        return list
+    private func deselectTableViewCell(_ animated: Bool) {
+        guard let indexPathForSelectedRow = tableView?.indexPathForSelectedRow else {
+            return
+        }
+
+        tableView?.deselectRow(at: indexPathForSelectedRow, animated: animated)
     }
 
-    func updateList(_ list: TLIList, sourceIndexPath: IndexPath, destinationIndexPath: IndexPath) {
-        var fetchedLists: [AnyObject] = (frc?.fetchedObjects as [AnyObject]?)!
+    private func updateLists(with list: TLIList?,
+                             sourceIndexPath: IndexPath,
+                             destinationIndexPath: IndexPath) {
+        guard let list = list else {
+            return
+        }
 
-        // Remove current list item
-        fetchedLists = fetchedLists.filter { $0 as! TLIList != list }
+        // Fetch all lists from core data context
+        var fetchedLists: [TLIList] = frc?.fetchedObjects ?? []
+
+        // Remove selected list item from fetched lists
+        fetchedLists = fetchedLists.filter { $0 != list }
 
         var sortedIndex = destinationIndexPath.row
 
         for sectionIndex in 0..<destinationIndexPath.section {
-            sortedIndex += (frc?.sections?[sectionIndex].numberOfObjects)!
+            guard let numberOfObjects = frc?.sections?[sectionIndex].numberOfObjects else {
+                return
+            }
+            sortedIndex += numberOfObjects
 
             if sectionIndex == sourceIndexPath.section {
                 sortedIndex -= 1
@@ -298,9 +318,8 @@ final class ListsViewController: CoreDataTableViewController {
 
         fetchedLists.insert(list, at: sortedIndex)
 
-        for(index, list) in fetchedLists.enumerated() {
-            let tmpList = list as! TLIList
-            tmpList.position = fetchedLists.count - index as NSNumber
+        for (index, list) in fetchedLists.enumerated() {
+            list.position = fetchedLists.count - index as NSNumber
         }
     }
 
@@ -313,57 +332,62 @@ final class ListsViewController: CoreDataTableViewController {
 
         // Disable fetched results controller
 
-        ignoreNextUpdates = true
+        isFetchedResultsControllerUpdating = true
 
-        let list = listAtIndexPath(sourceIndexPath)!
+        let list = frc?.object(at: sourceIndexPath)
 
-        updateList(list, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
+        updateLists(with: list,
+                    sourceIndexPath: sourceIndexPath,
+                    destinationIndexPath: destinationIndexPath)
 
-        try! managedObjectContext.save()
+        try? managedObjectContext.save()
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let section = frc?.sections?[section] else { return 0 }
+        return section.numberOfObjects
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ListTableViewCell = tableView.dequeue(for: indexPath)
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
 
-    override func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let list: TLIList = frc?.object(at: indexPath) as? TLIList,
+    func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        if let list: TLIList = frc?.object(at: indexPath),
             let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell {
             listTableViewCell.list = list
         }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var list: TLIList
-
-        if tableView == self.tableView {
-            list = frc?.object(at: indexPath) as! TLIList
-        } else {
-            list = resultsViewController?.frc?.object(at: indexPath) as! TLIList
+        guard let list = frc?.object(at: indexPath) else {
+            return
         }
 
         delegate?.listsViewControllerDidTapList(self, list: list)
     }
 
     func tableView(_ tableView: UITableView,
-                   titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: IndexPath) -> String! {
+                   titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Delete"
     }
 
     func tableView(_ tableView: UITableView,
-                   commitEditingStyle editingStyle: UITableViewCell.EditingStyle,
-                   forRowAtIndexPath indexPath: IndexPath) {
-        if editingStyle != UITableViewCell.EditingStyle.delete {
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        if editingStyle != .delete {
             return
         }
 
-        let list: TLIList = frc?.object(at: indexPath) as! TLIList
+        guard let list: TLIList = frc?.object(at: indexPath) else {
+            return
+        }
 
         managedObjectContext.delete(list)
 
-        try! managedObjectContext.save()
+        try? managedObjectContext.save()
     }
 
     func performBackgroundUpdates(_ completionHandler: ((UIBackgroundFetchResult) -> Void)!) {
@@ -436,9 +460,12 @@ extension ListsViewController {
 
         let editRowAction = UITableViewRowAction(
             style: .default,
-            title: "Edit", handler: { _, indexpath in
-
-                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
+            title: "Edit",
+            handler: { [weak self] (_, indexpath) in
+                guard let self = self,
+                      let list: TLIList = self.frc?.object(at: indexpath) else {
+                    return
+                }
                 self.delegate?.listsViewControllerDidAddList(self, list: list, selectedMode: .edit)
         })
 
@@ -447,11 +474,13 @@ extension ListsViewController {
         let archiveRowAction = UITableViewRowAction(
             style: .default,
             title: "Archive",
-            handler: {_, indexpath in
-                let list: TLIList = self.frc?.object(at: indexpath) as! TLIList
+            handler: { [weak self] (_, indexpath) in
+                guard let self = self,
+                      let list: TLIList = self.frc?.object(at: indexpath) else {
+                    return
+                }
                 list.archivedAt = Date()
-                // swiftlint:disable force_try
-                try! self.managedObjectContext.save()
+                try? self.managedObjectContext.save()
                 self.checkForLists()
                 self.tableView?.reloadData()
         })
@@ -461,53 +490,30 @@ extension ListsViewController {
     }
 }
 
-extension ListsViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+// MARK: - UISearchResultsUpdating
 
-    // MARK: UISearchBarDelegate
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        resultsViewController?.frc?.delegate = nil
-        resultsViewController?.frc = nil
-    }
-
-    // MARK: UISearchControllerDelegate
-
-    func didDismissSearchController(_ searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as! ResultsViewController
-        resultsController.frc?.delegate = nil
-        resultsController.frc = nil
-    }
-
-    // MARK: UISearchResultsUpdating
+extension ListsViewController: UISearchResultsUpdating {
 
     func updateSearchResults(for searchController: UISearchController) {
+        let searchText = searchController.searchBar.text ?? ""
+        let color = Utils.findColorByName(searchText)
+        frc?.fetchRequest.predicate = TLIList.predicate(for: searchText.lowercased(), color: color)
+        reloadFetchedResultsController()
+    }
 
-        if let text = searchController.searchBar.text {
-            if !text.isEmpty {
-                let lowercasedText = text.lowercased()
-                let color = Utils.findColorByName(lowercasedText)
-                let resultsController = searchController.searchResultsController as! ResultsViewController
-                let fetchRequest = TLIList.filterLists(with: lowercasedText, color: color)
+    private func reloadFetchedResultsController() {
+        do {
+            try frc?.performFetch()
+            tableView?.reloadData()
 
-                resultsController.frc = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                   managedObjectContext: managedObjectContext,
-                                                                   sectionNameKeyPath: nil,
-                                                                   cacheName: nil)
-                resultsController.frc?.delegate = self
-
-                do {
-                    try resultsController.frc?.performFetch()
-                    resultsController.tableView?.reloadData()
-                    resultsController.showNoResults()
-                } catch let error as NSError {
-                    fatalError(error.localizedDescription)
-                }
+            if let fetchedObjects = frc?.fetchedObjects,
+               fetchedObjects.isEmpty {
+                noResultsLabel.isHidden = false
+            } else {
+                noResultsLabel.isHidden = true
             }
+        } catch let error {
+            fatalError(error.localizedDescription)
         }
     }
 }
@@ -533,5 +539,83 @@ extension ListsViewController: ListsFooterViewDelegate {
 
     func listsFooterViewDisplayArchives(_ listsFooterView: ListsFooterView) {
         delegate?.listsViewControllerDidTapArchives(self)
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension ListsViewController: NSFetchedResultsControllerDelegate {
+
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        if isFetchedResultsControllerUpdating {
+            return
+        }
+        tableView?.beginUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
+        if isFetchedResultsControllerUpdating {
+            return
+        }
+
+        switch type {
+        case .insert:
+            tableView?.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            tableView?.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        default:
+            return
+        }
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+
+            if isFetchedResultsControllerUpdating {
+                return
+            }
+
+            switch type {
+            case .insert:
+                if let newIndexPath = newIndexPath {
+                    tableView?.insertRows(at: [newIndexPath],
+                                          with: .fade)
+                }
+
+            case .delete:
+                if let indexPath = indexPath {
+                    tableView?.deleteRows(at: [indexPath],
+                                          with: .fade)
+                }
+
+            case .update:
+                if let indexPath = indexPath,
+                   let cell = tableView?.cellForRow(at: indexPath) {
+                        configureCell(cell, atIndexPath: indexPath)
+                }
+            case .move:
+                if let indexPath = indexPath,
+                   let newIndexPath = newIndexPath {
+                        tableView?.deleteRows(at: [indexPath],
+                                              with: .fade)
+                        tableView?.insertRows(at: [newIndexPath],
+                                              with: .fade)
+                }
+            @unknown default: break
+        }
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        if isFetchedResultsControllerUpdating {
+            isFetchedResultsControllerUpdating = false
+        } else {
+            tableView?.endUpdates()
+        }
     }
 }
