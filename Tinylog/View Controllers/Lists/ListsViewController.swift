@@ -227,15 +227,6 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 
-    // MARK: - Display Setup
-
-    func displaySetup() {
-        let setupViewController: SetupViewController = SetupViewController()
-        let nc: UINavigationController = UINavigationController(rootViewController: setupViewController)
-        nc.modalPresentationStyle = .formSheet
-        navigationController?.present(nc, animated: true, completion: nil)
-    }
-
     // MARK: Display Settings
 
     @objc func displaySettings(_ sender: UIButton) {
@@ -354,18 +345,18 @@ final class ListsViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
 
-    func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        if let list: TLIList = frc?.object(at: indexPath),
-            let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell {
-            listTableViewCell.list = list
+    private func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        guard let list: TLIList = frc?.object(at: indexPath),
+              let listTableViewCell: ListTableViewCell = cell as? ListTableViewCell else {
+            return
         }
+        listTableViewCell.list = list
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let list = frc?.object(at: indexPath) else {
             return
         }
-
         delegate?.listsViewControllerDidTapList(self, list: list)
     }
 
@@ -449,15 +440,14 @@ extension ListsViewController {
 extension ListsViewController {
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-
         let editRowAction = UITableViewRowAction(
             style: .default,
             title: "Edit",
@@ -524,7 +514,6 @@ extension ListsViewController: ListsFooterViewDelegate {
 
     func selectTableViewCell(with list: TLIList) {
         guard let indexPath = frc?.indexPath(forObject: list) else {
-            print("error with index path")
             return
         }
 

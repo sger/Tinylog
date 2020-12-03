@@ -25,7 +25,6 @@ class ListsViewControllerTests: XCTestCase {
     }
 
     func testListViewControllerWithPalatinoFont() {
-
         let list = NSEntityDescription.insertNewObject(
             forEntityName: "List",
             into: coreDataManager.managedObjectContext) as? TLIList
