@@ -10,7 +10,7 @@ BRANCH ?= develop
 MASTER_BRANCH = $(RELEASE)-dist
 
 ifeq ($(PLATFORM), iOS)
-	DESTINATION ?= 'platform=iOS Simulator,name=iPhone 11,OS=14.3'
+	DESTINATION ?= 'platform=iOS Simulator,name=iPhone 11,OS=14.4'
 endif
 
 XCPRETTY :=
@@ -28,10 +28,6 @@ clean:
 	$(XCODEBUILD) clean $(BUILD_FLAGS) $(XCPRETTY)
 
 bootstrap: dependencies
-	brew update
-	brew unlink swiftlint || true
-	brew install swiftlint
-	brew link --overwrite swiftlint
 
 dependencies: cocoapods
 
