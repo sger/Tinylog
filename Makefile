@@ -28,7 +28,6 @@ clean:
 	$(XCODEBUILD) clean $(BUILD_FLAGS) $(XCPRETTY)
 
 bootstrap: dependencies
-	brew update
 
 dependencies: cocoapods
 
