@@ -29,9 +29,6 @@ clean:
 
 bootstrap: dependencies
 	brew update
-	brew unlink swiftlint || true
-	brew install swiftlint
-	brew link --overwrite swiftlint
 
 dependencies: cocoapods
 
