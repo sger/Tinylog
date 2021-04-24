@@ -19,9 +19,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.2.1</string>
 	<key>CFBundleVersion</key>
-	<string>296</string>
+	<string>298</string>
 	<key>CommitShortHash</key>
-	<string>4778bbe</string>
+	<string>8942e54</string>
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
