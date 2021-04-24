@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2</string>
+	<string>2.2.1</string>
 	<key>CFBundleVersion</key>
-	<string>295</string>
+	<string>296</string>
 	<key>CommitShortHash</key>
-	<string>3a022e4</string>
+	<string>4778bbe</string>
 	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
