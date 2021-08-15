@@ -24,7 +24,7 @@ jobs:
   test:
     needs: lint
     name: Test
-    runs-on: macOS-latest
+    runs-on: macos-11
     strategy:
       matrix:
         destination: ["platform=iOS Simulator,OS=14.5,name=iPhone 11"]
@@ -61,7 +61,7 @@ jobs:
   build:
     needs: [Lint, Test]
     name: Build
-    runs-on: macOS-latest
+    runs-on: macos-11
     strategy:
       matrix:
         destination: ["platform=iOS Simulator,OS=14.5,name=iPhone 11"]
