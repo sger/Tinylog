@@ -290,7 +290,7 @@ final class TasksViewController: CoreDataTableViewController, AddTaskViewDelegat
         view.addSubview(noListSelected)
         view.addSubview(noTasksLabel)
         view.addSubview(tasksFooterView)
-        view.addSubview(transparentLayer)
+        tableView?.addSubview(transparentLayer)
 
         view.setNeedsUpdateConstraints()
     }
