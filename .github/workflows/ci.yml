@@ -3,7 +3,7 @@ name: CI
 on: pull_request
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_12.5.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_13.app/Contents/Developer
 
 jobs:
   lint:
@@ -12,13 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.0.1
+        uses: norio-nomura/action-swiftlint@3.2.1
       - name: GitHub Action for SwiftLint with --strict
-        uses: norio-nomura/action-swiftlint@3.0.1
+        uses: norio-nomura/action-swiftlint@3.2.1
         with:
           args: --strict
       - name: GitHub Action for SwiftLint (Only files changed in the PR)
-        uses: norio-nomura/action-swiftlint@3.1.0
+        uses: norio-nomura/action-swiftlint@3.2.1
         env:
           DIFF_BASE: ${{ github.base_ref }}
   test:
@@ -27,7 +27,7 @@ jobs:
     runs-on: macos-11
     strategy:
       matrix:
-        destination: ["platform=iOS Simulator,OS=14.5,name=iPhone 11"]
+        destination: ["platform=iOS Simulator,OS=15.0,name=iPhone 11"]
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -64,7 +64,7 @@ jobs:
     runs-on: macos-11
     strategy:
       matrix:
-        destination: ["platform=iOS Simulator,OS=14.5,name=iPhone 11"]
+        destination: ["platform=iOS Simulator,OS=15.0,name=iPhone 11"]
     steps:
       - name: Checkout
         uses: actions/checkout@master

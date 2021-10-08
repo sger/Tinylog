@@ -30,6 +30,7 @@ final class AddListViewController: UITableViewController, UITextFieldDelegate {
         self.managedObjectContext = managedObjectContext
         self.list = list
         self.mode = mode
+        self.selectedColor = list?.color ?? ""
         super.init(style: .grouped)
     }
 

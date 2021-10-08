@@ -81,7 +81,7 @@ final class EditTaskViewController: UIViewController {
             heightAdjust = keyboardRect!.size.height
         }
 
-        let textViewHeight = size.height - heightAdjust //- 44.0
+        let textViewHeight = size.height - heightAdjust // - 44.0
 
         UIView.animate(withDuration: TimeInterval((userInfo.object(
             forKey: UIResponder.keyboardAnimationDurationUserInfoKey)! as AnyObject).floatValue),
@@ -146,7 +146,7 @@ final class EditTaskViewController: UIViewController {
             heightAdjust = keyboardRect!.size.height
         }
 
-        let textViewHeight = size.height - heightAdjust //- 44.0
+        let textViewHeight = size.height - heightAdjust // - 44.0
 
         UIView.animate(
             withDuration: TimeInterval(duration),
