@@ -19,7 +19,7 @@ final class AddListButton: UIButton {
 
         let origImage = UIImage(named: "plus")
         let tintedImage = origImage?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        //btn.setImage(tintedImage, for: .normal)
+        // btn.setImage(tintedImage, for: .normal)
         tintColor = UIColor.tinylogMainColor
 
         self.setBackgroundImage(tintedImage, for: UIControl.State())

@@ -16,19 +16,19 @@ let kTLIItalicFontName: NSString = "HelveticaNeue-Italic"
 @available(iOS 8.2, *)
 let kTLIRegularSFFontName: NSString = UIFont.systemFont(
     ofSize: 10.0,
-    weight: UIFont.Weight.regular).fontName as NSString //".SFUIText-Regular"
+    weight: UIFont.Weight.regular).fontName as NSString // ".SFUIText-Regular"
 @available(iOS 8.2, *)
 let kTLIBoldSFFontName: NSString = UIFont.systemFont(
     ofSize: 10.0,
-    weight: UIFont.Weight.bold).fontName as NSString //".SFUIText-Bold"
+    weight: UIFont.Weight.bold).fontName as NSString // ".SFUIText-Bold"
 @available(iOS 8.2, *)
 let kTLIBoldItalicSFFontName: NSString = UIFont.systemFont(
     ofSize: 10.0,
-    weight: UIFont.Weight.medium).fontName as NSString //".SFUIText-Medium"
+    weight: UIFont.Weight.medium).fontName as NSString // ".SFUIText-Medium"
 @available(iOS 8.2, *)
 let kTLIItalicSFFontName: NSString = UIFont.systemFont(
     ofSize: 10.0,
-    weight: UIFont.Weight.light).fontName as NSString //".SFUIText-Light"
+    weight: UIFont.Weight.light).fontName as NSString // ".SFUIText-Light"
 
 let kTLIFontRegularKey: NSString = "Regular"
 let kTLIFontItalicKey: NSString = "Italic"
