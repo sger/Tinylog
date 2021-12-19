@@ -41,7 +41,7 @@ final class SetupViewController: UIViewController {
         return descriptionLabel
     }()
 
-    private var notNowButton: RoundedButton = {
+    private lazy var notNowButton: RoundedButton = {
         let notNowButton = RoundedButton()
         notNowButton.accessibilityIdentifier = "notNowButton"
         notNowButton.setTitle(localizedString(key: "Later"), for: .normal)
@@ -53,7 +53,7 @@ final class SetupViewController: UIViewController {
         return notNowButton
     }()
 
-    private var useiCloudButton: RoundedButton = {
+    private lazy var useiCloudButton: RoundedButton = {
         let useiCloudButton = RoundedButton()
         useiCloudButton.accessibilityIdentifier = "useiCloudButton"
         useiCloudButton.setTitle(localizedString(key: "Use_iCloud"), for: .normal)
