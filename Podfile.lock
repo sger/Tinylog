@@ -105,7 +105,7 @@ PODS:
   - SnapKit (5.0.1)
   - SnapshotTesting (1.8.2)
   - SVProgressHUD (2.2.5)
-  - SwiftLint (0.46.2)
+  - SwiftLint (0.46.3)
 
 DEPENDENCIES:
   - Ensembles (~> 1.0)
@@ -157,7 +157,7 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SnapshotTesting: 38947050d13960d57a4a9c166fcf51bca7d56970
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwiftLint: 6bc52a21f0fd44cab9aa2dc8e534fb9f5e3ec507
+  SwiftLint: ae76d82f056734f853c8cd0371503252c606c482
 
 PODFILE CHECKSUM: a1f6b0dda98bf2cc4a418d74570ed7658095f037
 
