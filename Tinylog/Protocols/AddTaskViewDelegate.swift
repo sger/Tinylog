@@ -6,7 +6,7 @@
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
 
-protocol AddTaskViewDelegate: class {
+protocol AddTaskViewDelegate: AnyObject {
 
     func addTaskViewDidBeginEditing(_ addTaskView: AddTaskView)
     func addTaskViewDidEndEditing(_ addTaskView: AddTaskView)
