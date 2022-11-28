@@ -22,6 +22,8 @@ line_length: 125
 type_body_length:
   warning: 300
   error: 400
+included:
+ - Tinylog
 excluded:
   - Pods
   - TinylogTests
