@@ -1,19 +1,17 @@
 name: Danger
 
-on:
-  pull_request:
-    types: [synchronize, opened, reopened, labeled, unlabeled, edited]
+on: pull_request
 
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.app/Contents/Developer
 
 jobs:
-  main:
-    name: Review, Lint, Verify
+  job-danger:
+    name: Danger
     runs-on: macOS-latest
     steps:
       - name: git checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
 
       - name: ruby versions
         run: |
@@ -21,15 +19,22 @@ jobs:
           gem --version
           bundler --version
 
-      - name: ruby setup
-        uses: ruby/setup-ruby@v1
+      - name: cache gems
+        uses: actions/cache@v1
         with:
-          ruby-version: 2.7
-          bundler-cache: true
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gem-
+
+      - name: bundle install
+        run: |
+          bundle config path vendor/bundle
+          bundle install --without=documentation --jobs 4 --retry 3
 
       # additional steps here, if needed
 
       - name: danger
         env:
           DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
-        run: bundle exec danger --verbose
+        run: bundle exec danger
