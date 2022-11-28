@@ -10,7 +10,7 @@ import XCTest
 @testable import Tinylog
 import SnapshotTesting
 
-class ListsViewControllerTests: XCTestCase {
+final class ListsViewControllerTests: XCTestCase {
 
     var coreDataManager: CoreDataContext!
 
