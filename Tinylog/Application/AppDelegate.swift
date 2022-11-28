@@ -11,7 +11,6 @@ import Reachability
 import Ensembles
 import Firebase
 
-/// TLIAppDelegate Application Logic.
 // swiftlint:disable force_unwrapping
 class AppDelegate: UIResponder, UIApplicationDelegate, CDEPersistentStoreEnsembleDelegate {
 

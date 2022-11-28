@@ -94,7 +94,7 @@ final class EditTaskViewController: UIViewController {
                             width: size.width,
                             height: textViewHeight)
                         return
-            }, completion: { (_:Bool) -> Void in
+            }, completion: { (_: Bool) -> Void in
 
         })
     }
@@ -159,7 +159,7 @@ final class EditTaskViewController: UIViewController {
                     width: size.width,
                     height: textViewHeight)
                 return
-            }, completion: { (_:Bool) -> Void in
+            }, completion: { (_: Bool) -> Void in
         })
     }
 

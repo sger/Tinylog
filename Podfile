@@ -18,7 +18,7 @@ target 'Tinylog' do
   target 'TinylogTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'SnapshotTesting', '~> 1.8.1'
+    pod 'SnapshotTesting'
   end
 
 end
