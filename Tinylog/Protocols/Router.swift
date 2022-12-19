@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol Router: class {
+public protocol Router: AnyObject {
     func present(_ viewController: UIViewController, animated: Bool)
     func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)?)
     func push(_ viewController: UIViewController, animated: Bool)
