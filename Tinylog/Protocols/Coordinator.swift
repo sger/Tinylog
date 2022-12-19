@@ -6,6 +6,6 @@
 //  Copyright © 2019 Spiros Gerokostas. All rights reserved.
 //
 
-protocol Coordinator: class {
+protocol Coordinator: AnyObject {
     func start()
 }
