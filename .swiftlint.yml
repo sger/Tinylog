@@ -15,6 +15,7 @@ disabled_rules:
   - force_try
   - todo
   - for_where
+  - blanket_disable_command
 opt_in_rules:
   - empty_count
   - force_unwrapping
