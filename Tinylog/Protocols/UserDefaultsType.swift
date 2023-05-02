@@ -6,7 +6,7 @@
 //  Copyright © 2019 Spiros Gerokostas. All rights reserved.
 //
 
-public protocol UserDefaultsType: class {
+public protocol UserDefaultsType: AnyObject {
 
     func object(forKey defaultName: String) -> Any?
     func removeObject(forKey defaultName: String)
